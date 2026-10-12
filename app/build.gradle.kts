@@ -132,6 +132,19 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)
+
+    // Android Lint runs on its own classpath, which brings old Bouncy Castle, httpclient and commons-lang3 with
+    // known vulnerabilities. Raised to fixed releases, for the same reason as the buildscript block in the root
+    // build.gradle.kts. Nothing here reaches the app.
+    constraints {
+        listOf(
+            "org.bouncycastle:bcprov-jdk18on:1.86",
+            "org.bouncycastle:bcpkix-jdk18on:1.86",
+            "org.bouncycastle:bcutil-jdk18on:1.86",
+            "org.apache.httpcomponents:httpclient:4.5.14",
+            "org.apache.commons:commons-lang3:3.21.0",
+        ).forEach { add("androidLintTool", it) { because("OSV / OpenSSF Scorecard: vulnerable version on the Lint classpath") } }
+    }
 }
 
 kotlin {

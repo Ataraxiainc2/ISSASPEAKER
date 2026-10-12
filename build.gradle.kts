@@ -1,3 +1,21 @@
+// Build-time only: the Android Gradle Plugin brings these libraries in with known vulnerabilities (found by
+// OSV through OpenSSF Scorecard). None of them reaches the app, but the build runs on the developer's PC and in
+// CI, so they are raised to fixed releases here. Remove each line once AGP itself ships a fixed version.
+buildscript {
+    dependencies {
+        constraints {
+            listOf("bcprov", "bcpkix", "bcutil").forEach {
+                classpath("org.bouncycastle:$it-jdk18on:1.86") {
+                    because("GHSA-9pwp-9qqc-pr26, GHSA-qp49-qgx5-5m26, GHSA-wg6q-6289-32hp, GHSA-c3fc-8qff-9hwx")
+                }
+            }
+            classpath("org.bitbucket.b_c:jose4j:0.9.7") { because("GHSA-3677-xxcr-wjqv") }
+            classpath("org.jdom:jdom2:2.0.6.1") { because("GHSA-2363-cqg2-863c") }
+            classpath("org.apache.commons:commons-lang3:3.21.0") { because("GHSA-j288-q9x7-2f5v") }
+        }
+    }
+}
+
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.compose.compiler) apply false

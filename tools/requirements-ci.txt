@@ -1,0 +1,4 @@
+# Python tools for CI and cloud sessions, pinned by hash (pip install --require-hashes -r tools/requirements-ci.txt).
+codespell==2.4.1 \
+    --hash=sha256:3dadafa67df7e4a3dbf51e0d7315061b80d265f9552ebd699b3dd6834b47e425 \
+    --hash=sha256:299fcdcb09d23e81e35a671bbe746d5ad7e8385972e65dbb833a2eaac33c01e5

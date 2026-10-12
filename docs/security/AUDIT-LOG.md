@@ -54,3 +54,39 @@ public only from 1.5. A beta is a larger unknown than a stable release. It is pi
 `tools/cloud/setup-android.sh` verifies the Android command-line tools against the SHA-1 in Google's repository
 index, the only checksum Google publishes for them, fetched over HTTPS from the same host. Collision attacks on
 SHA-1 do not give a practical second-preimage here; the residual risk is a compromise of `dl.google.com` itself.
+
+## Review 2 — first automated scans (2026-10-12)
+
+The first runs of CodeQL and OpenSSF Scorecard on the public repository.
+
+### ISP-SEC-006 · Low · Fixed — vulnerable libraries on the build classpath
+
+Scorecard's OSV check reported nine advisories. All nine are in libraries the Android Gradle Plugin and
+Android Lint load to *build* the app — Bouncy Castle 1.80.2 (including the critical GHSA-9pwp-9qqc-pr26),
+jose4j 0.9.5, jdom2 2.0.6, commons-lang3 3.16.0 and httpclient 4.5.6. The release runtime classpath contains
+none of them (checked with `:app:dependencies`). Two of the nine were false positives (version metadata that
+Gradle already resolves upward). Because the build runs on the developer's PC and in CI, the rest were raised
+to fixed releases with dependency constraints: the root `buildscript` block and the `androidLintTool`
+configuration in `app/build.gradle.kts`. The verification metadata was regenerated from an empty cache and
+now lists only the fixed versions. Remove the constraints once AGP ships fixed versions itself.
+
+### ISP-SEC-007 · Low · Fixed — cloud backup enabled by default
+
+CodeQL `java/android/backup-enabled`. The app stored nothing sensitive yet, but secrets arrive in M1.
+`allowBackup` is now `false`. `data_extraction_rules.xml` stays, because Android 12+ performs
+device-to-device transfer regardless of `allowBackup`.
+
+### ISP-SEC-008 · Info · Fixed — CI Python tool not pinned by hash
+
+Scorecard Pinned-Dependencies. `codespell` is installed from `tools/requirements-ci.txt` with
+`--require-hashes`, in CI and in cloud sessions.
+
+### Scorecard items left open, and why
+
+- **Binary-Artifacts** (`gradle-wrapper.jar`): the standard Gradle wrapper; CI validates it against the
+  official checksums (`validate-wrappers`).
+- **Pinned-Dependencies** (`tools/cloud/setup-android.sh`, download then run): the archive is verified against
+  Google's published checksum before use (ISP-SEC-005).
+- **Branch-Protection / Code-Review**: a decision for the owner; recommended (see ISP-SEC-002).
+- **CII-Best-Practices**: requires registering the project at bestpractices.dev.
+- **Fuzzing**: candidates once there is untrusted input to parse (M1+: Cast discovery replies, AI responses).

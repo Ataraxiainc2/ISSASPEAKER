@@ -43,7 +43,8 @@ if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
   echo "export ANDROID_HOME=\"$SDK\"" >> "$CLAUDE_ENV_FILE"
 fi
 
-python3 -m pip install --quiet --user codespell==2.4.1 || echo "codespell not installed: run python3 -m pip install codespell==2.4.1"
+python3 -m pip install --quiet --user --require-hashes -r "$PROJECT/tools/requirements-ci.txt" \
+  || echo "codespell not installed: run python3 -m pip install --require-hashes -r tools/requirements-ci.txt"
 
 java_major="$(java -version 2>&1 | sed -nE 's/.*version "([0-9]+).*/\1/p' | head -1)"
 if [ -z "$java_major" ] || [ "$java_major" -lt 17 ]; then

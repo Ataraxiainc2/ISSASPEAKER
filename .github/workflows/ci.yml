@@ -37,7 +37,7 @@ jobs:
         run: python tools/features.py --check
       - name: Spelling (codespell)
         run: |
-          python -m pip install --quiet codespell==2.4.1
+          python -m pip install --quiet --require-hashes -r tools/requirements-ci.txt
           python -m codespell_lib
       - name: Build, unit tests, Android Lint, detekt
         run: ./gradlew --console=plain assembleDebug assembleRelease testDebugUnitTest lintDebug lintRelease detekt assembleDebugAndroidTest

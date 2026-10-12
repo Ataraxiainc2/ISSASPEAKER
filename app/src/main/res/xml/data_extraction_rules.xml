@@ -4,7 +4,8 @@
     Excluded: the database (conversation history and cached data), the encrypted preferences and the
     secrets/ folder that hold wrapped AI keys. Their Keystore keys cannot leave the device anyway, so a
     restored copy would be unreadable; excluding them keeps even the ciphertext at home.
-    Plain settings (language, routines) are still backed up.
+    Cloud backup is off altogether (allowBackup="false" in the manifest); these rules matter for device-to-device
+    transfer, which Android 12+ performs even then.
 -->
 <data-extraction-rules>
     <cloud-backup>
