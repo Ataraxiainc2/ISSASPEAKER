@@ -7,8 +7,8 @@ routine: *at 08:00, read today's birthdays from a sheet, have an AI write the an
 the kitchen speaker.*
 
 **Status:** milestone M0 done (foundation and security baseline); M1 (the MVP) is next. See the
-[plan](docs/PLAN.md) (Spanish), the [threat model](docs/security/THREAT-MODEL.md) and the
-[feature catalog](docs/FEATURES.md): 413 numbered features, each one marked *implemented*, *to implement*
+[plan](docs/PLAN.md), the [decisions](docs/DECISIONS.md), the [threat model](docs/security/THREAT-MODEL.md) and the
+[feature catalog](docs/FEATURES.md): 426 numbered features, each one marked *implemented*, *to implement*
 or *pending*.
 
 ## Design choices
@@ -16,7 +16,8 @@ or *pending*.
 - **Android 16+ only** (minSdk 36, target SDK 37). Built for the Galaxy S25 Ultra and the Galaxy Watch 5 Pro;
   older phones are deliberately out of scope.
 - Kotlin, Jetpack Compose, Material 3 Expressive.
-- Interface in English (default), Latin American Spanish and Brazilian Portuguese.
+- Interface in English (default), Latin American Spanish and Brazilian Portuguese; light, dark or phone theme.
+- AI on the user's own keys, for any provider: the list comes from a live registry, not a hard-coded one.
 - No backend: keys, tokens and history stay on the phone, encrypted.
 - The speaker is reached on the local network through Google Cast. Text is turned into speech on the phone.
 
@@ -42,7 +43,9 @@ Found a vulnerability? Please read [SECURITY.md](SECURITY.md) and report it priv
 
 | Path | What it is |
 |---|---|
-| `docs/PLAN.md` | Plan, decisions, milestones, risks |
+| `docs/PLAN.md` | Plan, milestones, risks |
+| `docs/DECISIONS.md` | Decisions taken and decisions waiting for approval |
+| `docs/design/` | Designs: AI provider registry, key vault |
 | `docs/features/catalog.tsv` | Single source of truth for features |
 | `docs/security/` | Threat model, audit log, findings |
 | `docs/FEATURES.md` | Generated catalog (`python tools/features.py`) |

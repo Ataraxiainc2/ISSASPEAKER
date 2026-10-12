@@ -1,6 +1,6 @@
 # ISSASPEAKER threat model
 
-**Version:** 1 (milestone M0, 2026-10-12) · **Method:** STRIDE per component, with a data-flow diagram ·
+**Version:** 2 (2026-10-12: AI provider registry and key vault added) · **Method:** STRIDE per component, with a data-flow diagram ·
 **Owner:** ISSASODA · **Review:** at the end of every milestone, and whenever a new integration or permission
 is added.
 
@@ -111,6 +111,27 @@ other data or speak arbitrary words in the owner's house.
 | Information disclosure | Injected text asks the model to include data from other sources in its answer | Each task gets only the data it needs (per-task context, no global memory dump); answers are spoken or shown, never sent anywhere without confirmation | M1 |
 | Spoofing | Injected text makes the speaker announce something false or alarming | Announcements say where the information came from; X Radar briefs cite their sources and show confidence (F407) | M2 |
 | Denial of service / cost | Content crafted to blow up token usage | Per-task input limits; spending caps (F054, F410) | M1 / M2 |
+
+### 5.3a AI provider registry (A1)
+
+The provider list comes from models.dev, a community-maintained registry that also says **where to send each
+provider's key** ([AI-PROVIDERS.md](../design/AI-PROVIDERS.md)).
+
+| Threat | Scenario | Control | Status |
+|---|---|---|---|
+| Tampering / information disclosure | A malicious registry change points a provider's base URL at an attacker, who collects every key sent there | Pinned hosts for major providers; trust-on-first-use host for the rest, and a changed host blocks the key until the user confirms (F418) | M1 |
+| Tampering | Oversized or malformed registry data crashes the app or injects markup | Size limit, schema validation, fields never executed or rendered as markup; last good copy kept | M1 |
+
+### 5.3b Key vault in Google Drive (A1, A2)
+
+Design: [KEY-VAULT.md](../design/KEY-VAULT.md). Keys are encrypted with a random vault key before they reach
+Drive; the vault key travels only in Block Store, end-to-end encrypted with the screen lock (F423, F424).
+
+| Threat | Scenario | Control | Status |
+|---|---|---|---|
+| Information disclosure | The Drive file leaks (export, compromised Drive session) | Ciphertext only; the vault key is not in Drive, not in the APK, not in the repository | M1 |
+| Information disclosure | The public source code is used to derive the encryption key (the pattern the other ISSASODA apps use) | No app secret exists; the vault key is random per user | M1 |
+| Denial of service | New phone without a backup restore cannot open the vault | One-time recovery code | M1 |
 
 ### 5.4 Local audio server and Cast (A4)
 

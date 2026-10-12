@@ -1,191 +1,165 @@
-# ISSASPEAKER — Plan del proyecto
+# ISSASPEAKER — Project plan
 
-**Fecha:** 2026-10-12 · **Estado:** M0 terminado (2026-10-12); sigue M1 · **Dueño:** ISSASODA (sat.tecnologias@gmail.com)
+**Updated:** 2026-10-12 · **Status:** M0 done; M1 next (waiting on CIO decisions C1–C4) · **Owner:** ISSASODA
+(sat.tecnologias@gmail.com)
 
-ISSASPEAKER es un centro de mando personal para Android: une el parlante Google Home de la red local,
-el ecosistema Google (Sheets, Calendar, Gmail, Drive, Apps Script), la música (Spotify, Last.fm),
-X, libros, el Galaxy Watch 5 Pro y modelos de IA con las API keys del propio usuario. Resuelve la
-fragmentación: un solo lugar que conecta servicios que normalmente no se hablan entre sí.
+ISSASPEAKER is a personal command center for Android. It joins the Google Home speaker on the local network,
+the Google ecosystem (Sheets, Calendar, Gmail, Drive, Apps Script), music (Spotify, Last.fm), X, books, the
+Galaxy Watch 5 Pro and AI models that run on the user's own keys. It solves fragmentation: one place that
+connects services that never talk to each other.
 
-Documentos relacionados:
+Related documents:
 
-- [`docs/features/catalog.tsv`](features/catalog.tsv) — **fuente única** de las 413 características numeradas.
-- [`docs/FEATURES.md`](FEATURES.md) — el catálogo legible, generado con `python tools/features.py`.
-- [`SECURITY.md`](../SECURITY.md) — política de reporte de vulnerabilidades.
-
----
-
-## 1. Validación de la configuración
-
-### Local (este PC)
-
-| Elemento | Estado | Detalle |
-|---|---|---|
-| Carpeta del proyecto | ✅ | `C:\Users\24\AndroidStudioProjects\ISSASPEAKER` (estaba vacía) |
-| Teléfono | ✅ | Galaxy S25 Ultra (SM-S938B), **Android 16 / API 36**, One UI 8.5, conectado por ADB |
-| Android SDK | ✅ | Plataformas 34–37 y build-tools 37.0.0 instalados |
-| JDK | ✅ | `JAVA_HOME` = JBR de Android Studio (OpenJDK 25.0.3); en el `PATH` hay un Java 24 aparte |
-| `ANDROID_HOME` | ⚠️ | No está definida; Gradle usará `local.properties` (`sdk.dir`), que Android Studio crea |
-| GitHub CLI | ✅ | `gh` 2.102, cuenta `Ataraxiainc2`. El Credential Manager de Windows se colgó en un push; se empuja con `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push` |
-| codespell | ✅ | Instalado (2.4.1), misma versión que la CI |
-| Skills | ⚠️ | Viven en `~/.claude/skills` (solo este PC). **Copiados al repo** en `.claude/skills/` para que la nube los vea |
-
-### Nube (sesiones de Claude Code en claude.ai/code)
-
-Una sesión en la nube clona el repo de GitHub en una máquina Linux limpia. Lo que eso implica:
-
-| Requisito | Estado | Acción |
-|---|---|---|
-| Repo en GitHub | ✅ | `Ataraxiainc2/ISSASPEAKER`, público |
-| App de GitHub de Claude con acceso al repo | ❓ | Verificar en claude.ai/code → al crear la sesión, elegir el repo; si no aparece, darle acceso a la app |
-| Android SDK en la máquina de la nube | ✅ | Script `tools/cloud/setup-android.sh` + hook `SessionStart` en `.claude/settings.json`; solo corre si `CLAUDE_CODE_REMOTE=true` y verifica el checksum de la descarga |
-| Red de la nube | ❓ | El entorno debe permitir `dl.google.com`, `maven.google.com`, `services.gradle.org`, `plugins.gradle.org`, `repo.maven.apache.org`. Revisar el nivel de acceso a red del entorno |
-| Skills y reglas del proyecto | ✅ | En el repo: `.claude/skills/` y `CLAUDE.md`. La memoria de este PC **no** viaja a la nube |
-| Secretos | ✅ | Ninguno en el repo. Las claves de firma siguen en `~/.issasoda-keys` del PC |
-
-**Lo que la nube no puede hacer**, y por tanto se hace en local: instalar en el S25 Ultra, probar el
-parlante (192.168.1.12 está en tu LAN), comprobar las Google Fonts en el teléfono real, firmar
-releases y probar el inicio de sesión con Google (el SHA-1 de depuración de la nube es otro).
-Flujo propuesto: **la nube escribe código y pasa la CI; el PC prueba en el teléfono.**
+- [`DECISIONS.md`](DECISIONS.md) — decisions taken, and the ones waiting for the CIO.
+- [`features/catalog.tsv`](features/catalog.tsv) — the **single source** of the numbered features;
+  [`FEATURES.md`](FEATURES.md) is generated from it (`python tools/features.py`).
+- [`design/AI-PROVIDERS.md`](design/AI-PROVIDERS.md), [`design/KEY-VAULT.md`](design/KEY-VAULT.md).
+- [`security/THREAT-MODEL.md`](security/THREAT-MODEL.md), [`security/AUDIT-LOG.md`](security/AUDIT-LOG.md),
+  [`../SECURITY.md`](../SECURITY.md).
 
 ---
 
-## 2. Decisiones técnicas
+## 1. Environment
 
-| Tema | Decisión | Por qué |
+### Local PC
+
+| Item | State | Detail |
 |---|---|---|
-| Plataforma | **minSdk 36 (Android 16)**, compile/target SDK 37 | Pediste lo más nuevo aunque deje fuera teléfonos viejos; el S25 Ultra ya está en API 36 |
-| Lenguaje y UI | Kotlin 2.4, Jetpack Compose (BOM 2026.09), Material 3 Expressive, Navigation 3 | Mismas versiones que ISSASTUDENT |
-| Arquitectura | MVVM + capas `ui / domain / data` por funcionalidad, inyección manual (`AppContainer`) | Igual que tus otras apps; sin Hilt hasta que haga falta |
-| Módulos Gradle | `:app` ahora; `:wear` en M5 | Un solo desarrollador: módulos solo cuando aportan |
-| Paquete | `com.issasoda.issaspeaker` | Convención ISSASODA |
-| Google | Credential Manager (identidad) + `AuthorizationClient` (permisos incrementales) + REST con OkHttp | Sin la librería pesada `google-api-client`; cada permiso se pide cuando se usa |
-| IA | REST directo con OkHttp + kotlinx.serialization: **Anthropic Claude, Google Gemini, OpenAI** | Sin SDKs de terceros; el usuario pone sus keys |
-| Parlante | Cast SDK (MediaRouter) → *Default Media Receiver*; el texto se convierte a voz en el teléfono (`TextToSpeech.synthesizeToFile`) y un servidor local mínimo le entrega el audio al parlante | Funciona sin nube. 192.168.1.12 queda como pista, el parlante se descubre por la red |
-| Rutinas | Alarma exacta → trabajo urgente de WorkManager | **Corrección al PRD:** WorkManager solo no garantiza las 08:00 en punto; con Doze puede atrasarse horas |
-| Almacenamiento | Room + SQLCipher; DataStore para preferencias; Tink + Keystore (StrongBox) para las API keys | Igual que ISSASTUDENT, más StrongBox del S25 |
-| Backend | **Ninguno en M0–M2** | Menos superficie de ataque; todo vive en el teléfono (ver pregunta D6) |
-| Idiomas | Inglés (por defecto), español latinoamericano (`es-419`), portugués de Brasil (`pt-BR`), con selector por app | Lo pediste así |
-| Fuentes | Google Fonts descargables (skill `android-google-fonts`): grupo curado de ≥100 familias de alta legibilidad, elegidas al azar, una nueva cada día (D2, F403) | Regla de ISSASODA; cada familia se valida en el S25 con la prueba `GoogleFontsTest` |
-| Licencia | MIT (D1) | Igual que ISSASTUDENT y BookCompass |
+| Phone | ✅ | Galaxy S25 Ultra (SM-S938B), Android 16 / API 36, One UI 8.5, on ADB |
+| IDE | ✅ | Android Studio Rabbit 1 (2026.2.1), JBR 25.0.3 |
+| Android SDK | ✅ | Platforms 34–37, build-tools 37.0.0 |
+| GitHub CLI | ✅ | Account `Ataraxiainc2`. Windows Credential Manager hung on a push; push with `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push` |
+| codespell | ✅ | 2.4.1, hash-pinned (`tools/requirements-ci.txt`) |
+| Keys | ✅ | `D:\SC\AK` (see its README): `A` for API keys, `issa_keys.py` loader, `play_signing.json` fingerprints. Never in the repository |
 
-### Flujo del MVP (rutina de las 08:00)
+### Cloud sessions (claude.ai/code)
+
+A cloud session clones this repository on a clean Linux machine.
+
+| Requirement | State | Detail |
+|---|---|---|
+| Repository | ✅ | `Ataraxiainc2/ISSASPEAKER`, public |
+| Claude GitHub App access | ❓ | CIO check C13 |
+| Android SDK | ✅ | `tools/cloud/setup-android.sh` via the SessionStart hook; runs only when `CLAUDE_CODE_REMOTE=true`; checksum verified |
+| Network | ❓ | The environment must allow `dl.google.com`, `maven.google.com`, `services.gradle.org`, `plugins.gradle.org`, `repo.maven.apache.org`, `pypi.org` |
+| Project rules and skills | ✅ | `CLAUDE.md` and `.claude/skills/` (the PC's memory does not travel) |
+
+The cloud cannot reach the phone, the speaker (LAN), the signing keys or `D:\SC\AK`. **The cloud writes code
+and passes CI; the PC tests on the phone and releases.**
+
+---
+
+## 2. Technical decisions
+
+| Topic | Decision | Why |
+|---|---|---|
+| Platform | minSdk 36 (Android 16), compile/target SDK 37 | Newest APIs on purpose; the S25 Ultra is on API 36 |
+| Language and UI | Kotlin 2.4, Jetpack Compose (BOM 2026.09), Material 3 Expressive (`material3 1.5.0-beta01`) | Same stack as the other ISSASODA apps; Expressive needs 1.5 |
+| Architecture | MVVM, `ui / domain / data` per feature, manual dependency injection | Same as the other apps |
+| Modules | `:app` now; `:wear` in M5; shared AI/vault library later (C5) | Modules only when they pay off |
+| Google | Credential Manager (identity) + `AuthorizationClient` (incremental scopes) + REST over OkHttp | No heavy client libraries; each scope requested when first needed |
+| AI | Live provider registry (models.dev) + supplement; OpenAI-compatible client plus native clients ([AI-PROVIDERS.md](design/AI-PROVIDERS.md)) | No fixed provider list (D5) |
+| User keys | Key vault: Keystore on the phone, encrypted copy in the user's Drive `appDataFolder`, vault key in Block Store ([KEY-VAULT.md](design/KEY-VAULT.md)) | An app secret in a public APK protects nothing (C3) |
+| Speaker | Cast SDK → Default Media Receiver; text-to-speech on the phone; a minimal local server hands the audio to the speaker | Works without a cloud; 192.168.1.12 is a hint, the speaker is discovered |
+| Routines | Exact alarm → expedited WorkManager job | WorkManager alone does not guarantee 08:00 under Doze |
+| Storage | Room + SQLCipher; SharedPreferences for plain settings; Tink + Keystore (StrongBox) for secrets | Settings are read before the first frame (no theme flash) |
+| Backend | None | Smaller attack surface; everything stays on the phone and in the user's own Google account |
+| Languages | English (default), Latin American Spanish, Brazilian Portuguese, per-app picker | Owner's choice |
+| Fonts | 133 high-legibility Google Fonts; a different family per text role, drawn at every start (D9) | Owner's choice; each family checked on the S25 |
+| Theme | Light, dark or phone setting (D10) | Owner's choice |
+| License | MIT (D1) | |
+
+### MVP flow (the 08:00 routine)
 
 ```mermaid
 flowchart LR
-    A[Alarma exacta 08:00] --> B[Trabajo urgente WorkManager]
-    B --> C{Horario silencioso?}
-    C -- sí --> Z[Registrar: omitido]
-    C -- no --> D[Google Sheets: cumpleaños de hoy]
-    D --> E[IA: redactar el anuncio<br/>datos de la hoja = no confiables]
-    E --> F[TTS en el teléfono → archivo de audio]
-    F --> G[Servidor local: URL de un solo uso]
-    G --> H[Cast → Google Home]
-    H --> I[Historial + notificación del resultado]
+    A[Exact alarm 08:00] --> B[Expedited WorkManager job]
+    B --> C{Quiet hours?}
+    C -- yes --> Z[Log: skipped]
+    C -- no --> D[Google Sheets: today's birthdays]
+    D --> E[AI writes the announcement<br/>sheet data = untrusted]
+    E --> F[Text-to-speech on the phone]
+    F --> G[Local server: single-use URL]
+    G --> H[Cast to Google Home]
+    H --> I[History + result notification]
 ```
 
 ---
 
-## 3. Hitos
+## 3. Milestones
 
-Cada hito termina con la CI en verde, cero advertencias (Lint, detekt, codespell) y el catálogo
-actualizado (`status = implemented` en lo que se entregó).
+Every milestone ends with CI green, zero warnings (Lint, detekt, Kotlin, codespell) and the catalog updated.
 
-| Hito | Contenido | Características | Criterio de salida |
+| Milestone | Scope | Features | Exit criterion |
 |---|---|---|---|
-| **M0** Cimientos y seguridad base | Esqueleto Compose, 3 idiomas, tema, fuentes, About público y de administrador (generado desde el catálogo), CI, CodeQL, Dependabot, Scorecard, modelo de amenazas, SECURITY.md, configuración de la nube | 19 | La app abre en el S25 en los 3 idiomas; el About de administrador lista lo implementado, lo pendiente y la seguridad; la CI corre en cada push |
-| **M1** MVP | Inicio de sesión con Google, permisos y revocación, API keys cifradas, chat de IA (texto y voz), descubrimiento del parlante + TTS, lectura de cumpleaños en Sheets, rutina diaria, horario silencioso, historial, errores | 53 | **A las 08:00 el parlante dice "Hoy es cumpleaños de…" sin tocar el teléfono**, tres días seguidos |
-| **M2** Anuncios y rutinas diarias | Clima, calendario, recordatorios, noticias (RSS), anuncios de mañana y noche, rutinas por voz, biblioteca y panel de automatizaciones, widget, mosaico, **Radar de X** | 65 | Rutina de la mañana completa (clima + agenda + cumpleaños + informe del Radar de X) |
-| **M3** Productividad Google | Gmail, Drive, Apps Script, Sheets avanzado, varias cuentas, informes semanales y mensuales | 93 | Resumen diario de correo leído en voz alta |
-| **M4** Música | Spotify, Last.fm, música en Google Home | 56 | Estadísticas de Last.fm y control de Spotify desde la app |
-| **M5** Reloj y salud | App Wear OS para el Watch 5 Pro, Health Connect | 27 | Rutina disparada desde el reloj |
-| **M6** Social y lectura | Resto de X, libros, Shikaka | 50 | Shikaka depende de D4 |
-| **M7** Inteligencia avanzada | Aprendizaje, análisis, categorías extendidas de noticias, IA en el teléfono | 49 | — |
-| **M8** Experimental | Rutinas adaptativas | 1 | Solo tras validar valor |
+| **M0** Foundation ✅ | Skeleton, 3 languages, theme modes, random fonts, public and admin About, CI, CodeQL, Scorecard, threat model, audit log, cloud setup | 21 | Done 2026-10-12 |
+| **M1** MVP | Google sign-in and scopes, key vault, live AI provider registry, AI chat (text and voice), speaker discovery and TTS, birthdays from Sheets, daily routine, quiet hours, history | 60 | At 08:00 the speaker announces today's birthdays without touching the phone, three days in a row |
+| **M2** Daily routines | Weather, calendar, reminders, news, morning and night announcements, voice routines, widget, Quick Settings tile, **X Radar** | 65 | Full morning routine (weather + agenda + birthdays + X Radar brief) |
+| **M3** Google productivity | Gmail, Drive, Apps Script, advanced Sheets, several accounts, weekly and monthly reports | 93 | Daily mail summary read aloud |
+| **M4** Music | Spotify, Last.fm full history, Shikaka-style statistics, habit insights on the speaker | 63 | A non-obvious insight about the owner's listening, spoken by the speaker |
+| **M5** Watch and health | Wear OS companion for the Watch 5 Pro, Health Connect | 27 | A routine started from the watch |
+| **M6** Social and reading | Rest of X, books | 45 | |
+| **M7** Advanced intelligence | Learning, analysis, extended news, on-device AI, model ranking | 50 | |
+| **M8** Experimental | Adaptive routines, shared AI module | 2 | Only after validating value |
 
 ---
 
-## 4. Validación del listado de características
+## 4. Validation of the original feature list
 
-El listado original tenía 400 entradas. Hallazgos verificados con un script, no a ojo:
+The original list had 400 entries; checked with a script, not by eye:
 
-1. **Solo 397 IDs originales distintos.** Tres aparecen dos veces: **21** (P2 y P4), **242** (P1
-   "Consulta de correos recientes" y P2 "…y seguimiento") y **320** (P1 "datos curiosos" y P3 "…personalizados").
-2. **Tres IDs nunca se asignaron: 259, 261 y 399.** La nota final del listado ("399 únicas + 1 repetida")
-   no es correcta, y el ID 400 sí está usado (P0, "Automatizaciones combinando servicios y dispositivos").
-3. **Fusiones** de duplicados reales: 230→398, 227→231, 183→4, 170→171, 254→256, 83→44, 242 (P2)→269, 21 (P4)→21.
-4. **Variantes de un mismo parámetro** unidas en una sola característica (no se pierde ninguna; el
-   origen las lista todas): categorías de noticias (7 en P1, 10 en P3), grupos de cuentas de X (9),
-   traducción de publicaciones (4), música por ánimo/actividad (6), explicaciones ciencia/tecnología/matemáticas (3),
-   contenido en inglés/español (2, ahora también portugués).
-5. **Cambios de prioridad**, cada uno explicado en la nota del catálogo: informes semanales/mensuales y
-   Apps Script bajan de P0 a P1 (no son cimientos: dependen de integraciones aún no construidas);
-   la identidad de la cuenta activa (235) sube de P2 a P0 (la verificación de administrador la necesita).
-6. **La entrada P4 duplicada** se reemplazó por la nueva sugerida: *rutinas adaptativas según patrones históricos de uso*.
-7. **55 características nuevas** (plataforma, seguridad, fiabilidad, costos), entre ellas: disparo a hora exacta,
-   política de ejecuciones perdidas, tope de gasto de IA, defensa contra inyección de prompts, servidor de audio
-   endurecido, widget, mosaico de Ajustes rápidos, Live Updates de Android 16, IA en el teléfono (Gemini Nano).
+1. **Only 397 distinct original IDs.** Three appear twice: 21 (P2 and P4), 242 (P1 and P2) and 320 (P1 and P3).
+2. **Three IDs were never assigned:** 259, 261 and 399. ID 400 is in use (P0, "Automations combining services
+   and devices").
+3. **Merged duplicates:** 230→398, 227→231, 183→4, 170→171, 254→256, 83→44, 242 (P2)→269, 21 (P4)→21.
+4. **Parameter-only variants** became one feature each (the `origin` column keeps every original number): news
+   categories, X account groups, post translation targets, music by mood or activity, science/technology/math
+   explanations, content languages.
+5. **Priority changes**, each explained in the catalog note: weekly and monthly reports and Apps Script moved
+   from P0 to P1; active-account identity (235) moved from P2 to P0.
+6. **Added since:** platform, security, reliability and cost features; X Radar (D3); the live AI registry and
+   key vault (D5, C3); theme and fonts (D9, D10); Last.fm history and habit insights (D4).
 
-**Resultado: 413 características** = 358 del listado original + 55 nuevas (F403 salió de D2; F404–F413, el Radar de X, de D3).
-396 por implementar, 12 pendientes de prueba de factibilidad, 5 bloqueadas por una decisión (Shikaka).
+Result: **426 features** = 358 from the original list + 68 new. Live counts are at the top of
+[`FEATURES.md`](FEATURES.md).
 
 ---
 
-## 5. Seguridad (lo que el repositorio debe demostrar)
+## 5. Security posture
 
-Pensado para la solicitud al Cyber Verification Program de Anthropic (nivel *Defense*, el que admite
-personas individuales): el repo muestra práctica defensiva real y verificable, no solo intención.
+Aimed at Anthropic's Cyber Verification Program (Defense tier, open to individuals): the repository shows real,
+verifiable defensive practice.
 
-- **Política pública:** `SECURITY.md` con reporte privado de vulnerabilidades y plazos.
-- **Modelo de amenazas** (STRIDE) con diagrama de flujo de datos, en `docs/security/`.
-- **Registro de auditoría** con IDs `ISP-SEC-NNN`, el mismo que muestra el About de administrador.
-- **Cadena de suministro:** CodeQL, Dependabot, revisión de dependencias, OSV-Scanner, verificación de
-  dependencias de Gradle, checksum del wrapper, Actions fijadas por SHA, OpenSSF Scorecard, SBOM por release.
-- **En la app:** keys cifradas con Keystore/StrongBox + Tink, base cifrada, biometría, `FLAG_SECURE`,
-  sin secretos en copias ni logs, permisos de Google mínimos e incrementales, revocación, servidor de audio
-  endurecido, solo HTTPS, y defensa contra inyección de prompts (correos, hojas y publicaciones son datos;
-  la IA nunca ejecuta una acción sin confirmación).
-- **Honestidad documentada:** el filtro de administrador es de interfaz, no una frontera de seguridad, y así se dice.
+- Public policy (`SECURITY.md`) with private vulnerability reporting.
+- STRIDE threat model with a data-flow diagram; audit log with IDs `ISP-SEC-NNN`, also shown in the admin screen.
+- Supply chain: CodeQL, Dependabot, dependency review, OSV-Scanner, Gradle dependency verification, wrapper
+  validation, SHA-pinned actions, hash-pinned Python tools, OpenSSF Scorecard, CODEOWNERS, protected `main`.
+- In the app: no permissions until a feature needs one, HTTPS only, no backups of secrets, no logs in release,
+  key vault, endpoint pinning for AI keys, prompt-injection guard, least-privilege Google scopes.
+- Honest documentation: accepted risks are written down with their reasons.
 
 ---
 
-## 6. Riesgos
+## 6. Risks
 
-| ID | Riesgo | Mitigación |
+| ID | Risk | Mitigation |
 |---|---|---|
-| R1 | Samsung duerme apps en segundo plano | Alarma exacta + trabajo urgente; guía para quitar la optimización de batería; diagnóstico de administrador |
-| R2 | Costos de API de IA | Tope mensual por proveedor y medidor de uso (característica nueva) |
-| R3 | El parlante debe estar en la misma Wi-Fi | Descubrimiento Cast, reintento, registro claro del fallo, sin IP fija |
-| R4 | X cobra por leer con su API | Radar de X con `x_search` de la API de xAI (≈ USD 5 por 1.000 posts) y tope diario (F410); compartir desde la app de X y notificaciones, gratis. Sin scraping: viola los términos de X y arriesga la cuenta |
-| R5 | Spotify cerró recomendaciones y artistas relacionados a apps nuevas (nov 2024); controlar la reproducción exige Premium | Recomendaciones con Last.fm + IA |
-| R6 | `gmail.readonly` es un permiso restringido | Uso personal en modo de prueba; una publicación abierta exigiría auditoría CASA |
-| R7 | En modo *Testing* de OAuth, los permisos pueden caducar a los 7 días | **Validar en M1**; si pasa, mover la pantalla de consentimiento a *In production* sin verificar (uso personal) |
-| R8 | Apps Script API exige el mismo proyecto de Cloud y despliegue como "API executable" | Prueba de factibilidad en M3 |
-| R9 | Protección de red local de Android 16/17 | Prueba en M1 con target SDK 37 |
-| R10 | Shikaka.net: servicio y API sin verificar | Bloqueado hasta D4 |
+| R1 | Samsung puts background apps to sleep | Exact alarm + expedited job; battery-optimization guide; admin diagnostics |
+| R2 | AI API costs | Monthly cap per provider and usage meter (C15) |
+| R3 | The speaker must be on the same Wi-Fi | Cast discovery, retry, clear failure log, no fixed IP |
+| R4 | X charges for API reads | X Radar on xAI `x_search` (about USD 5 per 1,000 posts) with a daily cap (C14); sharing and notifications for free. No scraping |
+| R5 | Spotify (Feb 2026): development mode needs Premium, max 5 users, fewer endpoints; recommendations closed since Nov 2024 | PKCE; recommendations from Last.fm + AI (C8) |
+| R6 | `gmail.readonly` is a restricted scope | Personal use without CASA (C16) |
+| R7 | OAuth "Testing" status can expire grants after 7 days | Consent screen "In production", unverified (C2) |
+| R8 | Apps Script API needs the same Cloud project and an API-executable deployment | Feasibility test in M3 |
+| R9 | Android 16/17 local-network protection | Test in M1 on target SDK 37 |
+| R10 | A poisoned AI registry entry could redirect keys | Endpoint pinning (F418) |
 
 ---
 
-## 7. Forma de trabajo
+## 7. Way of working
 
-- **Reglas del proyecto** en `CLAUDE.md` (las lee cualquier sesión, local o en la nube).
-- **Skills** en `.claude/skills/`: `android-google-fonts` (fuentes) y `retire-one-shot-scripts` (scripts de un solo uso).
-- **Calidad:** Android Lint con advertencias como errores, detekt (mismo `detekt.yml` que ISSASTUDENT/EmuGaMind/ISSAGRAPPH,
-  ejecutado con detekt-cli), codespell con lista de palabras en español y portugués, pruebas unitarias. Cero advertencias.
-- **Catálogo:** toda característica que se entrega cambia a `implemented` en `catalog.tsv` en el mismo commit;
-  el About de administrador se genera desde ahí, así que nunca se desincroniza.
-- **Commits** en inglés, pequeños y con el porqué. Nada de código escondido: el repo es público.
-
----
-
-## 8. Decisiones abiertas (antes de escribir código)
-
-| ID | Pregunta | Estado |
-|---|---|---|
-| D1 | Licencia del repo público | ✅ **MIT** (2026-10-12) |
-| D2 | Familias de Google Fonts | ✅ **Al menos 100 familias de alta legibilidad; una nueva al azar cada día** (F403) |
-| D3 | X: el acceso de lectura de la API es de pago | ✅ **Radar de X** (F404–F413): perfil de intereses → `x_search` de xAI → puntuación de señal → informe con citas; más compartir desde la app de X y notificaciones. Nada de noticias genéricas |
-| D4 | ¿Qué es exactamente Shikaka.net y tiene API? | ⏳ Abierta |
-| D5 | Proveedores de IA en M1 | ⏳ Propuesta: Claude, Gemini, OpenAI y xAI Grok (este último lo necesita el Radar de X) |
-| D6 | Proyecto de Google Cloud y backend | ✅ **Proyecto nuevo `issaspeaker`, sin Firebase** (2026-10-12) |
-| D7 | Versión de Wear OS del Watch 5 Pro | ⏳ Se mira en el reloj antes de M5 |
+- Project rules in `CLAUDE.md`; skills in `.claude/skills/`.
+- Quality gates: Lint, detekt and Kotlin warnings as errors, codespell, unit tests, catalog check.
+- A shipped feature becomes `implemented` in `catalog.tsv` in the same commit; the admin screen reads it.
+- Commits in English, small, with the reason. The repository is public: nothing hidden, nothing secret.

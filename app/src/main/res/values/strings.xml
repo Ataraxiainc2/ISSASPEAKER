@@ -9,9 +9,6 @@
     <string name="action_settings">Settings</string>
     <string name="action_about">About</string>
     <string name="action_admin">Admin</string>
-
-    <string name="home_font_title">Today\'s typeface</string>
-    <string name="home_font_body">A new high-legibility typeface every day.</string>
     <string name="home_next_title">Coming next</string>
     <string name="home_next_speaker">Speak through your Google Home speaker</string>
     <string name="home_next_google">Sign in with Google and read your sheets</string>
@@ -25,8 +22,6 @@
     <string name="about_privacy_body">There is no ISSASPEAKER server. Your keys, tokens and history stay on this phone, encrypted, and are left out of backups. Each permission is requested only when the feature that needs it is first used.</string>
     <string name="about_status_title">Status</string>
     <string name="about_status_body">Early development.</string>
-    <string name="about_font_title">Typeface of the day</string>
-    <string name="about_font_body">Today the app is set in %1$s. Every day it picks another high-legibility Google Font at random from a pool of %2$d, without repeating one until all have been used.</string>
     <string name="about_languages_title">Languages</string>
     <string name="about_languages_body">English, Spanish (Latin America) and Portuguese (Brazil). Change it in Settings.</string>
     <string name="about_source_title">Open source</string>
@@ -65,6 +60,16 @@
     <string name="language_en" translatable="false">English</string>
     <string name="language_es" translatable="false">Español (Latinoamérica)</string>
     <string name="language_pt" translatable="false">Português (Brasil)</string>
-    <string name="settings_font">Typeface</string>
-    <string name="settings_font_body">Today: %1$s. It changes every day.</string>
+    <string name="about_font_title">Typefaces</string>
+    <string name="about_font_body">Each time the app starts, titles, headings, text and labels each get a different high-legibility Google Font, drawn at random from a pool of %1$d. Settings shows which ones are in use.</string>
+    <string name="settings_theme">Theme</string>
+    <string name="theme_system">Phone setting</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_fonts">Fonts in use</string>
+    <string name="settings_fonts_body">New ones are drawn at every start. If one bothers you, take a screenshot of this list.</string>
+    <string name="font_role_display">Titles</string>
+    <string name="font_role_title">Headings</string>
+    <string name="font_role_body">Text</string>
+    <string name="font_role_label">Labels</string>
 </resources>

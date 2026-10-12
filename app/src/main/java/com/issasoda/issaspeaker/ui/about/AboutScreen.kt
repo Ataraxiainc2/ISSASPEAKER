@@ -35,7 +35,7 @@ fun AboutScreen(state: AppState, onBack: () -> Unit) {
                         stringResource(R.string.features_ready, records.count(FeatureStatus.IMPLEMENTED), records.features.size),
                 )
             }
-            TextSection(R.string.about_font_title, stringResource(R.string.about_font_body, state.fontName, FontPool.families.size))
+            TextSection(R.string.about_font_title, stringResource(R.string.about_font_body, FontPool.families.size))
             TextSection(R.string.about_languages_title, stringResource(R.string.about_languages_body))
             SectionCard(stringResource(R.string.about_source_title)) {
                 Text(stringResource(R.string.about_source_body), style = MaterialTheme.typography.bodyLarge)

@@ -42,11 +42,6 @@ fun HomeScreen(state: AppState, onOpenSettings: () -> Unit, onOpenAbout: () -> U
         ScreenColumn(padding) {
             Text(stringResource(R.string.tagline), style = MaterialTheme.typography.headlineSmall)
 
-            SectionCard(stringResource(R.string.home_font_title)) {
-                Text(state.fontName, style = MaterialTheme.typography.headlineMedium)
-                Text(stringResource(R.string.home_font_body), style = MaterialTheme.typography.bodyMedium)
-            }
-
             SectionCard(stringResource(R.string.home_next_title)) {
                 listOf(R.string.home_next_speaker, R.string.home_next_google, R.string.home_next_ai, R.string.home_next_routine)
                     .forEach { Text("• " + stringResource(it), style = MaterialTheme.typography.bodyLarge) }

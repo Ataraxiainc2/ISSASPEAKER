@@ -5,9 +5,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import com.issasoda.issaspeaker.R
+import kotlin.random.Random
 
 /**
- * The typefaces the app rotates through, one per day (catalog F403, decision D2; see FontRotation).
+ * The typefaces the app draws from (catalog F403, decisions D2 and D9): at every start each text role gets a
+ * different family, picked at random ([FontAssignment]).
  *
  * Every family is a text face chosen for legibility at reading sizes: open apertures, a generous
  * x-height, lining figures, and distinct shapes for the letters people confuse (I l 1, O 0, rn m).
@@ -51,7 +53,8 @@ object FontPool {
     /** The two weights requested per family; GoogleFontsTest checks exactly these. */
     val weights: List<FontWeight> = listOf(FontWeight.Normal, FontWeight.Bold)
 
-    fun familyNameFor(epochDay: Long): String = families[FontRotation.indexFor(epochDay, families.size)]
+    /** Drawn once per process: stable while the app runs (rotation, language change), new at the next start. */
+    val session: FontAssignment by lazy { FontAssignment.draw(families, Random.Default) }
 
     private val provider = GoogleFont.Provider(
         providerAuthority = "com.google.android.gms.fonts",

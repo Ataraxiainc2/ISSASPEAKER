@@ -8,9 +8,6 @@
     <string name="action_settings">Configurações</string>
     <string name="action_about">Sobre</string>
     <string name="action_admin">Administrador</string>
-
-    <string name="home_font_title">Tipografia de hoje</string>
-    <string name="home_font_body">Uma tipografia nova e muito legível a cada dia.</string>
     <string name="home_next_title">Em breve</string>
     <string name="home_next_speaker">Falar pelo seu alto-falante Google Home</string>
     <string name="home_next_google">Entrar com o Google e ler suas planilhas</string>
@@ -24,8 +21,6 @@
     <string name="about_privacy_body">O ISSASPEAKER não tem servidor. Suas chaves, tokens e histórico ficam neste celular, criptografados, e ficam fora dos backups. Cada permissão é pedida só quando o recurso que precisa dela é usado pela primeira vez.</string>
     <string name="about_status_title">Status</string>
     <string name="about_status_body">Em desenvolvimento inicial.</string>
-    <string name="about_font_title">Tipografia do dia</string>
-    <string name="about_font_body">Hoje o app usa %1$s. A cada dia ele escolhe ao acaso outra Google Font muito legível de um grupo de %2$d, sem repetir nenhuma até usar todas.</string>
     <string name="about_languages_title">Idiomas</string>
     <string name="about_languages_body">Inglês, espanhol (América Latina) e português (Brasil). Mude em Configurações.</string>
     <string name="about_source_title">Código aberto</string>
@@ -61,6 +56,16 @@
     </string-array>
     <string name="settings_language">Idioma</string>
     <string name="settings_language_system">Idioma do celular</string>
-    <string name="settings_font">Tipografia</string>
-    <string name="settings_font_body">Hoje: %1$s. Muda todos os dias.</string>
+    <string name="about_font_title">Tipografias</string>
+    <string name="about_font_body">Cada vez que o app abre, títulos, cabeçalhos, textos e rótulos recebem uma Google Font diferente e muito legível, sorteada de um grupo de %1$d. As Configurações mostram quais estão em uso.</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Conforme o celular</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Escuro</string>
+    <string name="settings_fonts">Fontes em uso</string>
+    <string name="settings_fonts_body">Novas são sorteadas a cada início. Se alguma incomodar, faça uma captura desta lista.</string>
+    <string name="font_role_display">Títulos</string>
+    <string name="font_role_title">Cabeçalhos</string>
+    <string name="font_role_body">Texto</string>
+    <string name="font_role_label">Rótulos</string>
 </resources>
