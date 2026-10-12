@@ -9,7 +9,7 @@ fragmentación: un solo lugar que conecta servicios que normalmente no se hablan
 
 Documentos relacionados:
 
-- [`docs/features/catalog.tsv`](features/catalog.tsv) — **fuente única** de las 402 características numeradas.
+- [`docs/features/catalog.tsv`](features/catalog.tsv) — **fuente única** de las 403 características numeradas.
 - [`docs/FEATURES.md`](FEATURES.md) — el catálogo legible, generado con `python tools/features.py`.
 - [`SECURITY.md`](../SECURITY.md) — política de reporte de vulnerabilidades.
 
@@ -66,7 +66,8 @@ Flujo propuesto: **la nube escribe código y pasa la CI; el PC prueba en el tel�
 | Almacenamiento | Room + SQLCipher; DataStore para preferencias; Tink + Keystore (StrongBox) para las API keys | Igual que ISSASTUDENT, más StrongBox del S25 |
 | Backend | **Ninguno en M0–M2** | Menos superficie de ataque; todo vive en el teléfono (ver pregunta D6) |
 | Idiomas | Inglés (por defecto), español latinoamericano (`es-419`), portugués de Brasil (`pt-BR`), con selector por app | Lo pediste así |
-| Fuentes | Google Fonts descargables (skill `android-google-fonts`) | Regla de ISSASODA; la familia se confirma contigo (D2) |
+| Fuentes | Google Fonts descargables (skill `android-google-fonts`): grupo curado de ≥100 familias de alta legibilidad, elegidas al azar (D2, F403) | Regla de ISSASODA; cada familia se valida en el S25 con la prueba `GoogleFontsTest` |
+| Licencia | MIT (D1) | Igual que ISSASTUDENT y BookCompass |
 
 ### Flujo del MVP (rutina de las 08:00)
 
@@ -121,12 +122,12 @@ El listado original tenía 400 entradas. Hallazgos verificados con un script, no
    Apps Script bajan de P0 a P1 (no son cimientos: dependen de integraciones aún no construidas);
    la identidad de la cuenta activa (235) sube de P2 a P0 (la verificación de administrador la necesita).
 6. **La entrada P4 duplicada** se reemplazó por la nueva sugerida: *rutinas adaptativas según patrones históricos de uso*.
-7. **44 características nuevas** (plataforma, seguridad, fiabilidad, costos), entre ellas: disparo a hora exacta,
+7. **45 características nuevas** (plataforma, seguridad, fiabilidad, costos), entre ellas: disparo a hora exacta,
    política de ejecuciones perdidas, tope de gasto de IA, defensa contra inyección de prompts, servidor de audio
    endurecido, widget, mosaico de Ajustes rápidos, Live Updates de Android 16, IA en el teléfono (Gemini Nano).
 
-**Resultado: 402 características** = 358 del listado original + 44 nuevas.
-346 por implementar, 12 pendientes de prueba de factibilidad, 44 bloqueadas por una decisión.
+**Resultado: 403 características** = 358 del listado original + 45 nuevas (la 403, el grupo de fuentes, salió de D2).
+347 por implementar, 12 pendientes de prueba de factibilidad, 44 bloqueadas por una decisión.
 
 ---
 
@@ -179,12 +180,12 @@ personas individuales): el repo muestra práctica defensiva real y verificable, 
 
 ## 8. Decisiones abiertas (antes de escribir código)
 
-| ID | Pregunta | Recomendación |
+| ID | Pregunta | Estado |
 |---|---|---|
-| D1 | Licencia del repo público | MIT, como ISSASTUDENT y BookCompass |
-| D2 | Familias de Google Fonts | Títulos: Space Grotesk · Texto: Atkinson Hyperlegible · Números: JetBrains Mono |
-| D3 | X: ¿pagar el acceso de lectura de la API? | Dejarlo bloqueado; hacer solo borradores |
-| D4 | ¿Qué es exactamente Shikaka.net y tiene API? | — |
-| D5 | Proveedores de IA en M1 | Claude, Gemini y OpenAI |
-| D6 | Proyecto de Google Cloud: ¿uno nuevo o el de ISSASODA? ¿Firebase? | Proyecto nuevo `issaspeaker`, sin Firebase |
-| D7 | Versión de Wear OS del Watch 5 Pro | Se mira en el reloj antes de M5 |
+| D1 | Licencia del repo público | ✅ **MIT** (2026-10-12) |
+| D2 | Familias de Google Fonts | ✅ **Al menos 100 familias de alta legibilidad, elegidas al azar** (F403). Falta definir cada cuánto rota |
+| D3 | X: el acceso de lectura de la API es de pago | ⏳ El dueño no pagará. Propuesta en revisión: compartir desde la app de X + notificaciones, sin scraping |
+| D4 | ¿Qué es exactamente Shikaka.net y tiene API? | ⏳ Abierta |
+| D5 | Proveedores de IA en M1 | ⏳ Propuesta: Claude, Gemini y OpenAI |
+| D6 | Proyecto de Google Cloud y backend | ✅ **Proyecto nuevo `issaspeaker`, sin Firebase** (2026-10-12) |
+| D7 | Versión de Wear OS del Watch 5 Pro | ⏳ Se mira en el reloj antes de M5 |

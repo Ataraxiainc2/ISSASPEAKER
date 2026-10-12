@@ -401,3 +401,4 @@ F399	HLTH	P2	M5	307	planned	Personal activity trends	Tendencias personales de ac
 F400	HLTH	P2	M5	308	planned	Personal activity reports	Informes personales de actividad	
 F401	HLTH	P2	M5	309	planned	Movement reminders	Recordatorios de movimiento	
 F402	HLTH	P2	M5	310	planned	Routines based on recorded activity	Rutinas basadas en actividad registrada	
+F403	PLAT	P0	M0	NEW	planned	Random high-legibility typeface from a curated pool of at least 100 Google Fonts	Tipografía aleatoria de alta legibilidad, de un grupo curado de al menos 100 Google Fonts	decision D2; each family vetted for I/l/1 and O/0 legibility; rotation rule pending

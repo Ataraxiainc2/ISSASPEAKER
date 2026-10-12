@@ -7,7 +7,7 @@ routine: *at 08:00, read today's birthdays from a sheet, have an AI write the an
 the kitchen speaker.*
 
 **Status:** planning. No app code yet. See the [plan](docs/PLAN.md) (Spanish) and the
-[feature catalog](docs/FEATURES.md): 402 numbered features, each one marked *implemented*, *to implement*
+[feature catalog](docs/FEATURES.md): 403 numbered features, each one marked *implemented*, *to implement*
 or *pending*.
 
 ## Design choices
