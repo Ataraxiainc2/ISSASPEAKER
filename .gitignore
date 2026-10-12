@@ -1,0 +1,25 @@
+*.iml
+.gradle/
+build/
+.idea/
+.kotlin/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+.DS_Store
+__pycache__/
+# Signing keys and secrets: never in the repository (they live in ~/.issasoda-keys).
+*.jks
+*.keystore
+*.p12
+keystore.properties
+*-upload.properties
+google-services.json
+client_secret*.json
+.env
+# Build outputs
+*.aab
+*.apk
+# Local Claude Code settings (per machine)
+.claude/settings.local.json

@@ -1,0 +1,403 @@
+id	module	priority	milestone	origin	status	title_en	title_es	note
+F001	PLAT	P0	M0	NEW	planned	Modern platform baseline: Android 16+ only (minSdk 36), target SDK 37, edge-to-edge, predictive back	Base de plataforma moderna: solo Android 16+ (minSdk 36), target SDK 37, edge-to-edge, gesto atrás predictivo	S25 Ultra runs Android 16 (API 36), One UI 8.5
+F002	PLAT	P0	M0	NEW	planned	Interface in English (default), Latin American Spanish and Brazilian Portuguese, with per-app language picker	Interfaz en inglés (por defecto), español latinoamericano y portugués de Brasil, con selector de idioma por app	values/, values-b+es+419/, values-pt-rBR/ + locales_config.xml
+F003	PLAT	P0	M0	NEW	planned	Material 3 Expressive theme with dynamic color and dark mode	Tema Material 3 Expressive con color dinámico y modo oscuro	
+F004	PLAT	P0	M0	NEW	planned	Google Fonts through the Play Services downloadable-font provider	Google Fonts mediante el proveedor de fuentes descargables de Play Services	skill android-google-fonts
+F005	PLAT	P0	M1	NEW	planned	Onboarding with guided permission setup	Bienvenida con configuración guiada de permisos	
+F006	PLAT	P0	M1	NEW	planned	Samsung battery-optimization guidance and exemption request	Guía y solicitud de exención de optimización de batería de Samsung	PRD risk 1 (Doze / Samsung app sleeping)
+F007	PLAT	P0	M0	NEW	planned	Public About screen	Pantalla Acerca de pública	
+F008	PLAT	P0	M0	NEW	planned	Admin About: implemented, planned and pending features plus security status, generated from this catalog	About de administrador: implementado, por implementar y pendiente, más estado de seguridad, generado desde este catálogo	admin = sat.tecnologias@gmail.com
+F009	PLAT	P0	M1	NEW	planned	Admin diagnostics: scheduled work, last runs, speaker reachability, token state (never secrets)	Diagnóstico de administrador: trabajos programados, últimas ejecuciones, alcance del parlante, estado de tokens (nunca secretos)	
+F010	PLAT	P1	M2	NEW	planned	Quick Settings tile to run a favorite routine	Mosaico de Ajustes rápidos para ejecutar una rutina favorita	
+F011	PLAT	P1	M2	NEW	planned	Home-screen widget (Glance) with routine buttons and the next announcement	Widget de pantalla de inicio (Glance) con botones de rutinas y el próximo anuncio	
+F012	PLAT	P2	M2	NEW	validate	Live Updates notification (Android 16) while a routine runs	Notificación Live Update (Android 16) mientras corre una rutina	check how One UI 8.5 Now Bar shows it
+F013	SEC	P0	M1	NEW	planned	AI keys encrypted at rest with Android Keystore (StrongBox when available) and Tink AEAD	Claves de IA cifradas en reposo con Android Keystore (StrongBox si existe) y Tink AEAD	
+F014	SEC	P0	M1	NEW	planned	Encrypted local database (Room + SQLCipher, key wrapped by Keystore)	Base de datos local cifrada (Room + SQLCipher, clave envuelta por Keystore)	same stack as ISSASTUDENT
+F015	SEC	P0	M1	NEW	planned	Biometric gate (Class 3) to reveal or change keys and to open admin tools	Bloqueo biométrico (Clase 3) para ver o cambiar claves y abrir herramientas de administrador	
+F016	SEC	P0	M1	NEW	planned	FLAG_SECURE on screens that show secrets, tokens or personal data	FLAG_SECURE en pantallas con secretos, tokens o datos personales	
+F017	SEC	P0	M1	NEW	planned	Secrets excluded from cloud backup and device transfer	Secretos excluidos de la copia en la nube y de la transferencia entre equipos	data_extraction_rules.xml
+F018	SEC	P0	M1	NEW	planned	Least-privilege, incremental Google scopes, requested only when an integration is first used	Permisos de Google mínimos e incrementales, pedidos solo cuando se usa cada integración	AuthorizationClient
+F019	SEC	P0	M1	NEW	planned	Sign-in with Credential Manager (Sign in with Google) and a verified ID token	Inicio de sesión con Credential Manager (Sign in with Google) y token de identidad verificado	
+F020	SEC	P0	M1	NEW	planned	Token revocation on sign-out and one-tap "erase everything" (keys, tokens, database)	Revocación de tokens al cerrar sesión y "borrar todo" en un toque (claves, tokens, base de datos)	
+F021	SEC	P0	M1	NEW	planned	Prompt-injection guard: mail, X, web, sheet and document content is untrusted data; AI output never triggers an action without explicit confirmation	Defensa contra inyección de prompts: el contenido de correos, X, web, hojas y documentos es dato no confiable; la IA nunca dispara una acción sin confirmación explícita	
+F022	SEC	P0	M1	NEW	planned	Hardened local audio server for Cast: Wi-Fi-only bind, random port, single-use unguessable URL, short lifetime	Servidor de audio local endurecido para Cast: solo Wi-Fi, puerto aleatorio, URL de un solo uso imposible de adivinar, vida corta	
+F023	SEC	P0	M1	NEW	validate	Local network access permission (Android 16/17 local network protection)	Permiso de acceso a la red local (protección de red local de Android 16/17)	verify behavior on target SDK 37
+F024	SEC	P0	M0	NEW	planned	HTTPS-only network policy (no cleartext traffic)	Política de red solo HTTPS (sin tráfico en texto plano)	network_security_config.xml
+F025	SEC	P0	M0	NEW	planned	No secrets or personal data in logs; release builds log nothing	Sin secretos ni datos personales en logs; las versiones release no registran nada	
+F026	SEC	P0	M0	NEW	planned	Admin check by verified Google account, documented as a UI gate and not a security boundary	Verificación de administrador por cuenta de Google verificada, documentada como filtro de interfaz y no como frontera de seguridad	
+F027	SEC	P0	M0	NEW	planned	Threat model (STRIDE) and data-flow diagram in docs/security	Modelo de amenazas (STRIDE) y diagrama de flujo de datos en docs/security	
+F028	SEC	P0	M0	NEW	planned	Security audit log with finding IDs (ISP-SEC-NNN) mirrored in admin About	Registro de auditoría de seguridad con IDs (ISP-SEC-NNN) reflejado en el About de administrador	
+F029	SEC	P0	M0	NEW	planned	CI on every push and pull request: build, unit tests, Android Lint, detekt, codespell	CI en cada push y pull request: compilación, pruebas unitarias, Android Lint, detekt, codespell	
+F030	SEC	P0	M0	NEW	planned	CodeQL (Kotlin), secret scanning with push protection, Dependabot	CodeQL (Kotlin), escaneo de secretos con protección de push, Dependabot	
+F031	SEC	P0	M0	NEW	planned	Dependency review and OSV-Scanner on pull requests	Revisión de dependencias y OSV-Scanner en pull requests	
+F032	SEC	P0	M0	NEW	planned	Gradle dependency verification and wrapper checksum	Verificación de dependencias de Gradle y checksum del wrapper	
+F033	SEC	P0	M0	NEW	planned	GitHub Actions pinned by commit SHA with least-privilege permissions	GitHub Actions fijadas por SHA con permisos mínimos	
+F034	SEC	P0	M0	NEW	planned	OpenSSF Scorecard published on the repository	OpenSSF Scorecard publicado en el repositorio	
+F035	SEC	P0	M0	NEW	planned	Private vulnerability reporting and SECURITY.md disclosure policy	Reporte privado de vulnerabilidades y política de divulgación SECURITY.md	
+F036	SEC	P0	M1	NEW	planned	Release signing with an upload key kept outside the repository	Firma de release con clave de subida fuera del repositorio	~/.issasoda-keys
+F037	SEC	P0	M1	NEW	planned	SBOM (CycloneDX) attached to every release	SBOM (CycloneDX) adjunto a cada release	
+F038	SEC	P0	M1	NEW	planned	Instrumented security tests: keys never stored in plain text, backups exclude secrets	Pruebas de seguridad instrumentadas: claves nunca en texto plano, copias sin secretos	
+F039	HUB	P0	M1	396	planned	Control panel for all integrations	Panel de control de todas las integraciones	
+F040	HUB	P0	M1	397	planned	Custom notification center	Centro de notificaciones personalizadas	
+F041	HUB	P0	M1	398+230	planned	Activity and automation execution history	Historial de actividades y automatizaciones ejecutadas	230 merged here
+F042	ACCT	P0	M1	232	planned	Connect authorized Google accounts	Conexión con cuentas de Google autorizadas	
+F043	ACCT	P0	M1	233	planned	Select the active Google account	Selección de la cuenta de Google activa	
+F044	ACCT	P0	M1	235	planned	Show the identity of the active account	Consulta de identidad de cuenta activa	moved P2 -> P0: the admin check needs it
+F045	ACCT	P0	M1	237	planned	View granted permissions	Consulta de permisos concedidos	
+F046	ACCT	P0	M1	238	planned	Revoke granted access	Revocación de accesos disponibles	
+F047	ACCT	P0	M3	234	planned	Manage several Google accounts	Gestión de varias cuentas de Google	
+F048	ACCT	P0	M3	236	planned	Switch between authorized accounts	Cambio entre cuentas autorizadas	
+F049	ACCT	P0	M3	239	planned	Choose the account per integration	Selección de cuenta por integración	
+F050	ACCT	P0	M3	240	planned	Per-account service settings	Configuración de servicios por cuenta	
+F051	AI	P0	M1	314	planned	AI API key management	Gestión de API keys de IA	
+F052	AI	P0	M1	315	planned	AI provider configuration	Configuración de proveedores de IA	
+F053	AI	P0	M1	316	planned	AI model selection per task	Selección del modelo de IA por tarea	
+F054	AI	P0	M1	NEW	planned	AI spending guard: per-provider monthly cap and usage meter	Control de gasto de IA: tope mensual por proveedor y medidor de uso	PRD risk 2 (API costs)
+F055	AI	P0	M2	317	planned	AI preferences (tone, length, language)	Configuración de preferencias de IA	
+F056	AI	P1	M1	313	planned	Connection to AI providers (Anthropic Claude, Google Gemini, OpenAI)	Conexión con proveedores de IA (Anthropic Claude, Google Gemini, OpenAI)	
+F057	AI	P1	M1	318	planned	Personal conversational assistant	Asistente conversacional personal	
+F058	AI	P1	M1	319	planned	General questions through AI	Consultas generales mediante IA	
+F059	AI	P1	M1	NEW	planned	Voice input for the chat (on-device speech recognition)	Entrada por voz en el chat (reconocimiento de voz en el teléfono)	PRD MVP: text/voice chat
+F060	AI	P1	M1	345	planned	Read AI answers aloud on the phone	Lectura por voz de respuestas de IA	
+F061	AI	P1	M2	347	planned	AI conversation history	Historial de conversaciones con IA	stored in the encrypted database
+F062	AI	P1	M2	346	planned	Turn conversations into notes	Conversión de conversaciones en notas	
+F063	AI	P1	M2	320	planned	Trivia generation	Generación de datos curiosos	
+F064	AI	P1	M2	330	planned	Turn texts into plain-language explanations	Conversión de textos en explicaciones sencillas	
+F065	AI	P1	M2	331	planned	Article summaries	Resúmenes de artículos	
+F066	AI	P1	M2	341+342	planned	Content generation in English, Spanish and Portuguese	Generación de contenido en inglés, español y portugués	341 and 342 merged; Portuguese added (app language)
+F067	AI	P2	M7	NEW	validate	On-device AI (Gemini Nano through ML Kit GenAI) for private summaries without an API key	IA en el teléfono (Gemini Nano con ML Kit GenAI) para resúmenes privados sin API key	S25 Ultra supports Gemini Nano
+F068	AI	P3	M7	320b	planned	Personalized trivia	Generación de datos curiosos personalizados	duplicate ID 320 in the source list; kept as its own feature
+F069	AI	P3	M7	321+322+323	planned	Explanations: science, technology and mathematics	Explicaciones científicas, tecnológicas y matemáticas	three topic variants of one feature
+F070	AI	P3	M7	324	planned	Learning questions	Generación de preguntas de aprendizaje	
+F071	AI	P3	M7	325	planned	Personal quizzes	Creación de cuestionarios personales	
+F072	AI	P3	M7	326	planned	Exercise generation	Generación de ejercicios	
+F073	AI	P3	M7	327	planned	Answer correction	Corrección de respuestas	
+F074	AI	P3	M7	328	planned	Study plans	Generación de planes de estudio	
+F075	AI	P3	M7	329	planned	Learning-goal tracking	Seguimiento de objetivos de aprendizaje	
+F076	AI	P3	M7	332	planned	Compare information sources	Comparación de fuentes de información	
+F077	AI	P3	M7	333	planned	Draw conclusions from documents	Extracción de conclusiones de documentos	
+F078	AI	P3	M7	334	planned	Flag claims that need verification	Identificación de afirmaciones que requieren verificación	
+F079	AI	P3	M7	335	planned	Questions to research a topic	Preguntas para investigar temas	
+F080	AI	P3	M7	336	planned	Project ideas	Ideas para proyectos	
+F081	AI	P3	M7	337	planned	Weigh alternatives	Evaluación de alternativas	
+F082	AI	P3	M7	338	planned	Organize thoughts	Organización de pensamientos	
+F083	AI	P3	M7	339	planned	Turn notes into lists	Conversión de notas en listas	
+F084	AI	P3	M7	340	planned	Executive reports	Creación de informes ejecutivos	
+F085	AI	P3	M7	343	planned	Mandarin conversation practice	Práctica conversacional en mandarín	
+F086	AI	P3	M7	344	planned	Translation between English, Spanish and Mandarin	Traducción entre inglés, español y mandarín	
+F087	AI	P3	M7	348	planned	Organize conversations by project	Organización de conversaciones por proyectos	
+F088	AI	P3	M7	349	planned	Search past conversations	Búsqueda en conversaciones anteriores	
+F089	CAST	P1	M1	1	planned	Connect to the Google Home speaker (Cast discovery; 192.168.1.12 only as a hint, never hard-coded)	Conexión con el parlante Google Home (descubrimiento Cast; 192.168.1.12 solo como pista, nunca fijo)	PRD risk 3: same Wi-Fi
+F090	CAST	P1	M1	12	planned	Choose the Google Cast device	Selección del dispositivo Google Cast	
+F091	CAST	P1	M1	2	planned	Play voice messages on the speaker	Reproducción de mensajes de voz	TTS to file on the phone, served to the Default Media Receiver
+F092	CAST	P1	M1	22	planned	Choose the narration voice	Selección de voces para narraciones	
+F093	CAST	P1	M1	11	planned	Speaker volume control	Control del volumen del parlante	
+F094	CAST	P1	M1	10	planned	Narrate AI-generated information	Narración de información generada por IA	
+F095	CAST	P2	M4	21	validate	Play playlists through Google Cast	Reproducción de listas mediante Google Cast	duplicate ID 21 in P2 and P4 merged here; advanced control stays experimental
+F096	ANN	P0	M1	23	planned	Quiet hours	Configuración de horarios silenciosos	the MVP must respect them
+F097	ANN	P1	M1	4+183	planned	Automatic birthday announcement (from Google Sheets)	Anuncio automático de cumpleaños (desde Google Sheets)	183 merged here; the MVP target
+F098	ANN	P0	M2	14	planned	Custom announcement routines	Creación de rutinas de anuncios personalizados	
+F099	ANN	P0	M2	24	planned	Announcements only on chosen days	Anuncios exclusivos para determinados días	
+F100	ANN	P0	M2	25	planned	Play personal reports	Reproducción de informes personales	
+F101	ANN	P1	M2	5	planned	Daily weather announcement	Anuncio diario del clima	Open-Meteo, no key
+F102	ANN	P1	M2	6	planned	Personalized morning announcement	Anuncio matutino personalizado	
+F103	ANN	P1	M2	7	planned	Night announcement	Anuncio nocturno	
+F104	ANN	P1	M2	8	planned	Read reminders aloud	Lectura de recordatorios	
+F105	ANN	P1	M2	9	planned	Play trivia	Reproducción de datos curiosos	
+F106	ANN	P1	M2	13	planned	Scheduled messages	Mensajes programados	
+F107	ANN	P1	M2	15	planned	Calendar event announcements	Anuncios de eventos del calendario	
+F108	ANN	P1	M2	16	planned	Pending-task announcements	Anuncios de tareas pendientes	
+F109	ANN	P1	M2	17	planned	Breaking-news announcements	Anuncios de noticias urgentes	
+F110	ANN	P1	M2	18	planned	Inspirational quotes	Lectura de citas inspiradoras	
+F111	ANN	P1	M2	19	planned	Daily voice summaries	Resúmenes diarios por voz	
+F112	ANN	P1	M2	20	planned	Alerts from other apps	Alertas de otras aplicaciones	NotificationListenerService, user-granted
+F113	ANN	P1	M2	3	planned	Read the news on the speaker	Lectura de noticias por el parlante	
+F114	RTN	P0	M1	NEW	planned	Exact-time triggers: an exact alarm starts an expedited WorkManager job (WorkManager alone cannot guarantee 08:00)	Disparo a la hora exacta: una alarma exacta inicia un trabajo urgente de WorkManager (WorkManager solo no garantiza las 08:00)	correction to the PRD
+F115	RTN	P0	M1	NEW	planned	Missed-run policy: catch up or skip, never announce twice	Política de ejecuciones perdidas: recuperar u omitir, nunca anunciar dos veces	
+F116	RTN	P0	M1	228	planned	Turn routines on and off	Activación y desactivación de rutinas	
+F117	RTN	P0	M1	219	planned	Run routines on a schedule	Ejecución de rutinas por horario	
+F118	RTN	P0	M1	217	planned	Run a routine from a button	Ejecución de rutinas desde un botón	
+F119	RTN	P0	M1	215	planned	View automation errors	Consulta de errores de automatización	
+F120	RTN	P0	M1	216	planned	Notify failed runs	Notificación de ejecuciones fallidas	
+F121	RTN	P0	M2	229	planned	Automation library	Biblioteca de automatizaciones	
+F122	RTN	P0	M2	231+227	planned	Automations dashboard with live status	Panel de automatizaciones con su estado	227 merged here
+F123	RTN	P0	M2	218	planned	Run routines by voice	Ejecución de rutinas mediante voz	
+F124	RTN	P0	M2	220	planned	Run routines on authorized events	Ejecución de rutinas ante eventos autorizados	
+F125	RTN	P0	M2	400	planned	Automations combining services and devices	Automatizaciones combinando servicios y dispositivos	
+F126	RTN	P0	M2	223	planned	Notifications from authorized automations	Notificaciones mediante automatizaciones autorizadas	
+F127	RTN	P0	M2	224	planned	Automated daily reports	Informes diarios automatizados	
+F128	RTN	P1	M3	225	planned	Automated weekly reports	Informes semanales automatizados	moved P0 -> P1: not foundation
+F129	RTN	P1	M3	226	planned	Automated monthly reports	Informes mensuales automatizados	moved P0 -> P1: not foundation
+F130	RTN	P4	M8	NEW	validate	Adaptive routines from historical usage patterns	Generación de rutinas adaptativas según patrones históricos de uso	replaces the duplicate P4 entry (21)
+F131	SHEET	P1	M1	176	planned	Connect Google Sheets	Conexión con Google Sheets	
+F132	SHEET	P1	M1	177	planned	Browse authorized sheets	Consulta de hojas autorizadas	
+F133	SHEET	P1	M1	178	planned	Read rows and columns	Lectura de filas y columnas	
+F134	SHEET	P1	M1	182	planned	Birthday lookup	Consulta de cumpleaños	
+F135	SHEET	P1	M2	184	planned	Anniversary lookup	Consulta de aniversarios	
+F136	SHEET	P1	M2	185	planned	Important-date reminders	Recordatorios de fechas importantes	
+F137	SHEET	P1	M2	179	planned	Search records by name	Búsqueda de registros por nombre	
+F138	SHEET	P1	M2	180	planned	Search records by date	Búsqueda de registros por fecha	
+F139	SHEET	P1	M2	181	planned	Search records by category	Búsqueda de registros por categoría	
+F140	SHEET	P1	M2	187	planned	Tasks kept in Sheets	Consulta de tareas en Sheets	
+F141	SHEET	P1	M3	188	planned	Log completed tasks	Registro de tareas completadas	
+F142	SHEET	P1	M3	189	planned	Personal habit log	Registro de hábitos personales	
+F143	SHEET	P1	M3	194	planned	Idea log	Registro de ideas	
+F144	SHEET	P1	M3	197	planned	Reports from spreadsheets	Informes desde hojas de cálculo	
+F145	SHEET	P1	M3	204	planned	Authorized record updates	Actualización autorizada de registros	
+F146	SHEET	P1	M3	205	planned	Append records to a sheet	Incorporación de registros a una hoja	
+F147	SHEET	P2	M3	186	planned	Authorized contact lists	Consulta de listas de contactos autorizadas	
+F148	SHEET	P2	M4	190	planned	Music activity log in Sheets	Registro de actividad musical en Sheets	
+F149	SHEET	P2	M3	191	planned	News log in Sheets	Registro de noticias en Sheets	
+F150	SHEET	P2	M6	192	blocked	X posts log in Sheets	Registro de publicaciones de X en Sheets	needs X read access (decision D3)
+F151	SHEET	P2	M6	193	planned	Reading log in Sheets	Registro de lecturas en Sheets	
+F152	SHEET	P2	M3	195	planned	Personal expense log	Registro de gastos personales	
+F153	SHEET	P2	M3	196	planned	Indicators in Sheets	Consulta de indicadores en Sheets	
+F154	SHEET	P2	M3	198	planned	Detect duplicate records	Detección de registros duplicados	
+F155	SHEET	P2	M3	199	planned	Find incomplete data	Identificación de datos incompletos	
+F156	SHEET	P2	M3	200	planned	Detect outliers	Detección de valores atípicos	
+F157	SHEET	P2	M3	201	planned	Compare sheets	Comparación entre hojas	
+F158	SHEET	P2	M3	202	planned	Charts	Generación de gráficos	
+F159	SHEET	P2	M3	203	planned	Historical trends	Consulta de tendencias históricas	
+F160	SHEET	P2	M3	206	planned	Create spreadsheets	Creación de hojas de cálculo	
+F161	SHEET	P2	M3	207	planned	Tracking templates	Generación de plantillas de seguimiento	
+F162	SHEET	P2	M3	208	planned	Periodic sheet reports	Automatización de reportes periódicos	
+F163	SHEET	P2	M3	209	planned	Export records	Exportación de registros	
+F164	SHEET	P2	M3	210	planned	Recent changes	Consulta de cambios recientes	
+F165	GAS	P1	M3	211	validate	Run Apps Script	Ejecución de Apps Script	Apps Script API: script must share the app's Cloud project and be deployed as API executable
+F166	GAS	P1	M3	212	validate	Trigger scripts manually	Activación manual de scripts	
+F167	GAS	P1	M3	213	validate	Schedule script runs	Programación de ejecuciones de scripts	moved P0 -> P1: depends on 211
+F168	GAS	P1	M3	214	validate	View script results	Consulta de resultados de scripts	moved P0 -> P1
+F169	GAS	P1	M3	221	validate	Reports through Apps Script	Generación de informes mediante Apps Script	moved P0 -> P1
+F170	GAS	P1	M3	222	validate	Update records through Apps Script	Actualización de registros mediante Apps Script	moved P0 -> P1
+F171	CAL	P1	M2	271	planned	Connect Google Calendar	Conexión con Google Calendar	
+F172	CAL	P1	M2	272	planned	Today's events	Consulta de eventos del día	
+F173	CAL	P1	M2	273	planned	This week's events	Consulta de eventos semanales	
+F174	CAL	P1	M2	275	planned	Upcoming-event announcements	Anuncios de próximos eventos	
+F175	CAL	P1	M2	276	planned	Create events	Creación de eventos	
+F176	CAL	P1	M2	277	planned	Create reminders	Creación de recordatorios	Google Tasks API
+F177	CAL	P1	M2	280	planned	Early reminders	Recordatorios anticipados	
+F178	CAL	P1	M2	281	planned	Daily agenda summary	Resumen diario de agenda	
+F179	CAL	P1	M2	285	planned	Ask about events by voice	Consulta de eventos por voz	
+F180	CAL	P2	M3	274	planned	This month's events	Consulta de eventos mensuales	
+F181	CAL	P2	M3	278	planned	Events extracted from mail	Extracción de eventos desde correos	
+F182	CAL	P2	M3	279	planned	Schedule-conflict detection	Detección de conflictos de horario	
+F183	CAL	P2	M3	282	planned	Weekly agenda summary	Resumen semanal de agenda	
+F184	CAL	P2	M3	283	planned	Find free slots	Identificación de espacios libres	
+F185	CAL	P2	M3	284	planned	Meeting reminder preparation	Preparación de recordatorios de reuniones	
+F186	MAIL	P1	M3	241	planned	Connect Gmail	Conexión con Gmail	gmail.readonly is a restricted scope: fine for personal use (Testing mode); public release needs a CASA assessment
+F187	MAIL	P1	M3	242	planned	Recent mail	Consulta de correos recientes	
+F188	MAIL	P1	M3	243	planned	Read selected mail	Lectura de correos seleccionados	
+F189	MAIL	P1	M3	244	planned	Read mail aloud	Lectura de correos en voz alta	
+F190	MAIL	P1	M3	245	planned	Spot priority mail	Identificación de correos prioritarios	
+F191	MAIL	P1	M3	246	planned	Filter by sender	Filtrado por remitente	
+F192	MAIL	P1	M3	247	planned	Filter by subject	Filtrado por asunto	
+F193	MAIL	P1	M3	248	planned	Filter by date	Filtrado por fecha	
+F194	MAIL	P1	M3	249	planned	Keyword search	Búsqueda de correos por palabras clave	
+F195	MAIL	P1	M3	250	planned	Unread mail	Consulta de correos no leídos	
+F196	MAIL	P1	M3	251	planned	Spot important contacts	Identificación de contactos importantes	
+F197	MAIL	P1	M3	252	planned	Daily mail summary	Resumen diario de correos	
+F198	MAIL	P1	M3	255	planned	Extract dates from mail	Extracción de fechas de correos	
+F199	MAIL	P1	M3	256+254	planned	Extract commitments (with their dates)	Extracción de compromisos (con sus fechas)	254 merged here
+F200	MAIL	P1	M3	257	planned	Extract tasks	Extracción de tareas	
+F201	MAIL	P1	M3	268	planned	Reminders for pending mail	Recordatorios de correos pendientes	
+F202	MAIL	P1	M3	269+242b	planned	Conversation follow-up	Seguimiento de conversaciones	duplicate 242 ("recent mail and follow-up") merged here
+F203	MAIL	P2	M3	253	planned	Summaries of long threads	Resumen de conversaciones extensas	
+F204	MAIL	P2	M3	258	planned	Spot invitations	Identificación de invitaciones	
+F205	MAIL	P2	M3	260	planned	Classify mail by topic	Clasificación de correos por tema	
+F206	MAIL	P2	M3	262	planned	Translate mail	Traducción de correos	
+F207	MAIL	P2	M3	263	planned	Draft replies	Generación de borradores de respuesta	drafts only; sending always needs confirmation
+F208	MAIL	P2	M3	264	planned	Proofread drafts	Corrección de borradores	
+F209	MAIL	P2	M3	265	planned	Attachment summaries	Resumen de archivos adjuntos	
+F210	MAIL	P2	M3	266	planned	Spot invoices	Identificación de facturas	
+F211	MAIL	P2	M3	267	planned	Spot bookings	Identificación de reservas	
+F212	MAIL	P2	M3	270	planned	Search inside mail	Búsqueda dentro de correos	
+F213	DRIVE	P1	M3	146	planned	Connect Google Drive	Conexión con Google Drive	
+F214	DRIVE	P1	M3	147	planned	Browse Drive files	Consulta de archivos de Drive	
+F215	DRIVE	P1	M3	148	planned	Find documents by name	Búsqueda de documentos por nombre	
+F216	DRIVE	P1	M3	152	planned	Recently modified files	Archivos modificados recientemente	
+F217	DRIVE	P1	M3	153	planned	Shared documents	Documentos compartidos	
+F218	DRIVE	P1	M3	154	planned	Starred documents	Documentos favoritos	
+F219	DRIVE	P1	M3	158	planned	Personal notes	Creación de notas personales	
+F220	DRIVE	P1	M3	159	planned	Personal reports	Creación de informes personales	
+F221	DRIVE	P1	M3	161	planned	Document summaries	Resumen de documentos	
+F222	DRIVE	P1	M3	171+170	planned	Read documents aloud (document to audio)	Lectura de documentos por voz (conversión a audio)	170 merged here
+F223	DRIVE	P2	M3	149	planned	Find documents by content	Búsqueda de documentos por contenido	
+F224	DRIVE	P2	M3	150	planned	Organize files by category	Organización de archivos por categorías	
+F225	DRIVE	P2	M3	151	planned	Create Drive folders	Creación de carpetas en Drive	
+F226	DRIVE	P2	M3	155	planned	Save articles to Drive	Guardado de artículos en Drive	
+F227	DRIVE	P2	M3	156	planned	Save news to Drive	Guardado de noticias en Drive	
+F228	DRIVE	P2	M6	157	blocked	Save X posts to Drive	Guardado de publicaciones de X	needs X read access (decision D3)
+F229	DRIVE	P2	M3	160	planned	AI-generated documents	Generación de documentos con IA	
+F230	DRIVE	P2	M3	162	planned	Extract information from documents	Extracción de información de documentos	
+F231	DRIVE	P2	M3	163	planned	Find dates in documents	Identificación de fechas en documentos	
+F232	DRIVE	P2	M3	164	planned	Find tasks in documents	Identificación de tareas en documentos	
+F233	DRIVE	P2	M3	165	planned	Extract lists and tables	Extracción de listas y tablas	
+F234	DRIVE	P2	M3	166	planned	Compare versions	Comparación de versiones	
+F235	DRIVE	P2	M3	167	planned	Classify documents automatically	Clasificación automática de documentos	
+F236	DRIVE	P2	M3	169	planned	Search my own documents	Búsqueda en documentos propios	
+F237	DRIVE	P2	M3	172	planned	Translate documents	Traducción de documentos	
+F238	DRIVE	P2	M3	173	planned	Reference document library	Biblioteca de documentos de referencia	
+F239	DRIVE	P2	M3	174	planned	Track important documents	Seguimiento de documentos importantes	
+F240	DRIVE	P2	M3	175	planned	Document review reminders	Recordatorios de revisión documental	
+F241	DRIVE	P3	M7	168	planned	Indexes for document collections	Índices para colecciones documentales	
+F242	NEWS	P0	M2	350	planned	Choose allowed sources	Selección de fuentes permitidas	
+F243	NEWS	P1	M2	351	planned	Relevant news	Consulta de noticias relevantes	RSS first; optional news API
+F244	NEWS	P1	M2	352+353+354+355+356+357+360	planned	News categories: international, Colombia, United States, technology, AI, science, cybersecurity	Categorías de noticias: internacionales, Colombia, Estados Unidos, tecnología, IA, ciencia, ciberseguridad	seven topic variants of one feature
+F245	NEWS	P1	M2	370	planned	Show date and source of each item	Identificación de fecha y fuente de noticias	
+F246	NEWS	P1	M2	371	planned	Alerts on chosen news	Alertas sobre noticias seleccionadas	
+F247	NEWS	P1	M2	372	planned	Read headlines	Lectura de titulares	
+F248	NEWS	P1	M2	373	planned	Personal daily news brief	Informativo personal diario	
+F249	NEWS	P3	M7	358+359+361+362+363+364+365+366+367+368	planned	Extended news categories: business, economy, space, games, education, engineering, robotics, energy, public health, tech regulation	Categorías extendidas: empresariales, económicas, espacio, videojuegos, educación, ingeniería, robótica, energía, salud pública, regulación tecnológica	ten topic variants of one feature
+F250	NEWS	P3	M7	369	planned	Compare news coverage	Comparación de coberturas informativas	
+F251	NEWS	P3	M7	374	planned	Personal weekly news brief	Informativo personal semanal	
+F252	NEWS	P3	M7	375	planned	Audio news summary	Resumen de noticias en audio	
+F253	SPOT	P1	M4	26	planned	Connect Spotify	Conexión con Spotify	Web API playback control needs Premium; development-mode app (allow-listed users)
+F254	SPOT	P1	M4	27	planned	Play and pause	Inicio y pausa de reproducción	
+F255	SPOT	P1	M4	28	planned	Skip tracks	Cambio de canción	
+F256	SPOT	P1	M4	29	planned	Choose playlists	Selección de listas de reproducción	
+F257	SPOT	P1	M4	30	planned	Search songs	Búsqueda de canciones	
+F258	SPOT	P1	M4	31	planned	Search artists	Búsqueda de artistas	
+F259	SPOT	P1	M4	32	planned	Search albums	Búsqueda de álbumes	
+F260	SPOT	P1	M4	33	planned	Play full albums	Reproducción de álbumes completos	
+F261	SPOT	P1	M4	34	planned	Current song	Consulta de canción actual	
+F262	SPOT	P1	M4	35	planned	Current artist	Consulta de artista actual	
+F263	SPOT	P1	M4	36	planned	Current album	Consulta de álbum actual	
+F264	SPOT	P1	M4	38	planned	Queue management	Gestión de cola de reproducción	
+F265	SPOT	P1	M4	39	planned	Shuffle	Reproducción aleatoria	
+F266	SPOT	P1	M4	40	planned	Repeat	Repetición de canciones	
+F267	SPOT	P1	M4	41	planned	Save favorite songs	Guardado de canciones favoritas	
+F268	SPOT	P1	M4	42	planned	Create playlists	Creación de listas de reproducción	
+F269	SPOT	P1	M4	43	planned	Add songs to playlists	Incorporación de canciones a listas	
+F270	SPOT	P1	M4	55	planned	Scheduled music	Programación de reproducción musical	
+F271	SPOT	P1	M4	56	planned	Automatic music stop	Detención automática de música	
+F272	SPOT	P1	M4	57	validate	Music on Google Home	Reproducción musical en Google Home	Spotify Connect must see the speaker
+F273	SPOT	P1	M4	58	planned	Choose the music device	Selección del dispositivo musical	
+F274	SPOT	P2	M4	37	planned	Track duration and progress	Consulta de duración y progreso musical	
+F275	SPOT	P2	M4	44+83	planned	Music recommendations from listening history	Recomendaciones musicales basadas en historial	83 merged; Spotify closed its recommendation endpoints to new apps (Nov 2024): Last.fm + AI instead
+F276	SPOT	P2	M4	45	planned	Similar artists	Descubrimiento de artistas similares	via Last.fm artist.getSimilar
+F277	SPOT	P2	M4	46	planned	Related albums	Descubrimiento de álbumes relacionados	via Last.fm
+F278	SPOT	P2	M4	47	planned	AI-generated playlists	Listas musicales generadas por IA	
+F279	SPOT	P2	M4	48	planned	Music for the time of day	Música según hora del día	
+F280	SPOT	P2	M4	49+50+51+52+53+54	planned	Music for a mood or activity: focus, study, workout, relax, sleep	Música según estado de ánimo o actividad: concentración, estudio, entrenamiento, relajación, sueño	six variants of one feature
+F281	LFM	P1	M4	61	planned	Connect Last.fm	Conexión con Last.fm	
+F282	LFM	P1	M4	62	planned	Personal Last.fm statistics	Estadísticas personales de Last.fm	
+F283	LFM	P1	M4	63	planned	Top artists	Artistas más escuchados	
+F284	LFM	P1	M4	64	planned	Top songs	Canciones más escuchadas	
+F285	LFM	P1	M4	65	planned	Top albums	Álbumes más escuchados	
+F286	LFM	P1	M4	66	planned	Favorite genres	Géneros musicales favoritos	from Last.fm tags
+F287	LFM	P1	M4	67	planned	Plays per week	Reproducciones por semana	
+F288	LFM	P1	M4	68	planned	Plays per month	Reproducciones por mes	
+F289	LFM	P1	M4	69	planned	Plays per year	Reproducciones por año	
+F290	LFM	P1	M4	77	planned	Export music statistics	Exportación de estadísticas musicales	
+F291	LFM	P1	M4	78	planned	Music log in Google Sheets	Registro musical en Google Sheets	
+F292	LFM	P1	M4	79	planned	Automatic music diary	Diario musical automático	
+F293	LFM	P2	M4	59	planned	Listening history	Consulta del historial musical	
+F294	LFM	P2	M4	60	planned	Weekly music summaries	Resúmenes musicales semanales	
+F295	LFM	P2	M4	70	planned	Compare music statistics	Comparación de estadísticas musicales	
+F296	LFM	P2	M4	71	planned	Spot changes in taste	Identificación de cambios en gustos	
+F297	LFM	P2	M4	72	planned	Rediscover forgotten artists	Descubrimiento de artistas olvidados	
+F298	LFM	P2	M4	73	planned	Bring back old songs	Recuperación de canciones antiguas	
+F299	LFM	P2	M4	74	planned	Recently played songs	Canciones reproducidas recientemente	
+F300	LFM	P2	M4	75	planned	All-time favorite songs	Canciones favoritas históricas	
+F301	LFM	P2	M4	76	planned	Personalized music reports	Informes musicales personalizados	
+F302	LFM	P2	M4	80	planned	Detect new favorite artists	Detección de nuevos artistas favoritos	
+F303	LFM	P2	M4	81	planned	Spot repeated songs	Identificación de canciones repetidas	
+F304	LFM	P2	M4	82	planned	Compare taste across years	Comparación de preferencias entre años	
+F305	LFM	P2	M4	84	planned	Playlists of rarely played songs	Listas de canciones poco escuchadas	
+F306	LFM	P2	M4	85	planned	Playlists of all-time favorites	Listas de favoritas históricas	
+F307	SHK	P1	M6	86	blocked	Shikaka.net integration	Integración con Shikaka.net	service and API not verified (decision D4)
+F308	SHK	P1	M6	87	blocked	Statistics available on Shikaka	Consulta de estadísticas disponibles en Shikaka	decision D4
+F309	SHK	P2	M6	88	blocked	Music trends on Shikaka	Tendencias musicales en Shikaka	decision D4
+F310	SHK	P2	M6	89	blocked	Compare Last.fm and Shikaka	Comparación Last.fm y Shikaka	decision D4
+F311	SHK	P2	M6	90	blocked	Joint music activity reports	Informes conjuntos de actividad musical	decision D4
+F312	X	P1	M6	91	planned	Connect the X account	Conexión con la cuenta de X	OAuth 2.0 with PKCE
+F313	X	P1	M6	92	blocked	Read the X feed	Lectura del feed de X	reading needs a paid X API tier (decision D3)
+F314	X	P1	M6	93	blocked	Recent posts from followed accounts	Publicaciones recientes de cuentas seguidas	decision D3
+F315	X	P1	M6	94	blocked	Filter by keyword	Filtrado por palabras clave	decision D3
+F316	X	P1	M6	95	blocked	Filter by author	Filtrado por autor	decision D3
+F317	X	P1	M6	96	blocked	Filter by topic	Filtrado por tema	decision D3
+F318	X	P1	M6	97	blocked	Filter by date	Filtrado por fecha	decision D3
+F319	X	P1	M6	98	blocked	Spot relevant posts	Identificación de publicaciones relevantes	decision D3
+F320	X	P1	M6	99	blocked	Daily X feed summary	Resumen diario del feed de X	decision D3
+F321	X	P1	M6	100	blocked	Weekly X summary	Resumen semanal de X	decision D3
+F322	X	P1	M6	101	blocked	Spot important news on X	Identificación de noticias importantes en X	decision D3
+F323	X	P1	M6	118	blocked	Read posts aloud	Lectura en voz alta de publicaciones	decision D3
+F324	X	P1	M6	124	blocked	Save posts	Guardado de publicaciones	decision D3
+F325	X	P1	M6	125	blocked	Organize saved posts	Organización de publicaciones guardadas	decision D3
+F326	X	P1	M6	128	blocked	Personal account lists	Listas personales de cuentas	decision D3
+F327	X	P1	M6	129	blocked	Priority-account alerts	Alertas de cuentas prioritarias	decision D3
+F328	X	P2	M6	102+103+104+105+106+107+108+109+110	blocked	Follow account groups: technology, science, AI, business, finance, education, games, literature, favorites	Seguimiento de grupos de cuentas: tecnológicas, científicas, IA, empresariales, financieras, educativas, videojuegos, literarias, favoritas	nine variants of one feature; decision D3
+F329	X	P2	M6	111	blocked	Rank by relevance	Clasificación por relevancia	decision D3
+F330	X	P2	M6	114	blocked	Spot repeated posts	Identificación de publicaciones repetidas	decision D3
+F331	X	P2	M6	115	blocked	Detect emerging topics	Detección de temas emergentes	decision D3
+F332	X	P2	M6	116	blocked	Trends related to my interests	Tendencias relacionadas con intereses personales	decision D3
+F333	X	P2	M6	117	blocked	Thread summaries	Resumen de hilos de X	decision D3
+F334	X	P2	M6	119	blocked	Read full threads	Lectura de hilos completos	decision D3
+F335	X	P2	M6	120+121+122+123	blocked	Translate posts into English, Spanish or Mandarin	Traducción de publicaciones al inglés, español o mandarín	121-123 merged here; decision D3
+F336	X	P2	M6	126	blocked	Search older posts	Búsqueda de publicaciones antiguas	decision D3
+F337	X	P2	M6	127	blocked	Posts by author	Consulta de publicaciones por autor	decision D3
+F338	X	P2	M6	130	blocked	Reports on topics discussed on X	Informes de temas discutidos en X	decision D3
+F339	X	P2	M6	133	blocked	Find original sources	Identificación de fuentes originales	decision D3
+F340	X	P2	M6	134	blocked	Extract relevant links	Extracción de enlaces relevantes	decision D3
+F341	X	P2	M6	135	blocked	Personal library of posts	Biblioteca personal de publicaciones	decision D3
+F342	X	P2	M6	143	blocked	Track personal topics	Seguimiento de temas personales	decision D3
+F343	X	P2	M6	144	blocked	Keyword alerts	Alertas por palabras clave	decision D3
+F344	X	P3	M7	112	blocked	Label posts by apparent credibility	Clasificación de publicaciones por credibilidad aparente	assistive label with sources, never a verdict; decision D3
+F345	X	P3	M7	113	blocked	Signals of possible misinformation	Detección de posibles noticias falsas	assistive label with sources, never a verdict; decision D3
+F346	X	P3	M7	131	blocked	Analyze arguments in public debates	Análisis de argumentos en debates públicos	decision D3
+F347	X	P3	M7	132	blocked	Compare perspectives on events	Comparación de perspectivas sobre acontecimientos	decision D3
+F348	X	P3	M7	136	planned	Draft posts for X	Borradores de publicaciones para X	drafts need no API; posting always asks for confirmation
+F349	X	P3	M7	137	planned	Draft threads for X	Borradores de hilos para X	
+F350	X	P3	M7	138	planned	Post ideas	Generación de ideas para publicaciones	
+F351	X	P3	M7	139	planned	Proofread posts	Corrección de publicaciones	
+F352	X	P3	M7	140	planned	Translate drafts	Traducción de borradores	
+F353	X	P3	M7	141	planned	Reminders to post	Recordatorios para publicar	
+F354	X	P3	M7	142	blocked	My own available metrics	Consulta de métricas propias disponibles	decision D3
+F355	X	P3	M7	145	blocked	My digital reputation report	Informe de reputación digital propia	decision D3
+F356	BOOK	P1	M6	376	planned	Connect book services	Integración con servicios de libros	Google Books API + Open Library
+F357	BOOK	P1	M6	377	planned	Search books by title	Búsqueda de libros por título	
+F358	BOOK	P1	M6	378	planned	Search books by author	Búsqueda de libros por autor	
+F359	BOOK	P1	M6	380	planned	Bibliographic details	Consulta de información bibliográfica	
+F360	BOOK	P1	M6	383	planned	Personal library	Biblioteca personal	
+F361	BOOK	P1	M6	384	planned	To-read books	Libros pendientes de lectura	
+F362	BOOK	P1	M6	385	planned	Finished books	Libros terminados	
+F363	BOOK	P1	M6	386	planned	Reading progress	Seguimiento del progreso de lectura	
+F364	BOOK	P1	M6	394	planned	Reading lists	Listas de lectura	
+F365	BOOK	P1	M6	395	planned	Reminders to keep reading	Recordatorios para continuar leyendo	
+F366	BOOK	P3	M7	379	planned	Search books by ISBN	Búsqueda de libros por ISBN	
+F367	BOOK	P3	M7	381	planned	Synopses	Consulta de sinopsis	
+F368	BOOK	P3	M7	382	planned	Book ratings	Consulta de valoraciones de libros	
+F369	BOOK	P3	M7	387	planned	Literary quotes log	Registro de citas literarias	
+F370	BOOK	P3	M7	388	planned	Organize books by theme	Organización de libros por temática	
+F371	BOOK	P3	M7	389	planned	Personalized book recommendations	Recomendaciones de libros personalizadas	
+F372	BOOK	P3	M7	390	planned	Recommendations from favorite authors	Recomendaciones según autores favoritos	
+F373	BOOK	P3	M7	391	planned	Recommendations from professional interests	Recomendaciones según intereses profesionales	
+F374	BOOK	P3	M7	392	planned	Book summaries from authorized sources	Resúmenes de libros con fuentes autorizadas	
+F375	BOOK	P3	M7	393	planned	Read my own texts aloud	Lectura en voz alta de textos propios	
+F376	WEAR	P1	M5	286	planned	Galaxy Watch 5 Pro companion app (Wear OS)	Conexión con Galaxy Watch 5 Pro	Wear OS module; Data Layer API
+F377	WEAR	P1	M5	287	planned	Selected notifications on the watch	Notificaciones seleccionadas en el reloj	
+F378	WEAR	P1	M5	288	planned	Important alerts on the watch	Alertas importantes en el reloj	
+F379	WEAR	P1	M5	289	planned	Reminders from the watch	Recordatorios desde el reloj	
+F380	WEAR	P1	M5	290	planned	Upcoming events on the watch	Próximos eventos desde el reloj	
+F381	WEAR	P1	M5	291	planned	Music control from the watch	Control musical desde el reloj	
+F382	WEAR	P1	M5	292	planned	Run routines from the watch (tile and complication)	Activación de rutinas desde el reloj	
+F383	WEAR	P1	M5	293	planned	Focus mode	Activación del modo concentración	Do Not Disturb access, user-granted
+F384	WEAR	P1	M5	296	planned	Tasks on the watch	Consulta de tareas desde el reloj	
+F385	WEAR	P1	M5	297	planned	Complete tasks from the watch	Confirmación de tareas desde el reloj	
+F386	WEAR	P1	M5	298	planned	Capture ideas from the watch	Registro de ideas desde el reloj	
+F387	WEAR	P1	M5	299	planned	Personal commands from the watch	Comandos personales desde el reloj	
+F388	WEAR	P1	M5	300	planned	Birthday alerts on the watch	Alertas de cumpleaños en el reloj	
+F389	WEAR	P2	M5	294	planned	News summaries on the watch	Noticias resumidas en el reloj	
+F390	WEAR	P2	M5	295	planned	Trivia on the watch	Datos curiosos en el reloj	
+F391	HLTH	P2	M5	311	planned	Health Connect integration	Integración con Health Connect	Samsung Health writes watch data to Health Connect on the phone
+F392	HLTH	P2	M5	312	planned	Health permission settings	Configuración de permisos de salud	
+F393	HLTH	P2	M5	301	planned	Physical activity statistics	Consulta de estadísticas de actividad física	
+F394	HLTH	P2	M5	302	planned	Steps	Consulta de pasos	
+F395	HLTH	P2	M5	303	planned	Daily activity	Consulta de actividad diaria	
+F396	HLTH	P2	M5	304	planned	Workout sessions	Consulta de sesiones de entrenamiento	
+F397	HLTH	P2	M5	305	planned	Heart rate (authorized)	Consulta de frecuencia cardíaca autorizada	
+F398	HLTH	P2	M5	306	planned	Sleep data (authorized)	Consulta de datos de sueño autorizados	
+F399	HLTH	P2	M5	307	planned	Personal activity trends	Tendencias personales de actividad	
+F400	HLTH	P2	M5	308	planned	Personal activity reports	Informes personales de actividad	
+F401	HLTH	P2	M5	309	planned	Movement reminders	Recordatorios de movimiento	
+F402	HLTH	P2	M5	310	planned	Routines based on recorded activity	Rutinas basadas en actividad registrada	
