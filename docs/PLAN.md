@@ -93,7 +93,7 @@ actualizado (`status = implemented` en lo que se entregó).
 
 | Hito | Contenido | Características | Criterio de salida |
 |---|---|---|---|
-| **M0** Cimientos y seguridad base | Esqueleto Compose, 3 idiomas, tema, fuentes, About público y de administrador (generado desde el catálogo), CI, CodeQL, Dependabot, Scorecard, modelo de amenazas, SECURITY.md, configuración de la nube | 18 | La app abre en el S25 en los 3 idiomas; el About de administrador lista lo implementado, lo pendiente y la seguridad; la CI corre en cada push |
+| **M0** Cimientos y seguridad base | Esqueleto Compose, 3 idiomas, tema, fuentes, About público y de administrador (generado desde el catálogo), CI, CodeQL, Dependabot, Scorecard, modelo de amenazas, SECURITY.md, configuración de la nube | 19 | La app abre en el S25 en los 3 idiomas; el About de administrador lista lo implementado, lo pendiente y la seguridad; la CI corre en cada push |
 | **M1** MVP | Inicio de sesión con Google, permisos y revocación, API keys cifradas, chat de IA (texto y voz), descubrimiento del parlante + TTS, lectura de cumpleaños en Sheets, rutina diaria, horario silencioso, historial, errores | 53 | **A las 08:00 el parlante dice "Hoy es cumpleaños de…" sin tocar el teléfono**, tres días seguidos |
 | **M2** Anuncios y rutinas diarias | Clima, calendario, recordatorios, noticias (RSS), anuncios de mañana y noche, rutinas por voz, biblioteca y panel de automatizaciones, widget, mosaico | 55 | Rutina de la mañana completa (clima + agenda + cumpleaños + titulares) |
 | **M3** Productividad Google | Gmail, Drive, Apps Script, Sheets avanzado, varias cuentas, informes semanales y mensuales | 93 | Resumen diario de correo leído en voz alta |
