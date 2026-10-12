@@ -33,8 +33,10 @@ by local sessions (Windows PC with the Galaxy S25 Ultra on ADB) and cloud sessio
 
 - Versions live in `gradle/libs.versions.toml`. `material3` is pinned above the BOM on purpose (ISP-SEC-004).
 - `gradle/verification-metadata.xml` pins a SHA-256 for every artifact. After adding or updating a
-  dependency, regenerate it and review the diff:
-  `./gradlew --write-verification-metadata sha256 assembleDebug assembleRelease testDebugUnitTest lintDebug lintRelease detekt assembleDebugAndroidTest`
+  dependency, regenerate it **with an empty Gradle cache** (a warm cache skips files such as `.module`
+  metadata that CI then downloads and rejects) and review the diff:
+  `GRADLE_USER_HOME=<empty temp dir> ./gradlew --no-configuration-cache --no-build-cache \`
+  `--write-verification-metadata sha256 assembleDebug assembleRelease testDebugUnitTest lintDebug lintRelease detekt assembleDebugAndroidTest`
   When AGP changes version, add the Linux and macOS `aapt2` jar checksums by hand (see ISP-SEC-001).
 - Fonts: `ui/theme/FontPool.kt`. Any family added must pass `GoogleFontsTest` on the real phone.
 

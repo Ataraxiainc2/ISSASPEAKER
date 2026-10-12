@@ -23,7 +23,10 @@ secrets in the repository or in CI.
 `gradle/verification-metadata.xml` pins a SHA-256 for every artifact the build resolves, so a swapped artifact
 fails the build. The checksums were recorded from the first download (trust on first use) and PGP
 signatures are not checked. The platform-specific `aapt2` jars for Linux and macOS were added by hand and
-cross-checked against the SHA-1 Google publishes. **Next step (M1):** turn on `verify-signatures` with an
+cross-checked against the SHA-1 Google publishes. The first CI run rejected `junit-bom-5.10.2.module`: the
+local Gradle cache had never downloaded it, so it had no entry. The file was fetched independently from Maven
+Central and the Gradle Plugin Portal (same SHA-256), and the metadata was regenerated with an empty cache — the
+rule now written in `CLAUDE.md`. **Next step (M1):** turn on `verify-signatures` with an
 explicit trusted-keys list for every artifact that publishes a signature.
 
 ### ISP-SEC-002 · Low · Mitigated — the cloud SessionStart hook runs repository code
