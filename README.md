@@ -6,7 +6,8 @@ models that run on the user's own API keys, so that services that never talk to 
 routine: *at 08:00, read today's birthdays from a sheet, have an AI write the announcement, and say it on
 the kitchen speaker.*
 
-**Status:** planning. No app code yet. See the [plan](docs/PLAN.md) (Spanish) and the
+**Status:** milestone M0 done (foundation and security baseline); M1 (the MVP) is next. See the
+[plan](docs/PLAN.md) (Spanish), the [threat model](docs/security/THREAT-MODEL.md) and the
 [feature catalog](docs/FEATURES.md): 413 numbered features, each one marked *implemented*, *to implement*
 or *pending*.
 
@@ -30,7 +31,10 @@ state, and the admin About screen shows the same list.
   first used, and can be reviewed and revoked in the app.
 - Content from mail, sheets, documents and the web is treated as untrusted data. AI output never
   triggers an action without explicit confirmation.
-- Supply chain: CodeQL, Dependabot, dependency review, Gradle dependency verification, SHA-pinned actions.
+- Supply chain: CodeQL, Dependabot, dependency review and OSV-Scanner, Gradle dependency verification,
+  SHA-pinned actions, OpenSSF Scorecard, CODEOWNERS.
+- Every finding is logged with an ID in the [audit log](docs/security/AUDIT-LOG.md), including the ones we
+  accepted and why.
 
 Found a vulnerability? Please read [SECURITY.md](SECURITY.md) and report it privately.
 
@@ -40,6 +44,7 @@ Found a vulnerability? Please read [SECURITY.md](SECURITY.md) and report it priv
 |---|---|
 | `docs/PLAN.md` | Plan, decisions, milestones, risks |
 | `docs/features/catalog.tsv` | Single source of truth for features |
+| `docs/security/` | Threat model, audit log, findings |
 | `docs/FEATURES.md` | Generated catalog (`python tools/features.py`) |
 | `CLAUDE.md` | Rules for AI coding sessions on this repo |
 | `.claude/skills/` | Project skills shared by local and cloud sessions |

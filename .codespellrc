@@ -1,0 +1,7 @@
+# codespell (python -m codespell_lib): typos in ISSASPEAKER's code, comments and texts.
+# Its dictionary is English. Every word below was flagged and is correct: Spanish or Portuguese text
+# (UI strings, the plan, the bilingual feature catalog) or a Kotlin name ("OptIn").
+# verification-metadata.xml is skipped: it lists Maven coordinates (errorprone), not prose.
+[codespell]
+skip = ./.git,./.gradle,./build,./app/build,./.kotlin,*.png,*.webp,*.jar,font_certs.xml,./gradle/verification-metadata.xml
+ignore-words-list = optin,avance,diagrama,imposible,artistas,argumentos,sinopsis,hace,variantes,historial,inicial,controles,comando,comandos,autor

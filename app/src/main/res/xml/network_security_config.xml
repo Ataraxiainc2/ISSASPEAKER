@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    HTTPS only (catalog F024). No cleartext to any host and only the system certificate store: user-added
+    CAs are not trusted, so a certificate installed on the phone cannot intercept the app's traffic.
+    The local Cast audio server (M1) is a server, not a client: the speaker connects to the phone, so this
+    policy does not need an exception for it.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

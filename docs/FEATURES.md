@@ -8,8 +8,8 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 
 | Status | Count |
 |---|---|
-| Implemented | 0 |
-| To implement | 396 |
+| Implemented | 18 |
+| To implement | 378 |
 | Pending: feasibility test | 12 |
 | Pending: blocked by a decision | 5 |
 
@@ -25,25 +25,25 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 
 | ID | Module | P | Feature | Característica | Origin | Status | Note |
 |---|---|---|---|---|---|---|---|
-| F001 | PLAT | P0 | Modern platform baseline: Android 16+ only (minSdk 36), target SDK 37, edge-to-edge, predictive back | Base de plataforma moderna: solo Android 16+ (minSdk 36), target SDK 37, edge-to-edge, gesto atrás predictivo | NEW | To implement | S25 Ultra runs Android 16 (API 36), One UI 8.5 |
-| F002 | PLAT | P0 | Interface in English (default), Latin American Spanish and Brazilian Portuguese, with per-app language picker | Interfaz en inglés (por defecto), español latinoamericano y portugués de Brasil, con selector de idioma por app | NEW | To implement | values/, values-b+es+419/, values-pt-rBR/ + locales_config.xml |
-| F003 | PLAT | P0 | Material 3 Expressive theme with dynamic color and dark mode | Tema Material 3 Expressive con color dinámico y modo oscuro | NEW | To implement |  |
-| F004 | PLAT | P0 | Google Fonts through the Play Services downloadable-font provider | Google Fonts mediante el proveedor de fuentes descargables de Play Services | NEW | To implement | skill android-google-fonts |
-| F007 | PLAT | P0 | Public About screen | Pantalla Acerca de pública | NEW | To implement |  |
-| F008 | PLAT | P0 | Admin About: implemented, planned and pending features plus security status, generated from this catalog | About de administrador: implementado, por implementar y pendiente, más estado de seguridad, generado desde este catálogo | NEW | To implement | admin = sat.tecnologias@gmail.com |
-| F024 | SEC | P0 | HTTPS-only network policy (no cleartext traffic) | Política de red solo HTTPS (sin tráfico en texto plano) | NEW | To implement | network_security_config.xml |
-| F025 | SEC | P0 | No secrets or personal data in logs; release builds log nothing | Sin secretos ni datos personales en logs; las versiones release no registran nada | NEW | To implement |  |
-| F026 | SEC | P0 | Admin check by verified Google account, documented as a UI gate and not a security boundary | Verificación de administrador por cuenta de Google verificada, documentada como filtro de interfaz y no como frontera de seguridad | NEW | To implement |  |
-| F027 | SEC | P0 | Threat model (STRIDE) and data-flow diagram in docs/security | Modelo de amenazas (STRIDE) y diagrama de flujo de datos en docs/security | NEW | To implement |  |
-| F028 | SEC | P0 | Security audit log with finding IDs (ISP-SEC-NNN) mirrored in admin About | Registro de auditoría de seguridad con IDs (ISP-SEC-NNN) reflejado en el About de administrador | NEW | To implement |  |
-| F029 | SEC | P0 | CI on every push and pull request: build, unit tests, Android Lint, detekt, codespell | CI en cada push y pull request: compilación, pruebas unitarias, Android Lint, detekt, codespell | NEW | To implement |  |
-| F030 | SEC | P0 | CodeQL (Kotlin), secret scanning with push protection, Dependabot | CodeQL (Kotlin), escaneo de secretos con protección de push, Dependabot | NEW | To implement |  |
-| F031 | SEC | P0 | Dependency review and OSV-Scanner on pull requests | Revisión de dependencias y OSV-Scanner en pull requests | NEW | To implement |  |
-| F032 | SEC | P0 | Gradle dependency verification and wrapper checksum | Verificación de dependencias de Gradle y checksum del wrapper | NEW | To implement |  |
-| F033 | SEC | P0 | GitHub Actions pinned by commit SHA with least-privilege permissions | GitHub Actions fijadas por SHA con permisos mínimos | NEW | To implement |  |
-| F034 | SEC | P0 | OpenSSF Scorecard published on the repository | OpenSSF Scorecard publicado en el repositorio | NEW | To implement |  |
-| F035 | SEC | P0 | Private vulnerability reporting and SECURITY.md disclosure policy | Reporte privado de vulnerabilidades y política de divulgación SECURITY.md | NEW | To implement |  |
-| F403 | PLAT | P0 | Random high-legibility typeface from a curated pool of at least 100 Google Fonts | Tipografía aleatoria de alta legibilidad, de un grupo curado de al menos 100 Google Fonts | NEW | To implement | decision D2: a new family every day, random order without repeats until the pool is used up; each family checked on the S25 |
+| F001 | PLAT | P0 | Modern platform baseline: Android 16+ only (minSdk 36), target SDK 37, edge-to-edge, predictive back | Base de plataforma moderna: solo Android 16+ (minSdk 36), target SDK 37, edge-to-edge, gesto atrás predictivo | NEW | Implemented | S25 Ultra runs Android 16 (API 36), One UI 8.5 |
+| F002 | PLAT | P0 | Interface in English (default), Latin American Spanish and Brazilian Portuguese, with per-app language picker | Interfaz en inglés (por defecto), español latinoamericano y portugués de Brasil, con selector de idioma por app | NEW | Implemented | values/, values-b+es+419/, values-pt-rBR/ + locales_config.xml |
+| F003 | PLAT | P0 | Material 3 Expressive theme with dynamic color and dark mode | Tema Material 3 Expressive con color dinámico y modo oscuro | NEW | Implemented | material3 1.5.0-beta01 (Expressive is public only from 1.5; ISP-SEC-004) |
+| F004 | PLAT | P0 | Google Fonts through the Play Services downloadable-font provider | Google Fonts mediante el proveedor de fuentes descargables de Play Services | NEW | Implemented | 133 families checked on the S25 with GoogleFontsTest |
+| F007 | PLAT | P0 | Public About screen | Pantalla Acerca de pública | NEW | Implemented |  |
+| F008 | PLAT | P0 | Admin About: implemented, planned and pending features plus security status, generated from this catalog | About de administrador: implementado, por implementar y pendiente, más estado de seguridad, generado desde este catálogo | NEW | Implemented | admin = sat.tecnologias@gmail.com |
+| F024 | SEC | P0 | HTTPS-only network policy (no cleartext traffic) | Política de red solo HTTPS (sin tráfico en texto plano) | NEW | Implemented | network_security_config.xml |
+| F025 | SEC | P0 | No secrets or personal data in logs; release builds log nothing | Sin secretos ni datos personales en logs; las versiones release no registran nada | NEW | Implemented |  |
+| F026 | SEC | P0 | Admin check by verified Google account, documented as a UI gate and not a security boundary | Verificación de administrador por cuenta de Google verificada, documentada como filtro de interfaz y no como frontera de seguridad | NEW | To implement | logic and tests done in M0 (admin/AdminPolicy.kt); takes effect with sign-in (F019, M1) |
+| F027 | SEC | P0 | Threat model (STRIDE) and data-flow diagram in docs/security | Modelo de amenazas (STRIDE) y diagrama de flujo de datos en docs/security | NEW | Implemented |  |
+| F028 | SEC | P0 | Security audit log with finding IDs (ISP-SEC-NNN) mirrored in admin About | Registro de auditoría de seguridad con IDs (ISP-SEC-NNN) reflejado en el About de administrador | NEW | Implemented |  |
+| F029 | SEC | P0 | CI on every push and pull request: build, unit tests, Android Lint, detekt, codespell | CI en cada push y pull request: compilación, pruebas unitarias, Android Lint, detekt, codespell | NEW | Implemented |  |
+| F030 | SEC | P0 | CodeQL (Kotlin), secret scanning with push protection, Dependabot | CodeQL (Kotlin), escaneo de secretos con protección de push, Dependabot | NEW | Implemented |  |
+| F031 | SEC | P0 | Dependency review and OSV-Scanner on pull requests | Revisión de dependencias y OSV-Scanner en pull requests | NEW | Implemented |  |
+| F032 | SEC | P0 | Gradle dependency verification and wrapper checksum | Verificación de dependencias de Gradle y checksum del wrapper | NEW | Implemented |  |
+| F033 | SEC | P0 | GitHub Actions pinned by commit SHA with least-privilege permissions | GitHub Actions fijadas por SHA con permisos mínimos | NEW | Implemented |  |
+| F034 | SEC | P0 | OpenSSF Scorecard published on the repository | OpenSSF Scorecard publicado en el repositorio | NEW | Implemented |  |
+| F035 | SEC | P0 | Private vulnerability reporting and SECURITY.md disclosure policy | Reporte privado de vulnerabilidades y política de divulgación SECURITY.md | NEW | Implemented |  |
+| F403 | PLAT | P0 | Random high-legibility typeface from a curated pool of at least 100 Google Fonts | Tipografía aleatoria de alta legibilidad, de un grupo curado de al menos 100 Google Fonts | NEW | Implemented | decision D2: a new family every day, random order without repeats; 133 families, all served on the S25 |
 
 ## M1 — MVP: account, AI, speaker, birthdays, daily routine (53)
 

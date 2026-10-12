@@ -1,6 +1,6 @@
 # ISSASPEAKER — Plan del proyecto
 
-**Fecha:** 2026-10-12 · **Estado:** plan propuesto, sin código de la app todavía · **Dueño:** ISSASODA (sat.tecnologias@gmail.com)
+**Fecha:** 2026-10-12 · **Estado:** M0 terminado (2026-10-12); sigue M1 · **Dueño:** ISSASODA (sat.tecnologias@gmail.com)
 
 ISSASPEAKER es un centro de mando personal para Android: une el parlante Google Home de la red local,
 el ecosistema Google (Sheets, Calendar, Gmail, Drive, Apps Script), la música (Spotify, Last.fm),
@@ -26,8 +26,8 @@ Documentos relacionados:
 | Android SDK | ✅ | Plataformas 34–37 y build-tools 37.0.0 instalados |
 | JDK | ✅ | `JAVA_HOME` = JBR de Android Studio (OpenJDK 25.0.3); en el `PATH` hay un Java 24 aparte |
 | `ANDROID_HOME` | ⚠️ | No está definida; Gradle usará `local.properties` (`sdk.dir`), que Android Studio crea |
-| GitHub CLI | ✅ | `gh` 2.102, cuenta `Ataraxiainc2`, permisos `repo` y `workflow` |
-| codespell | ❌ | No instalado: `python -m pip install codespell` (mismo uso que EmuGaMind) |
+| GitHub CLI | ✅ | `gh` 2.102, cuenta `Ataraxiainc2`. El Credential Manager de Windows se colgó en un push; se empuja con `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push` |
+| codespell | ✅ | Instalado (2.4.1), misma versión que la CI |
 | Skills | ⚠️ | Viven en `~/.claude/skills` (solo este PC). **Copiados al repo** en `.claude/skills/` para que la nube los vea |
 
 ### Nube (sesiones de Claude Code en claude.ai/code)
@@ -38,7 +38,7 @@ Una sesión en la nube clona el repo de GitHub en una máquina Linux limpia. Lo 
 |---|---|---|
 | Repo en GitHub | ✅ | `Ataraxiainc2/ISSASPEAKER`, público |
 | App de GitHub de Claude con acceso al repo | ❓ | Verificar en claude.ai/code → al crear la sesión, elegir el repo; si no aparece, darle acceso a la app |
-| Android SDK en la máquina de la nube | ❌ | **M0:** script `tools/cloud/setup-android.sh` + hook `SessionStart` en `.claude/settings.json` que solo corre si `CLAUDE_CODE_REMOTE=true` |
+| Android SDK en la máquina de la nube | ✅ | Script `tools/cloud/setup-android.sh` + hook `SessionStart` en `.claude/settings.json`; solo corre si `CLAUDE_CODE_REMOTE=true` y verifica el checksum de la descarga |
 | Red de la nube | ❓ | El entorno debe permitir `dl.google.com`, `maven.google.com`, `services.gradle.org`, `plugins.gradle.org`, `repo.maven.apache.org`. Revisar el nivel de acceso a red del entorno |
 | Skills y reglas del proyecto | ✅ | En el repo: `.claude/skills/` y `CLAUDE.md`. La memoria de este PC **no** viaja a la nube |
 | Secretos | ✅ | Ninguno en el repo. Las claves de firma siguen en `~/.issasoda-keys` del PC |

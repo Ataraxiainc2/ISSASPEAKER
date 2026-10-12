@@ -1,12 +1,12 @@
 id	module	priority	milestone	origin	status	title_en	title_es	note
-F001	PLAT	P0	M0	NEW	planned	Modern platform baseline: Android 16+ only (minSdk 36), target SDK 37, edge-to-edge, predictive back	Base de plataforma moderna: solo Android 16+ (minSdk 36), target SDK 37, edge-to-edge, gesto atrás predictivo	S25 Ultra runs Android 16 (API 36), One UI 8.5
-F002	PLAT	P0	M0	NEW	planned	Interface in English (default), Latin American Spanish and Brazilian Portuguese, with per-app language picker	Interfaz en inglés (por defecto), español latinoamericano y portugués de Brasil, con selector de idioma por app	values/, values-b+es+419/, values-pt-rBR/ + locales_config.xml
-F003	PLAT	P0	M0	NEW	planned	Material 3 Expressive theme with dynamic color and dark mode	Tema Material 3 Expressive con color dinámico y modo oscuro	
-F004	PLAT	P0	M0	NEW	planned	Google Fonts through the Play Services downloadable-font provider	Google Fonts mediante el proveedor de fuentes descargables de Play Services	skill android-google-fonts
+F001	PLAT	P0	M0	NEW	implemented	Modern platform baseline: Android 16+ only (minSdk 36), target SDK 37, edge-to-edge, predictive back	Base de plataforma moderna: solo Android 16+ (minSdk 36), target SDK 37, edge-to-edge, gesto atrás predictivo	S25 Ultra runs Android 16 (API 36), One UI 8.5
+F002	PLAT	P0	M0	NEW	implemented	Interface in English (default), Latin American Spanish and Brazilian Portuguese, with per-app language picker	Interfaz en inglés (por defecto), español latinoamericano y portugués de Brasil, con selector de idioma por app	values/, values-b+es+419/, values-pt-rBR/ + locales_config.xml
+F003	PLAT	P0	M0	NEW	implemented	Material 3 Expressive theme with dynamic color and dark mode	Tema Material 3 Expressive con color dinámico y modo oscuro	material3 1.5.0-beta01 (Expressive is public only from 1.5; ISP-SEC-004)
+F004	PLAT	P0	M0	NEW	implemented	Google Fonts through the Play Services downloadable-font provider	Google Fonts mediante el proveedor de fuentes descargables de Play Services	133 families checked on the S25 with GoogleFontsTest
 F005	PLAT	P0	M1	NEW	planned	Onboarding with guided permission setup	Bienvenida con configuración guiada de permisos	
 F006	PLAT	P0	M1	NEW	planned	Samsung battery-optimization guidance and exemption request	Guía y solicitud de exención de optimización de batería de Samsung	PRD risk 1 (Doze / Samsung app sleeping)
-F007	PLAT	P0	M0	NEW	planned	Public About screen	Pantalla Acerca de pública	
-F008	PLAT	P0	M0	NEW	planned	Admin About: implemented, planned and pending features plus security status, generated from this catalog	About de administrador: implementado, por implementar y pendiente, más estado de seguridad, generado desde este catálogo	admin = sat.tecnologias@gmail.com
+F007	PLAT	P0	M0	NEW	implemented	Public About screen	Pantalla Acerca de pública	
+F008	PLAT	P0	M0	NEW	implemented	Admin About: implemented, planned and pending features plus security status, generated from this catalog	About de administrador: implementado, por implementar y pendiente, más estado de seguridad, generado desde este catálogo	admin = sat.tecnologias@gmail.com
 F009	PLAT	P0	M1	NEW	planned	Admin diagnostics: scheduled work, last runs, speaker reachability, token state (never secrets)	Diagnóstico de administrador: trabajos programados, últimas ejecuciones, alcance del parlante, estado de tokens (nunca secretos)	
 F010	PLAT	P1	M2	NEW	planned	Quick Settings tile to run a favorite routine	Mosaico de Ajustes rápidos para ejecutar una rutina favorita	
 F011	PLAT	P1	M2	NEW	planned	Home-screen widget (Glance) with routine buttons and the next announcement	Widget de pantalla de inicio (Glance) con botones de rutinas y el próximo anuncio	
@@ -22,18 +22,18 @@ F020	SEC	P0	M1	NEW	planned	Token revocation on sign-out and one-tap "erase every
 F021	SEC	P0	M1	NEW	planned	Prompt-injection guard: mail, X, web, sheet and document content is untrusted data; AI output never triggers an action without explicit confirmation	Defensa contra inyección de prompts: el contenido de correos, X, web, hojas y documentos es dato no confiable; la IA nunca dispara una acción sin confirmación explícita	
 F022	SEC	P0	M1	NEW	planned	Hardened local audio server for Cast: Wi-Fi-only bind, random port, single-use unguessable URL, short lifetime	Servidor de audio local endurecido para Cast: solo Wi-Fi, puerto aleatorio, URL de un solo uso imposible de adivinar, vida corta	
 F023	SEC	P0	M1	NEW	validate	Local network access permission (Android 16/17 local network protection)	Permiso de acceso a la red local (protección de red local de Android 16/17)	verify behavior on target SDK 37
-F024	SEC	P0	M0	NEW	planned	HTTPS-only network policy (no cleartext traffic)	Política de red solo HTTPS (sin tráfico en texto plano)	network_security_config.xml
-F025	SEC	P0	M0	NEW	planned	No secrets or personal data in logs; release builds log nothing	Sin secretos ni datos personales en logs; las versiones release no registran nada	
-F026	SEC	P0	M0	NEW	planned	Admin check by verified Google account, documented as a UI gate and not a security boundary	Verificación de administrador por cuenta de Google verificada, documentada como filtro de interfaz y no como frontera de seguridad	
-F027	SEC	P0	M0	NEW	planned	Threat model (STRIDE) and data-flow diagram in docs/security	Modelo de amenazas (STRIDE) y diagrama de flujo de datos en docs/security	
-F028	SEC	P0	M0	NEW	planned	Security audit log with finding IDs (ISP-SEC-NNN) mirrored in admin About	Registro de auditoría de seguridad con IDs (ISP-SEC-NNN) reflejado en el About de administrador	
-F029	SEC	P0	M0	NEW	planned	CI on every push and pull request: build, unit tests, Android Lint, detekt, codespell	CI en cada push y pull request: compilación, pruebas unitarias, Android Lint, detekt, codespell	
-F030	SEC	P0	M0	NEW	planned	CodeQL (Kotlin), secret scanning with push protection, Dependabot	CodeQL (Kotlin), escaneo de secretos con protección de push, Dependabot	
-F031	SEC	P0	M0	NEW	planned	Dependency review and OSV-Scanner on pull requests	Revisión de dependencias y OSV-Scanner en pull requests	
-F032	SEC	P0	M0	NEW	planned	Gradle dependency verification and wrapper checksum	Verificación de dependencias de Gradle y checksum del wrapper	
-F033	SEC	P0	M0	NEW	planned	GitHub Actions pinned by commit SHA with least-privilege permissions	GitHub Actions fijadas por SHA con permisos mínimos	
-F034	SEC	P0	M0	NEW	planned	OpenSSF Scorecard published on the repository	OpenSSF Scorecard publicado en el repositorio	
-F035	SEC	P0	M0	NEW	planned	Private vulnerability reporting and SECURITY.md disclosure policy	Reporte privado de vulnerabilidades y política de divulgación SECURITY.md	
+F024	SEC	P0	M0	NEW	implemented	HTTPS-only network policy (no cleartext traffic)	Política de red solo HTTPS (sin tráfico en texto plano)	network_security_config.xml
+F025	SEC	P0	M0	NEW	implemented	No secrets or personal data in logs; release builds log nothing	Sin secretos ni datos personales en logs; las versiones release no registran nada	
+F026	SEC	P0	M0	NEW	planned	Admin check by verified Google account, documented as a UI gate and not a security boundary	Verificación de administrador por cuenta de Google verificada, documentada como filtro de interfaz y no como frontera de seguridad	logic and tests done in M0 (admin/AdminPolicy.kt); takes effect with sign-in (F019, M1)
+F027	SEC	P0	M0	NEW	implemented	Threat model (STRIDE) and data-flow diagram in docs/security	Modelo de amenazas (STRIDE) y diagrama de flujo de datos en docs/security	
+F028	SEC	P0	M0	NEW	implemented	Security audit log with finding IDs (ISP-SEC-NNN) mirrored in admin About	Registro de auditoría de seguridad con IDs (ISP-SEC-NNN) reflejado en el About de administrador	
+F029	SEC	P0	M0	NEW	implemented	CI on every push and pull request: build, unit tests, Android Lint, detekt, codespell	CI en cada push y pull request: compilación, pruebas unitarias, Android Lint, detekt, codespell	
+F030	SEC	P0	M0	NEW	implemented	CodeQL (Kotlin), secret scanning with push protection, Dependabot	CodeQL (Kotlin), escaneo de secretos con protección de push, Dependabot	
+F031	SEC	P0	M0	NEW	implemented	Dependency review and OSV-Scanner on pull requests	Revisión de dependencias y OSV-Scanner en pull requests	
+F032	SEC	P0	M0	NEW	implemented	Gradle dependency verification and wrapper checksum	Verificación de dependencias de Gradle y checksum del wrapper	
+F033	SEC	P0	M0	NEW	implemented	GitHub Actions pinned by commit SHA with least-privilege permissions	GitHub Actions fijadas por SHA con permisos mínimos	
+F034	SEC	P0	M0	NEW	implemented	OpenSSF Scorecard published on the repository	OpenSSF Scorecard publicado en el repositorio	
+F035	SEC	P0	M0	NEW	implemented	Private vulnerability reporting and SECURITY.md disclosure policy	Reporte privado de vulnerabilidades y política de divulgación SECURITY.md	
 F036	SEC	P0	M1	NEW	planned	Release signing with an upload key kept outside the repository	Firma de release con clave de subida fuera del repositorio	~/.issasoda-keys
 F037	SEC	P0	M1	NEW	planned	SBOM (CycloneDX) attached to every release	SBOM (CycloneDX) adjunto a cada release	
 F038	SEC	P0	M1	NEW	planned	Instrumented security tests: keys never stored in plain text, backups exclude secrets	Pruebas de seguridad instrumentadas: claves nunca en texto plano, copias sin secretos	
@@ -401,7 +401,7 @@ F399	HLTH	P2	M5	307	planned	Personal activity trends	Tendencias personales de ac
 F400	HLTH	P2	M5	308	planned	Personal activity reports	Informes personales de actividad	
 F401	HLTH	P2	M5	309	planned	Movement reminders	Recordatorios de movimiento	
 F402	HLTH	P2	M5	310	planned	Routines based on recorded activity	Rutinas basadas en actividad registrada	
-F403	PLAT	P0	M0	NEW	planned	Random high-legibility typeface from a curated pool of at least 100 Google Fonts	Tipografía aleatoria de alta legibilidad, de un grupo curado de al menos 100 Google Fonts	decision D2: a new family every day, random order without repeats until the pool is used up; each family checked on the S25
+F403	PLAT	P0	M0	NEW	implemented	Random high-legibility typeface from a curated pool of at least 100 Google Fonts	Tipografía aleatoria de alta legibilidad, de un grupo curado de al menos 100 Google Fonts	decision D2: a new family every day, random order without repeats; 133 families, all served on the S25
 F404	X	P1	M2	NEW	planned	X Radar: interest profile (topics, open questions, projects, seed accounts, topics to ignore)	Radar de X: perfil de intereses (temas, preguntas abiertas, proyectos, cuentas semilla, temas a ignorar)	decision D3
 F405	X	P1	M2	NEW	planned	X Radar: retrieval through the xAI API x_search tool (semantic, keyword, user and thread search) with allowed or excluded accounts and a date window	Radar de X: búsqueda con la herramienta x_search de la API de xAI (semántica, por palabras, de usuarios e hilos) con cuentas permitidas o excluidas y ventana de fechas	official API, no scraping; billed per post fetched
 F406	X	P1	M2	NEW	planned	X Radar: signal scoring that prefers primary sources (code, data, papers, first-hand reports) over opinions, rewards novelty against what was already seen and penalizes engagement bait	Radar de X: puntuación de señal que prefiere fuentes primarias (código, datos, papers, testimonios directos) sobre opiniones, premia la novedad frente a lo ya visto y castiga el cebo de interacción	

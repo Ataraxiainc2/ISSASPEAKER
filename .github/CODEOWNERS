@@ -1,0 +1,7 @@
+# Changes to the build, CI, dependency pins and AI-session configuration need the owner's review
+# (audit finding ISP-SEC-002: the cloud SessionStart hook runs tools/cloud/setup-android.sh).
+/.github/      @Ataraxiainc2
+/.claude/      @Ataraxiainc2
+/tools/cloud/  @Ataraxiainc2
+/gradle/       @Ataraxiainc2
+/*.gradle.kts  @Ataraxiainc2

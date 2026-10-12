@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tagline">Sua central de comando: alto-falante, Google, música e IA em um só lugar.</string>
+    <string name="loading">Carregando…</string>
+    <string name="features_ready">Recursos prontos: %1$d / %2$d</string>
+
+    <string name="action_back">Voltar</string>
+    <string name="action_settings">Configurações</string>
+    <string name="action_about">Sobre</string>
+    <string name="action_admin">Administrador</string>
+
+    <string name="home_font_title">Tipografia de hoje</string>
+    <string name="home_font_body">Uma tipografia nova e muito legível a cada dia.</string>
+    <string name="home_next_title">Em breve</string>
+    <string name="home_next_speaker">Falar pelo seu alto-falante Google Home</string>
+    <string name="home_next_google">Entrar com o Google e ler suas planilhas</string>
+    <string name="home_next_ai">Usar suas próprias chaves de IA, guardadas criptografadas neste celular</string>
+    <string name="home_next_routine">Uma rotina matinal que anuncia os aniversários do dia</string>
+    <string name="home_progress_title">Progresso</string>
+    <string name="about_version">Versão %1$s</string>
+    <string name="about_what_title">O que é</string>
+    <string name="about_what_body">O ISSASPEAKER une seu alto-falante Google Home, sua conta Google, sua música e modelos de IA que funcionam com suas próprias chaves, para que serviços que nunca conversam entre si compartilhem uma mesma rotina.</string>
+    <string name="about_privacy_title">Seus dados</string>
+    <string name="about_privacy_body">O ISSASPEAKER não tem servidor. Suas chaves, tokens e histórico ficam neste celular, criptografados, e ficam fora dos backups. Cada permissão é pedida só quando o recurso que precisa dela é usado pela primeira vez.</string>
+    <string name="about_status_title">Status</string>
+    <string name="about_status_body">Em desenvolvimento inicial.</string>
+    <string name="about_font_title">Tipografia do dia</string>
+    <string name="about_font_body">Hoje o app usa %1$s. A cada dia ele escolhe ao acaso outra Google Font muito legível de um grupo de %2$d, sem repetir nenhuma até usar todas.</string>
+    <string name="about_languages_title">Idiomas</string>
+    <string name="about_languages_body">Inglês, espanhol (América Latina) e português (Brasil). Mude em Configurações.</string>
+    <string name="about_source_title">Código aberto</string>
+    <string name="about_source_body">Todo o código é público, sob a licença MIT.</string>
+    <string name="about_source_link">Ver o código no GitHub</string>
+    <string name="security">Segurança</string>
+    <string name="about_security_body">Encontrou uma vulnerabilidade? Relate em particular, nunca em uma issue pública.</string>
+    <string name="about_security_link">Ler a política de segurança</string>
+
+    <string name="admin_title">Status do projeto</string>
+    <string name="admin_tab_implemented">Implementado</string>
+    <string name="admin_tab_planned">A implementar</string>
+    <string name="admin_tab_pending">Pendente</string>
+    <string name="admin_count_line">Implementado %1$d · A implementar %2$d · Pendente %3$d</string>
+    <string name="admin_empty">Ainda não há nada aqui.</string>
+    <string name="admin_pending_validate">teste de viabilidade</string>
+    <string name="admin_pending_blocked">bloqueado por uma decisão</string>
+    <string name="admin_security_controls">Controles de segurança</string>
+    <string name="admin_security_findings">Achados de auditoria</string>
+    <string name="admin_security_no_findings">Nenhum achado registrado. Cada achado recebe um ID (ISP-SEC-NNN) em docs/security/AUDIT-LOG.md.</string>
+    <string name="admin_gate_note">As telas de administrador são um filtro de conveniência, não uma fronteira de segurança: só mostram o que o repositório público já mostra.</string>
+    <string name="admin_titles_note">Os títulos dos recursos estão em inglês e espanhol.</string>
+    <string-array name="milestone_names">
+        <item>Fundação e segurança básica</item>
+        <item>MVP: conta, IA, alto-falante, aniversários, rotina diária</item>
+        <item>Anúncios e rotinas diárias</item>
+        <item>Produtividade Google</item>
+        <item>Música</item>
+        <item>Relógio e saúde</item>
+        <item>Social e leitura</item>
+        <item>Inteligência avançada</item>
+        <item>Experimental</item>
+    </string-array>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_system">Idioma do celular</string>
+    <string name="settings_font">Tipografia</string>
+    <string name="settings_font_body">Hoje: %1$s. Muda todos os dias.</string>
+</resources>

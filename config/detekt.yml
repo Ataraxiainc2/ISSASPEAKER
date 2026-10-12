@@ -1,0 +1,109 @@
+# detekt for ISSASPEAKER (copied from ISSASTUDENT, which copied it from EmuGaMind and ISSAGRAPPH: the same rules in all ISSASODA apps).
+#
+# Only these rules are re-tuned, and each one because it is WRONG for this codebase rather than
+# because it was inconvenient. Everything else the default profile checks stays on.
+
+# `build: maxIssues:` was removed in detekt 2. The task now fails on ANY finding that is not in
+# the baseline, which is what `maxIssues: 0` was asking for in the first place.
+
+style:
+  MagicNumber:
+    # An emulator and a Compose UI ARE numbers: dp, ARGB, timings, RetroPad button codes,
+    # counts, easing constants. Naming 1900 of them would replace readable geometry with a wall
+    # of one-use constants, and the rule cannot tell 0.4f (a drag damping factor, meaningful
+    # exactly where it is written) from a magic business number.
+    active: false
+  MaxLineLength:
+    # The project's own style, measured rather than guessed: 99.5% of lines already fit in 152
+    # columns. The default 120 flags 554 lines that are deliberately laid out that way.
+    maxLineLength: 160
+  UnusedImport:
+    # Off in the default profile, but Android Studio shows every unused import as a warning: kept at 0 here.
+    active: true
+  ReturnCount:
+    # Early returns are how the parsers and classifiers reject input. Forcing a single exit would
+    # add nesting to precisely the code that most needs to stay readable.
+    max: 6
+
+complexity:
+  TooManyFunctions:
+    # EmuGaMind (differs from ISSAGRAPPH): in Compose, splitting a long screen into many small PRIVATE
+    # functions is exactly what LongMethod asks for; counting them here would make the two rules
+    # contradict each other. And in Room DAOs every annotated query is a function by design.
+    ignorePrivate: true
+    ignoreOverridden: true
+    ignoreAnnotatedFunctions: ['Query', 'Insert', 'Update', 'Delete', 'Upsert', 'Transaction', 'RawQuery']
+
+naming:
+  FunctionNaming:
+    # @Composable functions are PascalCase by Google's own convention; the rule predates Compose.
+    ignoreAnnotated: ['Composable']
+
+# --- ktlint, via detekt-rules-ktlint-wrapper -------------------------------------------------------------
+# The rules that find defects stay on. The ones that would REFORMAT the codebase are off, and
+# each is off for a reason, not for convenience:
+#
+#   ArgumentListWrapping / Wrapping / Indentation / ParameterListWrapping / PropertyWrapping
+#     — 5,800 findings between them, all of it "put this argument on its own line". Applying it
+#       would rewrite the layout of every file for no behavioural gain and would fight the way
+#       the code is deliberately laid out.
+#   NoMultipleSpaces
+#     — the runs of spaces in this project align trailing comments into a column (see Fonts.kt,
+#       GraphConfig.kt). Collapsing them makes those blocks harder to read, not easier.
+#   MaximumLineLength
+#     — exact duplicate of style>MaxLineLength above; leaving both on double-reports every line.
+# Called `formatting:` until detekt 2 renamed the ruleset to `ktlint:`.
+ktlint:
+  ArgumentListWrapping:
+    active: false
+  Wrapping:
+    active: false
+  Indentation:
+    active: false
+  ParameterListWrapping:
+    active: false
+  PropertyWrapping:
+    active: false
+  NoMultipleSpaces:
+    active: false
+  MaximumLineLength:
+    # Off, not relaxed: style>MaxLineLength above checks exactly the same thing, and having both
+    # on means every long line is reported twice.
+    active: false
+  # --- rules that arrived WITH detekt 2, not with new code ------------------------------------
+  # detekt 2 bundles a much newer ktlint, and ktlint has since promoted a large batch of its
+  # experimental layout rules to standard. They switched on 3,500 findings across a codebase that
+  # did not change: the same wrapping opinions the block above already rejects, wearing new names.
+  # Each is off for the reason already given there — it would relay out every file for no
+  # behavioural gain — and each is named individually so the list can be revisited one rule at a
+  # time rather than as a blanket.
+  StatementWrapping:
+    active: false
+  FunctionLiteral:
+    active: false
+  FunctionSignature:
+    active: false
+  ClassSignature:
+    active: false
+  BinaryExpressionWrapping:
+    active: false
+  BlankLineBetweenWhenConditions:
+    active: false
+  EnumWrapping:
+    active: false
+  TrailingCommaOnCallSite:
+    active: false
+  TrailingCommaOnDeclarationSite:
+    active: false
+  # ktlint's position is that KDoc may only sit on a declaration. This project puts explanatory
+  # KDoc inside class bodies deliberately — it is where the reasoning about the code lives — and
+  # 66 of them are load-bearing documentation, not stray comments.
+  Kdoc:
+    active: false
+  # Braces around a loop body that spans lines. Correct in principle and WRONG applied here: the
+  # bodies it wraps are `for (row in values) for (v in row) if (v.isFinite()) { ... }` chains, and
+  # inserting braces without re-indenting — Indentation is off, above — leaves the closing braces
+  # in a column that contradicts the nesting. Ran it, read the diff, put it back: the corrected
+  # code was harder to follow than the code it replaced, which is the opposite of the point.
+  MultilineLoop:
+    active: false

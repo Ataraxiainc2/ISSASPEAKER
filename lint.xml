@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Android Lint for ISSASPEAKER. app/build.gradle.kts turns every warning into an error.
+    Below: checks that Lint leaves off by default and that matter here. Any exception must be listed
+    with its reason, never silenced in bulk.
+-->
+<lint>
+    <!-- Logging must never reach release builds (catalog F025); R8 strips Log calls, this catches the rest. -->
+    <issue id="LogConditional" severity="warning" />
+    <!-- Strings: the three languages must stay complete and consistent. -->
+    <issue id="MissingTranslation" severity="error" />
+    <issue id="ExtraTranslation" severity="error" />
+    <issue id="DuplicateStrings" severity="warning" />
+    <issue id="StringFormatTrivial" severity="warning" />
+    <!-- Code quality -->
+    <issue id="NoOp" severity="warning" />
+    <issue id="StopShip" severity="warning" />
+    <issue id="WrongThreadInterprocedural" severity="warning" />
+    <issue id="MemberExtensionConflict" severity="warning" />
+    <issue id="ComposableLambdaParameterNaming" severity="warning" />
+    <issue id="ComposableLambdaParameterPosition" severity="warning" />
+    <issue id="UnknownNullness" severity="ignore" />
+    <issue id="ConvertToWebp" severity="warning" />
+
+    <!--
+        Typos in font_certs.xml: the file holds the Google Fonts provider's certificates in base64, which the
+        spelling check reads as words. Copied unchanged from ISSAGRAPPH (skill android-google-fonts).
+    -->
+    <issue id="Typos">
+        <ignore path="**/font_certs.xml" />
+    </issue>
+</lint>
