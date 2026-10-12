@@ -54,7 +54,7 @@ F052	AI	P0	M1	315	planned	AI provider configuration	Configuración de proveedore
 F053	AI	P0	M1	316	planned	AI model selection per task	Selección del modelo de IA por tarea	
 F054	AI	P0	M1	NEW	planned	AI spending guard: per-provider monthly cap and usage meter	Control de gasto de IA: tope mensual por proveedor y medidor de uso	PRD risk 2 (API costs)
 F055	AI	P0	M2	317	planned	AI preferences (tone, length, language)	Configuración de preferencias de IA	
-F056	AI	P1	M1	313	planned	Connection to AI providers (Anthropic Claude, Google Gemini, OpenAI)	Conexión con proveedores de IA (Anthropic Claude, Google Gemini, OpenAI)	
+F056	AI	P1	M1	313	planned	Connection to AI providers (Anthropic Claude, Google Gemini, OpenAI, xAI Grok)	Conexión con proveedores de IA (Anthropic Claude, Google Gemini, OpenAI, xAI Grok)	xAI is needed by X Radar (x_search)
 F057	AI	P1	M1	318	planned	Personal conversational assistant	Asistente conversacional personal	
 F058	AI	P1	M1	319	planned	General questions through AI	Consultas generales mediante IA	
 F059	AI	P1	M1	NEW	planned	Voice input for the chat (on-device speech recognition)	Entrada por voz en el chat (reconocimiento de voz en el teléfono)	PRD MVP: text/voice chat
@@ -148,7 +148,7 @@ F146	SHEET	P1	M3	205	planned	Append records to a sheet	Incorporación de registr
 F147	SHEET	P2	M3	186	planned	Authorized contact lists	Consulta de listas de contactos autorizadas	
 F148	SHEET	P2	M4	190	planned	Music activity log in Sheets	Registro de actividad musical en Sheets	
 F149	SHEET	P2	M3	191	planned	News log in Sheets	Registro de noticias en Sheets	
-F150	SHEET	P2	M6	192	blocked	X posts log in Sheets	Registro de publicaciones de X en Sheets	needs X read access (decision D3)
+F150	SHEET	P2	M6	192	planned	X posts log in Sheets	Registro de publicaciones de X en Sheets	via X Radar
 F151	SHEET	P2	M6	193	planned	Reading log in Sheets	Registro de lecturas en Sheets	
 F152	SHEET	P2	M3	195	planned	Personal expense log	Registro de gastos personales	
 F153	SHEET	P2	M3	196	planned	Indicators in Sheets	Consulta de indicadores en Sheets	
@@ -226,7 +226,7 @@ F224	DRIVE	P2	M3	150	planned	Organize files by category	Organización de archivo
 F225	DRIVE	P2	M3	151	planned	Create Drive folders	Creación de carpetas en Drive	
 F226	DRIVE	P2	M3	155	planned	Save articles to Drive	Guardado de artículos en Drive	
 F227	DRIVE	P2	M3	156	planned	Save news to Drive	Guardado de noticias en Drive	
-F228	DRIVE	P2	M6	157	blocked	Save X posts to Drive	Guardado de publicaciones de X	needs X read access (decision D3)
+F228	DRIVE	P2	M6	157	planned	Save X posts to Drive	Guardado de publicaciones de X	via X Radar
 F229	DRIVE	P2	M3	160	planned	AI-generated documents	Generación de documentos con IA	
 F230	DRIVE	P2	M3	162	planned	Extract information from documents	Extracción de información de documentos	
 F231	DRIVE	P2	M3	163	planned	Find dates in documents	Identificación de fechas en documentos	
@@ -311,49 +311,49 @@ F309	SHK	P2	M6	88	blocked	Music trends on Shikaka	Tendencias musicales en Shikak
 F310	SHK	P2	M6	89	blocked	Compare Last.fm and Shikaka	Comparación Last.fm y Shikaka	decision D4
 F311	SHK	P2	M6	90	blocked	Joint music activity reports	Informes conjuntos de actividad musical	decision D4
 F312	X	P1	M6	91	planned	Connect the X account	Conexión con la cuenta de X	OAuth 2.0 with PKCE
-F313	X	P1	M6	92	blocked	Read the X feed	Lectura del feed de X	reading needs a paid X API tier (decision D3)
-F314	X	P1	M6	93	blocked	Recent posts from followed accounts	Publicaciones recientes de cuentas seguidas	decision D3
-F315	X	P1	M6	94	blocked	Filter by keyword	Filtrado por palabras clave	decision D3
-F316	X	P1	M6	95	blocked	Filter by author	Filtrado por autor	decision D3
-F317	X	P1	M6	96	blocked	Filter by topic	Filtrado por tema	decision D3
-F318	X	P1	M6	97	blocked	Filter by date	Filtrado por fecha	decision D3
-F319	X	P1	M6	98	blocked	Spot relevant posts	Identificación de publicaciones relevantes	decision D3
-F320	X	P1	M6	99	blocked	Daily X feed summary	Resumen diario del feed de X	decision D3
-F321	X	P1	M6	100	blocked	Weekly X summary	Resumen semanal de X	decision D3
-F322	X	P1	M6	101	blocked	Spot important news on X	Identificación de noticias importantes en X	decision D3
-F323	X	P1	M6	118	blocked	Read posts aloud	Lectura en voz alta de publicaciones	decision D3
-F324	X	P1	M6	124	blocked	Save posts	Guardado de publicaciones	decision D3
-F325	X	P1	M6	125	blocked	Organize saved posts	Organización de publicaciones guardadas	decision D3
-F326	X	P1	M6	128	blocked	Personal account lists	Listas personales de cuentas	decision D3
-F327	X	P1	M6	129	blocked	Priority-account alerts	Alertas de cuentas prioritarias	decision D3
-F328	X	P2	M6	102+103+104+105+106+107+108+109+110	blocked	Follow account groups: technology, science, AI, business, finance, education, games, literature, favorites	Seguimiento de grupos de cuentas: tecnológicas, científicas, IA, empresariales, financieras, educativas, videojuegos, literarias, favoritas	nine variants of one feature; decision D3
-F329	X	P2	M6	111	blocked	Rank by relevance	Clasificación por relevancia	decision D3
-F330	X	P2	M6	114	blocked	Spot repeated posts	Identificación de publicaciones repetidas	decision D3
-F331	X	P2	M6	115	blocked	Detect emerging topics	Detección de temas emergentes	decision D3
-F332	X	P2	M6	116	blocked	Trends related to my interests	Tendencias relacionadas con intereses personales	decision D3
-F333	X	P2	M6	117	blocked	Thread summaries	Resumen de hilos de X	decision D3
-F334	X	P2	M6	119	blocked	Read full threads	Lectura de hilos completos	decision D3
-F335	X	P2	M6	120+121+122+123	blocked	Translate posts into English, Spanish or Mandarin	Traducción de publicaciones al inglés, español o mandarín	121-123 merged here; decision D3
-F336	X	P2	M6	126	blocked	Search older posts	Búsqueda de publicaciones antiguas	decision D3
-F337	X	P2	M6	127	blocked	Posts by author	Consulta de publicaciones por autor	decision D3
-F338	X	P2	M6	130	blocked	Reports on topics discussed on X	Informes de temas discutidos en X	decision D3
-F339	X	P2	M6	133	blocked	Find original sources	Identificación de fuentes originales	decision D3
-F340	X	P2	M6	134	blocked	Extract relevant links	Extracción de enlaces relevantes	decision D3
-F341	X	P2	M6	135	blocked	Personal library of posts	Biblioteca personal de publicaciones	decision D3
-F342	X	P2	M6	143	blocked	Track personal topics	Seguimiento de temas personales	decision D3
-F343	X	P2	M6	144	blocked	Keyword alerts	Alertas por palabras clave	decision D3
-F344	X	P3	M7	112	blocked	Label posts by apparent credibility	Clasificación de publicaciones por credibilidad aparente	assistive label with sources, never a verdict; decision D3
-F345	X	P3	M7	113	blocked	Signals of possible misinformation	Detección de posibles noticias falsas	assistive label with sources, never a verdict; decision D3
-F346	X	P3	M7	131	blocked	Analyze arguments in public debates	Análisis de argumentos en debates públicos	decision D3
-F347	X	P3	M7	132	blocked	Compare perspectives on events	Comparación de perspectivas sobre acontecimientos	decision D3
+F313	X	P1	M6	92	planned	Read the X feed	Lectura del feed de X	served by X Radar (search-based), not the literal timeline
+F314	X	P1	M6	93	planned	Recent posts from followed accounts	Publicaciones recientes de cuentas seguidas	via X Radar
+F315	X	P1	M6	94	planned	Filter by keyword	Filtrado por palabras clave	via X Radar
+F316	X	P1	M6	95	planned	Filter by author	Filtrado por autor	via X Radar
+F317	X	P1	M6	96	planned	Filter by topic	Filtrado por tema	via X Radar
+F318	X	P1	M6	97	planned	Filter by date	Filtrado por fecha	via X Radar
+F319	X	P1	M6	98	planned	Spot relevant posts	Identificación de publicaciones relevantes	via X Radar
+F320	X	P1	M6	99	planned	Daily X feed summary	Resumen diario del feed de X	via X Radar
+F321	X	P1	M6	100	planned	Weekly X summary	Resumen semanal de X	via X Radar
+F322	X	P1	M6	101	planned	Spot important news on X	Identificación de noticias importantes en X	via X Radar
+F323	X	P1	M6	118	planned	Read posts aloud	Lectura en voz alta de publicaciones	via X Radar
+F324	X	P1	M6	124	planned	Save posts	Guardado de publicaciones	via X Radar
+F325	X	P1	M6	125	planned	Organize saved posts	Organización de publicaciones guardadas	via X Radar
+F326	X	P1	M6	128	planned	Personal account lists	Listas personales de cuentas	via X Radar
+F327	X	P1	M6	129	planned	Priority-account alerts	Alertas de cuentas prioritarias	via X Radar
+F328	X	P2	M6	102+103+104+105+106+107+108+109+110	planned	Follow account groups: technology, science, AI, business, finance, education, games, literature, favorites	Seguimiento de grupos de cuentas: tecnológicas, científicas, IA, empresariales, financieras, educativas, videojuegos, literarias, favoritas	nine variants of one feature; via X Radar
+F329	X	P2	M6	111	planned	Rank by relevance	Clasificación por relevancia	via X Radar
+F330	X	P2	M6	114	planned	Spot repeated posts	Identificación de publicaciones repetidas	via X Radar
+F331	X	P2	M6	115	planned	Detect emerging topics	Detección de temas emergentes	via X Radar
+F332	X	P2	M6	116	planned	Trends related to my interests	Tendencias relacionadas con intereses personales	via X Radar
+F333	X	P2	M6	117	planned	Thread summaries	Resumen de hilos de X	via X Radar
+F334	X	P2	M6	119	planned	Read full threads	Lectura de hilos completos	via X Radar
+F335	X	P2	M6	120+121+122+123	planned	Translate posts into English, Spanish or Mandarin	Traducción de publicaciones al inglés, español o mandarín	121-123 merged here; via X Radar
+F336	X	P2	M6	126	planned	Search older posts	Búsqueda de publicaciones antiguas	via X Radar
+F337	X	P2	M6	127	planned	Posts by author	Consulta de publicaciones por autor	via X Radar
+F338	X	P2	M6	130	planned	Reports on topics discussed on X	Informes de temas discutidos en X	via X Radar
+F339	X	P2	M6	133	planned	Find original sources	Identificación de fuentes originales	via X Radar
+F340	X	P2	M6	134	planned	Extract relevant links	Extracción de enlaces relevantes	via X Radar
+F341	X	P2	M6	135	planned	Personal library of posts	Biblioteca personal de publicaciones	via X Radar
+F342	X	P2	M6	143	planned	Track personal topics	Seguimiento de temas personales	via X Radar
+F343	X	P2	M6	144	planned	Keyword alerts	Alertas por palabras clave	via X Radar
+F344	X	P3	M7	112	planned	Label posts by apparent credibility	Clasificación de publicaciones por credibilidad aparente	assistive label with sources, never a verdict; via X Radar
+F345	X	P3	M7	113	planned	Signals of possible misinformation	Detección de posibles noticias falsas	assistive label with sources, never a verdict; via X Radar
+F346	X	P3	M7	131	planned	Analyze arguments in public debates	Análisis de argumentos en debates públicos	via X Radar
+F347	X	P3	M7	132	planned	Compare perspectives on events	Comparación de perspectivas sobre acontecimientos	via X Radar
 F348	X	P3	M7	136	planned	Draft posts for X	Borradores de publicaciones para X	drafts need no API; posting always asks for confirmation
 F349	X	P3	M7	137	planned	Draft threads for X	Borradores de hilos para X	
 F350	X	P3	M7	138	planned	Post ideas	Generación de ideas para publicaciones	
 F351	X	P3	M7	139	planned	Proofread posts	Corrección de publicaciones	
 F352	X	P3	M7	140	planned	Translate drafts	Traducción de borradores	
 F353	X	P3	M7	141	planned	Reminders to post	Recordatorios para publicar	
-F354	X	P3	M7	142	blocked	My own available metrics	Consulta de métricas propias disponibles	decision D3
-F355	X	P3	M7	145	blocked	My digital reputation report	Informe de reputación digital propia	decision D3
+F354	X	P3	M7	142	planned	My own available metrics	Consulta de métricas propias disponibles	via X Radar
+F355	X	P3	M7	145	planned	My digital reputation report	Informe de reputación digital propia	via X Radar
 F356	BOOK	P1	M6	376	planned	Connect book services	Integración con servicios de libros	Google Books API + Open Library
 F357	BOOK	P1	M6	377	planned	Search books by title	Búsqueda de libros por título	
 F358	BOOK	P1	M6	378	planned	Search books by author	Búsqueda de libros por autor	
@@ -401,4 +401,14 @@ F399	HLTH	P2	M5	307	planned	Personal activity trends	Tendencias personales de ac
 F400	HLTH	P2	M5	308	planned	Personal activity reports	Informes personales de actividad	
 F401	HLTH	P2	M5	309	planned	Movement reminders	Recordatorios de movimiento	
 F402	HLTH	P2	M5	310	planned	Routines based on recorded activity	Rutinas basadas en actividad registrada	
-F403	PLAT	P0	M0	NEW	planned	Random high-legibility typeface from a curated pool of at least 100 Google Fonts	Tipografía aleatoria de alta legibilidad, de un grupo curado de al menos 100 Google Fonts	decision D2; each family vetted for I/l/1 and O/0 legibility; rotation rule pending
+F403	PLAT	P0	M0	NEW	planned	Random high-legibility typeface from a curated pool of at least 100 Google Fonts	Tipografía aleatoria de alta legibilidad, de un grupo curado de al menos 100 Google Fonts	decision D2: a new family every day, random order without repeats until the pool is used up; each family checked on the S25
+F404	X	P1	M2	NEW	planned	X Radar: interest profile (topics, open questions, projects, seed accounts, topics to ignore)	Radar de X: perfil de intereses (temas, preguntas abiertas, proyectos, cuentas semilla, temas a ignorar)	decision D3
+F405	X	P1	M2	NEW	planned	X Radar: retrieval through the xAI API x_search tool (semantic, keyword, user and thread search) with allowed or excluded accounts and a date window	Radar de X: búsqueda con la herramienta x_search de la API de xAI (semántica, por palabras, de usuarios e hilos) con cuentas permitidas o excluidas y ventana de fechas	official API, no scraping; billed per post fetched
+F406	X	P1	M2	NEW	planned	X Radar: signal scoring that prefers primary sources (code, data, papers, first-hand reports) over opinions, rewards novelty against what was already seen and penalizes engagement bait	Radar de X: puntuación de señal que prefiere fuentes primarias (código, datos, papers, testimonios directos) sobre opiniones, premia la novedad frente a lo ya visto y castiga el cebo de interacción	
+F407	X	P1	M2	NEW	planned	X Radar: cited brief written by the chosen AI model (what changed, why it matters to me, links, confidence)	Radar de X: informe con citas escrito por el modelo de IA elegido (qué cambió, por qué me importa, enlaces, confianza)	posts are untrusted data (prompt-injection guard)
+F408	X	P1	M2	NEW	planned	X Radar: feedback (useful or noise) tunes the profile and the scoring	Radar de X: la retroalimentación (útil o ruido) ajusta el perfil y la puntuación	
+F409	X	P1	M2	NEW	planned	X Radar: discovery of high-signal accounts from the threads and quotes of seed accounts	Radar de X: descubrimiento de cuentas de alta señal a partir de hilos y citas de las cuentas semilla	
+F410	X	P0	M2	NEW	planned	X Radar: daily cap on posts fetched, with a usage meter	Radar de X: tope diario de posts consultados, con medidor de uso	x_search costs about USD 5 per 1,000 posts (xAI docs, Oct 2026)
+F411	X	P1	M2	NEW	planned	Share posts and threads from the X app into ISSASPEAKER (share sheet)	Compartir posts e hilos desde la app de X hacia ISSASPEAKER	free, no API
+F412	X	P1	M2	NEW	planned	Capture notifications from priority X accounts on the phone	Captura en el teléfono de notificaciones de cuentas prioritarias de X	builds on F112
+F413	X	P2	M2	NEW	planned	X Radar on the speaker: the brief read aloud in the morning routine	Radar de X en el parlante: el informe leído en la rutina de la mañana	

@@ -9,7 +9,7 @@ fragmentación: un solo lugar que conecta servicios que normalmente no se hablan
 
 Documentos relacionados:
 
-- [`docs/features/catalog.tsv`](features/catalog.tsv) — **fuente única** de las 403 características numeradas.
+- [`docs/features/catalog.tsv`](features/catalog.tsv) — **fuente única** de las 413 características numeradas.
 - [`docs/FEATURES.md`](FEATURES.md) — el catálogo legible, generado con `python tools/features.py`.
 - [`SECURITY.md`](../SECURITY.md) — política de reporte de vulnerabilidades.
 
@@ -66,7 +66,7 @@ Flujo propuesto: **la nube escribe código y pasa la CI; el PC prueba en el tel�
 | Almacenamiento | Room + SQLCipher; DataStore para preferencias; Tink + Keystore (StrongBox) para las API keys | Igual que ISSASTUDENT, más StrongBox del S25 |
 | Backend | **Ninguno en M0–M2** | Menos superficie de ataque; todo vive en el teléfono (ver pregunta D6) |
 | Idiomas | Inglés (por defecto), español latinoamericano (`es-419`), portugués de Brasil (`pt-BR`), con selector por app | Lo pediste así |
-| Fuentes | Google Fonts descargables (skill `android-google-fonts`): grupo curado de ≥100 familias de alta legibilidad, elegidas al azar (D2, F403) | Regla de ISSASODA; cada familia se valida en el S25 con la prueba `GoogleFontsTest` |
+| Fuentes | Google Fonts descargables (skill `android-google-fonts`): grupo curado de ≥100 familias de alta legibilidad, elegidas al azar, una nueva cada día (D2, F403) | Regla de ISSASODA; cada familia se valida en el S25 con la prueba `GoogleFontsTest` |
 | Licencia | MIT (D1) | Igual que ISSASTUDENT y BookCompass |
 
 ### Flujo del MVP (rutina de las 08:00)
@@ -95,11 +95,11 @@ actualizado (`status = implemented` en lo que se entregó).
 |---|---|---|---|
 | **M0** Cimientos y seguridad base | Esqueleto Compose, 3 idiomas, tema, fuentes, About público y de administrador (generado desde el catálogo), CI, CodeQL, Dependabot, Scorecard, modelo de amenazas, SECURITY.md, configuración de la nube | 19 | La app abre en el S25 en los 3 idiomas; el About de administrador lista lo implementado, lo pendiente y la seguridad; la CI corre en cada push |
 | **M1** MVP | Inicio de sesión con Google, permisos y revocación, API keys cifradas, chat de IA (texto y voz), descubrimiento del parlante + TTS, lectura de cumpleaños en Sheets, rutina diaria, horario silencioso, historial, errores | 53 | **A las 08:00 el parlante dice "Hoy es cumpleaños de…" sin tocar el teléfono**, tres días seguidos |
-| **M2** Anuncios y rutinas diarias | Clima, calendario, recordatorios, noticias (RSS), anuncios de mañana y noche, rutinas por voz, biblioteca y panel de automatizaciones, widget, mosaico | 55 | Rutina de la mañana completa (clima + agenda + cumpleaños + titulares) |
+| **M2** Anuncios y rutinas diarias | Clima, calendario, recordatorios, noticias (RSS), anuncios de mañana y noche, rutinas por voz, biblioteca y panel de automatizaciones, widget, mosaico, **Radar de X** | 65 | Rutina de la mañana completa (clima + agenda + cumpleaños + informe del Radar de X) |
 | **M3** Productividad Google | Gmail, Drive, Apps Script, Sheets avanzado, varias cuentas, informes semanales y mensuales | 93 | Resumen diario de correo leído en voz alta |
 | **M4** Música | Spotify, Last.fm, música en Google Home | 56 | Estadísticas de Last.fm y control de Spotify desde la app |
 | **M5** Reloj y salud | App Wear OS para el Watch 5 Pro, Health Connect | 27 | Rutina disparada desde el reloj |
-| **M6** Social y lectura | X, libros, Shikaka | 50 | Depende de D3 y D4 |
+| **M6** Social y lectura | Resto de X, libros, Shikaka | 50 | Shikaka depende de D4 |
 | **M7** Inteligencia avanzada | Aprendizaje, análisis, categorías extendidas de noticias, IA en el teléfono | 49 | — |
 | **M8** Experimental | Rutinas adaptativas | 1 | Solo tras validar valor |
 
@@ -122,12 +122,12 @@ El listado original tenía 400 entradas. Hallazgos verificados con un script, no
    Apps Script bajan de P0 a P1 (no son cimientos: dependen de integraciones aún no construidas);
    la identidad de la cuenta activa (235) sube de P2 a P0 (la verificación de administrador la necesita).
 6. **La entrada P4 duplicada** se reemplazó por la nueva sugerida: *rutinas adaptativas según patrones históricos de uso*.
-7. **45 características nuevas** (plataforma, seguridad, fiabilidad, costos), entre ellas: disparo a hora exacta,
+7. **55 características nuevas** (plataforma, seguridad, fiabilidad, costos), entre ellas: disparo a hora exacta,
    política de ejecuciones perdidas, tope de gasto de IA, defensa contra inyección de prompts, servidor de audio
    endurecido, widget, mosaico de Ajustes rápidos, Live Updates de Android 16, IA en el teléfono (Gemini Nano).
 
-**Resultado: 403 características** = 358 del listado original + 45 nuevas (la 403, el grupo de fuentes, salió de D2).
-347 por implementar, 12 pendientes de prueba de factibilidad, 44 bloqueadas por una decisión.
+**Resultado: 413 características** = 358 del listado original + 55 nuevas (F403 salió de D2; F404–F413, el Radar de X, de D3).
+396 por implementar, 12 pendientes de prueba de factibilidad, 5 bloqueadas por una decisión (Shikaka).
 
 ---
 
@@ -156,7 +156,7 @@ personas individuales): el repo muestra práctica defensiva real y verificable, 
 | R1 | Samsung duerme apps en segundo plano | Alarma exacta + trabajo urgente; guía para quitar la optimización de batería; diagnóstico de administrador |
 | R2 | Costos de API de IA | Tope mensual por proveedor y medidor de uso (característica nueva) |
 | R3 | El parlante debe estar en la misma Wi-Fi | Descubrimiento Cast, reintento, registro claro del fallo, sin IP fija |
-| R4 | X cobra por leer | Bloqueado hasta D3; los borradores no necesitan la API |
+| R4 | X cobra por leer con su API | Radar de X con `x_search` de la API de xAI (≈ USD 5 por 1.000 posts) y tope diario (F410); compartir desde la app de X y notificaciones, gratis. Sin scraping: viola los términos de X y arriesga la cuenta |
 | R5 | Spotify cerró recomendaciones y artistas relacionados a apps nuevas (nov 2024); controlar la reproducción exige Premium | Recomendaciones con Last.fm + IA |
 | R6 | `gmail.readonly` es un permiso restringido | Uso personal en modo de prueba; una publicación abierta exigiría auditoría CASA |
 | R7 | En modo *Testing* de OAuth, los permisos pueden caducar a los 7 días | **Validar en M1**; si pasa, mover la pantalla de consentimiento a *In production* sin verificar (uso personal) |
@@ -183,9 +183,9 @@ personas individuales): el repo muestra práctica defensiva real y verificable, 
 | ID | Pregunta | Estado |
 |---|---|---|
 | D1 | Licencia del repo público | ✅ **MIT** (2026-10-12) |
-| D2 | Familias de Google Fonts | ✅ **Al menos 100 familias de alta legibilidad, elegidas al azar** (F403). Falta definir cada cuánto rota |
-| D3 | X: el acceso de lectura de la API es de pago | ⏳ El dueño no pagará. Propuesta en revisión: compartir desde la app de X + notificaciones, sin scraping |
+| D2 | Familias de Google Fonts | ✅ **Al menos 100 familias de alta legibilidad; una nueva al azar cada día** (F403) |
+| D3 | X: el acceso de lectura de la API es de pago | ✅ **Radar de X** (F404–F413): perfil de intereses → `x_search` de xAI → puntuación de señal → informe con citas; más compartir desde la app de X y notificaciones. Nada de noticias genéricas |
 | D4 | ¿Qué es exactamente Shikaka.net y tiene API? | ⏳ Abierta |
-| D5 | Proveedores de IA en M1 | ⏳ Propuesta: Claude, Gemini y OpenAI |
+| D5 | Proveedores de IA en M1 | ⏳ Propuesta: Claude, Gemini, OpenAI y xAI Grok (este último lo necesita el Radar de X) |
 | D6 | Proyecto de Google Cloud y backend | ✅ **Proyecto nuevo `issaspeaker`, sin Firebase** (2026-10-12) |
 | D7 | Versión de Wear OS del Watch 5 Pro | ⏳ Se mira en el reloj antes de M5 |
