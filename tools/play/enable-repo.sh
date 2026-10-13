@@ -17,4 +17,5 @@ echo "$body" | gh api -X PUT "repos/$repo/environments/play" --input - -q '"envi
 branch=$(gh api "repos/$repo" -q .default_branch)
 gh api -X POST "repos/$repo/environments/play/deployment-branch-policies" -f name="$branch" -f type=branch -q '"branch: \(.name)"' \
   || echo "branch policy for $branch already present"
-# Google accepts refs/heads/main and refs/heads/master only; another default branch needs the WIF condition updated.
+# Google accepts refs/heads/main and refs/heads/master only; another default branch needs the trust rule updated.
+# The repository's play.yml must call play-access.yml at the pinned commit (see docs/design/PLAY-PUBLISHING.md).

@@ -119,3 +119,31 @@ GitHub Actions reaches Google Play through Workload Identity Federation: no serv
 accepts the GitHub token only for repository owner id 79027743, repository `Ataraxiainc2/ISSASPEAKER` and the
 `play` environment, which needs the owner's approval and deploys from `main` only
 ([PLAY-PUBLISHING.md](../design/PLAY-PUBLISHING.md)).
+
+## Review 4 — Play pipeline cross-check with the BookCompass team (2026-10-13)
+
+The BookCompass developer reviewed the shared Play access and the key records. Their points and the outcome:
+
+### ISP-SEC-012 · Medium · Fixed — Play token available to any job in a `play` environment
+
+The trust rule checked owner, environment and branch, so any job that a repository of the account ran in its
+`play` environment on `main`/`master` could obtain the Play token, not only the shared workflow; and callers
+used `play-access.yml@main`, so any change to ISSASPEAKER's `main` reached every app at once. **Fix:** the rule
+now also requires `job_workflow_ref` to be ISSASPEAKER's `play-access.yml` or `play-upload.yml` and
+`job_workflow_sha` to be a pinned commit (`tools/play/trust-rule.sh`); every caller pins the same commit. A new
+version of either file reaches Play only after the owner lists its commit in Google Cloud.
+
+### Also checked
+
+- `play_signing.json` (owner's key folder): the BookCompass entry had held another app's data; corrected by the
+  BookCompass team. The upload-key fingerprints of all five apps with a keystore on the PC now match their
+  keystores (keytool). The note saying no Play service account exists was outdated and is fixed.
+- Upload keystores had three homes (`~/.issasoda-keys`, two project folders, all git-ignored and never
+  committed). The master copy is now one folder in the owner's key store; the older copies stay until every
+  app builds from there.
+- `play-access.yml` used `curl -fsS`, which hides Google's error message; it now uses `--fail-with-body` and
+  prints it.
+- Firebase keys restricted to the debug certificate break sign-in in Play builds. ISSASPEAKER has no Firebase;
+  its OAuth Android clients cover the debug, upload and Play app-signing certificates.
+- Branch protection on `main`: the ruleset blocks deletion and force pushes. Required reviews stay off while
+  there is one developer (C19).

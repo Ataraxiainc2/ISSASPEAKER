@@ -30,6 +30,10 @@ recommendation; the CIO approves, changes or rejects it.
 | D20 | C21 done: `play-publisher@issaspeaker.iam.gserviceaccount.com` is an account-level Play Console user for all apps, current and future, without Admin, production releases or order management | 2026-10-13 |
 | D21 | Play access for every Ataraxiainc2 repository, current and future: Google trusts owner id 79027743 + environment `play` + branch `main`; environments created in EmuGaMind, ISSAGRAPPH, ISSASTUDENT, BookCompass | 2026-10-13 |
 | D22 | C22 done: first Sign in with Google on the S25 accepted by the owner | 2026-10-13 |
+| D23 | C11 done: ISSASPEAKER created in Play Console (Productivity, privacy policy on GitHub Pages); 0.1.0 on internal testing; store listing published by the owner. Data safety says "no data collected" and must be updated when M1 ships | 2026-10-13 |
+| D24 | Upload keystores of every app have one master copy in the owner's key folder (`D:\SC\AK\signing`); in CI they are `play` environment secrets, never repository secrets | 2026-10-13 |
+| D25 | Releases from GitHub: manual workflow, testing tracks only, dry run by default; production stays manual in Play Console; nothing goes to Play without the CIO's approval | 2026-10-13 |
+| D26 | Google trusts only ISSASPEAKER's `play-access.yml` / `play-upload.yml` at pinned commits (ISP-SEC-012); callers pin the same commit | 2026-10-13 |
 
 ## Waiting for the CIO
 
@@ -37,7 +41,6 @@ recommendation; the CIO approves, changes or rejects it.
 |---|---|---|---|
 | C5 | Share the AI-provider and key-vault code across ISSASODA apps as a separate public library (`issasoda-ai`) | Approve after M1 is stable | Affects every app and repository |
 | C7 | Last.fm key handling: user-entered (vault) or built into the app from `D:\SC\AK\A` | User-entered, like AI keys: nothing of yours ships in a public APK | Exposure of your key |
-| C11 | Create the ISSASPEAKER app in Play Console (name, category, privacy policy URL) | Create when M1 works; privacy policy on GitHub Pages of this repository | Store listing and policy declarations |
 | C12 | OpenSSF Best Practices badge: sign in at bestpractices.dev with GitHub and register the project | Approve; answers are prepared in [OPENSSF-BEST-PRACTICES.md](security/OPENSSF-BEST-PRACTICES.md) | Account creation and OAuth (I cannot do it for you) |
 | C14 | X Radar daily cap | 200 posts per day (about USD 1 per day at USD 5 per 1,000) | Recurring cost |
 | C15 | AI spending cap per provider per month | USD 10 per provider, warning at 80 % | Recurring cost |

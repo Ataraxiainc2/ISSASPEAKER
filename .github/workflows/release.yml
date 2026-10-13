@@ -1,0 +1,88 @@
+# Manual release (catalog F432): build the bundle, sign it with the upload key from the "play" environment's
+# secrets and send it to a TESTING track through play-upload.yml (keyless Play access).
+# Production is never reachable from here; it stays a manual step in Play Console.
+# dry_run (the default) validates the upload in a Play edit and discards it: nothing is published.
+#
+# Secrets of the "play" environment (never repository-level): UPLOAD_KEYSTORE_B64 (base64 of the .jks),
+# UPLOAD_STORE_PASSWORD, UPLOAD_KEY_ALIAS, UPLOAD_KEY_PASSWORD. The same names serve every ISSASODA app.
+name: Release to Play testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      track:
+        description: Testing track
+        type: choice
+        options: [internal, alpha, beta]
+        default: internal
+      dry_run:
+        description: Validate only, publish nothing
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: play
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: 25
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+        with:
+          validate-wrappers: true
+          cache-read-only: true
+      - name: Upload key from the play environment
+        env:
+          KEYSTORE_B64: ${{ secrets.UPLOAD_KEYSTORE_B64 }}
+          STORE_PASSWORD: ${{ secrets.UPLOAD_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.UPLOAD_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.UPLOAD_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          umask 077
+          dir="$RUNNER_TEMP/signing"
+          mkdir -p "$dir"
+          printf '%s' "$KEYSTORE_B64" | base64 -d > "$dir/issaspeaker-upload.jks"
+          printf 'storeFile=issaspeaker-upload.jks\nstorePassword=%s\nkeyAlias=%s\nkeyPassword=%s\n' \
+            "$STORE_PASSWORD" "$KEY_ALIAS" "$KEY_PASSWORD" > "$dir/issaspeaker-upload.properties"
+          echo "ISSASODA_SIGNING_DIR=$dir" >> "$GITHUB_ENV"
+      - name: Build the release bundle
+        run: ./gradlew --console=plain bundleRelease
+      - name: Remove the upload key
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/signing"
+      - name: The bundle is signed with the ISSASPEAKER upload key
+        run: |
+          keytool -printcert -jarfile app/build/outputs/bundle/release/app-release.aab \
+            | grep -q 'SHA256: 30:B9:0B:95:A3:B8:AD:8D:12:8D:B5:E0:3A:21:92:BC:48:D0:A4:E4:46:48:93:1E:58:D3:01:AD:03:FE:1F:CD'
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: bundle
+          path: app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+          retention-days: 3
+
+  upload:
+    needs: bundle
+    uses: Ataraxiainc2/ISSASPEAKER/.github/workflows/play-upload.yml@cd88e35fe086ad245ad51f9d2b0d6fe90f8d147e # pinned, see PLAY-PUBLISHING.md
+    with:
+      package: com.issasoda.issaspeaker
+      artifact: bundle
+      track: ${{ inputs.track }}
+      dry_run: ${{ inputs.dry_run }}
+    permissions:
+      contents: read
+      id-token: write

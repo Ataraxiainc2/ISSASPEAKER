@@ -8,8 +8,8 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 
 | Status | Count |
 |---|---|
-| Implemented | 29 |
-| To implement | 389 |
+| Implemented | 30 |
+| To implement | 388 |
 | Pending: feasibility test | 14 |
 | Pending: blocked by a decision | 0 |
 
@@ -50,7 +50,7 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F428 | PLAT | P0 | Adaptive full-screen layout: navigation bar or rail by window size, card grid using the whole width in portrait and landscape | Diseño adaptable a pantalla completa: barra o riel de navegación según el ancho, cuadrícula de tarjetas que usa todo el ancho en vertical y horizontal | NEW | Implemented | docs/design/UX.md |
 | F429 | PLAT | P0 | UX principles 2026 mapped to the app (tokens, components, states, accessibility) | Principios UX 2026 aplicados a la app (tokens, componentes, estados, accesibilidad) | NEW | Implemented | docs/design/UX.md |
 | F430 | PLAT | P0 | Public privacy policy and home page (GitHub Pages) | Política de privacidad y página pública (GitHub Pages) | NEW | Implemented | ataraxiainc2.github.io/ISSASPEAKER |
-| F431 | SEC | P0 | Keyless Google Play access from GitHub Actions for every repository of the account (Workload Identity Federation) | Acceso sin claves a Google Play desde GitHub Actions para todos los repositorios de la cuenta (Workload Identity Federation) | NEW | Implemented | owner id + environment play + main; no production, Admin or order rights; docs/design/PLAY-PUBLISHING.md |
+| F431 | SEC | P0 | Keyless Google Play access from GitHub Actions for every repository of the account (Workload Identity Federation) | Acceso sin claves a Google Play desde GitHub Actions para todos los repositorios de la cuenta (Workload Identity Federation) | NEW | Implemented | owner id + environment play + main/master + pinned ISSASPEAKER workflow commit; no production, Admin or order rights; docs/design/PLAY-PUBLISHING.md |
 
 ## M1 — MVP: account, AI, speaker, birthdays, daily routine (61)
 
@@ -70,7 +70,7 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F021 | SEC | P0 | Prompt-injection guard: mail, X, web, sheet and document content is untrusted data; AI output never triggers an action without explicit confirmation | Defensa contra inyección de prompts: el contenido de correos, X, web, hojas y documentos es dato no confiable; la IA nunca dispara una acción sin confirmación explícita | NEW | To implement |  |
 | F022 | SEC | P0 | Hardened local audio server for Cast: Wi-Fi-only bind, random port, single-use unguessable URL, short lifetime | Servidor de audio local endurecido para Cast: solo Wi-Fi, puerto aleatorio, URL de un solo uso imposible de adivinar, vida corta | NEW | To implement |  |
 | F023 | SEC | P0 | Local network access permission (Android 16/17 local network protection) | Permiso de acceso a la red local (protección de red local de Android 16/17) | NEW | Pending: feasibility test | verify behavior on target SDK 37 |
-| F036 | SEC | P0 | Release signing with an upload key kept outside the repository | Firma de release con clave de subida fuera del repositorio | NEW | To implement | ~/.issasoda-keys |
+| F036 | SEC | P0 | Release signing with an upload key kept outside the repository | Firma de release con clave de subida fuera del repositorio | NEW | Implemented | owner's key folder (D:/SC/AK/signing); CI: play environment secrets |
 | F037 | SEC | P0 | SBOM (CycloneDX) attached to every release | SBOM (CycloneDX) adjunto a cada release | NEW | To implement |  |
 | F038 | SEC | P0 | Instrumented security tests: keys never stored in plain text, backups exclude secrets | Pruebas de seguridad instrumentadas: claves nunca en texto plano, copias sin secretos | NEW | To implement |  |
 | F039 | HUB | P0 | Control panel for all integrations | Panel de control de todas las integraciones | 396 | To implement |  |
@@ -116,7 +116,7 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F420 | AI | P1 | One OpenAI-compatible client for most providers; native clients for Anthropic, Gemini, OpenAI, Cohere and Amazon Bedrock | Un cliente compatible con OpenAI para la mayoría; clientes nativos para Anthropic, Gemini, OpenAI, Cohere y Amazon Bedrock | NEW | To implement | about 190 registry providers are OpenAI-compatible |
 | F423 | SEC | P0 | Key vault synced to the user's own Google Drive (appDataFolder), end-to-end encrypted; the vault key travels in Block Store (encrypted with the screen lock), never in the APK | Bóveda de claves sincronizada con el Google Drive del propio usuario (appDataFolder), cifrada de extremo a extremo; la clave de la bóveda viaja en Block Store (cifrada con el bloqueo de pantalla), nunca en el APK | NEW | To implement | decision C3; docs/design/KEY-VAULT.md |
 | F424 | SEC | P0 | Vault recovery code shown once at setup, for a phone change without a Google backup restore | Código de recuperación de la bóveda, mostrado una vez al configurar, para cambiar de teléfono sin restaurar la copia de Google | NEW | To implement |  |
-| F432 | SEC | P1 | Release pipeline: signed bundle to the internal track from GitHub, owner approval required | Canal de publicación: paquete firmado a la pista interna desde GitHub, con aprobación del dueño | NEW | To implement | needs the app created in Play Console (C11) |
+| F432 | SEC | P1 | Release pipeline: signed bundle to the internal track from GitHub, owner approval required | Canal de publicación: paquete firmado a la pista interna desde GitHub, con aprobación del dueño | NEW | To implement | release.yml + play-upload.yml; manual, testing tracks only, dry run by default |
 
 ## M2 — Daily announcements and routines (65)
 

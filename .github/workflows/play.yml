@@ -1,6 +1,6 @@
 # Manual check that this repository can reach Google Play (see play-access.yml and
-# docs/design/PLAY-PUBLISHING.md). Works for any package of the developer account, for example an existing
-# app, since ISSASPEAKER itself is not in Play Console yet.
+# docs/design/PLAY-PUBLISHING.md). Works for any package of the developer account.
+# Called by its pinned commit, like every other repository: Google's trust rule accepts listed commits only.
 name: Google Play
 
 on:
@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   play:
-    uses: ./.github/workflows/play-access.yml
+    uses: Ataraxiainc2/ISSASPEAKER/.github/workflows/play-access.yml@cd88e35fe086ad245ad51f9d2b0d6fe90f8d147e # pinned
     with:
       package: ${{ inputs.package }}
     permissions:

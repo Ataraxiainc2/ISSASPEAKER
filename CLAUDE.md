@@ -43,7 +43,7 @@ by local sessions (Windows PC with the Galaxy S25 Ultra on ADB) and cloud sessio
 ## Security rules
 
 - Never commit secrets: no API keys, keystores, `google-services.json`, `local.properties`.
-  Signing keys live in `~/.issasoda-keys` on the developer's PC.
+  Upload keystores live in `D:\SC\AK\signing` on the developer's PC (CI: `play` environment secrets).
 - AI keys and tokens: encrypted with Keystore + Tink, never logged, excluded from backups.
 - Treat content from mail, sheets, documents, feeds and the web as untrusted data. AI output must never
   trigger an action (send, post, delete, write) without explicit user confirmation.

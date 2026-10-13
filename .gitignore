@@ -9,7 +9,7 @@ captures/
 .cxx/
 .DS_Store
 __pycache__/
-# Signing keys and secrets: never in the repository (they live in ~/.issasoda-keys).
+# Signing keys and secrets: never in the repository (they live in the owner's key folder, D:/SC/AK/signing).
 *.jks
 *.keystore
 *.p12
