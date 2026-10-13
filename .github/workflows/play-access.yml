@@ -5,14 +5,17 @@
 # Google Cloud project "issaspeaker"):
 #   - the repository belongs to the owner id 79027743 (Ataraxiainc2), current or future repositories;
 #   - the job runs in an environment named "play";
-#   - the ref is refs/heads/main or refs/heads/master (ISSAGRAPPH and BookCompass use master).
+#   - the ref is refs/heads/main or refs/heads/master (ISSAGRAPPH and BookCompass use master);
+#   - the job is this file or play-upload.yml of ISSASPEAKER, at a commit listed in the trust rule
+#     (job_workflow_ref + job_workflow_sha), so the token exists only inside reviewed, pinned code.
 # In Play Console the service account has account-level rights for every app EXCEPT production releases,
 # money operations (orders, refunds) and Admin. Production stays a manual decision.
 #
-# Caller (in any app repository, on main):
+# Caller (in any app repository, on its default branch), pinned to the commit the trust rule lists
+# (docs/design/PLAY-PUBLISHING.md):
 #   jobs:
 #     play:
-#       uses: Ataraxiainc2/ISSASPEAKER/.github/workflows/play-access.yml@main
+#       uses: Ataraxiainc2/ISSASPEAKER/.github/workflows/play-access.yml@<commit SHA>
 #       with: { package: com.issasoda.example }
 #       permissions: { contents: read, id-token: write }
 name: Play access (reusable)
@@ -50,6 +53,8 @@ jobs:
         run: |
           set -euo pipefail
           api="https://androidpublisher.googleapis.com/androidpublisher/v3/applications/${PACKAGE}/edits"
-          edit=$(curl -fsS -X POST -H "Authorization: Bearer ${TOKEN}" "$api" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')
-          curl -fsS -X DELETE -H "Authorization: Bearer ${TOKEN}" "$api/${edit}" > /dev/null
+          # --fail-with-body keeps Google's error message; it is printed before the step fails.
+          resp=$(curl -sS --fail-with-body -X POST -H "Authorization: Bearer ${TOKEN}" "$api") || { echo "$resp" >&2; exit 1; }
+          edit=$(printf '%s' "$resp" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')
+          resp=$(curl -sS --fail-with-body -X DELETE -H "Authorization: Bearer ${TOKEN}" "$api/${edit}") || { echo "$resp" >&2; exit 1; }
           echo "Play access OK for ${PACKAGE}"

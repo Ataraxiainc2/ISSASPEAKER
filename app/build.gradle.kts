@@ -46,8 +46,8 @@ android {
         // Android 16+ only, on purpose: the app is built for the Galaxy S25 Ultra and uses the newest APIs freely.
         minSdk = 36
         targetSdk = 37
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = 2
+        versionName = "0.1.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // Web OAuth client of the Google Cloud project "issaspeaker", used by Sign in with Google. A client ID is a
         // public identifier (it ships in every APK), not a secret; the value lives in gradle.properties.
@@ -69,16 +69,20 @@ android {
     }
 
     // Upload key for Google Play: it lives outside the project (and any repository), in
-    // ~/.issasoda-keys/issaspeaker-upload.properties. Without that file the release build is unsigned.
+    // <signing dir>/issaspeaker-upload.properties. The signing dir is -Pissa.signingDir, else the
+    // ISSASODA_SIGNING_DIR variable, else D:/SC/AK/signing (the owner's PC); -Pissa.uploadKey names the file
+    // directly. A relative storeFile is resolved next to that file. Without it the release build is unsigned.
+    val signingDir = providers.gradleProperty("issa.signingDir")
+        .orElse(providers.environmentVariable("ISSASODA_SIGNING_DIR"))
+        .getOrElse("D:/SC/AK/signing")
     val uploadKey = file(
-        providers.gradleProperty("issa.uploadKey").orNull
-            ?: "${System.getProperty("user.home")}/.issasoda-keys/issaspeaker-upload.properties",
+        providers.gradleProperty("issa.uploadKey").getOrElse("$signingDir/issaspeaker-upload.properties"),
     )
     signingConfigs {
         if (uploadKey.exists()) {
             create("upload") {
                 val props = Properties().apply { uploadKey.inputStream().use { load(it) } }
-                storeFile = file(props.getProperty("storeFile"))
+                storeFile = uploadKey.parentFile.resolve(props.getProperty("storeFile"))
                 storePassword = props.getProperty("storePassword")
                 keyAlias = props.getProperty("keyAlias")
                 keyPassword = props.getProperty("keyPassword")

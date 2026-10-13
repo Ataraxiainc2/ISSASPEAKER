@@ -1,0 +1,135 @@
+# Reusable: send a signed Android App Bundle to a TESTING track of Google Play, without any stored key.
+#
+# Same keyless access as play-access.yml (read its header): Google issues the Play token only inside this
+# file or play-access.yml, at a commit listed in the trust rule. The caller builds and signs the bundle in
+# its own job (upload key from its "play" environment's secrets) and hands it over as an artifact; this job
+# never sees the upload key, and the caller's job never sees a Play token.
+#
+# Production is out of reach twice: this job refuses the production track, and the service account has no
+# "Release to production" right in Play Console. Promotion to production stays a manual step there.
+#
+# dry_run (the default) uploads into a Play edit, asks Google to validate it and discards it: nothing is
+# published and the version code stays free.
+#
+# Caller (see ISSASPEAKER's release.yml):
+#   jobs:
+#     upload:
+#       needs: bundle   # a job that ran actions/upload-artifact with one .aab
+#       uses: Ataraxiainc2/ISSASPEAKER/.github/workflows/play-upload.yml@<commit SHA>
+#       with: { package: com.issasoda.example, artifact: bundle, track: internal, dry_run: true }
+#       permissions: { contents: read, id-token: write }
+name: Play upload (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        description: Android package name
+        required: true
+        type: string
+      artifact:
+        description: Name of the artifact (from the same run) that holds exactly one .aab
+        required: true
+        type: string
+      track:
+        description: "Testing track: internal, alpha (closed), beta (open) or a custom closed track"
+        required: false
+        type: string
+        default: internal
+      status:
+        description: "completed, or draft for an app that was never published"
+        required: false
+        type: string
+        default: completed
+      release_notes:
+        description: Optional en-US release notes
+        required: false
+        type: string
+        default: ""
+      dry_run:
+        description: Validate and discard; publish nothing
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: play
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check the inputs
+        env:
+          TRACK: ${{ inputs.track }}
+          STATUS: ${{ inputs.status }}
+        run: |
+          set -euo pipefail
+          if [ "$TRACK" = "production" ]; then echo "Production is a manual step in Play Console." >&2; exit 1; fi
+          case "$STATUS" in completed|draft) ;; *) echo "status must be completed or draft" >&2; exit 1 ;; esac
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ inputs.artifact }}
+          path: bundle
+      - id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+        with:
+          workload_identity_provider: projects/866688999493/locations/global/workloadIdentityPools/github/providers/issaspeaker-repo
+          service_account: play-publisher@issaspeaker.iam.gserviceaccount.com
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/androidpublisher
+      - name: Upload to the testing track
+        env:
+          TOKEN: ${{ steps.auth.outputs.access_token }}
+          PACKAGE: ${{ inputs.package }}
+          TRACK: ${{ inputs.track }}
+          STATUS: ${{ inputs.status }}
+          NOTES: ${{ inputs.release_notes }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        shell: python3 {0}
+        run: |
+          import glob, json, os, sys, urllib.error, urllib.request
+
+          package, track, status = os.environ["PACKAGE"], os.environ["TRACK"], os.environ["STATUS"]
+          dry_run = os.environ["DRY_RUN"] == "true"
+          host = "https://androidpublisher.googleapis.com"
+          edits = f"{host}/androidpublisher/v3/applications/{package}/edits"
+          uploads = f"{host}/upload/androidpublisher/v3/applications/{package}/edits"
+
+          def call(method, url, body=None, content_type="application/json"):
+              data = body if body is None or isinstance(body, bytes) else json.dumps(body).encode()
+              request = urllib.request.Request(url, data=data, method=method, headers={
+                  "Authorization": f"Bearer {os.environ['TOKEN']}", "Content-Type": content_type})
+              try:
+                  with urllib.request.urlopen(request, timeout=600) as response:
+                      raw = response.read()
+                      return json.loads(raw) if raw else {}
+              except urllib.error.HTTPError as error:
+                  # Google's error message, so the log says what to fix.
+                  sys.exit(f"{method} {url.split('/v3/')[1]}: HTTP {error.code}\n{error.read().decode(errors='replace')}")
+
+          bundles = glob.glob("bundle/**/*.aab", recursive=True)
+          if len(bundles) != 1:
+              sys.exit(f"Expected one .aab in the artifact, found {bundles}")
+
+          edit = call("POST", edits)["id"]
+          with open(bundles[0], "rb") as bundle:
+              version_code = call("POST", f"{uploads}/{edit}/bundles?uploadType=media", bundle.read(),
+                                  "application/octet-stream")["versionCode"]
+          release = {"versionCodes": [str(version_code)], "status": status}
+          if os.environ["NOTES"]:
+              release["releaseNotes"] = [{"language": "en-US", "text": os.environ["NOTES"]}]
+          call("PUT", f"{edits}/{edit}/tracks/{track}", {"track": track, "releases": [release]})
+
+          if dry_run:
+              call("POST", f"{edits}/{edit}:validate")
+              call("DELETE", f"{edits}/{edit}")
+              print(f"Dry run OK: {package} version {version_code} would go to '{track}' ({status}). Nothing published.")
+          else:
+              call("POST", f"{edits}/{edit}:commit")
+              print(f"Published {package} version {version_code} to '{track}' ({status}).")

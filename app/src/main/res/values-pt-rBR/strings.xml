@@ -54,7 +54,7 @@
     <string name="settings_language">Idioma</string>
     <string name="settings_language_system">Idioma do celular</string>
     <string name="about_font_title">Tipografias</string>
-    <string name="about_font_body">Cada vez que o app abre, títulos, cabeçalhos, textos e rótulos recebem uma Google Font diferente e muito legível, sorteada de um grupo de %1$d. As Configurações mostram quais estão em uso.</string>
+    <string name="about_font_body">Cada vez que você abre o app ou volta para ele, títulos, cabeçalhos, textos e rótulos recebem uma Google Font diferente e muito legível, sorteada de um grupo de %1$d. Girar a tela as mantém.</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_system">Conforme o celular</string>
     <string name="theme_light">Claro</string>

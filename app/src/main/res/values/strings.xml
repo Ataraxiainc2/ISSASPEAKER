@@ -58,7 +58,7 @@
     <string name="language_es" translatable="false">Español (Latinoamérica)</string>
     <string name="language_pt" translatable="false">Português (Brasil)</string>
     <string name="about_font_title">Typefaces</string>
-    <string name="about_font_body">Each time the app starts, titles, headings, text and labels each get a different high-legibility Google Font, drawn at random from a pool of %1$d. Settings shows which ones are in use.</string>
+    <string name="about_font_body">Each time you open the app or come back to it, titles, headings, text and labels each get a different high-legibility Google Font, drawn at random from a pool of %1$d. Rotating the screen keeps them.</string>
     <string name="settings_theme">Theme</string>
     <string name="theme_system">Phone setting</string>
     <string name="theme_light">Light</string>
