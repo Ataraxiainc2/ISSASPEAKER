@@ -14,5 +14,7 @@ else
   body='{"deployment_branch_policy":{"protected_branches":false,"custom_branch_policies":true}}'
 fi
 echo "$body" | gh api -X PUT "repos/$repo/environments/play" --input - -q '"environment: \(.name)"'
-gh api -X POST "repos/$repo/environments/play/deployment-branch-policies" -f name=main -f type=branch -q '"branch: \(.name)"' \
-  || echo "branch policy for main already present"
+branch=$(gh api "repos/$repo" -q .default_branch)
+gh api -X POST "repos/$repo/environments/play/deployment-branch-policies" -f name="$branch" -f type=branch -q '"branch: \(.name)"' \
+  || echo "branch policy for $branch already present"
+# Google accepts refs/heads/main and refs/heads/master only; another default branch needs the WIF condition updated.
