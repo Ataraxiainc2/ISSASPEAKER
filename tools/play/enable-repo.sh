@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Gives a repository of Ataraxiainc2 access to Google Play through play-access.yml (keyless, WIF).
 #   bash tools/play/enable-repo.sh <repository-name>
-# Creates the "play" environment limited to the main branch. Public repositories also get the owner as a
+# Creates the "play" environment limited to the default branch. Public repositories also get the owner as a
 # required reviewer; GitHub only offers required reviewers on private repositories with a paid plan.
 # Google Cloud needs no change: its trust rule already covers every repository of owner id 79027743.
 set -euo pipefail
