@@ -27,6 +27,9 @@ recommendation; the CIO approves, changes or rejects it.
 | D17 | C9 done: Spotify client secret rotated (ISP-SEC-009) | 2026-10-12 |
 | D18 | C20: fonts change every time the app opens or comes back from another app, never on rotation | 2026-10-12 |
 | D19 | C10 (urgent, owner): GitHub Actions gets keyless access to Google Play (Workload Identity Federation, environment `play`) | 2026-10-12 |
+| D20 | C21 done: `play-publisher@issaspeaker.iam.gserviceaccount.com` is an account-level Play Console user for all apps, current and future, without Admin, production releases or order management | 2026-10-13 |
+| D21 | Play access for every Ataraxiainc2 repository, current and future: Google trusts owner id 79027743 + environment `play` + branch `main`; environments created in EmuGaMind, ISSAGRAPPH, ISSASTUDENT, BookCompass | 2026-10-13 |
+| D22 | C22 done: first Sign in with Google on the S25 accepted by the owner | 2026-10-13 |
 
 ## Waiting for the CIO
 
@@ -42,7 +45,5 @@ recommendation; the CIO approves, changes or rejects it.
 | C17 | Pre-release `material3 1.5.0-beta01` for Material 3 Expressive (ISP-SEC-004) | Accept until 1.5.0 stable | Stability trade-off |
 | C18 | Last.fm write features (love a track, scrobble) need the application's shared secret | Read-only first; decide later | Your Last.fm account |
 | C19 | Required pull-request reviews on `main` would raise the Scorecard "Code-Review" score but block direct pushes | Keep off while there is one developer | Workflow |
-| C21 | Invite `play-publisher@issaspeaker.iam.gserviceaccount.com` in Play Console (Users and permissions) with *View app information* and *Release to testing tracks*, per app | Approve; my browser session was refused, correctly, because it grants account access | Grants access to your Play account |
-| C22 | Confirm "Agree and share" on the Google sign-in sheet on the phone (first sign-in) | Approve | Your personal Google consent |
 | C23 | GitHub sudo confirmation to review the Claude GitHub App, and its pending "permission update request" | Review it yourself at github.com/settings/installations | Your GitHub account |
 | C24 | Fix the Spotify payment error so Premium (and developer mode) does not lapse | Update the payment method | Payment |

@@ -1,0 +1,55 @@
+# Reusable: Google Play access for any Ataraxiainc2 repository, without any stored key.
+#
+# GitHub signs a short-lived OIDC token for the calling job; Google exchanges it for a token of
+# play-publisher@issaspeaker.iam.gserviceaccount.com only when ALL of these hold (Workload Identity Federation,
+# Google Cloud project "issaspeaker"):
+#   - the repository belongs to the owner id 79027743 (Ataraxiainc2), current or future repositories;
+#   - the job runs in an environment named "play";
+#   - the ref is refs/heads/main.
+# In Play Console the service account has account-level rights for every app EXCEPT production releases,
+# money operations (orders, refunds) and Admin. Production stays a manual decision.
+#
+# Caller (in any app repository, on main):
+#   jobs:
+#     play:
+#       uses: Ataraxiainc2/ISSASPEAKER/.github/workflows/play-access.yml@main
+#       with: { package: com.issasoda.example }
+#       permissions: { contents: read, id-token: write }
+name: Play access (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        description: Android package name
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  access-check:
+    runs-on: ubuntu-latest
+    environment: play
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+        with:
+          workload_identity_provider: projects/866688999493/locations/global/workloadIdentityPools/github/providers/issaspeaker-repo
+          service_account: play-publisher@issaspeaker.iam.gserviceaccount.com
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/androidpublisher
+      - name: Open and discard a Play edit
+        env:
+          TOKEN: ${{ steps.auth.outputs.access_token }}
+          PACKAGE: ${{ inputs.package }}
+        run: |
+          set -euo pipefail
+          api="https://androidpublisher.googleapis.com/androidpublisher/v3/applications/${PACKAGE}/edits"
+          edit=$(curl -fsS -X POST -H "Authorization: Bearer ${TOKEN}" "$api" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')
+          curl -fsS -X DELETE -H "Authorization: Bearer ${TOKEN}" "$api/${edit}" > /dev/null
+          echo "Play access OK for ${PACKAGE}"

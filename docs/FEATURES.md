@@ -8,9 +8,9 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 
 | Status | Count |
 |---|---|
-| Implemented | 28 |
+| Implemented | 29 |
 | To implement | 389 |
-| Pending: feasibility test | 15 |
+| Pending: feasibility test | 14 |
 | Pending: blocked by a decision | 0 |
 
 | Priority | Count |
@@ -50,7 +50,7 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F428 | PLAT | P0 | Adaptive full-screen layout: navigation bar or rail by window size, card grid using the whole width in portrait and landscape | Diseño adaptable a pantalla completa: barra o riel de navegación según el ancho, cuadrícula de tarjetas que usa todo el ancho en vertical y horizontal | NEW | Implemented | docs/design/UX.md |
 | F429 | PLAT | P0 | UX principles 2026 mapped to the app (tokens, components, states, accessibility) | Principios UX 2026 aplicados a la app (tokens, componentes, estados, accesibilidad) | NEW | Implemented | docs/design/UX.md |
 | F430 | PLAT | P0 | Public privacy policy and home page (GitHub Pages) | Política de privacidad y página pública (GitHub Pages) | NEW | Implemented | ataraxiainc2.github.io/ISSASPEAKER |
-| F431 | SEC | P0 | Keyless Google Play access from GitHub Actions (Workload Identity Federation, protected environment) | Acceso sin claves a Google Play desde GitHub Actions (Workload Identity Federation, entorno protegido) | NEW | Pending: feasibility test | waits for the owner to invite the service account in Play Console; docs/design/PLAY-PUBLISHING.md |
+| F431 | SEC | P0 | Keyless Google Play access from GitHub Actions for every repository of the account (Workload Identity Federation) | Acceso sin claves a Google Play desde GitHub Actions para todos los repositorios de la cuenta (Workload Identity Federation) | NEW | Implemented | owner id + environment play + main; no production, Admin or order rights; docs/design/PLAY-PUBLISHING.md |
 
 ## M1 — MVP: account, AI, speaker, birthdays, daily routine (61)
 

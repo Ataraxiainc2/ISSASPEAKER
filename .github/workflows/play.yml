@@ -1,12 +1,6 @@
-# Google Play access from GitHub Actions, without any stored key (Workload Identity Federation).
-#
-# GitHub signs a short-lived OIDC token for this job; Google exchanges it for a token of the service account
-# play-publisher@issaspeaker.iam.gserviceaccount.com. Google trusts the token only when it comes from this
-# repository (owner id 79027743) AND from the protected "play" environment, which needs the owner's approval
-# and accepts only the main branch. No JSON key exists anywhere.
-#
-# Today this workflow checks access (opens and discards a Play "edit"); release jobs are added when the app
-# exists in Play Console. See docs/design/PLAY-PUBLISHING.md.
+# Manual check that this repository can reach Google Play (see play-access.yml and
+# docs/design/PLAY-PUBLISHING.md). Works for any package of the developer account, for example an existing
+# app, since ISSASPEAKER itself is not in Play Console yet.
 name: Google Play
 
 on:
@@ -21,27 +15,10 @@ permissions:
   contents: read
 
 jobs:
-  access-check:
-    runs-on: ubuntu-latest
-    environment: play
+  play:
+    uses: ./.github/workflows/play-access.yml
+    with:
+      package: ${{ inputs.package }}
     permissions:
       contents: read
       id-token: write
-    steps:
-      - id: auth
-        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
-        with:
-          workload_identity_provider: projects/866688999493/locations/global/workloadIdentityPools/github/providers/issaspeaker-repo
-          service_account: play-publisher@issaspeaker.iam.gserviceaccount.com
-          token_format: access_token
-          access_token_scopes: https://www.googleapis.com/auth/androidpublisher
-      - name: Open and discard a Play edit
-        env:
-          TOKEN: ${{ steps.auth.outputs.access_token }}
-          PACKAGE: ${{ inputs.package }}
-        run: |
-          set -euo pipefail
-          api="https://androidpublisher.googleapis.com/androidpublisher/v3/applications/${PACKAGE}/edits"
-          edit=$(curl -fsS -X POST -H "Authorization: Bearer ${TOKEN}" "$api" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')
-          curl -fsS -X DELETE -H "Authorization: Bearer ${TOKEN}" "$api/${edit}" > /dev/null
-          echo "Play access OK for ${PACKAGE}"

@@ -169,7 +169,7 @@ one audio file on the LAN.
 | Tampering | A pull request changes the cloud SessionStart hook to run code in the owner's cloud session | CODEOWNERS on `.claude/`, `tools/cloud/`, `.github/`, `gradle/` | **Implemented**, see ISP-SEC-002 |
 | Information disclosure | A secret is committed | `.gitignore` for keys and configs; GitHub secret scanning with push protection (F030) | **Implemented** |
 | Repudiation | A vulnerable dependency goes unnoticed | Dependabot, dependency review and OSV-Scanner on PRs, CodeQL weekly and per push (F030, F031) | **Implemented** |
-| Elevation | Someone uses the CI path to publish to Google Play | Keyless Workload Identity Federation: Google accepts only this repository (owner id pinned) in the `play` environment, which needs the owner's approval and deploys from `main`; the service account gets testing-track rights only, never production | Built; Play invite pending |
+| Elevation | Someone uses the CI path to publish to Google Play | Keyless Workload Identity Federation: Google accepts only repositories of owner id 79027743, environment `play`, branch `main`; the service account has no production, Admin or order rights; ISSASPEAKER's environment also needs the owner's approval | **Implemented** |
 | Spoofing | A release APK is not the one built from this code | Upload key outside the repository (F036); SBOM per release (F037) | M1 |
 
 ### 5.8 Physical access (T4)
