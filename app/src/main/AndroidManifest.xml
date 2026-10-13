@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    M0 asks for no permissions at all: not even INTERNET. Google Fonts arrive through the Play Services
-    font provider, which downloads on its own. Each permission is added with the feature that needs it.
+    Permissions are added only with the feature that needs them:
+    - INTERNET: the Google profile photo (Sign in with Google). Google Fonts arrive through the Play Services
+      font provider, which downloads on its own.
 
     allowBackup="false": nothing goes to cloud backup (CodeQL java/android/backup-enabled). The language lives
     in the system's per-app locale setting, which Android keeps on its own. data_extraction_rules.xml still
     governs device-to-device transfer, which Android 12+ allows regardless of allowBackup.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"

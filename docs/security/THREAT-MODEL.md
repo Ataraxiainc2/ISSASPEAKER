@@ -96,6 +96,7 @@ The dotted edges are the most important: **content written by third parties (T3)
 | Threat | Scenario | Control | Status |
 |---|---|---|---|
 | Elevation of privilege | App holds broader scopes than any feature needs | Incremental, least-privilege scopes, asked when each integration is first used (F018); granted scopes visible and revocable (F045, F046) | M1 |
+| Spoofing / replay | A sign-in response from another request is accepted | Random 256-bit nonce per request, checked against the ID token's `nonce` claim (ISP-SEC-010) | **Implemented** |
 | Spoofing | Another account is treated as the admin | Admin check needs a verified Google email (F026); documented as a UI gate only | Logic **implemented** and tested; sign-in in M1 |
 | Information disclosure | Restricted Gmail data leaves the device | No backend: data goes only to the AI provider the owner chose, and the owner is told so | Design |
 
@@ -168,6 +169,7 @@ one audio file on the LAN.
 | Tampering | A pull request changes the cloud SessionStart hook to run code in the owner's cloud session | CODEOWNERS on `.claude/`, `tools/cloud/`, `.github/`, `gradle/` | **Implemented**, see ISP-SEC-002 |
 | Information disclosure | A secret is committed | `.gitignore` for keys and configs; GitHub secret scanning with push protection (F030) | **Implemented** |
 | Repudiation | A vulnerable dependency goes unnoticed | Dependabot, dependency review and OSV-Scanner on PRs, CodeQL weekly and per push (F030, F031) | **Implemented** |
+| Elevation | Someone uses the CI path to publish to Google Play | Keyless Workload Identity Federation: Google accepts only this repository (owner id pinned) in the `play` environment, which needs the owner's approval and deploys from `main`; the service account gets testing-track rights only, never production | Built; Play invite pending |
 | Spoofing | A release APK is not the one built from this code | Upload key outside the repository (F036); SBOM per release (F037) | M1 |
 
 ### 5.8 Physical access (T4)

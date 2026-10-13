@@ -49,6 +49,13 @@ android {
         versionCode = 1
         versionName = "0.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Web OAuth client of the Google Cloud project "issaspeaker", used by Sign in with Google. A client ID is a
+        // public identifier (it ships in every APK), not a secret; the value lives in gradle.properties.
+        buildConfigField(
+            "String",
+            "GOOGLE_WEB_CLIENT_ID",
+            "\"${providers.gradleProperty("issa.googleWebClientId").getOrElse("")}\"",
+        )
     }
 
     buildFeatures {
@@ -124,10 +131,18 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
+    implementation(libs.compose.material3.adaptive.navigation.suite)
     implementation(libs.compose.material.icons.core)
     implementation(libs.compose.ui.tooling.preview)
     // Downloadable Google Fonts (Play Services provider), see ui/theme/FontPool.kt.
     implementation(libs.compose.ui.text.google.fonts)
+    // Sign in with Google through Credential Manager (ui/account).
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    // The Google profile photo in the top bar.
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     debugImplementation(libs.compose.ui.tooling)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

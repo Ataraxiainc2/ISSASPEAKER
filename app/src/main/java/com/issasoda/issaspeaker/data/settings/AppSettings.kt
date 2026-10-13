@@ -33,6 +33,12 @@ class AppSettings(context: Context) {
         theme.value = mode
     }
 
+    /** Back to defaults (part of "Erase everything"). */
+    fun clear() {
+        prefs.edit { clear() }
+        theme.value = ThemeMode.SYSTEM
+    }
+
     private companion object {
         const val FILE = "settings"
         const val KEY_THEME = "theme_mode"

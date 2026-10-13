@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="tagline">Tu centro de mando: parlante, Google, música e IA en un solo lugar.</string>
-    <string name="loading">Cargando…</string>
     <string name="features_ready">Características listas: %1$d / %2$d</string>
-
-    <string name="action_back">Atrás</string>
     <string name="action_settings">Ajustes</string>
     <string name="action_about">Acerca de</string>
     <string name="action_admin">Administrador</string>
@@ -62,10 +59,38 @@
     <string name="theme_system">Según el teléfono</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Oscuro</string>
-    <string name="settings_fonts">Fuentes en uso</string>
-    <string name="settings_fonts_body">Se eligen nuevas en cada inicio. Si alguna te molesta, toma una captura de esta lista.</string>
     <string name="font_role_display">Títulos</string>
     <string name="font_role_title">Encabezados</string>
     <string name="font_role_body">Texto</string>
     <string name="font_role_label">Etiquetas</string>
+    <string name="nav_home">Inicio</string>
+    <string name="action_home">Volver al inicio</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_read_privacy">Leer la política de privacidad</string>
+    <string name="account_signed_in_as">Cuenta: %1$s</string>
+    <string name="account_signed_out">Cuenta: sin iniciar sesión</string>
+    <string name="account_signed_out_title">Sin iniciar sesión</string>
+    <string name="account_signed_out_body">Inicia sesión con tu cuenta de Google para usar tus hojas, calendario y Drive. Cada permiso se pide solo cuando usas por primera vez la función que lo necesita.</string>
+    <string name="account_sign_in">Iniciar sesión con Google</string>
+    <string name="account_signing_in">Iniciando sesión…</string>
+    <string name="account_sign_out">Cerrar sesión</string>
+    <string name="account_erase">Borrar todo</string>
+    <string name="account_erase_title">¿Borrar todo?</string>
+    <string name="account_erase_body">Se cierra la sesión y se eliminan de este teléfono tu cuenta, tus ajustes y tu idioma elegido. No se puede deshacer.</string>
+    <string name="account_erase_confirm">Borrar</string>
+    <string name="account_error_not_configured">El inicio de sesión no está configurado en esta versión.</string>
+    <string name="account_error_failed">No se completó el inicio de sesión. Revisa tu conexión e inténtalo de nuevo.</string>
+    <string name="home_hero_title">Tus rutinas, dichas en casa</string>
+    <string name="home_hero_welcome">Hola, %1$s</string>
+    <string name="home_privacy_title">Tus datos siguen siendo tuyos</string>
+    <string name="home_privacy_body">ISSASPEAKER no tiene servidor. Todo se queda en este teléfono y en tu propia cuenta de Google.</string>
+    <string name="records_failed">No se pudo leer la lista de funciones. Reinstala la app si sigue pasando.</string>
+    <string name="settings_account">Cuenta</string>
+    <string name="settings_privacy">Privacidad</string>
+    <string name="settings_privacy_body">La app guarda tus datos en este teléfono y en tu cuenta de Google, nunca en nuestros servidores. Borra todo desde la tarjeta Cuenta.</string>
+    <string name="about_help_title">Ayuda y soporte</string>
+    <string name="about_help_body">¿Dudas, ideas o un problema? Escríbenos; respondemos cada mensaje.</string>
+    <string name="about_help_action">Escribir a soporte</string>
+    <string name="admin_tab_diagnostics">Diagnóstico</string>
+    <string name="admin_diag_fonts">Fuentes de esta sesión</string>
 </resources>

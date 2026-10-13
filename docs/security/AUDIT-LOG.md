@@ -90,3 +90,32 @@ Scorecard Pinned-Dependencies. `codespell` is installed from `tools/requirements
 - **Branch-Protection / Code-Review**: a decision for the owner; recommended (see ISP-SEC-002).
 - **CII-Best-Practices**: requires registering the project at bestpractices.dev.
 - **Fuzzing**: candidates once there is untrusted input to parse (M1+: Cast discovery replies, AI responses).
+
+## Review 3 — sign-in, cloud project, Play access (2026-10-12)
+
+### ISP-SEC-009 · Low · Fixed — Spotify client secret shared in a chat
+
+The owner pasted the Spotify app's client secret into an AI chat while setting up integrations. Anything pasted
+into a chat should be treated as exposed. The secret was rotated in the Spotify dashboard the same day; the new
+value lives only in the owner's key folder. ISSASPEAKER does not use it at all: Spotify sign-in will use
+Authorization Code with PKCE, which needs no secret on the phone.
+
+### ISP-SEC-010 · Info · Accepted — ID token signature not re-verified on the phone
+
+Sign in with Google (Credential Manager) hands the app an ID token directly from Google Play services. The app
+sends a random 256-bit nonce with each request and rejects a token whose `nonce` claim differs, then reads
+`email_verified`. It does not verify the JWT signature, because there is no backend to protect: the token
+only decides what the interface shows, and the admin gate is documented as not a security boundary
+(ISP-SEC-003). If a backend ever relies on the identity, it must verify the signature server-side.
+
+### ISP-SEC-011 · Info · Accepted — billing account linked to the Cloud project
+
+Creating a project in the console requires a billing account. The project `issaspeaker` enables only no-cost
+APIs: Sheets, Drive, Google Play Developer, IAM Service Account Credentials and Security Token Service.
+
+### Keyless publishing path (design note, no finding)
+
+GitHub Actions reaches Google Play through Workload Identity Federation: no service-account key exists. Google
+accepts the GitHub token only for repository owner id 79027743, repository `Ataraxiainc2/ISSASPEAKER` and the
+`play` environment, which needs the owner's approval and deploys from `main` only
+([PLAY-PUBLISHING.md](../design/PLAY-PUBLISHING.md)).

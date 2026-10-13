@@ -19,28 +19,30 @@ recommendation; the CIO approves, changes or rejects it.
 | D9 | Fonts always random, never pinned; a different family per text role (titles, headings, text, labels), drawn at every start; Settings lists them | 2026-10-12 |
 | D10 | Theme: light, dark or phone setting | 2026-10-12 |
 | D11 | Branch ruleset on `main`: no force push, no deletion. Direct pushes still allowed | 2026-10-12 |
+| D12 | C1 done: Google Cloud project `issaspeaker` (OAuth Android clients for the debug and upload keys, Web client for sign-in; Sheets, Drive, Play Developer, IAM Credentials, STS enabled) | 2026-10-12 |
+| D13 | C2 done: OAuth consent "In production", External, unverified; privacy policy and home page on GitHub Pages | 2026-10-12 |
+| D14 | C3 and C4 approved: key vault (Drive appDataFolder + Block Store + recovery code) and the models.dev registry with pinned hosts; implementation in M1 | 2026-10-12 |
+| D15 | C6: Last.fm keys stored as one line `lastfm:key1;key2;...` (all 25 are interchangeable) | 2026-10-12 |
+| D16 | C8 done: Spotify app "Syngc" has the ISSASPEAKER package with debug and upload SHA-1 and redirect `issaspeaker://spotify-callback`; owner account is Premium (Student) — a payment error is pending on Spotify's side | 2026-10-12 |
+| D17 | C9 done: Spotify client secret rotated (ISP-SEC-009) | 2026-10-12 |
+| D18 | C20: fonts change every time the app opens or comes back from another app, never on rotation | 2026-10-12 |
+| D19 | C10 (urgent, owner): GitHub Actions gets keyless access to Google Play (Workload Identity Federation, environment `play`) | 2026-10-12 |
 
 ## Waiting for the CIO
 
 | ID | Question | Recommendation | Why it is yours |
 |---|---|---|---|
-| C1 | Create the Google Cloud project `issaspeaker`, its OAuth consent screen and the OAuth clients (Android client with the debug, upload and Play signing SHA-1; Web client for sign-in) | Approve, and let me do it in your Chrome while you watch, or do it yourself | Creates resources and credentials in your Google account |
-| C2 | OAuth consent screen status | **In production, unverified** (personal use, under 100 users). "Testing" can expire grants after 7 days, which would silently break the 08:00 routine | Legal/terms trade-off with Google |
-| C3 | Key vault design ([KEY-VAULT.md](design/KEY-VAULT.md)): Drive `appDataFolder` + vault key in Block Store + recovery code | Approve. The pattern used in the other apps (secret in the APK) is unsafe in a public repository | Security model for every user key |
-| C4 | Depend on models.dev (third-party, MIT) for the provider list, with pinned hosts ([AI-PROVIDERS.md](design/AI-PROVIDERS.md)) | Approve | Third-party data dependency |
 | C5 | Share the AI-provider and key-vault code across ISSASODA apps as a separate public library (`issasoda-ai`) | Approve after M1 is stable | Affects every app and repository |
-| C6 | Last.fm key for ISSASPEAKER: create a new Last.fm API application "ISSASPEAKER", or reuse "Multi-Platform Playlist Sync" | New application: revocable on its own, and its name shows in Last.fm | Your Last.fm account |
 | C7 | Last.fm key handling: user-entered (vault) or built into the app from `D:\SC\AK\A` | User-entered, like AI keys: nothing of yours ships in a public APK | Exposure of your key |
-| C8 | Spotify app "Syngc": register the Android package `com.issasoda.issaspeaker`, its SHA-1 and a redirect `issaspeaker://spotify-callback`; confirm the owner account has Premium (required since Feb 2026) | Approve; create a separate Spotify app "ISSASPEAKER" only if Syngc must keep its current setup | Your Spotify developer account |
-| C9 | Rotate the Spotify client secret (it was pasted into a chat). The app never uses it (PKCE) | Rotate | Your Spotify account |
-| C10 | Publishing to Google Play | (a) Keep releases local, signed with the upload key on the PC — safest; (b) GitHub Actions to the internal track, with a Play service account and the upload key as GitHub secrets behind a protected environment with manual approval. Recommend (a) now, (b) once the app is on Play | Signing keys and store access |
 | C11 | Create the ISSASPEAKER app in Play Console (name, category, privacy policy URL) | Create when M1 works; privacy policy on GitHub Pages of this repository | Store listing and policy declarations |
 | C12 | OpenSSF Best Practices badge: sign in at bestpractices.dev with GitHub and register the project | Approve; answers are prepared in [OPENSSF-BEST-PRACTICES.md](security/OPENSSF-BEST-PRACTICES.md) | Account creation and OAuth (I cannot do it for you) |
-| C13 | Claude GitHub App access to this repository for cloud sessions | Check at github.com/settings/installations | Your GitHub account settings |
 | C14 | X Radar daily cap | 200 posts per day (about USD 1 per day at USD 5 per 1,000) | Recurring cost |
 | C15 | AI spending cap per provider per month | USD 10 per provider, warning at 80 % | Recurring cost |
 | C16 | Gmail read access (restricted scope) for personal use, without a CASA security assessment | Accept | Google policy |
 | C17 | Pre-release `material3 1.5.0-beta01` for Material 3 Expressive (ISP-SEC-004) | Accept until 1.5.0 stable | Stability trade-off |
 | C18 | Last.fm write features (love a track, scrobble) need the application's shared secret | Read-only first; decide later | Your Last.fm account |
 | C19 | Required pull-request reviews on `main` would raise the Scorecard "Code-Review" score but block direct pushes | Keep off while there is one developer | Workflow |
-| C20 | Fonts are drawn at every app start. Confirm that "always random" means every start, not once a day | Every start | Taste |
+| C21 | Invite `play-publisher@issaspeaker.iam.gserviceaccount.com` in Play Console (Users and permissions) with *View app information* and *Release to testing tracks*, per app | Approve; my browser session was refused, correctly, because it grants account access | Grants access to your Play account |
+| C22 | Confirm "Agree and share" on the Google sign-in sheet on the phone (first sign-in) | Approve | Your personal Google consent |
+| C23 | GitHub sudo confirmation to review the Claude GitHub App, and its pending "permission update request" | Review it yourself at github.com/settings/installations | Your GitHub account |
+| C24 | Fix the Spotify payment error so Premium (and developer mode) does not lapse | Update the payment method | Payment |

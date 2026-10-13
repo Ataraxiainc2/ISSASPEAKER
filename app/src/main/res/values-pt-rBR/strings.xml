@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="tagline">Sua central de comando: alto-falante, Google, música e IA em um só lugar.</string>
-    <string name="loading">Carregando…</string>
     <string name="features_ready">Recursos prontos: %1$d / %2$d</string>
-
-    <string name="action_back">Voltar</string>
     <string name="action_settings">Configurações</string>
     <string name="action_about">Sobre</string>
     <string name="action_admin">Administrador</string>
@@ -62,10 +59,38 @@
     <string name="theme_system">Conforme o celular</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Escuro</string>
-    <string name="settings_fonts">Fontes em uso</string>
-    <string name="settings_fonts_body">Novas são sorteadas a cada início. Se alguma incomodar, faça uma captura desta lista.</string>
     <string name="font_role_display">Títulos</string>
     <string name="font_role_title">Cabeçalhos</string>
     <string name="font_role_body">Texto</string>
     <string name="font_role_label">Rótulos</string>
+    <string name="nav_home">Início</string>
+    <string name="action_home">Voltar ao início</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_read_privacy">Ler a política de privacidade</string>
+    <string name="account_signed_in_as">Conta: %1$s</string>
+    <string name="account_signed_out">Conta: não conectada</string>
+    <string name="account_signed_out_title">Não conectado</string>
+    <string name="account_signed_out_body">Entre com sua conta Google para usar suas planilhas, agenda e Drive. Cada permissão é pedida só quando você usa pela primeira vez o recurso que precisa dela.</string>
+    <string name="account_sign_in">Fazer login com o Google</string>
+    <string name="account_signing_in">Entrando…</string>
+    <string name="account_sign_out">Sair</string>
+    <string name="account_erase">Apagar tudo</string>
+    <string name="account_erase_title">Apagar tudo?</string>
+    <string name="account_erase_body">Isso encerra a sessão e remove deste celular sua conta, suas configurações e o idioma escolhido. Não pode ser desfeito.</string>
+    <string name="account_erase_confirm">Apagar</string>
+    <string name="account_error_not_configured">O login não está configurado nesta versão.</string>
+    <string name="account_error_failed">O login não foi concluído. Verifique sua conexão e tente de novo.</string>
+    <string name="home_hero_title">Suas rotinas, faladas em casa</string>
+    <string name="home_hero_welcome">Olá, %1$s</string>
+    <string name="home_privacy_title">Seus dados continuam seus</string>
+    <string name="home_privacy_body">O ISSASPEAKER não tem servidor. Tudo fica neste celular e na sua própria conta Google.</string>
+    <string name="records_failed">Não foi possível ler a lista de recursos. Reinstale o app se isso continuar.</string>
+    <string name="settings_account">Conta</string>
+    <string name="settings_privacy">Privacidade</string>
+    <string name="settings_privacy_body">O app guarda seus dados neste celular e na sua conta Google, nunca nos nossos servidores. Apague tudo pelo cartão Conta.</string>
+    <string name="about_help_title">Ajuda e suporte</string>
+    <string name="about_help_body">Dúvidas, ideias ou um problema? Escreva para nós; respondemos toda mensagem.</string>
+    <string name="about_help_action">Escrever ao suporte</string>
+    <string name="admin_tab_diagnostics">Diagnóstico</string>
+    <string name="admin_diag_fonts">Fontes desta sessão</string>
 </resources>

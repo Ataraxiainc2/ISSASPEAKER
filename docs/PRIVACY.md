@@ -60,8 +60,8 @@ network traffic uses HTTPS. Details: [threat model](security/THREAT-MODEL.md).
 
 ## Deleting your data
 
-- In the app: **Settings → Erase everything** removes keys, history and settings, deletes the Drive copy and
-  signs you out.
+- In the app: **Settings → Account → Erase everything** removes everything the app stores on the phone and
+  signs you out. Once keys are synced to Drive (planned), it also deletes that copy.
 - Uninstalling the app removes everything stored on the phone.
 - You can revoke the app's Google access at any time at
   [myaccount.google.com/permissions](https://myaccount.google.com/permissions).

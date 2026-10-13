@@ -1,5 +1,7 @@
 # ISSASPEAKER
 
+<img src="docs/play/icon-512.png" alt="ISSASPEAKER logo" width="128">
+
 A personal command center for Android. It joins the local Google Home speaker, the Google ecosystem
 (Sheets, Calendar, Gmail, Drive, Apps Script), music (Spotify, Last.fm), X, books, a Galaxy Watch and AI
 models that run on the user's own API keys, so that services that never talk to each other can share one
@@ -8,7 +10,7 @@ the kitchen speaker.*
 
 **Status:** milestone M0 done (foundation and security baseline); M1 (the MVP) is next. See the
 [plan](docs/PLAN.md), the [decisions](docs/DECISIONS.md), the [threat model](docs/security/THREAT-MODEL.md) and the
-[feature catalog](docs/FEATURES.md): 426 numbered features, each one marked *implemented*, *to implement*
+[feature catalog](docs/FEATURES.md): 432 numbered features, each one marked *implemented*, *to implement*
 or *pending*.
 
 ## Design choices
@@ -45,7 +47,7 @@ Found a vulnerability? Please read [SECURITY.md](SECURITY.md) and report it priv
 |---|---|
 | `docs/PLAN.md` | Plan, milestones, risks |
 | `docs/DECISIONS.md` | Decisions taken and decisions waiting for approval |
-| `docs/design/` | Designs: AI provider registry, key vault |
+| `docs/design/` | Designs: AI provider registry, key vault, UX principles, Play publishing |
 | `docs/features/catalog.tsv` | Single source of truth for features |
 | `docs/security/` | Threat model, audit log, findings |
 | `docs/FEATURES.md` | Generated catalog (`python tools/features.py`) |
