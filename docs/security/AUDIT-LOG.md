@@ -145,5 +145,5 @@ version of either file reaches Play only after the owner lists its commit in Goo
   prints it.
 - Firebase keys restricted to the debug certificate break sign-in in Play builds. ISSASPEAKER has no Firebase;
   its OAuth Android clients cover the debug, upload and Play app-signing certificates.
-- Branch protection on `main`: the ruleset blocks deletion and force pushes. Required reviews stay off while
-  there is one developer (C19).
+- Branch protection on `main`: the ruleset blocks deletion and force pushes. Required reviews stay off because
+  every developer session pushes as the same GitHub account, which cannot approve its own pull request (C19).

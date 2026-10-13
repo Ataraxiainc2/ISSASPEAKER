@@ -64,8 +64,21 @@ flowchart LR
   right. Promotion to production is a manual step in Play Console.
 - **If an upload key leaks:** reset it in Play Console → App signing (Play App Signing keeps the real signing
   key at Google), then replace the secrets.
+- **Secrets:** the owner runs `bash tools/play/set-release-secrets.sh [repository]`, which copies each app's upload
+  key, `google-services.json` and extra build inputs from the PC into its `play` environment.
 - **Master copy of the keys:** the owner's PC, `D:\SC\AK\signing\<app>-upload.jks` + `.properties`. Local release
   builds read it there (`-Pissa.signingDir` or `ISSASODA_SIGNING_DIR` to override).
+
+## Apps (2026-10-13)
+
+| Repository | Package | `play.yml` | `release.yml` | Release inputs beyond the upload key | Local build reads `D:\SC\AK\signing` |
+|---|---|---|---|---|---|
+| ISSASPEAKER | issaspeaker | pinned, OK | dry run passed | none | yes |
+| ISSASTUDENT | issastudent | pinned, OK | added | `google-services.json` | yes |
+| BookCompass | bookcompass | pinned, OK | added | `google-services.json`, Google Books key | yes |
+| EmuGaMind | emugamind | pinned, OK | added | `google-services.json`, `ADMIN_UID` | its session migrates |
+| ISSAGRAPPH | issagrapph | pinned, OK | added | `google-services.json` | its session migrates; GitHub copy is behind the PC |
+| — | movierecommendationapp | no repository | — | upload key lost: reset in Play Console first | — |
 
 ## Play review access
 

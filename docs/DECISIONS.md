@@ -47,6 +47,6 @@ recommendation; the CIO approves, changes or rejects it.
 | C16 | Gmail read access (restricted scope) for personal use, without a CASA security assessment | Accept | Google policy |
 | C17 | Pre-release `material3 1.5.0-beta01` for Material 3 Expressive (ISP-SEC-004) | Accept until 1.5.0 stable | Stability trade-off |
 | C18 | Last.fm write features (love a track, scrobble) need the application's shared secret | Read-only first; decide later | Your Last.fm account |
-| C19 | Required pull-request reviews on `main` would raise the Scorecard "Code-Review" score but block direct pushes | Keep off while there is one developer | Workflow |
+| C19 | Required pull-request reviews on `main` would raise the Scorecard "Code-Review" score but block direct pushes | Keep off: every developer (one Claude session per app, plus the owner) pushes as the same GitHub account, and GitHub never lets an account approve its own pull request, so required reviews would block everyone. Revisit if a second GitHub account (for example a review bot) is added | Workflow |
 | C23 | GitHub sudo confirmation to review the Claude GitHub App, and its pending "permission update request" | Review it yourself at github.com/settings/installations | Your GitHub account |
 | C24 | Fix the Spotify payment error so Premium (and developer mode) does not lapse | Update the payment method | Payment |
