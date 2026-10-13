@@ -8,8 +8,8 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 
 | Status | Count |
 |---|---|
-| Implemented | 30 |
-| To implement | 388 |
+| Implemented | 31 |
+| To implement | 387 |
 | Pending: feasibility test | 14 |
 | Pending: blocked by a decision | 0 |
 
@@ -116,7 +116,7 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F420 | AI | P1 | One OpenAI-compatible client for most providers; native clients for Anthropic, Gemini, OpenAI, Cohere and Amazon Bedrock | Un cliente compatible con OpenAI para la mayoría; clientes nativos para Anthropic, Gemini, OpenAI, Cohere y Amazon Bedrock | NEW | To implement | about 190 registry providers are OpenAI-compatible |
 | F423 | SEC | P0 | Key vault synced to the user's own Google Drive (appDataFolder), end-to-end encrypted; the vault key travels in Block Store (encrypted with the screen lock), never in the APK | Bóveda de claves sincronizada con el Google Drive del propio usuario (appDataFolder), cifrada de extremo a extremo; la clave de la bóveda viaja en Block Store (cifrada con el bloqueo de pantalla), nunca en el APK | NEW | To implement | decision C3; docs/design/KEY-VAULT.md |
 | F424 | SEC | P0 | Vault recovery code shown once at setup, for a phone change without a Google backup restore | Código de recuperación de la bóveda, mostrado una vez al configurar, para cambiar de teléfono sin restaurar la copia de Google | NEW | To implement |  |
-| F432 | SEC | P1 | Release pipeline: signed bundle to the internal track from GitHub, owner approval required | Canal de publicación: paquete firmado a la pista interna desde GitHub, con aprobación del dueño | NEW | To implement | release.yml + play-upload.yml; manual, testing tracks only, dry run by default |
+| F432 | SEC | P1 | Release pipeline: signed bundle to the internal track from GitHub, owner approval required | Canal de publicación: paquete firmado a la pista interna desde GitHub, con aprobación del dueño | NEW | Implemented | release.yml + play-upload.yml; manual, testing tracks only, dry run by default |
 
 ## M2 — Daily announcements and routines (65)
 

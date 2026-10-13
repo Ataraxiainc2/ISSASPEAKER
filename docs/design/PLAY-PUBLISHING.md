@@ -1,8 +1,8 @@
 # Publishing to Google Play from GitHub
 
 **Status (2026-10-13):** keyless access working for every app of the developer account. ISSASPEAKER is in Play
-Console (internal testing, version 0.1.0). Release pipeline (`release.yml` + `play-upload.yml`) written; dry
-run pending the upload-key secrets.
+Console (internal testing, version 0.1.0). Release pipeline (`release.yml` + `play-upload.yml`) working: the first
+dry run built, signed and validated version 0.1.1 (2) for the internal track and discarded it.
 
 ## How GitHub reaches Google Play without a key
 
