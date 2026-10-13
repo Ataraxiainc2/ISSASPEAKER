@@ -74,10 +74,10 @@ flowchart LR
 | Repository | Package | `play.yml` | `release.yml` | Release inputs beyond the upload key | Local build reads `D:\SC\AK\signing` |
 |---|---|---|---|---|---|
 | ISSASPEAKER | issaspeaker | pinned, OK | dry run passed | none | yes |
-| ISSASTUDENT | issastudent | pinned, OK | added | `google-services.json` | yes |
-| BookCompass | bookcompass | pinned, OK | added | `google-services.json`, Google Books key | yes |
-| EmuGaMind | emugamind | pinned, OK | added | `google-services.json`, `ADMIN_UID` | its session migrates |
-| ISSAGRAPPH | issagrapph | pinned, OK | added | `google-services.json` | its session migrates; GitHub copy is behind the PC |
+| ISSASTUDENT | issastudent | pinned, OK | works up to Play; versionCode 9 already used, bump needed | `google-services.json` | yes |
+| BookCompass | bookcompass | pinned, OK | build fails: `assetPackReleasePreBundleTask` (asset pack built outside the repo) | `google-services.json`, Google Books key | yes |
+| EmuGaMind | emugamind | pinned, OK | build fails: native `:eden` CMake configure in CI | `google-services.json`, `ADMIN_UID` | its session migrates |
+| ISSAGRAPPH | issagrapph | pinned, OK | added; not run (GitHub copy is behind the PC) | `google-services.json` | its session migrates; GitHub copy is behind the PC |
 | — | movierecommendationapp | no repository | — | upload key lost: reset in Play Console first | — |
 
 ## Play review access
