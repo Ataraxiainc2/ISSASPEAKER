@@ -29,6 +29,11 @@ Central and the Gradle Plugin Portal (same SHA-256), and the metadata was regene
 rule now written in `CLAUDE.md`. **Next step (M1):** turn on `verify-signatures` with an
 explicit trusted-keys list for every artifact that publishes a signature.
 
+*2026-10-14:* Android Studio's Gradle sync also downloads `-sources.jar` and `-javadoc.jar` files to show library
+code in the editor, and verification rejected them. Those two kinds are now trusted by pattern
+(`trusted-artifacts`, as Gradle recommends). They are never compiled into the app; every artifact the build uses
+is still checked by SHA-256.
+
 ### ISP-SEC-002 · Low · Mitigated — the cloud SessionStart hook runs repository code
 
 `.claude/settings.json` runs `tools/cloud/setup-android.sh` when a Claude Code cloud session starts. A branch

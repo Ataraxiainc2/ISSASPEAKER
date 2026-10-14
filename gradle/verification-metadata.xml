@@ -3,6 +3,12 @@
    <configuration>
       <verify-metadata>true</verify-metadata>
       <verify-signatures>false</verify-signatures>
+      <trusted-artifacts>
+         <!-- Android Studio downloads sources and Javadoc only to show them in the editor; they are never
+              compiled into the app, so they are not verified (Gradle's recommendation for IDE sync). -->
+         <trust file=".*-javadoc[.]jar" regex="true"/>
+         <trust file=".*-sources[.]jar" regex="true"/>
+      </trusted-artifacts>
    </configuration>
    <components>
       <component group="androidx.activity" name="activity" version="1.13.0">
