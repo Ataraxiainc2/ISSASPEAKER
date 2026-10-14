@@ -8,7 +8,6 @@
     <string name="home_next_title">Lo que viene</string>
     <string name="home_next_speaker">Hablar por tu parlante Google Home</string>
     <string name="home_next_google">Iniciar sesión con Google y leer tus hojas de cálculo</string>
-    <string name="home_next_ai">Usar tus propias claves de IA, guardadas cifradas en este teléfono</string>
     <string name="home_next_routine">Una rutina matutina que anuncia los cumpleaños del día</string>
     <string name="home_progress_title">Avance</string>
     <string name="about_version">Versión %1$s</string>
@@ -76,7 +75,7 @@
     <string name="account_sign_out">Cerrar sesión</string>
     <string name="account_erase">Borrar todo</string>
     <string name="account_erase_title">¿Borrar todo?</string>
-    <string name="account_erase_body">Se cierra la sesión y se eliminan de este teléfono tu cuenta, tus ajustes y tu idioma elegido. No se puede deshacer.</string>
+    <string name="account_erase_body">Se cierra la sesión y se eliminan de este teléfono tu cuenta, tus ajustes, tu idioma elegido y tus claves de IA. No se puede deshacer.</string>
     <string name="account_erase_confirm">Borrar</string>
     <string name="account_error_not_configured">El inicio de sesión no está configurado en esta versión.</string>
     <string name="account_error_failed">No se completó el inicio de sesión. Revisa tu conexión e inténtalo de nuevo.</string>
@@ -93,4 +92,60 @@
     <string name="about_help_action">Escribir a soporte</string>
     <string name="admin_tab_diagnostics">Diagnóstico</string>
     <string name="admin_diag_fonts">Fuentes de esta sesión</string>
+
+    <!-- AI tab -->
+    <string name="nav_ai">IA</string>
+    <string name="action_back">Atrás</string>
+    <string name="action_retry">Reintentar</string>
+    <string name="action_search">Buscar</string>
+    <string name="ai_ask_title">Pregúntale a la IA</string>
+    <string name="ai_ask_empty">Agrega un proveedor de IA con tu propia clave y pregunta lo que quieras aquí.</string>
+    <string name="ai_ask_using">Responde: %1$s · %2$s</string>
+    <string name="ai_ask_hint">Tu pregunta</string>
+    <string name="ai_ask_send">Enviar</string>
+    <string name="ai_ask_clear">Nueva conversación</string>
+    <string name="ai_add_provider">Agregar un proveedor</string>
+    <string name="ai_add_body">Cualquier proveedor de la lista en vivo: Anthropic, Google, OpenAI, xAI, DeepSeek, Groq y muchos más. Tu clave se verifica con el proveedor y se guarda cifrada en este teléfono.</string>
+    <string name="ai_default">Proveedor predeterminado</string>
+    <string name="ai_make_default">Usar por defecto</string>
+    <string name="ai_change_model">Cambiar modelo</string>
+    <string name="ai_remove">Quitar</string>
+    <string name="ai_remove_title">¿Quitar %1$s?</string>
+    <string name="ai_remove_body">Su clave se borra de este teléfono. Puedes agregarla otra vez cuando quieras.</string>
+    <string name="ai_model_label">Modelo: %1$s</string>
+    <string name="ai_saved">Proveedor listo</string>
+    <string name="ai_encrypt_failed">No se pudo guardar la clave cifrada en este teléfono.</string>
+    <string name="ai_key_unavailable">Este teléfono no puede abrir la clave guardada (por ejemplo, un teléfono nuevo configurado sin la copia de Google). Agrega la clave otra vez.</string>
+    <string name="ai_choose_provider">Elige un proveedor</string>
+    <string name="ai_registry_failed">No se pudo cargar la lista de proveedores. Revisa la conexión e inténtalo de nuevo.</string>
+    <string name="ai_key_explanation">Pega tu clave de API de %1$s. Se verifica con %1$s, se cifra en este teléfono y no se vuelve a mostrar.</string>
+    <string name="ai_key_label">Clave de API</string>
+    <string name="ai_validate_key">Verificar clave</string>
+    <string name="ai_provider_docs">Obtener una clave</string>
+    <string name="ai_key_privacy">La clave solo se envía a %1$s (%2$s). Las respuestas de la IA solo se muestran: nunca envían, publican ni borran nada.</string>
+    <string name="ai_all_families">Todos</string>
+    <string name="ai_model_new">Nuevo</string>
+    <string name="ai_model_context">Contexto de %1$dK</string>
+    <string name="ai_no_text_models">Esta clave no tiene modelos de texto.</string>
+    <string name="ai_provider_said">El proveedor respondió: %1$s</string>
+    <plurals name="ai_registry_source">
+        <item quantity="one">%d proveedor, en vivo desde models.dev</item>
+        <item quantity="many">%d proveedores, en vivo desde models.dev</item>
+        <item quantity="other">%d proveedores, en vivo desde models.dev</item>
+    </plurals>
+    <plurals name="ai_show_all_providers">
+        <item quantity="one">Ver el %d proveedor</item>
+        <item quantity="many">Ver los %d proveedores</item>
+        <item quantity="other">Ver los %d proveedores</item>
+    </plurals>
+    <plurals name="ai_model_count">
+        <item quantity="one">%d modelo</item>
+        <item quantity="many">%d modelos</item>
+        <item quantity="other">%d modelos</item>
+    </plurals>
+    <plurals name="ai_choose_model">
+        <item quantity="one">%d modelo funciona con esta clave. Elige uno:</item>
+        <item quantity="many">%d modelos funcionan con esta clave. Elige uno:</item>
+        <item quantity="other">%d modelos funcionan con esta clave. Elige uno:</item>
+    </plurals>
 </resources>

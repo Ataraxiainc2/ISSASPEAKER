@@ -1,6 +1,6 @@
 # ISSASPEAKER threat model
 
-**Version:** 2 (2026-10-12: AI provider registry and key vault added) · **Method:** STRIDE per component, with a data-flow diagram ·
+**Version:** 3 (2026-10-14: AI tab built: registry, key vault phase 1, questions) · **Method:** STRIDE per component, with a data-flow diagram ·
 **Owner:** ISSASODA · **Review:** at the end of every milestone, and whenever a new integration or permission
 is added.
 
@@ -15,8 +15,9 @@ provider keys and Google authorization, reads personal data (sheets, mail, calen
 speech with AI help, and plays it on a Google Home speaker on the home network. A Wear OS companion
 arrives in M5.
 
-**M0 state:** the app requests **no permissions at all**, not even `INTERNET`. Fonts arrive through the Play
-Services font provider. Everything below that is marked M1 or later is design, not yet code.
+**State (2026-10-14):** the only permission is `INTERNET` (profile photo, models.dev, the AI providers the owner
+adds). Fonts arrive through the Play Services font provider. Rows marked M1 or later without **Implemented** are
+design, not yet code.
 
 ## 2. Assets
 
@@ -85,8 +86,8 @@ The dotted edges are the most important: **content written by third parties (T3)
 
 | Threat | Scenario | Control | Status |
 |---|---|---|---|
-| Information disclosure | Another app or a backup reads an AI key | Keys encrypted with Keystore (StrongBox) + Tink (F013); database encrypted (F014); excluded from backup and transfer (F017) | F017 rules in place (M0); F013, F014 in M1 |
-| Information disclosure | Key visible on screen, in screenshots or recents | `FLAG_SECURE` on secret screens (F016); biometric gate to reveal (F015) | M1 |
+| Information disclosure | Another app or a backup reads an AI key | Keys sealed with AES-256-GCM under a vault key wrapped by the Keystore (StrongBox) (F013); excluded from backup and transfer (F017); database encrypted (F014) | F013, F017 **implemented**; F014 M1 |
+| Information disclosure | Key visible on screen, in screenshots or recents | `FLAG_SECURE` on the key and model screens (F016); a saved key is never shown again; biometric gate for admin tools (F015) | F016 **implemented**; F015 M1 |
 | Information disclosure | Key or token written to a log | No secrets in logs; R8 strips every `Log` call in release (F025) | **Implemented** |
 | Repudiation / misuse | A key keeps running up costs | Spending cap per provider (F054); X Radar daily cap (F410) | M1 / M2 |
 | Elevation | Sign-out leaves access behind | Token revocation and "erase everything" (F020) | M1 |
@@ -120,8 +121,8 @@ provider's key** ([AI-PROVIDERS.md](../design/AI-PROVIDERS.md)).
 
 | Threat | Scenario | Control | Status |
 |---|---|---|---|
-| Tampering / information disclosure | A malicious registry change points a provider's base URL at an attacker, who collects every key sent there | Pinned hosts for major providers; trust-on-first-use host for the rest, and a changed host blocks the key until the user confirms (F418) | M1 |
-| Tampering | Oversized or malformed registry data crashes the app or injects markup | Size limit, schema validation, fields never executed or rendered as markup; last good copy kept | M1 |
+| Tampering / information disclosure | A malicious registry change points a provider's base URL at an attacker, who collects every key sent there | Pinned hosts for ten major providers: a changed host drops the provider from the list. Every other provider shows the host on its tile and on the key screen before a key is typed. A saved key keeps the endpoint it was checked against and never follows a later registry change (F418; residual risk ISP-SEC-013) | **Implemented** |
+| Tampering | Oversized or malformed registry data crashes the app or injects markup | 40 MB limit, typed parsing that drops anything unexpected, HTTPS-only endpoints, fields shown as plain text only; last good copy kept | **Implemented** |
 
 ### 5.3b Key vault in Google Drive (A1, A2)
 

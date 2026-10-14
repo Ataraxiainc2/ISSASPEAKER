@@ -1,6 +1,8 @@
 # Key vault: user keys in the user's own Google Drive
 
-**Status:** design for approval (decision C3), implementation in M1 · catalog F013, F017, F423, F424
+**Status:** approved (C3, D14). Phase 1 implemented on 2026-10-14: vault key wrapped by the Keystore and backed up
+in Block Store, AI keys sealed on the phone (`ai/KeyVault.kt`, `ai/AiKeyStore.kt`). Phase 2, still to do: the
+sealed keys synced to Drive appDataFolder (F423) and the recovery code (F424) · catalog F013, F017, F423, F424
 
 ## Requirement
 

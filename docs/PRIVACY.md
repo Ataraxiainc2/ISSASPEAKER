@@ -4,7 +4,7 @@ title: ISSASPEAKER privacy policy
 
 # ISSASPEAKER privacy policy
 
-**Effective:** 2026-10-12 · **Developer:** ISSASODA · **Contact:** sat.tecnologias@gmail.com
+**Effective:** 2026-10-14 · **Developer:** ISSASODA · **Contact:** sat.tecnologias@gmail.com
 
 ISSASPEAKER is a personal assistant app for Android. This policy explains what data it handles, where that data
 goes and how to delete it. The app's source code is public at
@@ -25,7 +25,7 @@ be checked.
 |---|---|---|
 | Google account name, email and photo | To sign you in and show your account | On your phone |
 | Google data you authorize (for example a Google Sheet, your calendar, Drive files, Gmail) | To read birthdays, reminders and summaries you ask for | Read from Google when needed; results kept on your phone |
-| API keys you enter (AI providers, Last.fm) | To call those services for you | Encrypted on your phone, and an encrypted copy in a hidden app folder of **your own** Google Drive so you can restore them |
+| API keys you enter (AI providers, Last.fm) | To call those services for you | Encrypted on your phone. The key that opens them is backed up by Google Play services (Block Store), end-to-end encrypted with your screen lock. Planned: an encrypted copy in a hidden app folder of **your own** Google Drive, so you can restore the keys on a new phone |
 | Conversation history with the AI, routine history | To show you your history | Encrypted on your phone |
 | Music listening data (Spotify, Last.fm) | To show your statistics and control playback | On your phone |
 | Settings (language, theme) | To remember your choices | On your phone |
@@ -38,6 +38,8 @@ revoke permissions in the app and at [myaccount.google.com/permissions](https://
 - **Google**, for sign-in and the Google services you authorize.
 - **The AI provider you choose** (for example Anthropic, Google, OpenAI or xAI) receives the text of the requests
   you make, under that provider's own terms. You choose the provider and use your own key.
+- **models.dev**, a public directory of AI providers, from which the app downloads the provider list and logos.
+  No personal data is sent with those downloads.
 - **xAI**, if you enable X Radar, receives the search requests built from your interest profile.
 - **Spotify and Last.fm**, if you connect them.
 - **Your Google Home speaker**, on your home network, receives the audio of announcements.

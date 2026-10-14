@@ -19,6 +19,7 @@ buildscript {
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
 }
 
 // Kotlin static analysis that neither the compiler nor Android Lint covers: dead code, overly complex functions,

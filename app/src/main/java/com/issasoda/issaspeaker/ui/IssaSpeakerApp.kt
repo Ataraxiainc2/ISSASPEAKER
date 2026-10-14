@@ -5,6 +5,7 @@ import android.os.LocaleList
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
@@ -25,6 +26,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.issasoda.issaspeaker.IssaSpeakerApplication
 import com.issasoda.issaspeaker.R
 import com.issasoda.issaspeaker.admin.AdminPolicy
 import com.issasoda.issaspeaker.data.account.Account
@@ -37,6 +40,9 @@ import com.issasoda.issaspeaker.ui.about.AboutScreen
 import com.issasoda.issaspeaker.ui.about.AdminAboutScreen
 import com.issasoda.issaspeaker.ui.account.AccountActions
 import com.issasoda.issaspeaker.ui.account.AccountSheet
+import com.issasoda.issaspeaker.ui.ai.AddProviderViewModel
+import com.issasoda.issaspeaker.ui.ai.AiScreen
+import com.issasoda.issaspeaker.ui.ai.AiViewModel
 import com.issasoda.issaspeaker.ui.home.HomeScreen
 import com.issasoda.issaspeaker.ui.settings.SettingsScreen
 import com.issasoda.issaspeaker.ui.theme.FontAssignment
@@ -46,6 +52,7 @@ import kotlinx.coroutines.launch
 
 enum class Destination(val label: Int, val icon: ImageVector) {
     HOME(R.string.nav_home, Icons.Filled.Home),
+    AI(R.string.nav_ai, Icons.Filled.Face),
     SETTINGS(R.string.action_settings, Icons.Filled.Settings),
     ABOUT(R.string.action_about, Icons.Filled.Info),
     ADMIN(R.string.action_admin, Icons.Filled.Lock),
@@ -118,6 +125,7 @@ fun IssaSpeakerApp(settings: AppSettings, accounts: AccountRepository, onDarkThe
         ) {
             when (destination) {
                 Destination.HOME -> HomeScreen(state, onOpenSettings = { destination = Destination.SETTINGS })
+                Destination.AI -> AiScreen(state, viewModel<AiViewModel>(), viewModel<AddProviderViewModel>())
                 Destination.SETTINGS -> SettingsScreen(state, themeMode, settings::setThemeMode)
                 Destination.ABOUT -> AboutScreen(state)
                 Destination.ADMIN -> AdminAboutScreen(state)
@@ -156,6 +164,7 @@ private fun rememberAccountActions(accounts: AccountRepository, settings: AppSet
             scope.launch {
                 accounts.signOut()
                 settings.clear()
+                (context.applicationContext as IssaSpeakerApplication).aiKeys.eraseAll()
                 context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.getEmptyLocaleList()
                 onDone()
             }

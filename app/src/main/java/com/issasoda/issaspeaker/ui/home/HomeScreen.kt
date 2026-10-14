@@ -49,7 +49,7 @@ fun HomeScreen(state: AppState, onOpenSettings: () -> Unit) {
             fullWidth("hero") { Hero(state, onOpenSettings) }
             item(key = "next") {
                 SectionCard(stringResource(R.string.home_next_title)) {
-                    listOf(R.string.home_next_speaker, R.string.home_next_google, R.string.home_next_ai, R.string.home_next_routine)
+                    listOf(R.string.home_next_speaker, R.string.home_next_google, R.string.home_next_routine)
                         .forEachIndexed { index, text -> DotLine(stringResource(text), index) }
                 }
             }

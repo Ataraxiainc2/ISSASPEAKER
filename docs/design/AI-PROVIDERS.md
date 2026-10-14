@@ -1,6 +1,29 @@
 # AI providers: a live registry instead of a fixed list
 
-**Status:** design, approved direction (decision D5), implementation in M1 · catalog F056, F416–F422
+**Status:** implemented on 2026-10-14 (registry, key check, live model list, test call, several providers,
+Ask AI); supplement (F417), native Bedrock (F420) and model ranking (F421) still to do · catalog F056, F416–F422
+
+## As built (2026-10-14)
+
+The code follows the Movie Recommendation app, whose AI setup the owner rated as working very well:
+
+1. **AI tab → Add a provider:** the live list, labs that the most other providers serve first (the registry's
+   `canonical_model_id` links, never a hand-made ranking), 12 shown until "Show all", search over all of them.
+   Each tile shows the logo (models.dev), the name, the **host the key would go to** and the model count.
+2. **Key:** pasted into a hidden field on a secure window (no screenshots). Checked by calling the provider's
+   `/models` with it: a wrong key is rejected with the provider's own message.
+3. **Model:** the provider's own list for that key, enriched with registry details (family chips, release date,
+   context, "New" badge). Choosing one sends a one-word test prompt; only an answer saves it.
+4. **Saved:** the key is sealed with the vault key and stored with the endpoint it was checked against
+   (`ai/AiKeyStore.kt`). The first provider becomes the default; any other can be made the default, have its
+   model changed (the list is read live with the stored key) or be removed.
+5. **Ask AI:** a text conversation with the default provider, kept in memory only and sent with each question
+   (last 20 turns).
+
+Differences from the Movie Recommendation app: several providers instead of one, keys stored on the phone (no
+Firebase in this app) instead of Firestore, and pinned hosts for the major providers. Both apps share the same
+registry, client and vault code by copy until decision C5 (a shared library) is taken.
+
 
 ## Goal
 

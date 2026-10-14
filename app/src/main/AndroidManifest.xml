@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Permissions are added only with the feature that needs them:
-    - INTERNET: the Google profile photo (Sign in with Google). Google Fonts arrive through the Play Services
-      font provider, which downloads on its own.
+    - INTERNET: the Google profile photo (Sign in with Google), the AI provider registry (models.dev) and the AI
+      providers the owner adds. Google Fonts arrive through the Play Services font provider, which downloads on
+      its own.
 
     allowBackup="false": nothing goes to cloud backup (CodeQL java/android/backup-enabled). The language lives
     in the system's per-app locale setting, which Android keeps on its own. data_extraction_rules.xml still
@@ -13,6 +14,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".IssaSpeakerApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher"

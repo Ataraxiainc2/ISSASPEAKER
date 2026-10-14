@@ -147,3 +147,25 @@ version of either file reaches Play only after the owner lists its commit in Goo
   its OAuth Android clients cover the debug, upload and Play app-signing certificates.
 - Branch protection on `main`: the ruleset blocks deletion and force pushes. Required reviews stay off because
   every developer session pushes as the same GitHub account, which cannot approve its own pull request (C19).
+
+## Review 5 — AI tab: providers, keys and questions (2026-10-14)
+
+Built from the Movie Recommendation app's AI setup (registry, key check, model list, vault), adapted to
+several providers and on-phone storage. Reviewed: where keys live, where they can go, and what AI output can do.
+
+- Keys are sealed with AES-256-GCM under a random vault key, bound to the provider id; the vault key is wrapped
+  by a Keystore key (StrongBox when available) and backed up end to end encrypted in Block Store. Both files are
+  outside backup and device transfer. "Erase everything" deletes them and the Block Store copy.
+- A key is sent only to the endpoint stored with it; the registry cannot redirect a saved key.
+- The key and model screens are secure windows (no screenshots or recents preview); a saved key is never shown.
+- AI answers are displayed as text only; no code path turns model output into an action (F021 holds).
+- Release builds strip every `Log` call (F025); no log line includes a key.
+
+### ISP-SEC-013 · Low · Accepted — first key for a non-pinned provider trusts the registry's host
+
+Ten major providers (Anthropic, OpenAI, Google, xAI, Mistral, Groq, DeepSeek, Cerebras, Cohere, OpenRouter) have
+pinned hosts, so a registry change for them removes the provider instead of redirecting keys. For the other
+providers, the host comes from models.dev at the moment the key is added. The host is shown on the provider tile
+and the key screen, and the saved key keeps it forever. Residual risk: a poisoned registry entry for a small
+provider exactly when the owner adds it. Accepted for a single-owner app; revisit if the app gets other users.
+

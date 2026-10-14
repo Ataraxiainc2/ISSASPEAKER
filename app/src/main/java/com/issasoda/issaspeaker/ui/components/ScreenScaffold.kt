@@ -61,6 +61,7 @@ fun ScreenScaffold(
     account: Account?,
     onLogoClick: () -> Unit,
     onAccountClick: () -> Unit,
+    snackbarHost: @Composable () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -84,6 +85,7 @@ fun ScreenScaffold(
                 scrollBehavior = scrollBehavior,
             )
         },
+        snackbarHost = snackbarHost,
         content = content,
     )
 }

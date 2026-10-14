@@ -9,7 +9,6 @@
     <string name="home_next_title">Coming next</string>
     <string name="home_next_speaker">Speak through your Google Home speaker</string>
     <string name="home_next_google">Sign in with Google and read your sheets</string>
-    <string name="home_next_ai">Use your own AI keys, kept encrypted on this phone</string>
     <string name="home_next_routine">A morning routine that announces today\'s birthdays</string>
     <string name="home_progress_title">Progress</string>
     <string name="about_version">Version %1$s</string>
@@ -80,7 +79,7 @@
     <string name="account_sign_out">Sign out</string>
     <string name="account_erase">Erase everything</string>
     <string name="account_erase_title">Erase everything?</string>
-    <string name="account_erase_body">This signs you out and removes your account, settings and language choice from this phone. It cannot be undone.</string>
+    <string name="account_erase_body">This signs you out and removes your account, settings, language choice and AI keys from this phone. It cannot be undone.</string>
     <string name="account_erase_confirm">Erase</string>
     <string name="account_error_not_configured">Sign-in is not set up in this build.</string>
     <string name="account_error_failed">Sign-in did not complete. Check your connection and try again.</string>
@@ -97,4 +96,56 @@
     <string name="about_help_action">Email support</string>
     <string name="admin_tab_diagnostics">Diagnostics</string>
     <string name="admin_diag_fonts">Fonts in this session</string>
+
+    <!-- AI tab -->
+    <string name="nav_ai">AI</string>
+    <string name="action_back">Back</string>
+    <string name="action_retry">Try again</string>
+    <string name="action_search">Search</string>
+    <string name="ai_ask_title">Ask AI</string>
+    <string name="ai_ask_empty">Add an AI provider with your own key, then ask anything here.</string>
+    <string name="ai_ask_using">Answering: %1$s · %2$s</string>
+    <string name="ai_ask_hint">Your question</string>
+    <string name="ai_ask_send">Send</string>
+    <string name="ai_ask_clear">New conversation</string>
+    <string name="ai_add_provider">Add a provider</string>
+    <string name="ai_add_body">Any provider from the live list: Anthropic, Google, OpenAI, xAI, DeepSeek, Groq and many more. Your key is checked with the provider and kept encrypted on this phone.</string>
+    <string name="ai_default">Default provider</string>
+    <string name="ai_make_default">Use by default</string>
+    <string name="ai_change_model">Change model</string>
+    <string name="ai_remove">Remove</string>
+    <string name="ai_remove_title">Remove %1$s?</string>
+    <string name="ai_remove_body">Its key is deleted from this phone. You can add it again at any time.</string>
+    <string name="ai_model_label">Model: %1$s</string>
+    <string name="ai_saved">Provider ready</string>
+    <string name="ai_encrypt_failed">The key could not be saved encrypted on this phone.</string>
+    <string name="ai_key_unavailable">This phone cannot open the saved key (for example, a new phone set up without the Google backup). Add the key again.</string>
+    <string name="ai_choose_provider">Choose a provider</string>
+    <string name="ai_registry_failed">The provider list could not be loaded. Check the connection and try again.</string>
+    <string name="ai_key_explanation">Paste your %1$s API key. It is checked with %1$s, encrypted on this phone and never shown again.</string>
+    <string name="ai_key_label">API key</string>
+    <string name="ai_validate_key">Check key</string>
+    <string name="ai_provider_docs">Get a key</string>
+    <string name="ai_key_privacy">The key is only ever sent to %1$s (%2$s). AI answers are only shown: they never send, post or delete anything.</string>
+    <string name="ai_all_families">All</string>
+    <string name="ai_model_new">New</string>
+    <string name="ai_model_context">%1$dK context</string>
+    <string name="ai_no_text_models">This key has no text models.</string>
+    <string name="ai_provider_said">The provider said: %1$s</string>
+    <plurals name="ai_registry_source">
+        <item quantity="one">%d provider, live from models.dev</item>
+        <item quantity="other">%d providers, live from models.dev</item>
+    </plurals>
+    <plurals name="ai_show_all_providers">
+        <item quantity="one">Show the %d provider</item>
+        <item quantity="other">Show all %d providers</item>
+    </plurals>
+    <plurals name="ai_model_count">
+        <item quantity="one">%d model</item>
+        <item quantity="other">%d models</item>
+    </plurals>
+    <plurals name="ai_choose_model">
+        <item quantity="one">%d model works with this key. Choose one:</item>
+        <item quantity="other">%d models work with this key. Choose one:</item>
+    </plurals>
 </resources>
