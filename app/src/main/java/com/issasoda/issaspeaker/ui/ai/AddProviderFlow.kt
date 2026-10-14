@@ -21,6 +21,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -30,6 +31,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -58,6 +60,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -199,6 +202,9 @@ private fun ProviderTile(provider: RegistryProvider, onClick: () -> Unit) {
                         color = MaterialTheme.colorScheme.primary,
                     )
                 }
+                if (!provider.reviewed) {
+                    Text(stringResource(R.string.ai_unreviewed_badge), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.error)
+                }
             }
         }
     }
@@ -220,6 +226,8 @@ private fun SearchField(query: String, onQuery: (String) -> Unit) {
 @Composable
 private fun KeyEntry(provider: RegistryProvider, busy: Boolean, onSubmit: (String) -> Unit) {
     var key by remember(provider.id) { mutableStateOf("") }
+    // A provider newer than the app's reviewed host list needs the owner to accept its host first (ISP-SEC-013).
+    var hostAccepted by remember(provider.id) { mutableStateOf(provider.reviewed) }
     val uriHandler = LocalUriHandler.current
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = Spacing.xl, vertical = Spacing.l),
@@ -233,6 +241,7 @@ private fun KeyEntry(provider: RegistryProvider, busy: Boolean, onSubmit: (Strin
             }
         }
         Text(stringResource(R.string.ai_key_explanation, provider.name), style = MaterialTheme.typography.bodyLarge)
+        if (!provider.reviewed) UnreviewedHost(provider, hostAccepted) { hostAccepted = it }
         OutlinedTextField(
             value = key,
             onValueChange = { key = it },
@@ -240,11 +249,11 @@ private fun KeyEntry(provider: RegistryProvider, busy: Boolean, onSubmit: (Strin
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done, autoCorrectEnabled = false),
-            keyboardActions = KeyboardActions(onDone = { onSubmit(key) }),
+            keyboardActions = KeyboardActions(onDone = { if (hostAccepted) onSubmit(key) }),
             modifier = Modifier.fillMaxWidth().widthIn(max = KEY_FIELD_MAX_WIDTH),
         )
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.l)) {
-            Button(onClick = { onSubmit(key) }, enabled = key.isNotBlank() && !busy) { Text(stringResource(R.string.ai_validate_key)) }
+            Button(onClick = { onSubmit(key) }, enabled = key.isNotBlank() && hostAccepted && !busy) { Text(stringResource(R.string.ai_validate_key)) }
             provider.doc?.let { doc -> TextButton(onClick = { uriHandler.openUri(doc) }) { Text(stringResource(R.string.ai_provider_docs)) } }
         }
         Text(
@@ -252,6 +261,23 @@ private fun KeyEntry(provider: RegistryProvider, busy: Boolean, onSubmit: (Strin
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+    }
+}
+
+/** The warning and the check box for a provider whose host the app has not reviewed. */
+@Composable
+private fun UnreviewedHost(provider: RegistryProvider, accepted: Boolean, onAccepted: (Boolean) -> Unit) {
+    Text(
+        stringResource(R.string.ai_unreviewed_warning, provider.name, provider.endpoint.host),
+        style = MaterialTheme.typography.bodyLarge,
+        color = MaterialTheme.colorScheme.error,
+    )
+    Row(
+        Modifier.fillMaxWidth().toggleable(value = accepted, role = Role.Checkbox, onValueChange = onAccepted),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Checkbox(checked = accepted, onCheckedChange = null)
+        Text(stringResource(R.string.ai_unreviewed_confirm, provider.endpoint.host), Modifier.padding(start = Spacing.s))
     }
 }
 

@@ -35,6 +35,7 @@ recommendation; the CIO approves, changes or rejects it.
 | D25 | Releases from GitHub: manual workflow, testing tracks only, dry run by default; production stays manual in Play Console; nothing goes to Play without the CIO's approval | 2026-10-13 |
 | D26 | Google trusts only ISSASPEAKER's `play-access.yml` / `play-upload.yml` at pinned commits (ISP-SEC-012); callers pin the same commit | 2026-10-13 |
 | D27 | AI providers are presented and activated like the Movie Recommendation app (live list, key checked with the provider, model tested before saving); ISSASPEAKER keeps several providers with one default, on the phone | 2026-10-14 |
+| D28 | C25 approved: before the next Play release, Data safety declares that Ask AI questions go to the AI provider the owner chose (shared at the user's request, not collected by the developer, encrypted in transit) | 2026-10-14 |
 
 ## Waiting for the CIO
 
@@ -51,4 +52,3 @@ recommendation; the CIO approves, changes or rejects it.
 | C19 | Required pull-request reviews on `main` would raise the Scorecard "Code-Review" score but block direct pushes | Keep off: every developer (one Claude session per app, plus the owner) pushes as the same GitHub account, and GitHub never lets an account approve its own pull request, so required reviews would block everyone. Revisit if a second GitHub account (for example a review bot) is added | Workflow |
 | C23 | GitHub sudo confirmation to review the Claude GitHub App, and its pending "permission update request" | Review it yourself at github.com/settings/installations | Your GitHub account |
 | C24 | Fix the Spotify payment error so Premium (and developer mode) does not lapse | Update the payment method | Payment |
-| C25 | Play Data safety before the next Play release: the questions typed in Ask AI go to the AI provider the owner chose (with the owner's key); API keys stay encrypted on the phone | Declare "messages / other user-generated content" shared with a third party at the user's request, not collected by the developer, encrypted in transit | Play Console form you submit |

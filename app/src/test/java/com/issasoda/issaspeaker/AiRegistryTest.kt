@@ -3,6 +3,7 @@ package com.issasoda.issaspeaker
 import com.issasoda.issaspeaker.ai.AiClient
 import com.issasoda.issaspeaker.ai.AiEndpoint
 import com.issasoda.issaspeaker.ai.AiProtocol
+import com.issasoda.issaspeaker.ai.HostCheck
 import com.issasoda.issaspeaker.ai.PinnedHosts
 import com.issasoda.issaspeaker.ai.ProviderRegistry
 import com.issasoda.issaspeaker.ai.RegistryModel
@@ -31,11 +32,22 @@ class AiRegistryTest {
     }
 
     @Test
-    fun `a pinned provider is only accepted on its own host`() {
-        assertTrue(PinnedHosts.allows("anthropic", AiEndpoint(AiProtocol.ANTHROPIC, "https://api.anthropic.com/v1")))
-        assertFalse(PinnedHosts.allows("anthropic", AiEndpoint(AiProtocol.ANTHROPIC, "https://api.anthropic.com.evil.example/v1")))
-        assertFalse(PinnedHosts.allows("openai", AiEndpoint(AiProtocol.OPENAI_COMPATIBLE, "https://proxy.example/v1")))
-        assertTrue(PinnedHosts.allows("some-new-lab", AiEndpoint(AiProtocol.OPENAI_COMPATIBLE, "https://api.new-lab.ai/v1")))
+    fun `hosts are checked against the reviewed snapshot, majors even without it`() {
+        val pinned = PinnedHosts.parse("""{"hosts": {"zeta": "zeta.ai", "anthropic": "evil.example"}}""")
+        assertEquals(HostCheck.REVIEWED, pinned.check("zeta", AiEndpoint(AiProtocol.OPENAI_COMPATIBLE, "https://zeta.ai/v1")))
+        assertEquals(HostCheck.CHANGED, pinned.check("zeta", AiEndpoint(AiProtocol.OPENAI_COMPATIBLE, "https://zeta.ai.evil.example/v1")))
+        assertEquals(HostCheck.UNREVIEWED, pinned.check("new-lab", AiEndpoint(AiProtocol.OPENAI_COMPATIBLE, "https://api.new-lab.ai/v1")))
+        // A snapshot can never weaken a major provider's pin.
+        assertEquals(HostCheck.REVIEWED, pinned.check("anthropic", AiEndpoint(AiProtocol.ANTHROPIC, "https://api.anthropic.com/v1")))
+        assertEquals(HostCheck.CHANGED, PinnedHosts(emptyMap()).check("openai", AiEndpoint(AiProtocol.OPENAI_COMPATIBLE, "https://proxy.example/v1")))
+    }
+
+    @Test
+    fun `the shipped snapshot covers the majors with their real hosts`() {
+        val pinned = PinnedHosts.parse(java.io.File("src/main/assets/ai_pinned_hosts.json").readText())
+        PinnedHosts.MAJORS.forEach { (id, host) ->
+            assertEquals(id, HostCheck.REVIEWED, pinned.check(id, AiEndpoint(AiProtocol.OPENAI_COMPATIBLE, "https://$host/v1")))
+        }
     }
 
     @Test
@@ -53,13 +65,15 @@ class AiRegistryTest {
             }
         """.trimIndent()
 
-        val providers = ProviderRegistry.parse(body)
+        val providers = ProviderRegistry.parse(body, PinnedHosts(mapOf("zeta" to "zeta.ai")))
 
         assertEquals(listOf("anthropic", "zeta"), providers.map { it.id })
         val zeta = providers.last()
         assertTrue(zeta.models.getValue("z-chat").textOutput)
         assertFalse(zeta.models.getValue("z-image").textOutput)
         assertEquals("https://docs.anthropic.com", providers.first().doc)
+        assertTrue(zeta.reviewed)
+        assertTrue(providers.first { it.id == "anthropic" }.reviewed)
     }
 
     @Test
@@ -77,7 +91,7 @@ class AiRegistryTest {
             }
         """.trimIndent()
 
-        val reach = ProviderRegistry.parse(body).associate { it.id to it.reach }
+        val reach = ProviderRegistry.parse(body, PinnedHosts(emptyMap())).associate { it.id to it.reach }
 
         assertEquals(mapOf("hostA" to 0, "hostB" to 0, "lab" to 3), reach)
     }

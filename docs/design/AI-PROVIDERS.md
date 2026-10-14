@@ -21,7 +21,9 @@ The code follows the Movie Recommendation app, whose AI setup the owner rated as
    (last 20 turns).
 
 Differences from the Movie Recommendation app: several providers instead of one, keys stored on the phone (no
-Firebase in this app) instead of Firestore, and pinned hosts for the major providers. Both apps share the same
+Firebase in this app) instead of Firestore, and pinned hosts: a reviewed snapshot of every provider's host ships in
+the APK (`tools/ai/pinned_hosts.py`); a changed host hides the provider and a provider newer than the snapshot
+needs the owner's confirmation (ISP-SEC-013). Both apps share the same
 registry, client and vault code by copy until decision C5 (a shared library) is taken.
 
 

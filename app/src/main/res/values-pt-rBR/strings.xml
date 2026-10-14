@@ -148,4 +148,7 @@
         <item quantity="many">%d modelos funcionam com esta chave. Escolha um:</item>
         <item quantity="other">%d modelos funcionam com esta chave. Escolha um:</item>
     </plurals>
+    <string name="ai_unreviewed_badge">Novo: servidor ainda não revisado</string>
+    <string name="ai_unreviewed_warning">%1$s é mais novo que esta versão do app, então o servidor (%2$s) não foi revisado. Continue só se confiar nele.</string>
+    <string name="ai_unreviewed_confirm">Confio minha chave a %1$s</string>
 </resources>

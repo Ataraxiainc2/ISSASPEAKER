@@ -148,4 +148,7 @@
         <item quantity="one">%d model works with this key. Choose one:</item>
         <item quantity="other">%d models work with this key. Choose one:</item>
     </plurals>
+    <string name="ai_unreviewed_badge">New: server not reviewed yet</string>
+    <string name="ai_unreviewed_warning">%1$s is newer than this version of the app, so its server (%2$s) has not been reviewed. Continue only if you trust it.</string>
+    <string name="ai_unreviewed_confirm">I trust %1$s with my key</string>
 </resources>

@@ -35,6 +35,8 @@ data class RegistryProvider(
      * models stay at 0. Measured from the registry, never hard-coded.
      */
     val reach: Int = 0,
+    /** False: newer than the app's reviewed host snapshot; the owner confirms the host before adding a key. */
+    val reviewed: Boolean = false,
 )
 
 /** What models.dev says about one model: [family] groups models of a line (gpt, claude, gemini...). */
@@ -53,9 +55,11 @@ data class RegistryModel(
  * compact form; a stale copy is used only when the phone is offline.
  *
  * The registry decides what is listed, never where a saved key goes: the base URL is stored with the key when the
- * user adds it ([AiKeyStore]), and the major providers' hosts are pinned ([PinnedHosts]).
+ * user adds it ([AiKeyStore]), and every known provider's host is pinned ([PinnedHosts]).
  */
 class ProviderRegistry(private val context: Context, private val client: OkHttpClient) {
+
+    private val pinned by lazy { PinnedHosts.load(context) }
 
     private val mutex = Mutex()
     private var memory: List<RegistryProvider>? = null
@@ -106,13 +110,15 @@ class ProviderRegistry(private val context: Context, private val client: OkHttpC
             response.body.takeIf { it.contentLength() <= MAX_BYTES }?.string()?.takeIf { it.length <= MAX_BYTES }
                 ?: throw IOException("models.dev registry too large")
         }
-        return parse(body)
+        return parse(body, pinned)
     }
 
     companion object {
         private const val TAG = "ProviderRegistry"
         private const val REGISTRY_URL = "https://models.dev/api.json"
-        private const val CACHE_FILE = "ai_registry_v1.json"
+
+        // v2: adds RegistryProvider.reviewed.
+        private const val CACHE_FILE = "ai_registry_v2.json"
         private const val TTL_MS = 24L * 60 * 60 * 1000
 
         /** The registry is ~6 MB today; anything far larger is not the registry. */
@@ -122,15 +128,16 @@ class ProviderRegistry(private val context: Context, private val client: OkHttpC
 
         /**
          * models.dev's api.json → the providers the app can reach, sorted by name. Never renders or executes a field.
-         * A pinned provider whose host changed is dropped ([PinnedHosts]).
+         * A provider whose host changed since the reviewed snapshot is dropped ([PinnedHosts]).
          */
-        internal fun parse(body: String): List<RegistryProvider> {
+        internal fun parse(body: String, pinned: PinnedHosts): List<RegistryProvider> {
             val root = Json.parseToJsonElement(body).jsonObject
             val reach = reachByLab(root)
             return root.mapNotNull { (id, element) ->
                 val provider = element as? JsonObject ?: return@mapNotNull null
-                val endpoint = SdkFamilies.endpointFor(provider.string("npm"), provider.string("api"))
-                    ?.takeIf { PinnedHosts.allows(id, it) } ?: return@mapNotNull null
+                val endpoint = SdkFamilies.endpointFor(provider.string("npm"), provider.string("api")) ?: return@mapNotNull null
+                val hostCheck = pinned.check(id, endpoint)
+                if (hostCheck == HostCheck.CHANGED) return@mapNotNull null
                 RegistryProvider(
                     id = id,
                     name = provider.string("name") ?: id,
@@ -138,6 +145,7 @@ class ProviderRegistry(private val context: Context, private val client: OkHttpC
                     endpoint = endpoint,
                     models = models(provider),
                     reach = reach[id] ?: 0,
+                    reviewed = hostCheck == HostCheck.REVIEWED,
                 )
             }.sortedBy { it.name.lowercase() }
         }

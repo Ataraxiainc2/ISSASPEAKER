@@ -121,7 +121,7 @@ provider's key** ([AI-PROVIDERS.md](../design/AI-PROVIDERS.md)).
 
 | Threat | Scenario | Control | Status |
 |---|---|---|---|
-| Tampering / information disclosure | A malicious registry change points a provider's base URL at an attacker, who collects every key sent there | Pinned hosts for ten major providers: a changed host drops the provider from the list. Every other provider shows the host on its tile and on the key screen before a key is typed. A saved key keeps the endpoint it was checked against and never follows a later registry change (F418; residual risk ISP-SEC-013) | **Implemented** |
+| Tampering / information disclosure | A malicious registry change points a provider's base URL at an attacker, who collects every key sent there | Every reachable provider's host is pinned in a reviewed snapshot shipped in the APK (202 on 2026-10-14; the ten majors also in code): a changed host drops the provider from the list. A provider newer than the snapshot is marked and needs the owner's explicit confirmation of its host. A saved key keeps the endpoint it was checked against and never follows a later registry change (F418, ISP-SEC-013 fixed) | **Implemented** |
 | Tampering | Oversized or malformed registry data crashes the app or injects markup | 40 MB limit, typed parsing that drops anything unexpected, HTTPS-only endpoints, fields shown as plain text only; last good copy kept | **Implemented** |
 
 ### 5.3b Key vault in Google Drive (A1, A2)

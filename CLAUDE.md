@@ -25,6 +25,8 @@ by local sessions (Windows PC with the Galaxy S25 Ultra on ADB) and cloud sessio
   no baseline), `./gradlew testDebugUnitTest`.
 - `python -m codespell_lib` with `.codespellrc` (Spanish and Portuguese UI words are allow-listed there).
 - `python tools/features.py --check`.
+- `python tools/ai/pinned_hosts.py --check`. Before each release, regenerate the reviewed AI host snapshot with
+  `python tools/ai/pinned_hosts.py` and review its diff (ISP-SEC-013).
 - Kotlin compiler warnings are errors too (`allWarningsAsErrors`).
 - One accepted Gradle warning: "Deprecated Gradle features" comes from AGP 9.4.1 itself
   (`Configuration.setVisible` in `BasePlugin`), not from this project. Remove this note when AGP fixes it.

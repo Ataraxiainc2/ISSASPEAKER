@@ -35,6 +35,8 @@ jobs:
           python-version: "3.13"
       - name: Feature catalog is valid and docs/FEATURES.md is current
         run: python tools/features.py --check
+      - name: Reviewed AI provider hosts are well-formed (ISP-SEC-013)
+        run: python tools/ai/pinned_hosts.py --check
       - name: Spelling (codespell)
         run: |
           python -m pip install --quiet --require-hashes -r tools/requirements-ci.txt
