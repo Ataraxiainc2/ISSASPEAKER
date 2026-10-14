@@ -46,6 +46,7 @@ import com.issasoda.issaspeaker.ui.ai.AiScreen
 import com.issasoda.issaspeaker.ui.ai.AiViewModel
 import com.issasoda.issaspeaker.ui.home.HomeScreen
 import com.issasoda.issaspeaker.ui.settings.SettingsScreen
+import com.issasoda.issaspeaker.ui.signin.SignInScreen
 import com.issasoda.issaspeaker.ui.speaker.SpeakViewModel
 import com.issasoda.issaspeaker.ui.speaker.SpeakerScreen
 import com.issasoda.issaspeaker.ui.speaker.SpeakerViewModel
@@ -115,7 +116,13 @@ fun IssaSpeakerApp(settings: AppSettings, accounts: AccountRepository, onDarkThe
         accountActions = accountActions,
     )
 
+    val skippedSignIn by settings.skippedSignIn.collectAsStateWithLifecycle()
     IssaSpeakerTheme(fonts, darkTheme) {
+        // Signed out and not yet "explore without an account": the sign-in screen comes first.
+        if (account == null && !skippedSignIn) {
+            SignInScreen(accountActions, onSkip = settings::skipSignIn)
+            return@IssaSpeakerTheme
+        }
         NavigationSuiteScaffold(
             navigationSuiteItems = {
                 Destination.entries.filter { it != Destination.ADMIN || adminVisible }.forEach { item ->

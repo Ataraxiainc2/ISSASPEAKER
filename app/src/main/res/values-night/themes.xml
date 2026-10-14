@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.IssaSpeaker" parent="android:Theme.Material.NoActionBar" />
+    <style name="Theme.IssaSpeaker" parent="android:Theme.Material.NoActionBar">
+        <!-- Landscape uses the whole screen, camera cutout included (ui/components/Insets.kt). -->
+        <item name="android:windowLayoutInDisplayCutoutMode">always</item>
+    </style>
 </resources>

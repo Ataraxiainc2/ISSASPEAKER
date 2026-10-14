@@ -49,6 +49,8 @@ import com.issasoda.issaspeaker.speaker.VoiceChoice
 import com.issasoda.issaspeaker.speaker.VoiceEntry
 import com.issasoda.issaspeaker.speaker.VoiceGroup
 import com.issasoda.issaspeaker.ui.ai.ProviderLogo
+import com.issasoda.issaspeaker.ui.components.screenInsets
+import com.issasoda.issaspeaker.ui.components.topBarInsets
 import com.issasoda.issaspeaker.ui.theme.Sizes
 import com.issasoda.issaspeaker.ui.theme.Spacing
 
@@ -65,8 +67,10 @@ fun VoiceChooser(viewModel: SpeakViewModel, onClose: () -> Unit) {
     val selected = VoiceChoice.decode(style.voice)
     val sample = stringResource(R.string.speak_sample)
     Scaffold(
+        contentWindowInsets = screenInsets,
         topBar = {
             TopAppBar(
+                windowInsets = topBarInsets,
                 title = { Text(stringResource(R.string.voice_choose)) },
                 navigationIcon = {
                     IconButton(onClick = onClose) {

@@ -28,6 +28,16 @@ class AppSettings(context: Context) {
 
     val themeMode: StateFlow<ThemeMode> = theme.asStateFlow()
 
+    private val skipped = MutableStateFlow(prefs.getBoolean(KEY_SKIPPED_SIGN_IN, false))
+
+    /** True once the owner chose to look around without an account: the sign-in screen stops opening by itself. */
+    val skippedSignIn: StateFlow<Boolean> = skipped.asStateFlow()
+
+    fun skipSignIn() {
+        prefs.edit { putBoolean(KEY_SKIPPED_SIGN_IN, true) }
+        skipped.value = true
+    }
+
     fun setThemeMode(mode: ThemeMode) {
         prefs.edit { putString(KEY_THEME, mode.key) }
         theme.value = mode
@@ -37,10 +47,12 @@ class AppSettings(context: Context) {
     fun clear() {
         prefs.edit { clear() }
         theme.value = ThemeMode.SYSTEM
+        skipped.value = false
     }
 
     private companion object {
         const val FILE = "settings"
         const val KEY_THEME = "theme_mode"
+        const val KEY_SKIPPED_SIGN_IN = "skipped_sign_in"
     }
 }

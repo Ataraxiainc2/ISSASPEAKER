@@ -223,4 +223,16 @@
     <string name="voice_style_lively">Vivaz</string>
     <string name="voice_style_knowledgeable">Experta</string>
     <string name="voice_style_warm">Cálida</string>
+
+    <!-- Sign-in screen -->
+    <string name="signin_subtitle">Cumpleaños, recordatorios y respuestas de la IA que elijas, anunciados en tu parlante Google Home.</string>
+    <string name="signin_value_speaker">Habla en tu parlante Google Home o Nest</string>
+    <string name="signin_value_ai">Usa la IA que elijas, con tus propias claves</string>
+    <string name="signin_value_private">Sin servidores de ISSASPEAKER: tus datos son tuyos</string>
+    <string name="signin_sample_label">Así suena</string>
+    <string name="signin_sample">Buenos días. Hoy cumple años Ana: cumple 34. ¡Feliz cumpleaños, Ana!</string>
+    <string name="signin_prompt">Inicia sesión para empezar</string>
+    <string name="signin_button">Iniciar sesión</string>
+    <string name="signin_button_sub">con Google</string>
+    <string name="signin_skip">Explorar sin cuenta</string>
 </resources>

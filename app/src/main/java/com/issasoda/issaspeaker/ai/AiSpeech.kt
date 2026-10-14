@@ -116,16 +116,23 @@ class AiSpeech(baseClient: OkHttpClient) {
         private const val OPENAI_INSTRUCTIONS =
             "Read this as a warm, clear announcement for a family at home, in the language of the text."
 
-        /** The base64 PCM in Gemini's answer, as a WAV file. */
+        /**
+         * The audio in Gemini's answer as a WAV file. Older speech models send raw 16-bit PCM ("audio/L16; rate=24000"),
+         * which gets a WAV header; newer ones send a finished WAV ("audio/wav"), used as it is.
+         */
         internal fun geminiWav(body: String): ByteArray? {
             val part = json.parseToJsonElement(body).jsonObject["candidates"]?.jsonArray?.firstOrNull()?.jsonObject
                 ?.get("content")?.jsonObject?.get("parts")?.jsonArray?.firstOrNull()?.jsonObject
             val inline = (part?.get("inlineData") as? JsonObject) ?: return null
             val data = (inline["data"] as? JsonPrimitive)?.contentOrNull ?: return null
             val mime = (inline["mimeType"] as? JsonPrimitive)?.contentOrNull.orEmpty()
+            val audio = java.util.Base64.getDecoder().decode(data)
+            if (mime.startsWith("audio/wav") || mime.startsWith("audio/x-wav") || audio.startsWithRiff()) return audio
             val rate = Regex("""rate=(\d+)""").find(mime)?.groupValues?.get(1)?.toIntOrNull() ?: DEFAULT_RATE
-            return pcmToWav(java.util.Base64.getDecoder().decode(data), rate)
+            return pcmToWav(audio, rate)
         }
+
+        private fun ByteArray.startsWithRiff(): Boolean = size > RIFF_PREAMBLE && String(this, 0, RIFF_ID_BYTES) == "RIFF"
 
         /** 16-bit little-endian mono PCM → a WAV file (44-byte RIFF header + the samples). */
         fun pcmToWav(pcm: ByteArray, sampleRate: Int): ByteArray {
@@ -152,6 +159,7 @@ class AiSpeech(baseClient: OkHttpClient) {
 
         private const val WAV_HEADER_BYTES = 44
         private const val RIFF_PREAMBLE = 8
+        private const val RIFF_ID_BYTES = 4
         private const val FMT_CHUNK_BYTES = 16
         private const val PCM_FORMAT: Short = 1
         private const val BITS_PER_BYTE = 8

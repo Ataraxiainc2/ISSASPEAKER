@@ -20,6 +20,9 @@ class VoicesTest {
         assertEquals("tts-1-hd", AiVoices.preferredModel(AiSpeechApi.OPENAI_SPEECH, listOf("tts-1", "tts-1-hd")))
         val gemini = listOf("gemini-2.5-pro-preview-tts", "gemini-2.5-flash-preview-tts", "gemini-3.1-flash-tts-preview", "gemini-2.5-flash")
         assertEquals("gemini-3.1-flash-tts-preview", AiVoices.preferredModel(AiSpeechApi.GEMINI, gemini))
+        // The owner's key on 2026-10-14: the stable full model wins over Lite and over previews.
+        val current = gemini + listOf("models/gemini-3.8-flash-lite-tts", "models/gemini-3.8-flash-tts")
+        assertEquals("gemini-3.8-flash-tts", AiVoices.preferredModel(AiSpeechApi.GEMINI, current))
         assertNull(AiVoices.preferredModel(AiSpeechApi.GEMINI, listOf("gemini-2.5-flash")))
         assertNull(AiVoices.apiFor("deepseek"))
     }

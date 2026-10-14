@@ -53,11 +53,18 @@ object AiVoices {
 
     /** The speech model to use from the provider's live list: the cheaper, newer one first. Null: no speech model. */
     fun preferredModel(api: AiSpeechApi, modelIds: List<String>): String? {
-        val speech = modelIds.filter { "tts" in it.lowercase() && "realtime" !in it }
+        // Gemini's OpenAI-compatible list names models "models/gemini-…"; requests use the bare id.
+        val speech = modelIds.map { it.removePrefix("models/") }.filter { "tts" in it.lowercase() && "realtime" !in it }
         return when (api) {
             AiSpeechApi.OPENAI_SPEECH ->
                 speech.sortedWith(compareByDescending<String> { "gpt" in it }.thenByDescending { "mini" in it }.thenByDescending { it })
-            AiSpeechApi.GEMINI -> speech.sortedWith(compareByDescending<String> { "flash" in it }.thenByDescending { versionOf(it) })
+            // Flash (fast, affordable) but not Lite (lower quality), newest, stable before preview.
+            AiSpeechApi.GEMINI -> speech.sortedWith(
+                compareByDescending<String> { "flash" in it }
+                    .thenBy { "lite" in it }
+                    .thenByDescending { versionOf(it) }
+                    .thenBy { "preview" in it },
+            )
         }.firstOrNull()
     }
 

@@ -67,8 +67,10 @@ fun ScreenScaffold(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        contentWindowInsets = screenInsets,
         topBar = {
             TopAppBar(
+                windowInsets = topBarInsets,
                 title = { Text(title, maxLines = 1) },
                 navigationIcon = {
                     IconButton(onClick = onLogoClick) {

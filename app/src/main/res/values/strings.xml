@@ -223,4 +223,16 @@
     <string name="voice_style_lively">Lively</string>
     <string name="voice_style_knowledgeable">Knowledgeable</string>
     <string name="voice_style_warm">Warm</string>
+
+    <!-- Sign-in screen -->
+    <string name="signin_subtitle">Birthdays, reminders and answers from the AI you choose, announced on your Google Home speaker.</string>
+    <string name="signin_value_speaker">Speaks on your Google Home or Nest speaker</string>
+    <string name="signin_value_ai">Uses the AI you choose, with your own keys</string>
+    <string name="signin_value_private">No ISSASPEAKER servers: your data stays yours</string>
+    <string name="signin_sample_label">This is how it sounds</string>
+    <string name="signin_sample">Good morning. Today is Ana\'s birthday: she turns 34. Happy birthday, Ana!</string>
+    <string name="signin_prompt">Sign in to start</string>
+    <string name="signin_button">Sign in</string>
+    <string name="signin_button_sub">with Google</string>
+    <string name="signin_skip">Explore without an account</string>
 </resources>

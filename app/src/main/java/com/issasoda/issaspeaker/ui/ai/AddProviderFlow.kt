@@ -69,6 +69,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.issasoda.issaspeaker.R
 import com.issasoda.issaspeaker.ai.RegistryProvider
+import com.issasoda.issaspeaker.ui.components.screenInsets
+import com.issasoda.issaspeaker.ui.components.topBarInsets
 import com.issasoda.issaspeaker.ui.theme.Sizes
 import com.issasoda.issaspeaker.ui.theme.Spacing
 import java.time.LocalDate
@@ -90,8 +92,10 @@ fun AddProviderFlow(ui: AddFlowState, step: AddStep, viewModel: AddProviderViewM
         onDispose { window?.clearFlags(WindowManager.LayoutParams.FLAG_SECURE) }
     }
     Scaffold(
+        contentWindowInsets = screenInsets,
         topBar = {
             TopAppBar(
+                windowInsets = topBarInsets,
                 title = {
                     Text(
                         when (step) {

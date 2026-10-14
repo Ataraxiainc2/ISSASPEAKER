@@ -8,6 +8,8 @@
               compiled into the app, so they are not verified (Gradle's recommendation for IDE sync). -->
          <trust file=".*-javadoc[.]jar" regex="true"/>
          <trust file=".*-sources[.]jar" regex="true"/>
+         <!-- Gradle's own source code, which Android Studio downloads for the editor on sync. -->
+         <trust group="gradle" name="gradle" file="gradle-.*-src[.]zip" regex="true"/>
       </trusted-artifacts>
    </configuration>
    <components>
