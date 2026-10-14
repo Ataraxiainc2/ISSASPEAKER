@@ -8,8 +8,8 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 
 | Status | Count |
 |---|---|
-| Implemented | 44 |
-| To implement | 375 |
+| Implemented | 48 |
+| To implement | 371 |
 | Pending: feasibility test | 13 |
 | Pending: blocked by a decision | 0 |
 
@@ -68,7 +68,7 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F019 | SEC | P0 | Sign-in with Credential Manager (Sign in with Google) and a verified ID token | Inicio de sesión con Credential Manager (Sign in with Google) y token de identidad verificado | NEW | Implemented | Credential Manager + GetSignInWithGoogleOption with a per-request nonce checked in the ID token; Google Cloud project issaspeaker, OAuth consent in production |
 | F020 | SEC | P0 | Token revocation on sign-out and one-tap "erase everything" (keys, tokens, database) | Revocación de tokens al cerrar sesión y "borrar todo" en un toque (claves, tokens, base de datos) | NEW | To implement | erase everything (account, settings, language, AI keys and the vault key incl. Block Store) done; token revocation arrives with Google scopes |
 | F021 | SEC | P0 | Prompt-injection guard: mail, X, web, sheet and document content is untrusted data; AI output never triggers an action without explicit confirmation | Defensa contra inyección de prompts: el contenido de correos, X, web, hojas y documentos es dato no confiable; la IA nunca dispara una acción sin confirmación explícita | NEW | To implement |  |
-| F022 | SEC | P0 | Hardened local audio server for Cast: Wi-Fi-only bind, random port, single-use unguessable URL, short lifetime | Servidor de audio local endurecido para Cast: solo Wi-Fi, puerto aleatorio, URL de un solo uso imposible de adivinar, vida corta | NEW | To implement |  |
+| F022 | SEC | P0 | Hardened local audio server for Cast: Wi-Fi-only bind, random port, single-use unguessable URL, short lifetime | Servidor de audio local endurecido para Cast: solo Wi-Fi, puerto aleatorio, URL de un solo uso imposible de adivinar, vida corta | NEW | Implemented | speaker/AudioServer.kt: Wi-Fi address only, system-chosen port, one path with 128 random bits, GET/HEAD with byte ranges, open only for one announcement (at most 3 minutes); other requests dropped unanswered |
 | F023 | SEC | P0 | Local network access permission (Android 16/17 local network protection) | Permiso de acceso a la red local (protección de red local de Android 16/17) | NEW | Implemented | ACCESS_LOCAL_NETWORK declared and asked at run time on phones that have it (Android 17); Android 16 phones reach the LAN without it; speaker/ ui/speaker |
 | F036 | SEC | P0 | Release signing with an upload key kept outside the repository | Firma de release con clave de subida fuera del repositorio | NEW | Implemented | owner's key folder (D:/SC/AK/signing); CI: play environment secrets |
 | F037 | SEC | P0 | SBOM (CycloneDX) attached to every release | SBOM (CycloneDX) adjunto a cada release | NEW | To implement |  |
@@ -92,9 +92,9 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F060 | AI | P1 | Read AI answers aloud on the phone | Lectura por voz de respuestas de IA | 345 | To implement |  |
 | F089 | CAST | P1 | Connect to the Google Home speaker (Cast discovery; 192.168.1.12 only as a hint, never hard-coded) | Conexión con el parlante Google Home (descubrimiento Cast; 192.168.1.12 solo como pista, nunca fijo) | 1 | Implemented | Cast SDK discovery with the Default Media Receiver, only while the speaker screen is open; first test 2026-10-14 found the owner's Google Home |
 | F090 | CAST | P1 | Choose the Google Cast device | Selección del dispositivo Google Cast | 12 | Implemented | chosen by Cast device ID (not name or IP); connection test plays the speaker's connection sound |
-| F091 | CAST | P1 | Play voice messages on the speaker | Reproducción de mensajes de voz | 2 | To implement | TTS to file on the phone, served to the Default Media Receiver |
-| F092 | CAST | P1 | Choose the narration voice | Selección de voces para narraciones | 22 | To implement |  |
-| F093 | CAST | P1 | Speaker volume control | Control del volumen del parlante | 11 | To implement |  |
+| F091 | CAST | P1 | Play voice messages on the speaker | Reproducción de mensajes de voz | 2 | Implemented | phone TTS to WAV, served by AudioServer, played by the Default Media Receiver; file deleted and session ended afterwards |
+| F092 | CAST | P1 | Choose the narration voice | Selección de voces para narraciones | 22 | Implemented | the phone's text-to-speech voices for the app language; Latin American voices first for es-419 |
+| F093 | CAST | P1 | Speaker volume control | Control del volumen del parlante | 11 | Implemented | announcement volume set before speaking; the speaker's previous volume is restored after |
 | F094 | CAST | P1 | Narrate AI-generated information | Narración de información generada por IA | 10 | To implement |  |
 | F096 | ANN | P0 | Quiet hours | Configuración de horarios silenciosos | 23 | To implement | the MVP must respect them |
 | F097 | ANN | P1 | Automatic birthday announcement (from Google Sheets) | Anuncio automático de cumpleaños (desde Google Sheets) | 4+183 | To implement | 183 merged here; the MVP target |

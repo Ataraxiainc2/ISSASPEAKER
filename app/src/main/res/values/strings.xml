@@ -174,4 +174,16 @@
     <string name="speaker_help_wifi">The speaker and this phone must be on the same Wi-Fi network. No Bluetooth pairing is needed.</string>
     <string name="speaker_help_permission">If the phone asks, allow access to the local network.</string>
     <string name="speaker_open_google_home">Open Google Home</string>
+    <string name="speak_title">Say something on the speaker</string>
+    <string name="speak_sample">Hello, I am ISSASPEAKER. Your announcements will sound like this.</string>
+    <string name="speak_text_label">Text to say</string>
+    <string name="speak_voice">Voice</string>
+    <string name="speak_voice_auto">Automatic (the phone\'s voice for this language)</string>
+    <string name="speak_voice_offline">works offline</string>
+    <string name="speak_volume">Announcement volume: %1$d %%</string>
+    <string name="speak_button">Say it on the speaker</string>
+    <string name="speak_done">Done. The speaker went back to its previous volume.</string>
+    <string name="speak_no_wifi">The phone is not on Wi-Fi. Connect it to the same Wi-Fi as the speaker.</string>
+    <string name="speak_tts_failed">The phone could not turn the text into speech. Check the voice in the phone\'s text-to-speech settings.</string>
+    <string name="speak_playback_failed">The speaker could not play the announcement. Try again.</string>
 </resources>

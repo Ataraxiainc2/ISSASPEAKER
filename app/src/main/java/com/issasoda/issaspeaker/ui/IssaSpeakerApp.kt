@@ -46,6 +46,7 @@ import com.issasoda.issaspeaker.ui.ai.AiScreen
 import com.issasoda.issaspeaker.ui.ai.AiViewModel
 import com.issasoda.issaspeaker.ui.home.HomeScreen
 import com.issasoda.issaspeaker.ui.settings.SettingsScreen
+import com.issasoda.issaspeaker.ui.speaker.SpeakViewModel
 import com.issasoda.issaspeaker.ui.speaker.SpeakerScreen
 import com.issasoda.issaspeaker.ui.speaker.SpeakerViewModel
 import com.issasoda.issaspeaker.ui.theme.FontAssignment
@@ -138,7 +139,7 @@ fun IssaSpeakerApp(settings: AppSettings, accounts: AccountRepository, onDarkThe
 private fun DestinationScreen(destination: Destination, state: AppState, themeMode: ThemeMode, settings: AppSettings, onNavigate: (Destination) -> Unit) {
     when (destination) {
         Destination.HOME -> HomeScreen(state, onOpenSettings = { onNavigate(Destination.SETTINGS) })
-        Destination.SPEAKER -> SpeakerScreen(state, viewModel<SpeakerViewModel>())
+        Destination.SPEAKER -> SpeakerScreen(state, viewModel<SpeakerViewModel>(), viewModel<SpeakViewModel>())
         Destination.AI -> AiScreen(state, viewModel<AiViewModel>(), viewModel<AddProviderViewModel>())
         Destination.SETTINGS -> SettingsScreen(state, themeMode, settings::setThemeMode)
         Destination.ABOUT -> AboutScreen(state)

@@ -14,65 +14,75 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeoutOrNull
 
-/** The outcome of connecting to the speaker. */
-sealed interface ConnectionResult {
-    data object Connected : ConnectionResult
-
+/** Why a session with the speaker could not be used. */
+sealed interface ConnectionProblem {
     /** The speaker was not seen in the current search (off, asleep or on another network). */
-    data object NotFound : ConnectionResult
+    data object NotFound : ConnectionProblem
 
-    data object TimedOut : ConnectionResult
+    data object TimedOut : ConnectionProblem
 
     /** [reason] is the Cast status name (for the diagnostics screen); never personal data. */
-    data class Failed(val reason: String) : ConnectionResult
+    data class Failed(val reason: String) : ConnectionProblem
+}
+
+/** The value a session produced, or why there was no session. */
+sealed interface SessionResult<out T> {
+    data class Done<T>(val value: T) : SessionResult<T>
+    data class Problem(val problem: ConnectionProblem) : SessionResult<Nothing>
 }
 
 /**
- * Opens a Cast session with the Default Media Receiver on the chosen speaker. For now it only proves the connection
- * (the speaker plays its "connected" sound) and closes it; speaking through the speaker (F091) builds on it.
- * Call from the main thread.
+ * Opens a Cast session with the Default Media Receiver on the chosen speaker, runs one piece of work in it and always
+ * ends it, so the speaker is free again (catalog F089, F091). Call from the main thread.
  */
 class SpeakerConnection(private val context: Context, private val discovery: SpeakerDiscovery) {
 
-    /** Connects to [speaker], waits for the session, holds it briefly so the speaker's sound is heard, then ends it. */
-    suspend fun test(speaker: Speaker): ConnectionResult {
-        val route = discovery.route(speaker.deviceId) ?: return ConnectionResult.NotFound
+    /** Connects and holds the session briefly, so the speaker's connection sound is heard. */
+    suspend fun test(speaker: Speaker): SessionResult<Unit> = withSession(speaker) { delay(HOLD_MS) }
+
+    suspend fun <T> withSession(speaker: Speaker, work: suspend (CastSession) -> T): SessionResult<T> {
+        val route = discovery.route(speaker.deviceId) ?: return SessionResult.Problem(ConnectionProblem.NotFound)
         val cast = try {
             CastContext.getSharedInstance(context, ContextCompat.getMainExecutor(context)).await()
         } catch (e: ModuleUnavailableException) {
             Log.w(TAG, "Cast is not available on this phone", e)
-            return ConnectionResult.Failed("CAST_UNAVAILABLE")
+            return SessionResult.Problem(ConnectionProblem.Failed("CAST_UNAVAILABLE"))
         }
-        val outcome = CompletableDeferred<ConnectionResult>()
-        val listener = SessionOutcome(outcome)
+        val outcome = CompletableDeferred<CastSession?>()
+        val failure = CompletableDeferred<String>()
+        val listener = SessionOutcome(outcome, failure)
         cast.sessionManager.addSessionManagerListener(listener, CastSession::class.java)
         try {
             MediaRouter.getInstance(context).selectRoute(route)
-            val result = withTimeoutOrNull(CONNECT_TIMEOUT_MS) { outcome.await() } ?: ConnectionResult.TimedOut
-            if (result == ConnectionResult.Connected) delay(HOLD_MS)
-            return result
+            val session = withTimeoutOrNull(CONNECT_TIMEOUT_MS) { outcome.await() }
+                ?: return SessionResult.Problem(if (failure.isCompleted) ConnectionProblem.Failed(failure.await()) else ConnectionProblem.TimedOut)
+            return SessionResult.Done(work(session))
         } finally {
             cast.sessionManager.removeSessionManagerListener(listener, CastSession::class.java)
             cast.sessionManager.endCurrentSession(true)
         }
     }
 
-    /** Completes [outcome] with the first session start or failure. */
-    private class SessionOutcome(private val outcome: CompletableDeferred<ConnectionResult>) : SessionManagerListener<CastSession> {
+    /** Completes [session] with the started session, or with null and [failure] with the Cast status. */
+    private class SessionOutcome(
+        private val session: CompletableDeferred<CastSession?>,
+        private val failure: CompletableDeferred<String>,
+    ) : SessionManagerListener<CastSession> {
         override fun onSessionStarted(session: CastSession, sessionId: String) {
-            outcome.complete(ConnectionResult.Connected)
-        }
-
-        override fun onSessionStartFailed(session: CastSession, error: Int) {
-            outcome.complete(ConnectionResult.Failed(CastStatusCodes.getStatusCodeString(error)))
+            this.session.complete(session)
         }
 
         override fun onSessionResumed(session: CastSession, wasSuspended: Boolean) {
-            outcome.complete(ConnectionResult.Connected)
+            this.session.complete(session)
         }
 
-        override fun onSessionResumeFailed(session: CastSession, error: Int) {
-            outcome.complete(ConnectionResult.Failed(CastStatusCodes.getStatusCodeString(error)))
+        override fun onSessionStartFailed(session: CastSession, error: Int) = fail(error)
+
+        override fun onSessionResumeFailed(session: CastSession, error: Int) = fail(error)
+
+        private fun fail(error: Int) {
+            failure.complete(CastStatusCodes.getStatusCodeString(error))
+            session.complete(null)
         }
 
         override fun onSessionStarting(session: CastSession) = Unit

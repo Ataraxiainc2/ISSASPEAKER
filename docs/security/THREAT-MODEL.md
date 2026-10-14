@@ -142,12 +142,12 @@ one audio file on the LAN.
 
 | Threat | Scenario | Control | Status |
 |---|---|---|---|
-| Information disclosure | A device on the Wi-Fi (T2) downloads an announcement | Bind to the Wi-Fi interface only, random port, single-use URL with a 128-bit random path, lifetime of seconds, serves one file and nothing else (F022) | M1 |
-| Tampering | T2 replaces the audio | The server only serves files the app wrote; no upload method; the path is unguessable | M1 |
+| Information disclosure | A device on the Wi-Fi (T2) downloads an announcement | Bound to the Wi-Fi address only, system-chosen port, one path with 128 random bits, open only while one announcement plays (at most 3 minutes), serves one file and nothing else; the file is deleted afterwards (F022) | **Implemented** |
+| Tampering | T2 replaces the audio | The server only serves the file the app wrote; GET and HEAD only, no upload; the path is unguessable | **Implemented** |
 | Spoofing | A fake device answers discovery as "Kitchen speaker" | The owner picks the device once; the app remembers its Cast device ID, not just its name (F090) | **Implemented** |
 | Information disclosure | The app scans the network more than needed | Discovery runs only while the speaker screen is visible; `ACCESS_LOCAL_NETWORK` is asked only on phones that enforce it (F023) | **Implemented** |
 | Information disclosure | The Cast SDK (Google Play services) sends technical data about Cast use to Google | Accepted, as for any Cast app; no Cast media notification, no automatic session resume; stated in the privacy policy | Accepted |
-| Denial of service | Flood of requests to the server | The server exists only during playback and drops unknown paths at once | M1 |
+| Denial of service | Flood of requests to the server | The server exists only during playback; unknown paths, other methods and malformed or oversized requests are dropped unanswered; 10 s read timeout per connection | **Implemented** |
 
 ### 5.5 Network (A1–A3)
 

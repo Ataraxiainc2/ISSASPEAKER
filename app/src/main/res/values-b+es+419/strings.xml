@@ -174,4 +174,16 @@
     <string name="speaker_help_wifi">El parlante y este teléfono deben estar en la misma red Wi-Fi. No hace falta vincularlos por Bluetooth.</string>
     <string name="speaker_help_permission">Si el teléfono lo pide, permite el acceso a la red local.</string>
     <string name="speaker_open_google_home">Abrir Google Home</string>
+    <string name="speak_title">Di algo en el parlante</string>
+    <string name="speak_sample">Hola, soy ISSASPEAKER. Así sonarán tus anuncios.</string>
+    <string name="speak_text_label">Texto para decir</string>
+    <string name="speak_voice">Voz</string>
+    <string name="speak_voice_auto">Automática (la voz del teléfono para este idioma)</string>
+    <string name="speak_voice_offline">funciona sin internet</string>
+    <string name="speak_volume">Volumen de los anuncios: %1$d %%</string>
+    <string name="speak_button">Decirlo en el parlante</string>
+    <string name="speak_done">Listo. El parlante volvió a su volumen anterior.</string>
+    <string name="speak_no_wifi">El teléfono no está en Wi-Fi. Conéctalo al mismo Wi-Fi que el parlante.</string>
+    <string name="speak_tts_failed">El teléfono no pudo convertir el texto en voz. Revisa la voz en los ajustes de texto a voz del teléfono.</string>
+    <string name="speak_playback_failed">El parlante no pudo reproducir el anuncio. Inténtalo de nuevo.</string>
 </resources>

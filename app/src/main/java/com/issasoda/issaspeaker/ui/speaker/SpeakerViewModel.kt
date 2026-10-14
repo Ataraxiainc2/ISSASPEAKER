@@ -7,8 +7,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.issasoda.issaspeaker.IssaSpeakerApplication
 import com.issasoda.issaspeaker.R
-import com.issasoda.issaspeaker.speaker.ConnectionResult
+import com.issasoda.issaspeaker.speaker.ConnectionProblem
 import com.issasoda.issaspeaker.speaker.FoundSpeaker
+import com.issasoda.issaspeaker.speaker.SessionResult
 import com.issasoda.issaspeaker.speaker.Speaker
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -59,7 +60,7 @@ class SpeakerViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun forget() {
-        store.clear()
+        store.forget()
         _test.value = TestState()
     }
 
@@ -69,12 +70,9 @@ class SpeakerViewModel(app: Application) : AndroidViewModel(app) {
         if (_test.value.running) return
         _test.value = TestState(running = true)
         viewModelScope.launch {
-            val result = connection.test(speaker)
-            _test.value = when (result) {
-                ConnectionResult.Connected -> TestState(message = R.string.speaker_test_ok, success = true)
-                ConnectionResult.NotFound -> TestState(message = R.string.speaker_test_not_found)
-                ConnectionResult.TimedOut -> TestState(message = R.string.speaker_test_timeout)
-                is ConnectionResult.Failed -> TestState(message = R.string.speaker_test_failed)
+            _test.value = when (val result = connection.test(speaker)) {
+                is SessionResult.Done -> TestState(message = R.string.speaker_test_ok, success = true)
+                is SessionResult.Problem -> TestState(message = problemMessage(result.problem))
             }
         }
     }
@@ -82,6 +80,13 @@ class SpeakerViewModel(app: Application) : AndroidViewModel(app) {
     override fun onCleared() = discovery.stop()
 
     companion object {
+        /** What to tell the owner when the speaker could not be reached. */
+        fun problemMessage(problem: ConnectionProblem): Int = when (problem) {
+            ConnectionProblem.NotFound -> R.string.speaker_test_not_found
+            ConnectionProblem.TimedOut -> R.string.speaker_test_timeout
+            is ConnectionProblem.Failed -> R.string.speaker_test_failed
+        }
+
         /** Android 17's local network permission; absent on earlier phones. */
         const val LOCAL_NETWORK = "android.permission.ACCESS_LOCAL_NETWORK"
     }

@@ -48,7 +48,7 @@ import kotlinx.coroutines.delay
  * owner needs before any shows up (set up in Google Home, same Wi-Fi, local network allowed).
  */
 @Composable
-fun SpeakerScreen(app: AppState, viewModel: SpeakerViewModel) {
+fun SpeakerScreen(app: AppState, viewModel: SpeakerViewModel, speak: SpeakViewModel) {
     val chosen by viewModel.chosen.collectAsStateWithLifecycle()
     val found by viewModel.found.collectAsStateWithLifecycle()
     val test by viewModel.test.collectAsStateWithLifecycle()
@@ -72,6 +72,7 @@ fun SpeakerScreen(app: AppState, viewModel: SpeakerViewModel) {
             item(key = "chosen") {
                 ChosenSpeakerCard(chosen, test, onTest = viewModel::testConnection, onForget = viewModel::forget)
             }
+            if (chosen != null) item(key = "speak") { SpeakCard(speak) }
             item(key = "found") {
                 SectionCard(stringResource(R.string.speaker_found_title)) {
                     if (needsPermission) {
