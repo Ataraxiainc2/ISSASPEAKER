@@ -37,7 +37,9 @@ revoke permissions in the app and at [myaccount.google.com/permissions](https://
 
 - **Google**, for sign-in and the Google services you authorize.
 - **The AI provider you choose** (for example Anthropic, Google, OpenAI or xAI) receives the text of the requests
-  you make, under that provider's own terms. You choose the provider and use your own key.
+  you make, under that provider's own terms. You choose the provider and use your own key. If you choose one of
+  its voices for announcements, it also receives the text of each announcement to turn it into speech. The
+  phone's own voices send nothing anywhere.
 - **models.dev**, a public directory of AI providers, from which the app downloads the provider list and logos.
   No personal data is sent with those downloads.
 - **xAI**, if you enable X Radar, receives the search requests built from your interest profile.

@@ -23,6 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,6 +54,7 @@ fun SpeakerScreen(app: AppState, viewModel: SpeakerViewModel, speak: SpeakViewMo
     val found by viewModel.found.collectAsStateWithLifecycle()
     val test by viewModel.test.collectAsStateWithLifecycle()
     var needsPermission by remember { mutableStateOf(viewModel.needsLocalNetworkPermission()) }
+    var choosingVoice by rememberSaveable { mutableStateOf(false) }
     val askPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         needsPermission = viewModel.needsLocalNetworkPermission()
     }
@@ -62,6 +64,10 @@ fun SpeakerScreen(app: AppState, viewModel: SpeakerViewModel, speak: SpeakViewMo
         onPauseOrDispose { viewModel.stopSearch() }
     }
 
+    if (choosingVoice) {
+        VoiceChooser(speak) { choosingVoice = false }
+        return
+    }
     ScreenScaffold(
         title = stringResource(R.string.nav_speaker),
         account = app.account,
@@ -72,7 +78,7 @@ fun SpeakerScreen(app: AppState, viewModel: SpeakerViewModel, speak: SpeakViewMo
             item(key = "chosen") {
                 ChosenSpeakerCard(chosen, test, onTest = viewModel::testConnection, onForget = viewModel::forget)
             }
-            if (chosen != null) item(key = "speak") { SpeakCard(speak) }
+            if (chosen != null) item(key = "speak") { SpeakCard(speak, onChooseVoice = { choosingVoice = true }) }
             item(key = "found") {
                 SectionCard(stringResource(R.string.speaker_found_title)) {
                     if (needsPermission) {

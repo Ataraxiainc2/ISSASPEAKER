@@ -16,8 +16,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-/** The last connection test: running, or its result as a string resource. */
-data class TestState(val running: Boolean = false, val message: Int? = null, val success: Boolean = false)
+/** The last connection test or announcement: running, or its result as a string resource (with [arg] when it has one). */
+data class TestState(val running: Boolean = false, val message: Int? = null, val success: Boolean = false, val arg: String? = null)
 
 /**
  * The speaker tab (catalog F089, F090): find the Cast speakers on the Wi-Fi, choose one, test the connection.
