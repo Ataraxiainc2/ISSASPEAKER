@@ -188,3 +188,8 @@ kotlin {
 composeCompiler {
     includeComposeMappingFile.set(false)
 }
+
+// Android Studio's Build > Make Project asks for :app:unitTestClasses and :app:androidTestClasses, which AGP 9 no
+// longer creates (it has per-variant tasks only). These aggregates keep Make Project working.
+tasks.register("unitTestClasses") { dependsOn("compileDebugUnitTestSources") }
+tasks.register("androidTestClasses") { dependsOn("compileDebugAndroidTestSources") }
