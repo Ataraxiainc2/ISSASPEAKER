@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -45,6 +46,8 @@ import com.issasoda.issaspeaker.ui.ai.AiScreen
 import com.issasoda.issaspeaker.ui.ai.AiViewModel
 import com.issasoda.issaspeaker.ui.home.HomeScreen
 import com.issasoda.issaspeaker.ui.settings.SettingsScreen
+import com.issasoda.issaspeaker.ui.speaker.SpeakerScreen
+import com.issasoda.issaspeaker.ui.speaker.SpeakerViewModel
 import com.issasoda.issaspeaker.ui.theme.FontAssignment
 import com.issasoda.issaspeaker.ui.theme.FontSession
 import com.issasoda.issaspeaker.ui.theme.IssaSpeakerTheme
@@ -52,6 +55,7 @@ import kotlinx.coroutines.launch
 
 enum class Destination(val label: Int, val icon: ImageVector) {
     HOME(R.string.nav_home, Icons.Filled.Home),
+    SPEAKER(R.string.nav_speaker, Icons.Filled.Notifications),
     AI(R.string.nav_ai, Icons.Filled.Face),
     SETTINGS(R.string.action_settings, Icons.Filled.Settings),
     ABOUT(R.string.action_about, Icons.Filled.Info),
@@ -123,15 +127,22 @@ fun IssaSpeakerApp(settings: AppSettings, accounts: AccountRepository, onDarkThe
                 }
             },
         ) {
-            when (destination) {
-                Destination.HOME -> HomeScreen(state, onOpenSettings = { destination = Destination.SETTINGS })
-                Destination.AI -> AiScreen(state, viewModel<AiViewModel>(), viewModel<AddProviderViewModel>())
-                Destination.SETTINGS -> SettingsScreen(state, themeMode, settings::setThemeMode)
-                Destination.ABOUT -> AboutScreen(state)
-                Destination.ADMIN -> AdminAboutScreen(state)
-            }
+            DestinationScreen(destination, state, themeMode, settings) { destination = it }
             if (showAccount) AccountSheet(account, accountActions) { showAccount = false }
         }
+    }
+}
+
+/** The screen of one navigation destination. */
+@Composable
+private fun DestinationScreen(destination: Destination, state: AppState, themeMode: ThemeMode, settings: AppSettings, onNavigate: (Destination) -> Unit) {
+    when (destination) {
+        Destination.HOME -> HomeScreen(state, onOpenSettings = { onNavigate(Destination.SETTINGS) })
+        Destination.SPEAKER -> SpeakerScreen(state, viewModel<SpeakerViewModel>())
+        Destination.AI -> AiScreen(state, viewModel<AiViewModel>(), viewModel<AddProviderViewModel>())
+        Destination.SETTINGS -> SettingsScreen(state, themeMode, settings::setThemeMode)
+        Destination.ABOUT -> AboutScreen(state)
+        Destination.ADMIN -> AdminAboutScreen(state)
     }
 }
 
@@ -164,7 +175,9 @@ private fun rememberAccountActions(accounts: AccountRepository, settings: AppSet
             scope.launch {
                 accounts.signOut()
                 settings.clear()
-                (context.applicationContext as IssaSpeakerApplication).aiKeys.eraseAll()
+                val services = context.applicationContext as IssaSpeakerApplication
+                services.aiKeys.eraseAll()
+                services.speakerStore.clear()
                 context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.getEmptyLocaleList()
                 onDone()
             }

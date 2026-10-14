@@ -151,4 +151,27 @@
     <string name="ai_unreviewed_badge">Nuevo: servidor aún sin revisar</string>
     <string name="ai_unreviewed_warning">%1$s es más nuevo que esta versión de la app, así que su servidor (%2$s) no se ha revisado. Continúa solo si confías en él.</string>
     <string name="ai_unreviewed_confirm">Confío mi clave a %1$s</string>
+
+    <!-- Speaker tab -->
+    <string name="nav_speaker">Parlante</string>
+    <string name="speaker_chosen_title">Tu parlante</string>
+    <string name="speaker_none_chosen">Todavía no elegiste un parlante. Elige uno de la lista de parlantes encontrados en este Wi-Fi.</string>
+    <string name="speaker_test">Probar conexión</string>
+    <string name="speaker_test_running">Conectando… escucha el parlante.</string>
+    <string name="speaker_test_ok">Conectado. El parlante debió sonar con su tono de conexión.</string>
+    <string name="speaker_test_not_found">El parlante no está en este Wi-Fi ahora. Revisa que esté encendido y en la misma red que el teléfono.</string>
+    <string name="speaker_test_timeout">El parlante no respondió a tiempo. Inténtalo de nuevo.</string>
+    <string name="speaker_test_failed">La conexión falló. Revisa que nadie más esté transmitiendo a él e inténtalo de nuevo.</string>
+    <string name="speaker_forget">Olvidar este parlante</string>
+    <string name="speaker_found_title">Parlantes en este Wi-Fi</string>
+    <string name="speaker_searching">Buscando parlantes Google Home y Nest en tu Wi-Fi…</string>
+    <string name="speaker_nothing_found">No se encontraron parlantes. Revisa los pasos de abajo; la lista se actualiza sola.</string>
+    <string name="speaker_group">Grupo de parlantes</string>
+    <string name="speaker_permission_body">Para encontrar tu parlante, la app necesita acceso a los dispositivos de tu red local. Solo se usa para el parlante.</string>
+    <string name="speaker_permission_allow">Permitir acceso a la red local</string>
+    <string name="speaker_help_title">Antes de que aparezca tu parlante</string>
+    <string name="speaker_help_setup">Configura el parlante una vez con la app Google Home.</string>
+    <string name="speaker_help_wifi">El parlante y este teléfono deben estar en la misma red Wi-Fi. No hace falta vincularlos por Bluetooth.</string>
+    <string name="speaker_help_permission">Si el teléfono lo pide, permite el acceso a la red local.</string>
+    <string name="speaker_open_google_home">Abrir Google Home</string>
 </resources>

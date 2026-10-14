@@ -8,9 +8,9 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 
 | Status | Count |
 |---|---|
-| Implemented | 41 |
-| To implement | 377 |
-| Pending: feasibility test | 14 |
+| Implemented | 44 |
+| To implement | 375 |
+| Pending: feasibility test | 13 |
 | Pending: blocked by a decision | 0 |
 
 | Priority | Count |
@@ -69,7 +69,7 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F020 | SEC | P0 | Token revocation on sign-out and one-tap "erase everything" (keys, tokens, database) | Revocación de tokens al cerrar sesión y "borrar todo" en un toque (claves, tokens, base de datos) | NEW | To implement | erase everything (account, settings, language, AI keys and the vault key incl. Block Store) done; token revocation arrives with Google scopes |
 | F021 | SEC | P0 | Prompt-injection guard: mail, X, web, sheet and document content is untrusted data; AI output never triggers an action without explicit confirmation | Defensa contra inyección de prompts: el contenido de correos, X, web, hojas y documentos es dato no confiable; la IA nunca dispara una acción sin confirmación explícita | NEW | To implement |  |
 | F022 | SEC | P0 | Hardened local audio server for Cast: Wi-Fi-only bind, random port, single-use unguessable URL, short lifetime | Servidor de audio local endurecido para Cast: solo Wi-Fi, puerto aleatorio, URL de un solo uso imposible de adivinar, vida corta | NEW | To implement |  |
-| F023 | SEC | P0 | Local network access permission (Android 16/17 local network protection) | Permiso de acceso a la red local (protección de red local de Android 16/17) | NEW | Pending: feasibility test | verify behavior on target SDK 37 |
+| F023 | SEC | P0 | Local network access permission (Android 16/17 local network protection) | Permiso de acceso a la red local (protección de red local de Android 16/17) | NEW | Implemented | ACCESS_LOCAL_NETWORK declared and asked at run time on phones that have it (Android 17); Android 16 phones reach the LAN without it; speaker/ ui/speaker |
 | F036 | SEC | P0 | Release signing with an upload key kept outside the repository | Firma de release con clave de subida fuera del repositorio | NEW | Implemented | owner's key folder (D:/SC/AK/signing); CI: play environment secrets |
 | F037 | SEC | P0 | SBOM (CycloneDX) attached to every release | SBOM (CycloneDX) adjunto a cada release | NEW | To implement |  |
 | F038 | SEC | P0 | Instrumented security tests: keys never stored in plain text, backups exclude secrets | Pruebas de seguridad instrumentadas: claves nunca en texto plano, copias sin secretos | NEW | To implement |  |
@@ -90,8 +90,8 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F058 | AI | P1 | General questions through AI | Consultas generales mediante IA | 319 | Implemented | Ask AI card on the AI tab |
 | F059 | AI | P1 | Voice input for the chat (on-device speech recognition) | Entrada por voz en el chat (reconocimiento de voz en el teléfono) | NEW | To implement | PRD MVP: text/voice chat |
 | F060 | AI | P1 | Read AI answers aloud on the phone | Lectura por voz de respuestas de IA | 345 | To implement |  |
-| F089 | CAST | P1 | Connect to the Google Home speaker (Cast discovery; 192.168.1.12 only as a hint, never hard-coded) | Conexión con el parlante Google Home (descubrimiento Cast; 192.168.1.12 solo como pista, nunca fijo) | 1 | To implement | PRD risk 3: same Wi-Fi |
-| F090 | CAST | P1 | Choose the Google Cast device | Selección del dispositivo Google Cast | 12 | To implement |  |
+| F089 | CAST | P1 | Connect to the Google Home speaker (Cast discovery; 192.168.1.12 only as a hint, never hard-coded) | Conexión con el parlante Google Home (descubrimiento Cast; 192.168.1.12 solo como pista, nunca fijo) | 1 | Implemented | Cast SDK discovery with the Default Media Receiver, only while the speaker screen is open; first test 2026-10-14 found the owner's Google Home |
+| F090 | CAST | P1 | Choose the Google Cast device | Selección del dispositivo Google Cast | 12 | Implemented | chosen by Cast device ID (not name or IP); connection test plays the speaker's connection sound |
 | F091 | CAST | P1 | Play voice messages on the speaker | Reproducción de mensajes de voz | 2 | To implement | TTS to file on the phone, served to the Default Media Receiver |
 | F092 | CAST | P1 | Choose the narration voice | Selección de voces para narraciones | 22 | To implement |  |
 | F093 | CAST | P1 | Speaker volume control | Control del volumen del parlante | 11 | To implement |  |

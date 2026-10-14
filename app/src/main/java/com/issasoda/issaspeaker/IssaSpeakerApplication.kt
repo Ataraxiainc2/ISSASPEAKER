@@ -10,6 +10,9 @@ import com.issasoda.issaspeaker.ai.AiClient
 import com.issasoda.issaspeaker.ai.AiKeyStore
 import com.issasoda.issaspeaker.ai.KeyVault
 import com.issasoda.issaspeaker.ai.ProviderRegistry
+import com.issasoda.issaspeaker.speaker.SpeakerConnection
+import com.issasoda.issaspeaker.speaker.SpeakerDiscovery
+import com.issasoda.issaspeaker.speaker.SpeakerStore
 import okhttp3.OkHttpClient
 
 /** One instance of each long-lived service, shared by every screen. Nothing is created until first used. */
@@ -20,6 +23,10 @@ class IssaSpeakerApplication : Application(), SingletonImageLoader.Factory {
     val providerRegistry by lazy { ProviderRegistry(this, http) }
     val aiClient by lazy { AiClient(http) }
     val aiKeys by lazy { AiKeyStore(this, KeyVault(this)) }
+
+    val speakerStore by lazy { SpeakerStore(this) }
+    val speakerDiscovery by lazy { SpeakerDiscovery(this) }
+    val speakerConnection by lazy { SpeakerConnection(this, speakerDiscovery) }
 
     /** Images: the Google profile photo and the AI providers' logos (SVG, from models.dev). */
     override fun newImageLoader(context: PlatformContext): ImageLoader =

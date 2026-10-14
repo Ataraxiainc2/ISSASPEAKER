@@ -42,7 +42,9 @@ revoke permissions in the app and at [myaccount.google.com/permissions](https://
   No personal data is sent with those downloads.
 - **xAI**, if you enable X Radar, receives the search requests built from your interest profile.
 - **Spotify and Last.fm**, if you connect them.
-- **Your Google Home speaker**, on your home network, receives the audio of announcements.
+- **Your Google Home speaker**, on your home network, receives the audio of announcements. The app finds it with
+  Google Cast, part of Google Play services, which may send Google technical data about Cast use, as it does for
+  any app that uses Cast. The app looks for speakers only while its speaker screen is open.
 
 ISSASODA receives nothing.
 

@@ -144,7 +144,9 @@ one audio file on the LAN.
 |---|---|---|---|
 | Information disclosure | A device on the Wi-Fi (T2) downloads an announcement | Bind to the Wi-Fi interface only, random port, single-use URL with a 128-bit random path, lifetime of seconds, serves one file and nothing else (F022) | M1 |
 | Tampering | T2 replaces the audio | The server only serves files the app wrote; no upload method; the path is unguessable | M1 |
-| Spoofing | A fake device answers discovery as "Kitchen speaker" | The owner picks the device once; the app remembers its Cast device ID, not just its name (F090) | M1 |
+| Spoofing | A fake device answers discovery as "Kitchen speaker" | The owner picks the device once; the app remembers its Cast device ID, not just its name (F090) | **Implemented** |
+| Information disclosure | The app scans the network more than needed | Discovery runs only while the speaker screen is visible; `ACCESS_LOCAL_NETWORK` is asked only on phones that enforce it (F023) | **Implemented** |
+| Information disclosure | The Cast SDK (Google Play services) sends technical data about Cast use to Google | Accepted, as for any Cast app; no Cast media notification, no automatic session resume; stated in the privacy policy | Accepted |
 | Denial of service | Flood of requests to the server | The server exists only during playback and drops unknown paths at once | M1 |
 
 ### 5.5 Network (A1–A3)

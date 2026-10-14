@@ -151,4 +151,27 @@
     <string name="ai_unreviewed_badge">New: server not reviewed yet</string>
     <string name="ai_unreviewed_warning">%1$s is newer than this version of the app, so its server (%2$s) has not been reviewed. Continue only if you trust it.</string>
     <string name="ai_unreviewed_confirm">I trust %1$s with my key</string>
+
+    <!-- Speaker tab -->
+    <string name="nav_speaker">Speaker</string>
+    <string name="speaker_chosen_title">Your speaker</string>
+    <string name="speaker_none_chosen">No speaker chosen yet. Pick one from the list of speakers found on this Wi-Fi.</string>
+    <string name="speaker_test">Test connection</string>
+    <string name="speaker_test_running">Connecting… listen to the speaker.</string>
+    <string name="speaker_test_ok">Connected. The speaker should have played its connection sound.</string>
+    <string name="speaker_test_not_found">The speaker is not on this Wi-Fi right now. Check that it is on and on the same network as the phone.</string>
+    <string name="speaker_test_timeout">The speaker did not answer in time. Try again.</string>
+    <string name="speaker_test_failed">The connection failed. Make sure no one else is casting to it and try again.</string>
+    <string name="speaker_forget">Forget this speaker</string>
+    <string name="speaker_found_title">Speakers on this Wi-Fi</string>
+    <string name="speaker_searching">Searching your Wi-Fi for Google Home and Nest speakers…</string>
+    <string name="speaker_nothing_found">No speakers found. Check the steps below; the list updates by itself.</string>
+    <string name="speaker_group">Speaker group</string>
+    <string name="speaker_permission_body">To find your speaker, the app needs access to devices on your local network. It is used only for the speaker.</string>
+    <string name="speaker_permission_allow">Allow local network access</string>
+    <string name="speaker_help_title">Before your speaker shows up</string>
+    <string name="speaker_help_setup">Set up the speaker once with the Google Home app.</string>
+    <string name="speaker_help_wifi">The speaker and this phone must be on the same Wi-Fi network. No Bluetooth pairing is needed.</string>
+    <string name="speaker_help_permission">If the phone asks, allow access to the local network.</string>
+    <string name="speaker_open_google_home">Open Google Home</string>
 </resources>

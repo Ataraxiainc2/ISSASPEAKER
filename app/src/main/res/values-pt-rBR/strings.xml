@@ -151,4 +151,27 @@
     <string name="ai_unreviewed_badge">Novo: servidor ainda não revisado</string>
     <string name="ai_unreviewed_warning">%1$s é mais novo que esta versão do app, então o servidor (%2$s) não foi revisado. Continue só se confiar nele.</string>
     <string name="ai_unreviewed_confirm">Confio minha chave a %1$s</string>
+
+    <!-- Speaker tab -->
+    <string name="nav_speaker">Alto-falante</string>
+    <string name="speaker_chosen_title">Seu alto-falante</string>
+    <string name="speaker_none_chosen">Nenhum alto-falante escolhido ainda. Escolha um da lista de alto-falantes encontrados neste Wi-Fi.</string>
+    <string name="speaker_test">Testar conexão</string>
+    <string name="speaker_test_running">Conectando… ouça o alto-falante.</string>
+    <string name="speaker_test_ok">Conectado. O alto-falante deve ter tocado o som de conexão.</string>
+    <string name="speaker_test_not_found">O alto-falante não está neste Wi-Fi agora. Verifique se está ligado e na mesma rede que o celular.</string>
+    <string name="speaker_test_timeout">O alto-falante não respondeu a tempo. Tente de novo.</string>
+    <string name="speaker_test_failed">A conexão falhou. Verifique se ninguém mais está transmitindo para ele e tente de novo.</string>
+    <string name="speaker_forget">Esquecer este alto-falante</string>
+    <string name="speaker_found_title">Alto-falantes neste Wi-Fi</string>
+    <string name="speaker_searching">Procurando alto-falantes Google Home e Nest no seu Wi-Fi…</string>
+    <string name="speaker_nothing_found">Nenhum alto-falante encontrado. Confira os passos abaixo; a lista se atualiza sozinha.</string>
+    <string name="speaker_group">Grupo de alto-falantes</string>
+    <string name="speaker_permission_body">Para encontrar seu alto-falante, o app precisa de acesso aos dispositivos da sua rede local. Só é usado para o alto-falante.</string>
+    <string name="speaker_permission_allow">Permitir acesso à rede local</string>
+    <string name="speaker_help_title">Antes de o alto-falante aparecer</string>
+    <string name="speaker_help_setup">Configure o alto-falante uma vez com o app Google Home.</string>
+    <string name="speaker_help_wifi">O alto-falante e este celular devem estar na mesma rede Wi-Fi. Não é preciso parear por Bluetooth.</string>
+    <string name="speaker_help_permission">Se o celular pedir, permita o acesso à rede local.</string>
+    <string name="speaker_open_google_home">Abrir o Google Home</string>
 </resources>

@@ -156,6 +156,9 @@ dependencies {
     implementation(libs.coil.svg)
     implementation(libs.play.services.blockstore)
     implementation(libs.kotlinx.coroutines.play.services)
+    // The Google Home speaker: Cast discovery and sessions with the Default Media Receiver (speaker/).
+    implementation(libs.play.services.cast.framework)
+    implementation(libs.androidx.mediarouter)
     debugImplementation(libs.compose.ui.tooling)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

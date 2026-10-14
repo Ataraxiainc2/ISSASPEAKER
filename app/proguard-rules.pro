@@ -9,3 +9,6 @@
     public static int wtf(...);
     public static int println(...);
 }
+
+# The Cast SDK finds CastOptionsProvider by the class name in the manifest's meta-data, so R8 must keep that name.
+-keep class com.issasoda.issaspeaker.speaker.CastOptionsProvider { <init>(); }

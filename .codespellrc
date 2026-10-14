@@ -4,4 +4,4 @@
 # verification-metadata.xml is skipped: it lists Maven coordinates (errorprone), not prose.
 [codespell]
 skip = ./.git,./.gradle,./build,./app/build,./.kotlin,*.png,*.webp,*.jar,font_certs.xml,./gradle/verification-metadata.xml
-ignore-words-list = optin,avance,diagrama,imposible,artistas,argumentos,sinopsis,hace,variantes,historial,inicial,controles,comando,comandos,autor,te,requiere,cliente,ser,componentes,responde
+ignore-words-list = optin,avance,diagrama,imposible,artistas,argumentos,sinopsis,hace,variantes,historial,inicial,controles,comando,comandos,autor,te,requiere,cliente,ser,componentes,responde,som
