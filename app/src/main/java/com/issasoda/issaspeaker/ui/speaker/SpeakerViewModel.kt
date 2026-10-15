@@ -77,8 +77,6 @@ class SpeakerViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    override fun onCleared() = discovery.stop()
-
     companion object {
         /** What to tell the owner when the speaker could not be reached. */
         fun problemMessage(problem: ConnectionProblem): Int = when (problem) {

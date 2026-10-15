@@ -23,9 +23,11 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.issasoda.issaspeaker.R
 import com.issasoda.issaspeaker.data.birthdays.BirthdaySource
+import com.issasoda.issaspeaker.ui.components.screenInsets
 import com.issasoda.issaspeaker.ui.theme.Spacing
 import java.time.LocalDate
 
@@ -37,7 +39,12 @@ import java.time.LocalDate
 @Composable
 fun ImportSheet(state: ImportState, viewModel: BirthdaysViewModel) {
     val locale = LocalConfiguration.current.locales[0]
-    ModalBottomSheet(onDismissRequest = viewModel::cancelImport, sheetState = fullSheet()) {
+    ModalBottomSheet(
+        onDismissRequest = viewModel::cancelImport,
+        sheetState = fullSheet(),
+        sheetMaxWidth = Dp.Unspecified,
+        contentWindowInsets = { screenInsets },
+    ) {
         Column(Modifier.fillMaxWidth().padding(horizontal = Spacing.xl).padding(bottom = Spacing.xl), verticalArrangement = Arrangement.spacedBy(Spacing.s)) {
             Text(
                 stringResource(if (state.source == BirthdaySource.CONTACTS) R.string.birthday_from_contacts else R.string.birthday_from_file),

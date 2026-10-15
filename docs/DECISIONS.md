@@ -9,7 +9,7 @@ recommendation; the CIO approves, changes or rejects it.
 | ID | Decision | Date |
 |---|---|---|
 | D1 | MIT license | 2026-10-12 |
-| D2 | High-legibility Google Fonts from a pool of at least 100 (133 today) | 2026-10-12 |
+| D2 | High-legibility Google Fonts from a pool of at least 150 (158 today, every one checked on the S25 with GoogleFontsTest; raised from 100 by the owner on 2026-10-15) | 2026-10-12 |
 | D3 | X: no paid X API and no scraping. X Radar uses the xAI `x_search` tool, plus sharing from the X app and notifications | 2026-10-12 |
 | D4 | Shikaka.net: ShikakaStats has no public API; the same deep statistics are computed from the full Last.fm history | 2026-10-12 |
 | D5 | AI providers: no fixed list. Live registry (models.dev) plus a supplement; every provider the owner has a key for, and any other the user adds | 2026-10-12 |

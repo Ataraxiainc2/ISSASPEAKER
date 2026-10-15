@@ -26,7 +26,7 @@ object FontPool {
 
     val families: List<String> = listOf(
         // Designed for legibility or accessibility first
-        "Atkinson Hyperlegible", "Lexend", "Lexend Deca", "Andika",
+        "Atkinson Hyperlegible", "Parkinsans", "Lexend", "Lexend Deca", "Andika",
         "Readex Pro",
         // Humanist and neo-grotesque sans
         "Inter", "Inter Tight", "Source Sans 3", "Figtree", "Nunito Sans", "Nunito", "Noto Sans", "Open Sans",
@@ -42,12 +42,15 @@ object FontPool {
         "Ysabeau Office", "Ysabeau Infant", "Proza Libre", "Sarala", "Istok Web", "Arimo", "Carlito",
         "Pontano Sans", "Mada", "Rethink Sans", "Sofia Sans", "Prompt", "Inria Sans", "Rosario", "Martel Sans",
         "Gabarito", "Spline Sans", "Arsenal", "Cantarell", "Gudea", "Sintony", "Varta",
+        "Geist", "Ubuntu Sans", "Hubot Sans", "Kanit", "Niramit", "K2D", "Livvic", "Glory", "Lunasima",
+        "Alexandria", "Saira", "Maven Pro", "Mitr",
         // Text serifs and slabs
         "Source Serif 4", "Merriweather", "Literata", "Lora", "Noto Serif", "PT Serif", "IBM Plex Serif",
         "Libre Baskerville", "Spectral", "Newsreader", "Roboto Serif", "Gelasio", "Bitter", "Domine",
         "Zilla Slab", "Roboto Slab", "Faustina", "Petrona", "Besley", "Andada Pro", "Vollkorn", "Charis SIL",
         "Gentium Book Plus", "Tinos", "Noticia Text", "Frank Ruhl Libre", "Brygada 1918", "Libre Caslon Text",
-        "Martel", "Arvo", "Lusitana",
+        "Martel", "Arvo", "Lusitana", "Crimson Pro", "Crimson Text", "Piazzolla", "Hahmlet", "Abhaya Libre",
+        "Gupter", "Sumana", "Aleo", "Podkova", "Kameron", "Rokkitt",
     )
 
     /** The two weights requested per family; GoogleFontsTest checks exactly these. */

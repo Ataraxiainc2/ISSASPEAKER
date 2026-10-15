@@ -32,9 +32,11 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.Dp
 import com.issasoda.issaspeaker.R
 import com.issasoda.issaspeaker.data.birthdays.Birthday
 import com.issasoda.issaspeaker.data.birthdays.BirthdaySource
+import com.issasoda.issaspeaker.ui.components.screenInsets
 import com.issasoda.issaspeaker.ui.theme.Spacing
 import java.time.LocalDate
 import java.time.Month
@@ -97,7 +99,7 @@ fun BirthdayForm(existing: Birthday?, onSave: (Birthday) -> Unit, onDelete: (Str
     // Typed text survives rotation: the fields are saved as a list and put back into a new FormState.
     val form = rememberSaveable(existing?.id, saver = FormState.saver(existing)) { FormState(existing) }
     var confirmDelete by rememberSaveable { mutableStateOf(false) }
-    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = fullSheet()) {
+    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = fullSheet(), sheetMaxWidth = Dp.Unspecified, contentWindowInsets = { screenInsets }) {
         Column(
             Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = Spacing.xl).padding(bottom = Spacing.xl),
             verticalArrangement = Arrangement.spacedBy(Spacing.m),

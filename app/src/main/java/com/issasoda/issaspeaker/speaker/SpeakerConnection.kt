@@ -41,7 +41,8 @@ class SpeakerConnection(private val context: Context, private val discovery: Spe
     suspend fun test(speaker: Speaker): SessionResult<Unit> = withSession(speaker) { delay(HOLD_MS) }
 
     suspend fun <T> withSession(speaker: Speaker, work: suspend (CastSession) -> T): SessionResult<T> {
-        val route = discovery.route(speaker.deviceId) ?: return SessionResult.Problem(ConnectionProblem.NotFound)
+        // From any screen or from a routine: the speaker is looked for when no search has seen it yet.
+        val route = discovery.find(speaker.deviceId, FIND_TIMEOUT_MS) ?: return SessionResult.Problem(ConnectionProblem.NotFound)
         val cast = try {
             CastContext.getSharedInstance(context, ContextCompat.getMainExecutor(context)).await()
         } catch (e: ModuleUnavailableException) {
@@ -95,6 +96,7 @@ class SpeakerConnection(private val context: Context, private val discovery: Spe
     private companion object {
         const val TAG = "SpeakerConnection"
         const val CONNECT_TIMEOUT_MS = 20_000L
+        const val FIND_TIMEOUT_MS = 15_000L
         const val HOLD_MS = 1_500L
     }
 }

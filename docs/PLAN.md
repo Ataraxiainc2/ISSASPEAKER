@@ -65,7 +65,7 @@ and passes CI; the PC tests on the phone and releases.**
 | Storage | Room + SQLCipher; SharedPreferences for plain settings; Tink + Keystore (StrongBox) for secrets | Settings are read before the first frame (no theme flash) |
 | Backend | None | Smaller attack surface; everything stays on the phone and in the user's own Google account |
 | Languages | English (default), Latin American Spanish, Brazilian Portuguese, per-app picker | Owner's choice |
-| Fonts | 133 high-legibility Google Fonts; a different family per text role, drawn at every start (D9) | Owner's choice; each family checked on the S25 |
+| Fonts | 158 high-legibility Google Fonts (at least 150, D2); a different family per text role, drawn at every start (D9) | Owner's choice; each family checked on the S25 |
 | Theme | Light, dark or phone setting (D10) | Owner's choice |
 | License | MIT (D1) | |
 

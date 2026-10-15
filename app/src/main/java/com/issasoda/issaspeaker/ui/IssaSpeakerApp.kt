@@ -12,9 +12,6 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -128,17 +125,10 @@ fun IssaSpeakerApp(settings: AppSettings, accounts: AccountRepository, onDarkThe
             SignInScreen(accountActions, onSkip = settings::skipSignIn)
             return@IssaSpeakerTheme
         }
-        NavigationSuiteScaffold(
-            navigationSuiteItems = {
-                Destination.entries.filter { it.inMenu && (it != Destination.ADMIN || adminVisible) }.forEach { item ->
-                    item(
-                        selected = destination == item || (destination == Destination.ABOUT && item == Destination.SETTINGS),
-                        onClick = { destination = item },
-                        icon = { Icon(item.icon, contentDescription = null) },
-                        label = { Text(stringResource(item.label)) },
-                    )
-                }
-            },
+        AppNavigation(
+            items = Destination.entries.filter { it.inMenu && (it != Destination.ADMIN || adminVisible) },
+            isSelected = { item -> destination == item || (destination == Destination.ABOUT && item == Destination.SETTINGS) },
+            onSelect = { destination = it },
         ) {
             DestinationScreen(destination, state, themeMode, settings) { destination = it }
             if (showAccount) AccountSheet(account, accountActions) { showAccount = false }

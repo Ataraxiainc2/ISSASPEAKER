@@ -137,7 +137,6 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
-    implementation(libs.compose.material3.adaptive.navigation.suite)
     implementation(libs.compose.material.icons.core)
     implementation(libs.compose.ui.tooling.preview)
     // Downloadable Google Fonts (Play Services provider), see ui/theme/FontPool.kt.
