@@ -100,7 +100,8 @@ Every milestone ends with CI green, zero warnings (Lint, detekt, Kotlin, codespe
 | **M5** Watch and health | Wear OS companion for the Watch 5 Pro, Health Connect | 27 | A routine started from the watch |
 | **M6** Social and reading | Rest of X, books | 45 | |
 | **M7** Advanced intelligence | Learning, analysis, extended news, on-device AI, model ranking | 50 | |
-| **M8** Experimental | Adaptive routines, shared AI module | 2 | Only after validating value |
+| **M8** Experimental | Adaptive routines, shared AI module, agents, household profiles, differentiators | 38 | Only after validating value |
+| **M9** Ecosystem | PC companion (authenticated local service), Home Assistant, devices working together, home security, energy | 112 | "Turn on the PC" and a Home Assistant scene, by voice, with the result spoken |
 
 ---
 

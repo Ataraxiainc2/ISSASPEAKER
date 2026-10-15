@@ -431,3 +431,353 @@ F429	PLAT	P0	M0	NEW	implemented	UX principles 2026 mapped to the app (tokens, co
 F430	PLAT	P0	M0	NEW	implemented	Public privacy policy and home page (GitHub Pages)	Política de privacidad y página pública (GitHub Pages)	ataraxiainc2.github.io/ISSASPEAKER
 F431	SEC	P0	M0	NEW	implemented	Keyless Google Play access from GitHub Actions for every repository of the account (Workload Identity Federation)	Acceso sin claves a Google Play desde GitHub Actions para todos los repositorios de la cuenta (Workload Identity Federation)	owner id + environment play + main/master + pinned ISSASPEAKER workflow commit; no production, Admin or order rights; docs/design/PLAY-PUBLISHING.md
 F432	SEC	P1	M1	NEW	implemented	Release pipeline: signed bundle to the internal track from GitHub, owner approval required	Canal de publicación: paquete firmado a la pista interna desde GitHub, con aprobación del dueño	release.yml + play-upload.yml; manual, testing tracks only, dry run by default
+F433	VOICE	P1	M7	IDEAS	planned	Personalized voice assistant	Asistente de voz personalizado	
+F434	VOICE	P1	M2	IDEAS	planned	Continuous conversation with AI	Conversación continua con IA	
+F435	VOICE	P1	M7	IDEAS	planned	Custom voice commands	Comandos de voz personalizados	
+F436	VOICE	P1	M7	IDEAS	planned	Natural-language commands	Comandos en lenguaje natural	
+F437	VOICE	P1	M7	IDEAS	planned	Understanding of chained commands	Comprensión de órdenes encadenadas	
+F438	VOICE	P1	M7	IDEAS	planned	Several actions from one command	Ejecución de múltiples acciones con una sola orden	
+F439	VOICE	P1	M7	IDEAS	planned	Contextual memory across a conversation	Memoria contextual de conversaciones	
+F440	VOICE	P1	M7	IDEAS	planned	Short or detailed answers, as the user prefers	Respuestas breves o detalladas	
+F441	VOICE	P1	M7	IDEAS	planned	Interrupt the assistant by voice	Interrupción por voz	
+F442	VOICE	P1	M7	IDEAS	planned	Spoken confirmation of critical actions	Confirmación verbal de acciones críticas	
+F443	VOICE	P1	M7	IDEAS	planned	Clarifying ambiguous commands	Interpretación de órdenes ambiguas	
+F444	VOICE	P1	M7	IDEAS	planned	Contextual follow-up questions	Preguntas de seguimiento contextuales	
+F445	VOICE	P1	M7	IDEAS	planned	Live voice translation	Traducción simultánea por voz	
+F446	VOICE	P1	M7	IDEAS	planned	Multilingual conversation	Conversación multilingüe	
+F447	VOICE	P1	M7	IDEAS	planned	Spoken language practice	Práctica oral de idiomas	
+F448	VOICE	P1	M7	IDEAS	planned	Pronunciation feedback	Corrección de pronunciación	
+F449	VOICE	P1	M7	IDEAS	planned	Summary of earlier conversations	Resumen de conversaciones anteriores	
+F450	VOICE	P1	M7	IDEAS	planned	Domain-specific assistants	Asistente especializado por dominio	
+F451	VOICE	P1	M7	IDEAS	planned	Automatic routing between AI models	Enrutamiento automático entre modelos de IA	
+F452	VOICE	P1	M7	IDEAS	planned	Model choice by cost and capability	Selección del modelo según coste y capacidad	
+F453	VOICE	P1	M7	IDEAS	planned	On-device AI models where supported	Ejecución local de modelos de IA compatibles	
+F454	VOICE	P1	M7	IDEAS	planned	Answers with verifiable sources	Respuestas con fuentes verificables	
+F455	VOICE	P1	M7	IDEAS	planned	Web search by voice	Búsqueda web por voz	
+F456	VOICE	P1	M7	IDEAS	planned	Image analysis from the phone camera	Análisis de imágenes mediante el celular	
+F457	VOICE	P1	M7	IDEAS	planned	Turn a spoken request into an automation	Conversión de órdenes en automatizaciones	
+F458	VOICE	P1	M7	IDEAS	planned	Detection of recurring requests	Detección de intenciones recurrentes	
+F459	VOICE	P1	M7	IDEAS	planned	Suggestions for new automations	Sugerencias de nuevas automatizaciones	
+F460	VOICE	P1	M7	IDEAS	planned	Approval before a new automation runs	Confirmación previa de automatizaciones nuevas	
+F461	VOICE	P1	M7	IDEAS	planned	Log of every action the AI performed	Registro de acciones ejecutadas por la IA	
+F462	VOICE	P1	M7	IDEAS	planned	Private conversation mode (nothing kept)	Modo de conversación privada	
+F463	VOICE	P1	M7	IDEAS	planned	Silent mode (answers on screen only)	Modo silencioso	
+F464	VOICE	P1	M2	IDEAS	planned	Smart do-not-disturb for announcements	Modo no molestar inteligente	
+F465	DEV	P2	M9	IDEAS	planned	Control the PC by voice through the speaker	Control del PC desde el parlante	
+F466	DEV	P2	M9	IDEAS	planned	Control the phone from the PC	Control del celular desde el PC	
+F467	DEV	P2	M9	IDEAS	planned	Control the PC from the phone	Control del PC desde el celular	
+F468	DEV	P2	M9	IDEAS	planned	Send commands from the watch to the speaker	Envío de comandos del reloj al parlante	
+F469	DEV	P2	M9	IDEAS	planned	Shared clipboard between phone and PC	Portapapeles compartido	
+F470	DEV	P2	M9	IDEAS	planned	Send text between devices	Envío de texto entre dispositivos	
+F471	DEV	P2	M9	IDEAS	planned	Send links between devices	Envío de enlaces entre dispositivos	
+F472	DEV	P2	M9	IDEAS	planned	File transfer between devices	Transferencia de archivos entre dispositivos	
+F473	DEV	P2	M9	IDEAS	planned	Notification sharing between devices	Compartición de notificaciones	
+F474	DEV	P2	M9	IDEAS	planned	Continue a task on another device	Continuación de tareas en otro dispositivo	
+F475	DEV	P2	M9	IDEAS	planned	Smart audio routing to the right speaker	Enrutamiento inteligente de audio	
+F476	DEV	P2	M9	IDEAS	planned	Automatic choice of the output device	Selección automática del dispositivo de salida	
+F477	DEV	P2	M9	IDEAS	planned	Central device inventory	Inventario centralizado de dispositivos	
+F478	DEV	P2	M9	IDEAS	planned	Live connection status of each device	Estado de conexión en tiempo real	
+F479	DEV	P2	M9	IDEAS	planned	Connectivity diagnostics	Diagnóstico de conectividad	
+F480	DEV	P2	M9	IDEAS	planned	Control devices by room	Control de dispositivos por habitación	
+F481	DEV	P2	M9	IDEAS	planned	Central devices dashboard	Panel centralizado de dispositivos	
+F482	DEV	P2	M9	IDEAS	planned	Quick actions across devices	Acciones rápidas entre dispositivos	
+F483	DEV	P2	M9	IDEAS	planned	Multi-device mode without internet where possible	Modo multidispositivo sin conexión a Internet cuando sea viable	
+F484	PC	P2	M9	IDEAS	planned	Wake the PC with Wake-on-LAN	Encender el PC mediante Wake-on-LAN	
+F485	PC	P2	M9	IDEAS	planned	Shut down the PC safely	Apagar el PC de forma segura	
+F486	PC	P2	M9	IDEAS	planned	Restart the PC	Reiniciar el PC	
+F487	PC	P2	M9	IDEAS	planned	Lock the PC session	Bloquear la sesión	
+F488	PC	P2	M9	IDEAS	planned	Put the PC to sleep	Suspender el equipo	
+F489	PC	P2	M9	IDEAS	planned	PC status by voice (CPU, RAM, disk, temperature)	Consultar el estado del equipo	
+F490	PC	P2	M9	IDEAS	planned	Internet speed check	Consultar la velocidad de Internet	
+F491	PC	P2	M9	IDEAS	planned	Find processes using too many resources	Detectar procesos que consumen recursos	
+F492	PC	P2	M9	IDEAS	planned	Open PC apps by voice	Abrir aplicaciones por voz	
+F493	PC	P2	M9	IDEAS	planned	Run allow-listed commands and scripts (PowerShell, Python)	Ejecutar comandos autorizados	
+F494	PC	P2	M9	IDEAS	planned	Open development projects	Lanzar proyectos de desarrollo	
+F495	PC	P2	M9	IDEAS	planned	Open specific folders	Abrir carpetas específicas	
+F496	PC	P2	M9	IDEAS	planned	Find files by voice	Buscar archivos por voz	
+F497	PC	P2	M9	IDEAS	planned	Open recent files	Abrir archivos recientes	
+F498	PC	P2	M9	IDEAS	planned	Find duplicate files	Detectar archivos duplicados	
+F499	PC	P2	M9	IDEAS	planned	Start backups	Crear copias de seguridad	
+F500	PC	P2	M9	IDEAS	planned	Verify backups	Verificar copias de seguridad	
+F501	PC	P2	M9	IDEAS	planned	Diagnostic reports of the PC	Generar informes de diagnóstico	
+F502	PC	P2	M9	IDEAS	planned	Pending updates on the PC	Detectar actualizaciones pendientes	
+F503	PC	P2	M9	IDEAS	planned	PC volume	Ajustar el volumen del PC	
+F504	PC	P2	M9	IDEAS	planned	Mute the PC microphone	Silenciar el micrófono	
+F505	PC	P2	M9	IDEAS	planned	Switch the PC audio device	Cambiar el dispositivo de audio	
+F506	PC	P2	M9	IDEAS	planned	Screenshot on command	Capturar pantallas por comando	
+F507	PC	P2	M9	IDEAS	planned	Git status by voice	Consultar el estado de Git	
+F508	PC	P2	M9	IDEAS	planned	Run automated tests	Ejecutar pruebas automatizadas	
+F509	PC	P2	M9	IDEAS	planned	Announcements of failed builds	Recibir avisos de compilaciones fallidas	
+F510	PHONE	P2	M2	IDEAS	planned	Announce incoming calls on the speaker	Anunciar llamadas entrantes	
+F511	PHONE	P2	M2	IDEAS	planned	Missed calls by voice	Consultar llamadas perdidas	
+F512	PHONE	P2	M2	IDEAS	planned	Send SMS by voice (with confirmation)	Enviar mensajes SMS	
+F513	PHONE	P2	M2	IDEAS	planned	Dictate WhatsApp messages (with confirmation)	Dictar mensajes de WhatsApp	
+F514	PHONE	P2	M2	IDEAS	planned	Read incoming messages aloud	Leer mensajes entrantes en voz alta	
+F515	PHONE	P2	M2	IDEAS	planned	Reply to messages by dictation (with confirmation)	Responder mensajes mediante dictado	
+F516	PHONE	P2	M2	IDEAS	planned	Summary of pending conversations	Resumir conversaciones pendientes	
+F517	PHONE	P2	M2	IDEAS	planned	Notification history	Consultar el historial de notificaciones	
+F518	PHONE	P2	M2	IDEAS	planned	Filter notifications by priority	Filtrar notificaciones por prioridad	
+F519	PHONE	P1	M2	IDEAS	planned	Read selected notifications on the speaker	Leer notificaciones seleccionadas en el parlante	
+F520	PHONE	P2	M2	IDEAS	planned	Turn on do-not-disturb	Activar el modo no molestar	
+F521	PHONE	P2	M2	IDEAS	planned	Phone battery level by voice	Consultar el nivel de batería	
+F522	PHONE	P2	M2	IDEAS	planned	Low-battery announcement	Detectar batería baja	
+F523	PHONE	P1	M2	IDEAS	planned	Ring the phone to find it in the house	Hacer sonar el celular perdido	
+F524	PHONE	P2	M2	IDEAS	planned	Open phone apps by voice	Abrir aplicaciones mediante voz	
+F525	PHONE	P2	M2	IDEAS	planned	Read QR codes	Leer códigos QR	
+F526	PHONE	P2	M2	IDEAS	planned	Scan documents	Escanear documentos	
+F527	PHONE	P2	M2	IDEAS	planned	Notes by dictation	Crear notas mediante dictado	
+F528	PHONE	P1	M2	IDEAS	planned	Reminders by voice	Crear recordatorios mediante voz	
+F529	PHONE	P2	M2	IDEAS	planned	Add calendar events by voice	Añadir eventos al calendario	
+F530	PHONE	P2	M2	IDEAS	planned	Record voice notes	Grabar notas de voz	
+F531	PHONE	P2	M2	IDEAS	planned	Transcribe recordings	Transcribir grabaciones	
+F532	PHONE	P2	M2	IDEAS	planned	Phone storage check	Supervisar el almacenamiento disponible	
+F533	WEAR	P2	M5	IDEAS	planned	Weather on the watch	Consultar el clima desde el reloj	
+F534	WEAR	P2	M5	IDEAS	planned	Reminders on the wrist	Mostrar recordatorios en la muñeca	
+F535	WEAR	P2	M5	IDEAS	planned	Start home scenes from the watch	Activar escenas domésticas	
+F536	WEAR	P2	M5	IDEAS	planned	Dictate notes on the watch	Dictar notas desde el reloj	
+F537	WEAR	P2	M5	IDEAS	planned	Start timers from the watch	Iniciar temporizadores	
+F538	WEAR	P2	M5	IDEAS	planned	Alert when the phone is left behind	Avisar cuando el celular queda atrás	
+F539	WEAR	P2	M5	IDEAS	planned	Daily activity summary	Mostrar un resumen diario de actividad	
+F540	WEAR	P2	M5	IDEAS	planned	Start a relaxation routine	Activar una rutina de relajación	
+F541	WEAR	P2	M5	IDEAS	planned	Watch as a media remote	Usar el reloj como control remoto multimedia	
+F542	WEAR	P2	M5	IDEAS	planned	Confirm or cancel home actions on the watch	Confirmar o cancelar acciones del hogar	
+F543	WEAR	P2	M5	IDEAS	planned	Confirm sensitive operations on the watch	Confirmar operaciones sensibles con autenticación compatible	
+F544	HOME	P1	M9	IDEAS	planned	Home Assistant integration (entities, scenes, automations)	Integración con Home Assistant	
+F545	HOME	P2	M9	IDEAS	planned	Lights on and off	Encendido y apagado de luces	
+F546	HOME	P2	M9	IDEAS	planned	Light brightness	Regulación de intensidad lumínica	
+F547	HOME	P2	M9	IDEAS	planned	Light color temperature	Control de temperatura de color	
+F548	HOME	P2	M9	IDEAS	planned	Smart plugs and switches	Control de enchufes inteligentes	
+F549	HOME	P2	M9	IDEAS	planned	Energy use per plug	Medición de consumo por enchufe	
+F550	HOME	P2	M9	IDEAS	planned	Thermostats and air conditioning	Control de termostatos compatibles	
+F551	HOME	P2	M9	IDEAS	planned	Fans, humidifiers and dehumidifiers	Control de ventiladores	
+F552	HOME	P2	M9	IDEAS	planned	Temperature and humidity by room	Supervisión de temperatura por habitación	
+F553	HOME	P2	M9	IDEAS	planned	Air quality (CO2, PM2.5, VOC)	Supervisión de calidad del aire	
+F554	HOME	P2	M9	IDEAS	planned	Smart locks (with extra confirmation)	Control de cerraduras inteligentes compatibles	
+F555	HOME	P2	M9	IDEAS	planned	Blinds, curtains and garage doors	Control de persianas motorizadas	
+F556	HOME	P2	M9	IDEAS	planned	Robot vacuums	Control de robots aspiradores	
+F557	HOME	P2	M9	IDEAS	planned	TVs and Android TV	Control de televisores compatibles	
+F558	HOME	P2	M9	IDEAS	planned	Scenes by room (arrive, leave, movie, reading, sleep)	Gestión de escenas por habitación	
+F559	HOME	P2	M9	IDEAS	planned	Presence-based automations	Automatizaciones basadas en presencia	
+F560	HOME	P2	M9	IDEAS	planned	Sensor-based automations	Automatizaciones basadas en sensores	
+F561	HOME	P2	M9	IDEAS	planned	Run an automation manually	Ejecución manual de automatizaciones	
+F562	HOME	P2	M9	IDEAS	planned	Automation run history	Historial de ejecución de automatizaciones	
+F563	HOME	P2	M9	IDEAS	planned	Offline sensors and low sensor batteries	Notificación de sensores desconectados	
+F564	HOME	P2	M9	IDEAS	planned	Home control dashboard	Panel de control de la vivienda	
+F565	HOME	P2	M9	IDEAS	planned	Local automation without internet where devices allow	Automatización local sin Internet cuando los equipos lo permitan	
+F566	SAFE	P2	M9	IDEAS	planned	Home security status panel	Panel de estado de seguridad	
+F567	SAFE	P2	M9	IDEAS	planned	Arm the away mode	Activación del modo de vigilancia	
+F568	SAFE	P2	M9	IDEAS	planned	Disarm with authentication	Desactivación autenticada de la vigilancia	
+F569	SAFE	P1	M9	IDEAS	planned	Leak, smoke and carbon monoxide alerts on the speaker	Alertas por fugas de agua	
+F570	SAFE	P2	M9	IDEAS	planned	Open doors and windows alerts	Notificaciones de puertas abiertas	
+F571	SAFE	P2	M9	IDEAS	planned	View authorized cameras	Visualización de cámaras autorizadas	
+F572	SAFE	P2	M9	IDEAS	planned	Smart doorbell announcements	Notificación de timbres inteligentes	
+F573	SAFE	P2	M9	IDEAS	planned	Announce visitors on the speaker	Anuncio de visitas por el parlante	
+F574	SAFE	P2	M9	IDEAS	planned	Security event log	Registro de eventos de seguridad	
+F575	SAFE	P2	M9	IDEAS	planned	Internet outage detection and recovery notice	Detección de interrupciones de Internet	
+F576	SAFE	P2	M9	IDEAS	planned	New devices on the home network	Detección de nuevos dispositivos en la red	
+F577	SAFE	P2	M9	IDEAS	planned	Certificates about to expire	Alertas de certificados digitales próximos a vencer	
+F578	SAFE	P2	M9	IDEAS	planned	Privacy mode for cameras and microphones	Modo de privacidad para cámaras y micrófonos	
+F579	SAFE	P2	M9	IDEAS	planned	Audit of executed commands	Auditoría de comandos ejecutados	
+F580	AUDIO	P2	M4	IDEAS	planned	Podcasts on the speaker	Reproducción de podcasts	
+F581	AUDIO	P2	M4	IDEAS	planned	Audiobooks with bookmarks and resume	Reproducción de audiolibros	
+F582	AUDIO	P2	M4	IDEAS	planned	Internet radio stations	Reproducción de emisoras de radio	
+F583	AUDIO	P2	M4	IDEAS	planned	Ambient, focus and sleep sounds	Reproducción de sonidos ambientales	
+F584	AUDIO	P2	M4	IDEAS	planned	Sleep timer for audio	Temporizador de apagado de audio	
+F585	AUDIO	P2	M4	IDEAS	planned	Volume by time of day	Ajuste automático del volumen por horario	
+F586	AUDIO	P2	M4	IDEAS	planned	Announcements that resume the music after	Anuncios domésticos sin interrumpir la reproducción cuando la integración lo permita	
+F587	AUDIO	P2	M4	IDEAS	planned	Play recorded messages on the speaker	Reproducción de mensajes grabados	
+F588	AUDIO	P2	M4	IDEAS	planned	AI playlists for studying, training or resting	Generación de listas musicales para estudiar	
+F589	AUDIO	P2	M4	IDEAS	planned	Movie mode (lights dim, restore after)	Modo cine automatizado	
+F590	CAL	P2	M2	IDEAS	planned	Unified agenda	Agenda unificada	
+F591	CAL	P2	M2	IDEAS	planned	Agenda by voice	Consulta de la agenda por voz	
+F592	CAL	P2	M2	IDEAS	planned	Change events in natural language	Modificación de eventos mediante lenguaje natural	
+F593	CAL	P2	M2	IDEAS	planned	Location-based reminders	Recordatorios basados en ubicación	
+F594	CAL	P2	M2	IDEAS	planned	Reminders of unfinished tasks	Recordatorios de tareas inconclusas	
+F595	CAL	P2	M2	IDEAS	planned	Prioritized task list	Lista de tareas priorizadas	
+F596	CAL	P2	M2	IDEAS	planned	Break goals into tasks with AI	Descomposición de objetivos en tareas	
+F597	CAL	P2	M2	IDEAS	planned	Shared shopping list	Lista de compras compartida	
+F598	CAL	P2	M2	IDEAS	planned	Home inventory	Inventario doméstico	
+F599	CAL	P2	M2	IDEAS	planned	Warranties and their expiry	Registro de garantías	
+F600	CAL	P2	M2	IDEAS	planned	Order and delivery tracking	Seguimiento de pedidos	
+F601	CAL	P2	M2	IDEAS	planned	Habit tracking	Seguimiento de hábitos	
+F602	CAL	P2	M2	IDEAS	planned	Pomodoro timer	Temporizador Pomodoro	
+F603	CAL	P2	M2	IDEAS	planned	Several named timers on the speaker	Temporizadores múltiples	
+F604	CAL	P2	M2	IDEAS	planned	Gentle progressive alarms on the speaker	Alarmas progresivas	
+F605	CAL	P2	M2	IDEAS	planned	Time-to-get-ready announcements	Avisos de preparación para salir	
+F606	CAL	P2	M2	IDEAS	planned	Weekly productivity report	Informe semanal de productividad	
+F607	MAIL	P2	M3	IDEAS	planned	Pending requests found in mail	Detección de solicitudes pendientes	
+F608	MAIL	P2	M3	IDEAS	planned	Deadlines found in mail	Identificación de fechas límite en correos	
+F609	MAIL	P2	M3	IDEAS	planned	Adjust the tone of a reply	Adaptación del tono de los mensajes	
+F610	MAIL	P2	M3	IDEAS	planned	Reminders for unanswered mail	Recordatorios de correos sin respuesta	
+F611	MAIL	P2	M3	IDEAS	planned	Phishing warnings	Detección de posibles intentos de phishing	
+F612	MAIL	P2	M3	IDEAS	planned	Voicemail transcription	Transcripción de mensajes de voz	
+F613	WORK	P2	M3	IDEAS	planned	Next meeting by voice	Consulta de la siguiente reunión	
+F614	WORK	P2	M3	IDEAS	planned	Prepare the PC before a meeting	Preparación del PC antes de una reunión	
+F615	WORK	P2	M3	IDEAS	planned	Mute notifications during meetings	Silenciamiento de notificaciones durante reuniones	
+F616	WORK	P2	M3	IDEAS	planned	Meeting transcription with consent	Transcripción de reuniones con autorización	
+F617	WORK	P2	M3	IDEAS	planned	Meeting summaries with decisions, owners and deadlines	Resumen de reuniones	
+F618	WORK	P2	M3	IDEAS	planned	Follow-up of commitments	Seguimiento de compromisos	
+F619	WORK	P2	M3	IDEAS	planned	Turn notes into documents	Conversión de notas en documentos	
+F620	WORK	P2	M3	IDEAS	planned	Checklists	Elaboración de listas de verificación	
+F621	WORK	P2	M3	IDEAS	planned	Upcoming milestone alerts	Alertas de hitos próximos	
+F622	DEVOPS	P3	M7	IDEAS	planned	Build finished announcements	Notificación de compilaciones completadas	
+F623	DEVOPS	P3	M7	IDEAS	planned	CI/CD pipeline status (GitHub Actions)	Supervisión de pipelines CI/CD	
+F624	DEVOPS	P3	M7	IDEAS	planned	Deployment announcements	Notificaciones de despliegues	
+F625	DEVOPS	P3	M7	IDEAS	planned	Explain an exception or error log	Explicación de excepciones	
+F626	DEVOPS	P3	M7	IDEAS	planned	Spoken summary of Git changes	Resumen de diferencias Git	
+F627	DEVOPS	P3	M7	IDEAS	planned	Uncommitted changes reminder	Detección de cambios sin confirmar	
+F628	DEVOPS	P3	M7	IDEAS	planned	Vulnerable dependency alerts	Supervisión de dependencias vulnerables	
+F629	DEVOPS	P3	M7	IDEAS	planned	AI model cost tracking	Seguimiento del coste de modelos de IA	
+F630	DEVOPS	P3	M7	IDEAS	planned	Model comparison	Evaluación comparativa de modelos	
+F631	DEVOPS	P3	M7	IDEAS	planned	Stop running agents	Interrupción de agentes en ejecución	
+F632	DEVOPS	P3	M7	IDEAS	planned	Auditable log of automated actions	Registro auditable de acciones automatizadas	
+F633	EDU	P2	M7	IDEAS	planned	Personal voice tutor	Tutor personal mediante voz	
+F634	EDU	P2	M7	IDEAS	planned	Explanations at the learner's level	Explicaciones ajustadas al nivel del estudiante	
+F635	EDU	P2	M7	IDEAS	planned	Conversational English practice	Práctica de inglés conversacional	
+F636	EDU	P2	M7	IDEAS	planned	Vocabulary training	Entrenamiento de vocabulario	
+F637	EDU	P2	M7	IDEAS	planned	Spaced repetition	Repetición espaciada	
+F638	EDU	P2	M2	IDEAS	planned	Spoken quizzes with a timer and the answer (like the owner's QA sheet)	Cuestionarios orales	
+F639	EDU	P2	M2	IDEAS	planned	Fact of the day in the user's language (sheet or AI)	Dato curioso del día	
+F640	EDU	P2	M7	IDEAS	planned	Explanations of wrong answers	Explicaciones de respuestas incorrectas	
+F641	EDU	P2	M7	IDEAS	planned	Weekly study plans	Planes de estudio semanales	
+F642	EDU	P2	M7	IDEAS	planned	Study session reminders	Recordatorios de sesiones de estudio	
+F643	EDU	P2	M7	IDEAS	planned	Review questions before bed	Preguntas de repaso antes de dormir	
+F644	EDU	P2	M7	IDEAS	planned	Learning progress reports	Informes de progreso educativo	
+F645	HLTH	P2	M5	IDEAS	planned	Hydration reminders	Recordatorios de hidratación	
+F646	HLTH	P2	M5	IDEAS	planned	Active break and stretching reminders	Recordatorios de pausas activas	
+F647	HLTH	P2	M5	IDEAS	planned	Rest timer between sets	Temporizador de descanso entre series	
+F648	HLTH	P2	M5	IDEAS	planned	Guided breathing and meditation	Sesiones guiadas de respiración	
+F649	HLTH	P2	M5	IDEAS	planned	Medication reminders set by the user	Recordatorios de medicamentos configurados por el usuario	
+F650	HLTH	P2	M5	IDEAS	planned	Medical appointment reminders	Recordatorios de citas	
+F651	HLTH	P2	M5	IDEAS	planned	Optional mood journal	Registro de estado de ánimo voluntario	
+F652	HLTH	P2	M5	IDEAS	planned	Delete personal health records	Eliminación de registros personales	
+F653	HOUSE	P3	M9	IDEAS	planned	Recipes read step by step	Lectura por voz de instrucciones de recetas	
+F654	HOUSE	P3	M9	IDEAS	planned	Recipes from the ingredients at home (AI)	Búsqueda de recetas según ingredientes disponibles	
+F655	HOUSE	P3	M9	IDEAS	planned	Cooking unit conversion	Conversión de unidades de cocina	
+F656	HOUSE	P3	M9	IDEAS	planned	Shopping list from a recipe	Lista de compras generada desde recetas	
+F657	HOUSE	P3	M9	IDEAS	planned	Food expiry alerts	Alertas de productos próximos a vencer	
+F658	HOUSE	P3	M9	IDEAS	planned	Weekly meal plan	Planificación semanal de comidas	
+F659	HOUSE	P3	M9	IDEAS	planned	Cleaning reminders	Recordatorios de limpieza	
+F660	HOUSE	P3	M9	IDEAS	planned	Washing machine finished announcements	Notificaciones de ciclos de lavado terminados	
+F661	HOUSE	P3	M9	IDEAS	planned	Plant care reminders	Recordatorios de cuidado de plantas	
+F662	HOUSE	P3	M9	IDEAS	planned	Household chores with rotation	Distribución de tareas del hogar	
+F663	HOUSE	P3	M9	IDEAS	planned	Things to take before leaving	Lista de objetos que llevar antes de salir	
+F664	ENER	P3	M9	IDEAS	planned	Energy dashboard	Panel de consumo energético	
+F665	ENER	P3	M9	IDEAS	planned	Unusual consumption alerts	Detección de consumos anómalos	
+F666	ENER	P3	M9	IDEAS	planned	Electricity cost estimate	Estimación del coste eléctrico	
+F667	ENER	P3	M9	IDEAS	planned	Devices left on	Detección de dispositivos encendidos innecesariamente	
+F668	ENER	P3	M9	IDEAS	planned	Internet speed and latency monitoring	Supervisión de velocidad de Internet	
+F669	ENER	P3	M9	IDEAS	planned	Energy saving while away	Modo de ahorro energético durante ausencias	
+F670	MOVE	P2	M2	IDEAS	planned	When to leave, with traffic	Aviso de hora recomendada para salir	
+F671	MOVE	P2	M2	IDEAS	planned	Incidents on usual routes	Alertas de incidentes en rutas habituales	
+F672	MOVE	P2	M2	IDEAS	planned	Umbrella reminder from the forecast	Recordatorio de llevar paraguas según el pronóstico	
+F673	MOVE	P2	M2	IDEAS	planned	Where I parked	Registro de estacionamiento	
+F674	MOVE	P2	M2	IDEAS	planned	Vehicle maintenance reminders	Recordatorios de mantenimiento del vehículo	
+F675	FIN	P3	M7	IDEAS	planned	Expenses by voice	Registro de gastos por voz	
+F676	FIN	P3	M7	IDEAS	planned	Budgets by category with alerts	Presupuestos por categoría	
+F677	FIN	P3	M7	IDEAS	planned	Bill reminders and due dates	Recordatorios de facturas	
+F678	FIN	P3	M7	IDEAS	planned	Subscription tracking and renewals	Seguimiento de suscripciones	
+F679	FIN	P3	M7	IDEAS	planned	Export expenses to the user's sheet	Exportación de gastos a hojas de cálculo	
+F680	RTN	P2	M8	IDEAS	planned	Lights on when arriving, off when leaving	Encender luces al detectar llegada	
+F681	RTN	P2	M8	IDEAS	planned	Silence during meetings	Activar silencio durante reuniones	
+F682	RTN	P2	M8	IDEAS	planned	Pause music during calls	Pausar música cuando se recibe una llamada compatible	
+F683	RTN	P2	M8	IDEAS	planned	Work mode when the PC starts	Activar el modo trabajo al iniciar el PC	
+F684	RTN	P2	M8	IDEAS	planned	Night routine by time and presence	Activar la rutina nocturna según horario y presencia	
+F685	RTN	P2	M2	IDEAS	planned	Agenda announced to start the day	Anunciar la agenda al comenzar el día	
+F686	RTN	P2	M2	IDEAS	planned	Priority tasks announced at set times	Anunciar tareas prioritarias en horarios definidos	
+F687	RTN	P2	M8	IDEAS	planned	Hold non-urgent notifications while sleeping	Suspender notificaciones no urgentes durante el sueño	
+F688	RTN	P2	M8	IDEAS	planned	Presence simulation with lights	Simular presencia mediante iluminación programada	
+F689	RTN	P2	M8	IDEAS	planned	Conflicts between automations	Detectar conflictos entre automatizaciones	
+F690	RTN	P2	M8	IDEAS	planned	Dry run of an automation	Simular una automatización antes de activarla	
+F691	RTN	P2	M8	IDEAS	planned	Pause one automation for a while	Desactivar temporalmente automatizaciones específicas	
+F692	RTN	P2	M8	IDEAS	planned	Essential routines without internet where possible	Ejecutar rutinas esenciales sin Internet cuando sea viable	
+F693	ANN	P1	M2	IDEAS	planned	Announcements by room	Anuncios personalizados por habitación	
+F694	ANN	P1	M2	IDEAS	planned	Announcements for one person	Anuncios dirigidos a usuarios específicos	
+F695	ANN	P1	M2	IDEAS	planned	Spoken agenda summary	Resumen hablado de la agenda	
+F696	ANN	P1	M2	IDEAS	planned	Spoken summary of pending tasks	Resumen hablado de tareas pendientes	
+F697	ANN	P1	M9	IDEAS	planned	PC task finished announcements	Aviso de tareas de PC terminadas	
+F698	ANN	P1	M2	IDEAS	planned	Parcel arrival announcements	Aviso de llegada de paquetes	
+F699	ANN	P1	M2	IDEAS	planned	Timer announcements	Anuncios de temporizadores	
+F700	ANN	P1	M2	IDEAS	planned	Intercom between rooms where supported	Intercomunicador entre habitaciones compatibles	
+F701	ANN	P1	M2	IDEAS	planned	Broadcast a recorded message	Difusión de mensajes grabados	
+F702	ANN	P1	M2	IDEAS	planned	Saved articles read aloud	Lectura de artículos guardados	
+F703	ANN	P1	M2	IDEAS	planned	AI agents answer on the speaker	Respuestas habladas de agentes de IA	
+F704	ANN	P1	M2	IDEAS	planned	Automatic choice of an available speaker	Selección automática de parlante disponible	
+F705	ANN	P1	M2	IDEAS	planned	Announcements prioritized by urgency	Priorización de anuncios por urgencia	
+F706	ANN	P1	M2	IDEAS	planned	Queue of pending announcements	Cola de anuncios pendientes	
+F707	ANN	P1	M2	IDEAS	planned	Repeat announcements nobody heard	Repetición de anuncios no escuchados	
+F708	ANN	P1	M2	IDEAS	planned	History of announcements	Historial de anuncios emitidos	
+F709	ANN	P1	M2	IDEAS	planned	Announcement volume by time of day	Ajuste de volumen según horario	
+F710	ANN	P1	M2	IDEAS	planned	Urgent-only announcement mode	Modo de anuncios exclusivamente urgentes	
+F711	ANN	P1	M2	IDEAS	planned	Playback failure detection	Detección de fallos de reproducción	
+F712	ANN	P1	M2	IDEAS	planned	Fallback to another speaker	Reproducción alternativa en otro dispositivo compatible	
+F713	DEV	P3	M9	IDEAS	planned	Start a routine from any authorized device	Iniciar una rutina desde cualquier dispositivo autorizado	
+F714	DEV	P3	M9	IDEAS	planned	Show speaker answers on the phone	Mostrar en el celular los resultados de una consulta del parlante	
+F715	DEV	P3	M9	IDEAS	planned	Short answers to the watch	Enviar respuestas breves al reloj	
+F716	DEV	P3	M9	IDEAS	planned	Critical alerts to several devices	Enviar alertas críticas a varios dispositivos	
+F717	DEV	P3	M9	IDEAS	planned	Turn a voice conversation into a visible task	Convertir una conversación de voz en una tarea visible	
+F718	DEV	P3	M9	IDEAS	planned	Approve an action from the phone	Aprobar una acción desde el celular	
+F719	DEV	P3	M9	IDEAS	planned	Recover the context of an interrupted task	Recuperar el contexto de una tarea interrumpida	
+F720	VIS	P2	M7	IDEAS	planned	Text from photos (OCR)	Extracción de texto mediante OCR	
+F721	VIS	P2	M7	IDEAS	planned	Receipts and invoices digitized	Digitalización de recibos	
+F722	VIS	P2	M7	IDEAS	planned	Barcodes	Lectura de códigos de barras	
+F723	VIS	P2	M7	IDEAS	planned	Image descriptions read aloud	Generación de descripciones de imágenes	
+F724	VIS	P2	M7	IDEAS	planned	Video transcription and subtitles	Transcripción de vídeos	
+F725	VIS	P2	M7	IDEAS	planned	Plant identification	Identificación asistida de plantas	
+F726	VIS	P2	M7	IDEAS	planned	Product labels read aloud	Lectura de etiquetas de productos	
+F727	VIS	P2	M7	IDEAS	planned	Explain charts and screenshots	Explicación de gráficos y capturas de pantalla	
+F728	VIS	P2	M7	IDEAS	planned	On-device image processing where possible	Procesamiento local de imágenes cuando sea posible	
+F729	MEM	P2	M7	IDEAS	planned	Universal search across own files and notes	Buscador universal de archivos	
+F730	MEM	P2	M7	IDEAS	planned	Capture ideas by voice	Registro de ideas mediante voz	
+F731	MEM	P2	M7	IDEAS	planned	Automatic note tagging	Etiquetado automático de notas	
+F732	MEM	P2	M7	IDEAS	planned	Editable personal memory	Memoria personal editable	
+F733	MEM	P2	M7	IDEAS	planned	Forget selected memories	Eliminación selectiva de recuerdos	
+F734	MEM	P2	M7	IDEAS	planned	Expiry date for temporary information	Fecha de caducidad para información temporal	
+F735	MEM	P2	M7	IDEAS	planned	Export personal memory	Exportación de la memoria personal	
+F736	MEM	P2	M7	IDEAS	planned	Answers that link to the original document	Respuestas con enlaces a documentos originales	
+F737	MEM	P2	M7	IDEAS	planned	Turn conversations into action plans	Conversión de conversaciones en planes de acción	
+F738	USER	P2	M8	IDEAS	planned	Individual household profiles	Perfiles individuales	
+F739	USER	P2	M8	IDEAS	planned	Quiet hours per person	Horarios de silencio individuales	
+F740	USER	P2	M8	IDEAS	planned	Routines per person	Rutinas personalizadas por usuario	
+F741	USER	P2	M8	IDEAS	planned	Shared household lists	Listas compartidas del hogar	
+F742	USER	P2	M8	IDEAS	planned	Limits for children	Límites de acceso para menores	
+F743	USER	P2	M8	IDEAS	planned	Guest mode	Modo invitado	
+F744	USER	P2	M8	IDEAS	planned	Revoke a person's access	Revocación de accesos	
+F745	AGENT	P3	M8	IDEAS	planned	Personal productivity agent	Agente personal de productividad	
+F746	AGENT	P3	M8	IDEAS	planned	Multi-step task planning	Planificación de tareas de varios pasos	
+F747	AGENT	P3	M8	IDEAS	planned	Results checked before they are delivered	Validación de resultados antes de entregarlos	
+F748	AGENT	P3	M8	IDEAS	planned	Cost estimate before running	Estimación de costes de ejecución	
+F749	AGENT	P3	M8	IDEAS	planned	Usage and time limits per agent	Límites de uso por agente	
+F750	AGENT	P1	M8	IDEAS	planned	Human approval before irreversible actions	Aprobación humana antes de acciones irreversibles	
+F751	AGENT	P3	M8	IDEAS	planned	Pause all agents	Pausa global de agentes	
+F752	AGENT	P1	M8	IDEAS	planned	Emergency stop for all automations	Botón de emergencia para detener automatizaciones	
+F753	AGENT	P3	M8	IDEAS	planned	Agent supervision panel	Panel de supervisión de agentes	
+F754	AGENT	P3	M8	IDEAS	planned	Local models for private tasks	Uso de modelos locales para tareas privadas	
+F755	AGENT	P3	M8	IDEAS	planned	Scheduled agents	Programación de agentes por horario	
+F756	INT	P2	M9	IDEAS	planned	Google Tasks	Integración con Google Tasks	
+F757	INT	P2	M9	IDEAS	planned	Google Photos	Integración con Google Photos	
+F758	INT	P2	M9	IDEAS	planned	Google Maps	Integración con Google Maps	
+F759	INT	P2	M2	IDEAS	planned	Weather services	Integración con servicios meteorológicos	
+F760	INT	P2	M9	IDEAS	planned	Amazon Alexa	Integración con Amazon Alexa	
+F761	INT	P2	M9	IDEAS	planned	GitHub	Integración con GitHub	
+F762	INT	P2	M9	IDEAS	planned	Webhooks in and out	Integración con webhooks	
+F763	PLAT	P2	M2	IDEAS	planned	Local processing first	Procesamiento local prioritario	
+F764	PLAT	P2	M2	IDEAS	planned	Local queue of pending actions, sent when back online	Cola local de acciones pendientes	
+F765	PLAT	P2	M2	IDEAS	planned	Cloud connection loss detection	Detección de pérdida de conexión con la nube	
+F766	PLAT	P2	M2	IDEAS	planned	Credential rotation reminders	Rotación de credenciales de integración	
+F767	PLAT	P2	M2	IDEAS	planned	Export audit logs	Exportación de registros de auditoría	
+F768	PLAT	P2	M2	IDEAS	planned	Settings backup and restore	Copias de seguridad de configuraciones	
+F769	PLAT	P2	M2	IDEAS	planned	Automation versions	Versionado de automatizaciones	
+F770	PLAT	P2	M2	IDEAS	planned	Maintenance mode	Modo de mantenimiento	
+F771	PLAT	P2	M2	IDEAS	planned	Expired integrations detected	Detección de integraciones caducadas	
+F772	PLAT	P2	M2	IDEAS	planned	External service quotas and rate limits	Gestión de cuotas de servicios externos	
+F773	PLAT	P2	M2	IDEAS	planned	Loop protection for automations	Mecanismos para evitar ciclos de automatización	
+F774	PLAT	P2	M2	IDEAS	planned	System health panel	Panel de salud del sistema	
+F775	PLAT	P2	M2	IDEAS	planned	Global stop for automations	Botón global de parada de automatizaciones	
+F776	EXP	P3	M8	IDEAS	planned	Assistant that learns repeated routines	Asistente que aprende rutinas repetidas	
+F777	EXP	P3	M8	IDEAS	planned	Build automations by talking	Creación guiada de automatizaciones mediante conversación	
+F778	EXP	P3	M8	IDEAS	planned	Shareable routine library and templates	Biblioteca de rutinas compartibles	
+F779	EXP	P3	M8	IDEAS	planned	Time saved by each automation	Estimación del tiempo ahorrado por automatización	
+F780	EXP	P3	M8	IDEAS	planned	Unified activity timeline	Línea de tiempo unificada de actividad	
+F781	EXP	P3	M8	IDEAS	planned	Unified alert center	Centro de alertas unificado	
+F782	EXP	P3	M8	IDEAS	planned	Daily ecosystem status report	Informe diario de estado del ecosistema	
