@@ -24,7 +24,9 @@ by local sessions (Windows PC with the Galaxy S25 Ultra on ADB) and cloud sessio
 - `./gradlew lint` (warnings are errors), `./gradlew detekt` (detekt-cli, config in `config/detekt.yml`,
   no baseline), `./gradlew testDebugUnitTest`.
 - `python -m codespell_lib` with `.codespellrc` (Spanish and Portuguese UI words are allow-listed there).
-- `python tools/features.py --check`.
+- `python tools/features.py --check` and `python tools/order.py --check` (after a catalog edit, run both without
+  `--check`: FEATURES.md and features/ORDER.md are generated). Build features in ORDER.md order unless the owner
+  says otherwise.
 - `python tools/ai/pinned_hosts.py --check`. Before each release, regenerate the reviewed AI host snapshot with
   `python tools/ai/pinned_hosts.py` and review its diff (ISP-SEC-013).
 - Kotlin compiler warnings are errors too (`allWarningsAsErrors`).
