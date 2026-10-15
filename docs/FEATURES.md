@@ -9,8 +9,8 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 
 | Status | Count |
 |---|---|
-| Implemented | 48 |
-| To implement | 721 |
+| Implemented | 49 |
+| To implement | 720 |
 | Pending: feasibility test | 13 |
 | Pending: blocked by a decision | 0 |
 
@@ -98,7 +98,7 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F093 | CAST | P1 | Speaker volume control | Control del volumen del parlante | 11 | Implemented | announcement volume set before speaking; the speaker's previous volume is restored after |
 | F094 | CAST | P1 | Narrate AI-generated information | Narración de información generada por IA | 10 | To implement |  |
 | F096 | ANN | P0 | Quiet hours | Configuración de horarios silenciosos | 23 | To implement | the MVP must respect them |
-| F097 | ANN | P1 | Automatic birthday announcement (from Google Sheets) | Anuncio automático de cumpleaños (desde Google Sheets) | 4+183 | To implement | 183 merged here; the MVP target |
+| F097 | ANN | P1 | Automatic birthday announcement (from Google Sheets) | Anuncio automático de cumpleaños (desde Google Sheets) | 4+183 | To implement | 183 merged here; the MVP target. Done so far: birthdays on the phone and 'announce now'; next: copy in the owner's Google Sheet, then the 08:00 routine |
 | F114 | RTN | P0 | Exact-time triggers: an exact alarm starts an expedited WorkManager job (WorkManager alone cannot guarantee 08:00) | Disparo a la hora exacta: una alarma exacta inicia un trabajo urgente de WorkManager (WorkManager solo no garantiza las 08:00) | NEW | To implement | correction to the PRD |
 | F115 | RTN | P0 | Missed-run policy: catch up or skip, never announce twice | Política de ejecuciones perdidas: recuperar u omitir, nunca anunciar dos veces | NEW | To implement |  |
 | F116 | RTN | P0 | Turn routines on and off | Activación y desactivación de rutinas | 228 | To implement |  |
@@ -109,7 +109,7 @@ The mapping from the original numbering is in the `origin` column (`NEW` = added
 | F131 | SHEET | P1 | Connect Google Sheets | Conexión con Google Sheets | 176 | To implement |  |
 | F132 | SHEET | P1 | Browse authorized sheets | Consulta de hojas autorizadas | 177 | To implement |  |
 | F133 | SHEET | P1 | Read rows and columns | Lectura de filas y columnas | 178 | To implement |  |
-| F134 | SHEET | P1 | Birthday lookup | Consulta de cumpleaños | 182 | To implement |  |
+| F134 | SHEET | P1 | Birthday lookup | Consulta de cumpleaños | 182 | Implemented | Birthdays tab: list by next date, age and days to go, form, imports from contacts and CSV (Google Sheets or Excel export) with review; 'announce now' on the speaker |
 | F416 | AI | P0 | Live AI provider registry from models.dev, refreshed daily, cached and schema-checked: no hard-coded provider list | Registro de proveedores de IA en vivo desde models.dev, actualizado a diario, en caché y validado: sin lista fija de proveedores | NEW | Implemented | ai/ProviderRegistry.kt; same component as the Movie Recommendation app |
 | F417 | AI | P0 | Bundled supplement for providers missing from the registry (SambaNova, Reka, Yandex, Baidu, Inflection) | Suplemento incluido para proveedores que no están en el registro (SambaNova, Reka, Yandex, Baidu, Inflection) | NEW | To implement |  |
 | F418 | SEC | P0 | Endpoint pinning: a key is only sent to its provider's known host; a changed base URL in the registry needs the user's confirmation | Fijación de endpoints: una clave solo viaja al host conocido de su proveedor; un cambio de URL en el registro requiere confirmación del usuario | NEW | Implemented | reviewed snapshot of every provider's host in the APK (tools/ai/pinned_hosts.py, ISP-SEC-013); providers newer than the snapshot need confirmation; every saved key keeps the endpoint it was checked against |

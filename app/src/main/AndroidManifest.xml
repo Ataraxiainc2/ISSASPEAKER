@@ -4,6 +4,8 @@
     - INTERNET: the Google profile photo (Sign in with Google), the AI provider registry (models.dev) and the AI
       providers the owner adds. Google Fonts arrive through the Play Services font provider, which downloads on
       its own.
+    - READ_CONTACTS: "Import from contacts" on the birthdays screen reads names and birthdays once, on the phone;
+      asked only when the owner taps it.
     - ACCESS_LOCAL_NETWORK: finding and talking to the Google Home speaker on the home Wi-Fi (Android 17 local
       network protection). Asked at run time, only on phones that have it, when the owner opens the speaker screen.
     Merged from libraries (documented in docs/security/THREAT-MODEL.md):
@@ -18,6 +20,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <!-- To open the Google Home app from the speaker screen when a speaker still has to be set up. -->
     <queries>

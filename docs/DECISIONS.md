@@ -36,6 +36,7 @@ recommendation; the CIO approves, changes or rejects it.
 | D26 | Google trusts only ISSASPEAKER's `play-access.yml` / `play-upload.yml` at pinned commits (ISP-SEC-012); callers pin the same commit | 2026-10-13 |
 | D27 | AI providers are presented and activated like the Movie Recommendation app (live list, key checked with the provider, model tested before saving); ISSASPEAKER keeps several providers with one default, on the phone | 2026-10-14 |
 | D28 | C25 approved: before the next Play release, Data safety declares that Ask AI questions go to the AI provider the owner chose (shared at the user's request, not collected by the developer, encrypted in transit) | 2026-10-14 |
+| D29 | Birthdays live in the app (list, form, imports from contacts and CSV, announce now); the copy in a Google Sheet in the owner's Drive is storage behind the app, not the interface. Play Data safety (D28) must also declare contacts: read on the device at the user's request, not collected | 2026-10-15 |
 
 ## Waiting for the CIO
 

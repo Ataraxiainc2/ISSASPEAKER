@@ -5,6 +5,7 @@ import android.os.LocaleList
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -44,6 +45,8 @@ import com.issasoda.issaspeaker.ui.account.AccountSheet
 import com.issasoda.issaspeaker.ui.ai.AddProviderViewModel
 import com.issasoda.issaspeaker.ui.ai.AiScreen
 import com.issasoda.issaspeaker.ui.ai.AiViewModel
+import com.issasoda.issaspeaker.ui.birthdays.BirthdaysScreen
+import com.issasoda.issaspeaker.ui.birthdays.BirthdaysViewModel
 import com.issasoda.issaspeaker.ui.home.HomeScreen
 import com.issasoda.issaspeaker.ui.settings.SettingsScreen
 import com.issasoda.issaspeaker.ui.signin.SignInScreen
@@ -55,12 +58,14 @@ import com.issasoda.issaspeaker.ui.theme.FontSession
 import com.issasoda.issaspeaker.ui.theme.IssaSpeakerTheme
 import kotlinx.coroutines.launch
 
-enum class Destination(val label: Int, val icon: ImageVector) {
+/** [inMenu] false: reached from another screen (About opens from Settings), so the menu keeps five entries. */
+enum class Destination(val label: Int, val icon: ImageVector, val inMenu: Boolean = true) {
     HOME(R.string.nav_home, Icons.Filled.Home),
+    BIRTHDAYS(R.string.nav_birthdays, Icons.Filled.DateRange),
     SPEAKER(R.string.nav_speaker, Icons.Filled.Notifications),
     AI(R.string.nav_ai, Icons.Filled.Face),
     SETTINGS(R.string.action_settings, Icons.Filled.Settings),
-    ABOUT(R.string.action_about, Icons.Filled.Info),
+    ABOUT(R.string.action_about, Icons.Filled.Info, inMenu = false),
     ADMIN(R.string.action_admin, Icons.Filled.Lock),
 }
 
@@ -102,7 +107,7 @@ fun IssaSpeakerApp(settings: AppSettings, accounts: AccountRepository, onDarkThe
 
     var destination by rememberSaveable { mutableStateOf(Destination.HOME) }
     if (destination == Destination.ADMIN && !adminVisible) destination = Destination.HOME
-    BackHandler(enabled = destination != Destination.HOME) { destination = Destination.HOME }
+    BackHandler(enabled = destination != Destination.HOME) { destination = destination.back() }
 
     var showAccount by rememberSaveable { mutableStateOf(false) }
     val accountActions = rememberAccountActions(accounts, settings) { showAccount = false }
@@ -125,9 +130,9 @@ fun IssaSpeakerApp(settings: AppSettings, accounts: AccountRepository, onDarkThe
         }
         NavigationSuiteScaffold(
             navigationSuiteItems = {
-                Destination.entries.filter { it != Destination.ADMIN || adminVisible }.forEach { item ->
+                Destination.entries.filter { it.inMenu && (it != Destination.ADMIN || adminVisible) }.forEach { item ->
                     item(
-                        selected = destination == item,
+                        selected = destination == item || (destination == Destination.ABOUT && item == Destination.SETTINGS),
                         onClick = { destination = item },
                         icon = { Icon(item.icon, contentDescription = null) },
                         label = { Text(stringResource(item.label)) },
@@ -141,14 +146,18 @@ fun IssaSpeakerApp(settings: AppSettings, accounts: AccountRepository, onDarkThe
     }
 }
 
+/** Where "back" goes: About returns to Settings, which opened it; everything else to Home. */
+private fun Destination.back(): Destination = if (this == Destination.ABOUT) Destination.SETTINGS else Destination.HOME
+
 /** The screen of one navigation destination. */
 @Composable
 private fun DestinationScreen(destination: Destination, state: AppState, themeMode: ThemeMode, settings: AppSettings, onNavigate: (Destination) -> Unit) {
     when (destination) {
         Destination.HOME -> HomeScreen(state, onOpenSettings = { onNavigate(Destination.SETTINGS) })
+        Destination.BIRTHDAYS -> BirthdaysScreen(state, viewModel<BirthdaysViewModel>())
         Destination.SPEAKER -> SpeakerScreen(state, viewModel<SpeakerViewModel>(), viewModel<SpeakViewModel>())
         Destination.AI -> AiScreen(state, viewModel<AiViewModel>(), viewModel<AddProviderViewModel>())
-        Destination.SETTINGS -> SettingsScreen(state, themeMode, settings::setThemeMode)
+        Destination.SETTINGS -> SettingsScreen(state, themeMode, settings::setThemeMode, onOpenAbout = { onNavigate(Destination.ABOUT) })
         Destination.ABOUT -> AboutScreen(state)
         Destination.ADMIN -> AdminAboutScreen(state)
     }
@@ -186,6 +195,7 @@ private fun rememberAccountActions(accounts: AccountRepository, settings: AppSet
                 val services = context.applicationContext as IssaSpeakerApplication
                 services.aiKeys.eraseAll()
                 services.speakerStore.clear()
+                services.birthdays.clear()
                 context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.getEmptyLocaleList()
                 onDone()
             }

@@ -26,6 +26,8 @@ be checked.
 | Google account name, email and photo | To sign you in and show your account | On your phone |
 | Google data you authorize (for example a Google Sheet, your calendar, Drive files, Gmail) | To read birthdays, reminders and summaries you ask for | Read from Google when needed; results kept on your phone |
 | API keys you enter (AI providers, Last.fm) | To call those services for you | Encrypted on your phone. The key that opens them is backed up by Google Play services (Block Store), end-to-end encrypted with your screen lock. Planned: an encrypted copy in a hidden app folder of **your own** Google Drive, so you can restore the keys on a new phone |
+| Birthdays you add or import (name, day, month, optional year, note) | To announce them | On your phone, outside backups. Planned: a copy in a Google Sheet in **your own** Drive |
+| Contacts, only if you tap "Import from contacts" | To find the birthdays already saved there | Read on your phone once; only the people you tick are kept |
 | Conversation history with the AI, routine history | To show you your history | Encrypted on your phone |
 | Music listening data (Spotify, Last.fm) | To show your statistics and control playback | On your phone |
 | Settings (language, theme) | To remember your choices | On your phone |

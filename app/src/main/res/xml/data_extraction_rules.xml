@@ -2,7 +2,8 @@
 <!--
     Secrets never leave the phone through backup or device transfer (catalog F017).
     Excluded: the database (conversation history and cached data), the encrypted preferences and the
-    secrets/ folder that hold wrapped AI keys. Their Keystore keys cannot leave the device anyway, so a
+    secrets/ folder that hold wrapped AI keys, and birthdays.json (other people's dates; the owner's Google Sheet
+    copy is what moves to a new phone). Their Keystore keys cannot leave the device anyway, so a
     restored copy would be unreadable; excluding them keeps even the ciphertext at home.
     Cloud backup is off altogether (allowBackup="false" in the manifest); these rules matter for device-to-device
     transfer, which Android 12+ performs even then.
@@ -13,11 +14,13 @@
         <exclude domain="sharedpref" path="secure_prefs.xml" />
         <exclude domain="file" path="secrets/" />
         <exclude domain="file" path="cast_audio/" />
+        <exclude domain="file" path="birthdays.json" />
     </cloud-backup>
     <device-transfer>
         <exclude domain="database" path="." />
         <exclude domain="sharedpref" path="secure_prefs.xml" />
         <exclude domain="file" path="secrets/" />
         <exclude domain="file" path="cast_audio/" />
+        <exclude domain="file" path="birthdays.json" />
     </device-transfer>
 </data-extraction-rules>

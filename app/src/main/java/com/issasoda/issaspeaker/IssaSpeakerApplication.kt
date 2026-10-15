@@ -11,6 +11,7 @@ import com.issasoda.issaspeaker.ai.AiKeyStore
 import com.issasoda.issaspeaker.ai.AiSpeech
 import com.issasoda.issaspeaker.ai.KeyVault
 import com.issasoda.issaspeaker.ai.ProviderRegistry
+import com.issasoda.issaspeaker.data.birthdays.BirthdayStore
 import com.issasoda.issaspeaker.speaker.SpeakerAnnouncer
 import com.issasoda.issaspeaker.speaker.SpeakerConnection
 import com.issasoda.issaspeaker.speaker.SpeakerDiscovery
@@ -27,6 +28,8 @@ class IssaSpeakerApplication : Application(), SingletonImageLoader.Factory {
     val providerRegistry by lazy { ProviderRegistry(this, http) }
     val aiClient by lazy { AiClient(http) }
     val aiKeys by lazy { AiKeyStore(this, KeyVault(this)) }
+
+    val birthdays by lazy { BirthdayStore(this) }
 
     val speakerStore by lazy { SpeakerStore(this) }
     val speakerDiscovery by lazy { SpeakerDiscovery(this) }

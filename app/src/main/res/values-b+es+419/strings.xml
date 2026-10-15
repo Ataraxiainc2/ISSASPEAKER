@@ -235,4 +235,65 @@
     <string name="signin_button">Iniciar sesión</string>
     <string name="signin_button_sub">con Google</string>
     <string name="signin_skip">Explorar sin cuenta</string>
+
+    <!-- Birthdays -->
+    <string name="nav_birthdays">Cumpleaños</string>
+    <string name="settings_about_body">Qué hace la app, sus funciones y cómo se protegen tus datos.</string>
+    <string name="settings_about_open">Abrir Acerca de</string>
+    <string name="birthday_add">Agregar cumpleaños</string>
+    <string name="birthday_edit">Editar cumpleaños</string>
+    <string name="birthday_name">Nombre</string>
+    <string name="birthday_name_required">Escribe un nombre.</string>
+    <string name="birthday_day">Día</string>
+    <string name="birthday_day_invalid">Ese día no existe en ese mes.</string>
+    <string name="birthday_year">Año (opcional)</string>
+    <string name="birthday_year_help">Con el año, el parlante también dice la edad.</string>
+    <string name="birthday_year_invalid">Escribe un año entre 1900 y este año.</string>
+    <string name="birthday_note">Nota (opcional)</string>
+    <string name="birthday_note_help">Algo para recordar: una idea de regalo, un dato curioso.</string>
+    <string name="birthday_save">Guardar</string>
+    <string name="birthday_delete">Eliminar</string>
+    <string name="birthday_delete_title">¿Eliminar a %1$s?</string>
+    <string name="birthday_delete_body">El cumpleaños se borra de este teléfono.</string>
+    <string name="birthday_today_title">Hoy</string>
+    <string name="birthday_next_title">Próximo cumpleaños</string>
+    <string name="birthday_today">hoy</string>
+    <string name="birthday_turns">cumple %1$d</string>
+    <string name="birthday_none_yet">Todavía no hay cumpleaños.</string>
+    <string name="birthday_announce">Anunciar en el parlante</string>
+    <string name="birthday_announced">Anunciado en el parlante.</string>
+    <string name="birthday_no_speaker">Primero elige un parlante en la pestaña Parlante.</string>
+    <string name="birthday_empty_title">Agrega los cumpleaños de tu familia</string>
+    <string name="birthday_empty_body">Agrégalos uno por uno con el botón de abajo, o trae muchos a la vez desde tus contactos o desde un archivo (en Google Sheets: Archivo, Descargar, CSV).</string>
+    <string name="birthday_import_more">Traer varios a la vez</string>
+    <string name="birthday_from_contacts">Desde contactos</string>
+    <string name="birthday_from_file">Desde un archivo (CSV)</string>
+    <string name="birthday_import_none_contacts">Ninguno de tus contactos tiene un cumpleaños guardado.</string>
+    <string name="birthday_import_none_file">No se encontraron nombres y fechas. El archivo necesita una columna de nombre y una de fecha (por ejemplo Nombre y Fecha).</string>
+    <string name="birthday_read_day_first">Fechas leídas como día/mes.</string>
+    <string name="birthday_read_month_first">Fechas leídas como mes/día.</string>
+    <string name="birthday_swap">Invertir</string>
+    <string name="birthday_say">Hoy cumple años %1$s. ¡Feliz cumpleaños!</string>
+    <string name="birthday_say_next">Hoy no hay cumpleaños. El próximo es el de %1$s, el %2$s.</string>
+    <string name="birthday_say_none_at_all">Todavía no hay cumpleaños guardados.</string>
+    <plurals name="birthday_in_days">
+        <item quantity="one">en %d día</item>
+        <item quantity="many">en %d días</item>
+        <item quantity="other">en %d días</item>
+    </plurals>
+    <plurals name="birthday_skipped">
+        <item quantity="one">Se omitió %d fila sin nombre o sin fecha válida</item>
+        <item quantity="many">Se omitieron %d filas sin nombre o sin fecha válida</item>
+        <item quantity="other">Se omitieron %d filas sin nombre o sin fecha válida</item>
+    </plurals>
+    <plurals name="birthday_import_confirm">
+        <item quantity="one">Importar %d</item>
+        <item quantity="many">Importar %d</item>
+        <item quantity="other">Importar %d</item>
+    </plurals>
+    <plurals name="birthday_say_with_age">
+        <item quantity="one">Hoy cumple años %1$s: cumple %2$d año. ¡Feliz cumpleaños!</item>
+        <item quantity="many">Hoy cumple años %1$s: cumple %2$d años. ¡Feliz cumpleaños!</item>
+        <item quantity="other">Hoy cumple años %1$s: cumple %2$d años. ¡Feliz cumpleaños!</item>
+    </plurals>
 </resources>

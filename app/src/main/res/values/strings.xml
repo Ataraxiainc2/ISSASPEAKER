@@ -235,4 +235,61 @@
     <string name="signin_button">Sign in</string>
     <string name="signin_button_sub">with Google</string>
     <string name="signin_skip">Explore without an account</string>
+
+    <!-- Birthdays -->
+    <string name="nav_birthdays">Birthdays</string>
+    <string name="settings_about_body">What the app does, its features and how your data is protected.</string>
+    <string name="settings_about_open">Open About</string>
+    <string name="birthday_add">Add birthday</string>
+    <string name="birthday_edit">Edit birthday</string>
+    <string name="birthday_name">Name</string>
+    <string name="birthday_name_required">Write a name.</string>
+    <string name="birthday_day">Day</string>
+    <string name="birthday_day_invalid">That day does not exist in that month.</string>
+    <string name="birthday_year">Year (optional)</string>
+    <string name="birthday_year_help">With the year, the speaker also says the age.</string>
+    <string name="birthday_year_invalid">Write a year between 1900 and this year.</string>
+    <string name="birthday_note">Note (optional)</string>
+    <string name="birthday_note_help">Something to remember: a gift idea, a fun fact.</string>
+    <string name="birthday_save">Save</string>
+    <string name="birthday_delete">Delete</string>
+    <string name="birthday_delete_title">Delete %1$s?</string>
+    <string name="birthday_delete_body">The birthday is removed from this phone.</string>
+    <string name="birthday_today_title">Today</string>
+    <string name="birthday_next_title">Next birthday</string>
+    <string name="birthday_today">today</string>
+    <string name="birthday_turns">turns %1$d</string>
+    <string name="birthday_none_yet">No birthdays yet.</string>
+    <string name="birthday_announce">Announce on the speaker</string>
+    <string name="birthday_announced">Announced on the speaker.</string>
+    <string name="birthday_no_speaker">Choose a speaker in the Speaker tab first.</string>
+    <string name="birthday_empty_title">Add your family\'s birthdays</string>
+    <string name="birthday_empty_body">Add them one by one with the button below, or bring many at once from your contacts or from a file (in Google Sheets: File, Download, CSV).</string>
+    <string name="birthday_import_more">Bring more at once</string>
+    <string name="birthday_from_contacts">From contacts</string>
+    <string name="birthday_from_file">From a file (CSV)</string>
+    <string name="birthday_import_none_contacts">None of your contacts has a birthday saved.</string>
+    <string name="birthday_import_none_file">No names and dates were found. The file needs a name column and a date column (for example Name and Birthday).</string>
+    <string name="birthday_read_day_first">Dates read as day/month.</string>
+    <string name="birthday_read_month_first">Dates read as month/day.</string>
+    <string name="birthday_swap">Swap</string>
+    <string name="birthday_say">Today is %1$s\'s birthday. Happy birthday!</string>
+    <string name="birthday_say_next">There are no birthdays today. The next one is %1$s, on %2$s.</string>
+    <string name="birthday_say_none_at_all">There are no birthdays saved yet.</string>
+    <plurals name="birthday_in_days">
+        <item quantity="one">in %d day</item>
+        <item quantity="other">in %d days</item>
+    </plurals>
+    <plurals name="birthday_skipped">
+        <item quantity="one">%d row without a name or a valid date was skipped</item>
+        <item quantity="other">%d rows without a name or a valid date were skipped</item>
+    </plurals>
+    <plurals name="birthday_import_confirm">
+        <item quantity="one">Import %d</item>
+        <item quantity="other">Import %d</item>
+    </plurals>
+    <plurals name="birthday_say_with_age">
+        <item quantity="one">Today is %1$s\'s birthday: %2$d year old. Happy birthday!</item>
+        <item quantity="other">Today is %1$s\'s birthday: %2$d years old. Happy birthday!</item>
+    </plurals>
 </resources>

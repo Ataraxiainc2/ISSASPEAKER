@@ -95,7 +95,7 @@ F093	CAST	P1	M1	11	implemented	Speaker volume control	Control del volumen del pa
 F094	CAST	P1	M1	10	planned	Narrate AI-generated information	Narración de información generada por IA	
 F095	CAST	P2	M4	21	validate	Play playlists through Google Cast	Reproducción de listas mediante Google Cast	duplicate ID 21 in P2 and P4 merged here; advanced control stays experimental
 F096	ANN	P0	M1	23	planned	Quiet hours	Configuración de horarios silenciosos	the MVP must respect them
-F097	ANN	P1	M1	4+183	planned	Automatic birthday announcement (from Google Sheets)	Anuncio automático de cumpleaños (desde Google Sheets)	183 merged here; the MVP target
+F097	ANN	P1	M1	4+183	planned	Automatic birthday announcement (from Google Sheets)	Anuncio automático de cumpleaños (desde Google Sheets)	183 merged here; the MVP target. Done so far: birthdays on the phone and 'announce now'; next: copy in the owner's Google Sheet, then the 08:00 routine
 F098	ANN	P0	M2	14	planned	Custom announcement routines	Creación de rutinas de anuncios personalizados	
 F099	ANN	P0	M2	24	planned	Announcements only on chosen days	Anuncios exclusivos para determinados días	
 F100	ANN	P0	M2	25	planned	Play personal reports	Reproducción de informes personales	
@@ -132,7 +132,7 @@ F130	RTN	P4	M8	NEW	validate	Adaptive routines from historical usage patterns	Gen
 F131	SHEET	P1	M1	176	planned	Connect Google Sheets	Conexión con Google Sheets	
 F132	SHEET	P1	M1	177	planned	Browse authorized sheets	Consulta de hojas autorizadas	
 F133	SHEET	P1	M1	178	planned	Read rows and columns	Lectura de filas y columnas	
-F134	SHEET	P1	M1	182	planned	Birthday lookup	Consulta de cumpleaños	
+F134	SHEET	P1	M1	182	implemented	Birthday lookup	Consulta de cumpleaños	Birthdays tab: list by next date, age and days to go, form, imports from contacts and CSV (Google Sheets or Excel export) with review; 'announce now' on the speaker
 F135	SHEET	P1	M2	184	planned	Anniversary lookup	Consulta de aniversarios	
 F136	SHEET	P1	M2	185	planned	Important-date reminders	Recordatorios de fechas importantes	
 F137	SHEET	P1	M2	179	planned	Search records by name	Búsqueda de registros por nombre	

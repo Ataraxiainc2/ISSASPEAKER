@@ -47,7 +47,7 @@ private val themeLabels = mapOf(
 )
 
 @Composable
-fun SettingsScreen(state: AppState, themeMode: ThemeMode, onThemeModeChange: (ThemeMode) -> Unit) {
+fun SettingsScreen(state: AppState, themeMode: ThemeMode, onThemeModeChange: (ThemeMode) -> Unit, onOpenAbout: () -> Unit) {
     val localeManager = LocalContext.current.getSystemService(LocaleManager::class.java)
     val currentLanguage = localeManager.applicationLocales.toLanguageTags()
     val uriHandler = LocalUriHandler.current
@@ -86,6 +86,12 @@ fun SettingsScreen(state: AppState, themeMode: ThemeMode, onThemeModeChange: (Th
                 SectionCard(stringResource(R.string.settings_privacy)) {
                     Text(stringResource(R.string.settings_privacy_body), style = MaterialTheme.typography.bodyLarge)
                     TextButton(onClick = { uriHandler.openUri(Links.PRIVACY) }) { Text(stringResource(R.string.action_read_privacy)) }
+                }
+            }
+            item(key = "about") {
+                SectionCard(stringResource(R.string.action_about)) {
+                    Text(stringResource(R.string.settings_about_body), style = MaterialTheme.typography.bodyLarge)
+                    TextButton(onClick = onOpenAbout) { Text(stringResource(R.string.settings_about_open)) }
                 }
             }
         }
