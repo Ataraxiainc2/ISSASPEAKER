@@ -264,12 +264,12 @@
     <string name="birthday_announced">Announced on the speaker.</string>
     <string name="birthday_no_speaker">Choose a speaker in the Speaker tab first.</string>
     <string name="birthday_empty_title">Add your family\'s birthdays</string>
-    <string name="birthday_empty_body">Add them one by one with the button below, or bring many at once from your contacts or from a file (in Google Sheets: File, Download, CSV).</string>
+    <string name="birthday_empty_body">Add them one by one with the button below, or bring many at once from your contacts or from a spreadsheet: pick a Google Sheet in Drive, an Excel file or a CSV.</string>
     <string name="birthday_import_more">Bring more at once</string>
     <string name="birthday_from_contacts">From contacts</string>
-    <string name="birthday_from_file">From a file (CSV)</string>
+    <string name="birthday_from_file">From Google Sheets or Excel</string>
     <string name="birthday_import_none_contacts">None of your contacts has a birthday saved.</string>
-    <string name="birthday_import_none_file">No names and dates were found. The file needs a name column and a date column (for example Name and Birthday).</string>
+    <string name="birthday_import_none_file">No names and dates were found. The sheet needs a name column and a date column (for example Name and Birthday) in its first tab with data.</string>
     <string name="birthday_read_day_first">Dates read as day/month.</string>
     <string name="birthday_read_month_first">Dates read as month/day.</string>
     <string name="birthday_swap">Swap</string>

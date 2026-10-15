@@ -40,6 +40,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.issasoda.issaspeaker.R
 import com.issasoda.issaspeaker.data.birthdays.Birthday
+import com.issasoda.issaspeaker.data.birthdays.SheetFiles
 import com.issasoda.issaspeaker.data.birthdays.upcoming
 import com.issasoda.issaspeaker.ui.AppState
 import com.issasoda.issaspeaker.ui.components.AdaptiveGrid
@@ -70,7 +71,7 @@ fun BirthdaysScreen(app: AppState, viewModel: BirthdaysViewModel) {
     val file = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(viewModel::importFile) }
     val imports = ImportActions(
         onContacts = { contacts.launch(Manifest.permission.READ_CONTACTS) },
-        onFile = { file.launch(arrayOf("text/csv", "text/comma-separated-values", "application/csv", "text/plain")) },
+        onFile = { file.launch(SheetFiles.pickerTypes) },
     )
 
     ScreenScaffold(

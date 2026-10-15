@@ -11,30 +11,28 @@ import com.issasoda.issaspeaker.data.birthdays.BirthdayImport
 import com.issasoda.issaspeaker.data.birthdays.BirthdaySource
 import com.issasoda.issaspeaker.data.birthdays.ContactBirthdays
 import com.issasoda.issaspeaker.data.birthdays.ImportCandidate
+import com.issasoda.issaspeaker.data.birthdays.SheetFiles
 import com.issasoda.issaspeaker.data.birthdays.upcoming
 import com.issasoda.issaspeaker.speaker.AnnounceResult
 import com.issasoda.issaspeaker.speaker.VoiceChoice
 import com.issasoda.issaspeaker.ui.speaker.SpeakerViewModel
 import com.issasoda.issaspeaker.ui.speaker.TestState
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.IOException
 import java.time.LocalDate
 import java.util.Locale
 
-/** People found by an import, waiting for the owner to tick who to add. [fileText] lets a file be re-read day/month swapped. */
+/** People found by an import, waiting for the owner to tick who to add. [fileRows] let a file be re-read day/month swapped. */
 data class ImportState(
     val source: BirthdaySource,
     val candidates: List<ImportCandidate>,
     val selected: Set<Int>,
     val dayFirst: Boolean,
     val skippedRows: Int,
-    val fileText: String? = null,
+    val fileRows: List<List<String>> = emptyList(),
 )
 
 /**
@@ -73,20 +71,11 @@ class BirthdaysViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    /** Reads a CSV the owner picked (exported from Google Sheets or Excel). At most 2 MB is read. */
+    /** Reads the spreadsheet the owner picked: a Google Sheet in Drive, an Excel workbook or a CSV. */
     fun importFile(uri: Uri) {
         viewModelScope.launch {
-            val text = withContext(Dispatchers.IO) {
-                try {
-                    getApplication<Application>().contentResolver.openInputStream(uri)?.use { input ->
-                        String(input.readNBytes(MAX_FILE_BYTES), Charsets.UTF_8).removePrefix(BOM)
-                    }
-                } catch (_: IOException) {
-                    null
-                }
-            }
-            val parsed = text?.let { BirthdayImport.parseCsv(it) }
-            _import.value = parsed?.let { review(BirthdaySource.FILE, it.candidates, it.dayFirst, it.skippedRows).copy(fileText = text) }
+            val parsed = SheetFiles.read(getApplication(), uri)
+            _import.value = parsed?.let { review(BirthdaySource.FILE, it.candidates, it.dayFirst, it.skippedRows).copy(fileRows = it.rows) }
                 ?: ImportState(BirthdaySource.FILE, emptyList(), emptySet(), dayFirst = true, skippedRows = 0)
         }
     }
@@ -94,9 +83,8 @@ class BirthdaysViewModel(app: Application) : AndroidViewModel(app) {
     /** The file's dates were read the wrong way round (3/4 as 3 April instead of 4 March): read them again swapped. */
     fun swapDateOrder() {
         val current = _import.value ?: return
-        val text = current.fileText ?: return
-        val parsed = BirthdayImport.parseCsv(text, dayFirst = !current.dayFirst)
-        _import.value = review(BirthdaySource.FILE, parsed.candidates, parsed.dayFirst, parsed.skippedRows).copy(fileText = text)
+        val parsed = BirthdayImport.parseRows(current.fileRows, dayFirst = !current.dayFirst)
+        _import.value = review(BirthdaySource.FILE, parsed.candidates, parsed.dayFirst, parsed.skippedRows).copy(fileRows = current.fileRows)
     }
 
     fun toggle(index: Int) = _import.update { state ->
@@ -145,10 +133,4 @@ class BirthdaysViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private fun locale(): Locale = getApplication<Application>().resources.configuration.locales[0]
-
-    private companion object {
-        const val MAX_FILE_BYTES = 2 * 1024 * 1024
-        val BOM = Char(BYTE_ORDER_MARK).toString()
-        const val BYTE_ORDER_MARK = 0xFEFF
-    }
 }

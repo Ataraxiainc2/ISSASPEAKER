@@ -264,12 +264,12 @@
     <string name="birthday_announced">Anunciado en el parlante.</string>
     <string name="birthday_no_speaker">Primero elige un parlante en la pestaña Parlante.</string>
     <string name="birthday_empty_title">Agrega los cumpleaños de tu familia</string>
-    <string name="birthday_empty_body">Agrégalos uno por uno con el botón de abajo, o trae muchos a la vez desde tus contactos o desde un archivo (en Google Sheets: Archivo, Descargar, CSV).</string>
+    <string name="birthday_empty_body">Agrégalos uno por uno con el botón de abajo, o trae muchos a la vez desde tus contactos o desde una hoja de cálculo: elige una hoja de Google Sheets en Drive, un Excel o un CSV.</string>
     <string name="birthday_import_more">Traer varios a la vez</string>
     <string name="birthday_from_contacts">Desde contactos</string>
-    <string name="birthday_from_file">Desde un archivo (CSV)</string>
+    <string name="birthday_from_file">Desde Google Sheets o Excel</string>
     <string name="birthday_import_none_contacts">Ninguno de tus contactos tiene un cumpleaños guardado.</string>
-    <string name="birthday_import_none_file">No se encontraron nombres y fechas. El archivo necesita una columna de nombre y una de fecha (por ejemplo Nombre y Fecha).</string>
+    <string name="birthday_import_none_file">No se encontraron nombres y fechas. La hoja necesita una columna de nombre y una de fecha (por ejemplo Nombre y Fecha) en su primera pestaña con datos.</string>
     <string name="birthday_read_day_first">Fechas leídas como día/mes.</string>
     <string name="birthday_read_month_first">Fechas leídas como mes/día.</string>
     <string name="birthday_swap">Invertir</string>

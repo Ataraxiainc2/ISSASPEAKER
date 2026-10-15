@@ -264,12 +264,12 @@
     <string name="birthday_announced">Anunciado no alto-falante.</string>
     <string name="birthday_no_speaker">Primeiro escolha um alto-falante na aba Alto-falante.</string>
     <string name="birthday_empty_title">Adicione os aniversários da sua família</string>
-    <string name="birthday_empty_body">Adicione um por um com o botão abaixo, ou traga vários de uma vez dos seus contatos ou de um arquivo (no Google Sheets: Arquivo, Fazer download, CSV).</string>
+    <string name="birthday_empty_body">Adicione um por um com o botão abaixo, ou traga vários de uma vez dos seus contatos ou de uma planilha: escolha uma planilha do Google Sheets no Drive, um Excel ou um CSV.</string>
     <string name="birthday_import_more">Trazer vários de uma vez</string>
     <string name="birthday_from_contacts">Dos contatos</string>
-    <string name="birthday_from_file">De um arquivo (CSV)</string>
+    <string name="birthday_from_file">Do Google Sheets ou Excel</string>
     <string name="birthday_import_none_contacts">Nenhum dos seus contatos tem aniversário salvo.</string>
-    <string name="birthday_import_none_file">Nenhum nome e data foram encontrados. O arquivo precisa de uma coluna de nome e uma de data (por exemplo Nome e Data).</string>
+    <string name="birthday_import_none_file">Nenhum nome e data foram encontrados. A planilha precisa de uma coluna de nome e uma de data (por exemplo Nome e Data) na primeira aba com dados.</string>
     <string name="birthday_read_day_first">Datas lidas como dia/mês.</string>
     <string name="birthday_read_month_first">Datas lidas como mês/dia.</string>
     <string name="birthday_swap">Inverter</string>

@@ -9,7 +9,10 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.io.ByteArrayOutputStream
 import java.time.LocalDate
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 
 class BirthdaysTest {
 
@@ -77,5 +80,30 @@ class BirthdaysTest {
     fun `the same person is recognized across imports`() {
         assertTrue(birthday("Ana  Pérez", 3, 25).sameAs(birthday("ana pérez", 3, 25, 1990)))
         assertFalse(birthday("Ana", 3, 25).sameAs(birthday("Ana", 3, 26)))
+    }
+
+    @Test
+    fun `a Google Sheet exported as Excel is read, dates as serial numbers or text, other tabs skipped`() {
+        val shared = "<sst><si><t>NOMBRE</t></si><si><t>FN</t></si><si><t>Ana &amp; Co</t></si><si><r><t>Lu</t></r><r><t>is</t></r></si></sst>"
+        val cumple = "<worksheet><sheetData>" +
+            "<row r=\"1\"><c r=\"A1\" t=\"s\"><v>0</v></c><c r=\"B1\" t=\"s\"><v>1</v></c></row>" +
+            "<row r=\"2\"><c r=\"A2\" t=\"s\"><v>2</v></c><c r=\"B2\"><v>32957</v></c></row>" +
+            "<row r=\"3\"><c r=\"A3\" t=\"s\"><v>3</v></c><c r=\"B3\" t=\"inlineStr\"><is><t>7/11/1985</t></is></c></row>" +
+            "</sheetData></worksheet>"
+        val facts = "<worksheet><sheetData><row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>A fact</t></is></c></row></sheetData></worksheet>"
+        val bytes = ByteArrayOutputStream().also { out ->
+            ZipOutputStream(out).use { zip ->
+                listOf("xl/sharedStrings.xml" to shared, "xl/worksheets/sheet2.xml" to facts, "xl/worksheets/sheet1.xml" to cumple).forEach { (name, xml) ->
+                    zip.putNextEntry(ZipEntry(name))
+                    zip.write(xml.toByteArray())
+                    zip.closeEntry()
+                }
+            }
+        }.toByteArray()
+
+        val result = BirthdayImport.parseXlsx(bytes)!!
+
+        assertEquals(listOf(ImportCandidate("Ana & Co", 3, 25, 1990, ""), ImportCandidate("Luis", 11, 7, 1985, "")), result.candidates)
+        assertNull(BirthdayImport.parseXlsx("not a zip".toByteArray()))
     }
 }

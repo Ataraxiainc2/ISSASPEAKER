@@ -5,13 +5,18 @@ import java.time.LocalDate
 /** A person read from a file or the contacts, before the owner confirms the import. */
 data class ImportCandidate(val name: String, val month: Int, val day: Int, val year: Int?, val note: String)
 
-/** A file read for import: the people found, and how the dates were read. */
-data class FileImport(val candidates: List<ImportCandidate>, val dayFirst: Boolean, val skippedRows: Int)
+/** A file read for import: the people found, how the dates were read, and the rows (to read them again swapped). */
+data class FileImport(
+    val candidates: List<ImportCandidate>,
+    val dayFirst: Boolean,
+    val skippedRows: Int,
+    val rows: List<List<String>> = emptyList(),
+)
 
 /**
- * Reads birthdays from the owner's files and contacts (catalog F134): a CSV exported from Google Sheets or Excel (any
- * column order, a header such as "Nombre", "Name", "FN", "Fecha", "Birthday", "Data de nascimento"), and contact
- * birthday strings. Nothing here is executed or sent anywhere; text only.
+ * Reads birthdays from the owner's files and contacts (catalog F134): a Google Sheet picked in Drive, an Excel workbook
+ * or a CSV (any column order, a header such as "Nombre", "Name", "FN", "Fecha", "Birthday", "Data de nascimento"),
+ * and contact birthday strings. Nothing here is executed or sent anywhere; text only.
  */
 object BirthdayImport {
 
@@ -21,8 +26,15 @@ object BirthdayImport {
     private const val MAX_ROWS = 5_000
 
     /** Parses CSV text. [dayFirst] null: decided from the data (a first number above 12 means day first), else day first. */
-    fun parseCsv(text: String, dayFirst: Boolean? = null): FileImport {
-        val rows = csvRows(text).filter { row -> row.any { it.isNotBlank() } }.take(MAX_ROWS)
+    fun parseCsv(text: String, dayFirst: Boolean? = null): FileImport = parseRows(csvRows(text), dayFirst)
+
+    /** The first sheet of a workbook that has names and dates (a Google Sheet's other tabs are skipped). */
+    fun parseXlsx(bytes: ByteArray): FileImport? =
+        XlsxReader.sheets(bytes)?.map { parseRows(it, null) }?.let { sheets -> sheets.firstOrNull { it.candidates.isNotEmpty() } ?: sheets.first() }
+
+    /** Rows from any source: a header row is found by its names; without one, name is column A and date column B. */
+    fun parseRows(allRows: List<List<String>>, dayFirst: Boolean? = null): FileImport {
+        val rows = allRows.filter { row -> row.any { it.isNotBlank() } }.take(MAX_ROWS)
         if (rows.isEmpty()) return FileImport(emptyList(), dayFirst ?: true, 0)
         val header = rows.first().map { it.trim().lowercase() }
         val nameColumn = header.indexOfFirst { h -> nameHeaders.any { h.startsWith(it) } }
@@ -44,12 +56,19 @@ object BirthdayImport {
                 ImportCandidate(person, parsed.month, parsed.day, parsed.year, if (noteColumn >= 0) row.getOrNull(noteColumn)?.trim().orEmpty() else "")
             }
         }
-        return FileImport(candidates, order, skipped)
+        return FileImport(candidates, order, skipped, rows)
     }
 
-    /** A date as people write it: 25/3/1990, 3/25/1990, 1990-03-25, 25-03, 25.03.1990 or a contact's "--03-25". */
+    /**
+     * A date as people write it: 25/3/1990, 3/25/1990, 1990-03-25, 25-03, 25.03.1990, a contact's "--03-25", or an
+     * Excel date (a serial day number such as 32957, counted from 30 December 1899).
+     */
     fun parseDate(text: String, dayFirst: Boolean): ParsedDate? {
         val value = text.trim()
+        value.toDoubleOrNull()?.takeIf { it >= MIN_SERIAL && it < MAX_SERIAL }?.let { serial ->
+            val date = EXCEL_EPOCH.plusDays(serial.toLong())
+            return checked(date.monthValue, date.dayOfMonth, date.year)
+        }
         Regex("""^(\d{4})-(\d{1,2})-(\d{1,2})""").find(value)?.let { m ->
             return checked(m.groupValues[2].toInt(), m.groupValues[3].toInt(), m.groupValues[1].toInt())
         }
@@ -147,5 +166,10 @@ object BirthdayImport {
     }
 
     private const val MIN_YEAR = 1900
+
+    /** Excel serial dates: 1 March 1900 (61) to 31 December 2099; smaller numbers are a day or a month, not a date. */
+    private const val MIN_SERIAL = 61.0
+    private const val MAX_SERIAL = 73_051.0
+    private val EXCEL_EPOCH: LocalDate = LocalDate.of(1899, 12, 30)
     private const val CENTURY_PIVOT = 30
 }
