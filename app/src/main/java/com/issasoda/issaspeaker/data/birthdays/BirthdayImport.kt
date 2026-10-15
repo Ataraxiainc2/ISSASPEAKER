@@ -109,10 +109,11 @@ object BirthdayImport {
         return !(monthFirst && !dayFirstSeen)
     }
 
-    /** RFC 4180 rows: commas or semicolons (whichever the first line has more of), quoted fields, CRLF or LF. */
+    /** RFC 4180 rows: commas, semicolons or tabs, quoted fields, CRLF or LF. */
     private fun csvRows(text: String): List<List<String>> {
         val firstLine = text.lineSequence().firstOrNull().orEmpty()
-        val separator = if (firstLine.count { it == ';' } > firstLine.count { it == ',' }) ';' else ','
+        // Whichever of comma, semicolon or tab the first line has most of (Drive may export tab-separated values).
+        val separator = listOf(',', ';', '\t').maxBy { sep -> firstLine.count { it == sep } }
         return CsvReader(text, separator).rows()
     }
 

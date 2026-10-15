@@ -292,4 +292,7 @@
         <item quantity="one">Today is %1$s\'s birthday: %2$d year old. Happy birthday!</item>
         <item quantity="other">Today is %1$s\'s birthday: %2$d years old. Happy birthday!</item>
     </plurals>
+    <string name="birthday_google_sheet_help">Google Drive only lets other apps open a Google Sheet as a PDF. In the Google Sheets app, open the sheet, then More, Share and export, Save as Excel. Then choose that Excel file here.</string>
+    <string name="birthday_import_unreadable">That file could not be opened. Choose an Excel (.xlsx) or CSV file.</string>
+    <string name="birthday_format_help">Expected format: a first row with titles, a Name column and a Birthday column (day/month/year; the year is optional). An optional Note column is read too. Rows without a date are skipped.</string>
 </resources>

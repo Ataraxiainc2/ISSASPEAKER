@@ -37,19 +37,29 @@ import java.time.LocalDate
 @Composable
 fun ImportSheet(state: ImportState, viewModel: BirthdaysViewModel) {
     val locale = LocalConfiguration.current.locales[0]
-    ModalBottomSheet(onDismissRequest = viewModel::cancelImport) {
+    ModalBottomSheet(onDismissRequest = viewModel::cancelImport, sheetState = fullSheet()) {
         Column(Modifier.fillMaxWidth().padding(horizontal = Spacing.xl).padding(bottom = Spacing.xl), verticalArrangement = Arrangement.spacedBy(Spacing.s)) {
             Text(
                 stringResource(if (state.source == BirthdaySource.CONTACTS) R.string.birthday_from_contacts else R.string.birthday_from_file),
                 style = MaterialTheme.typography.headlineSmall,
             )
             if (state.candidates.isEmpty()) {
+                val none = if (state.source == BirthdaySource.CONTACTS) R.string.birthday_import_none_contacts else R.string.birthday_import_none_file
+                Text(stringResource(state.problem ?: none), style = MaterialTheme.typography.bodyLarge)
                 Text(
-                    stringResource(if (state.source == BirthdaySource.CONTACTS) R.string.birthday_import_none_contacts else R.string.birthday_import_none_file),
-                    style = MaterialTheme.typography.bodyLarge,
+                    stringResource(R.string.birthday_format_help),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 TextButton(onClick = viewModel::cancelImport) { Text(stringResource(R.string.action_cancel)) }
                 return@Column
+            }
+            // The decision first, so it is never below the fold (landscape, long lists).
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.s)) {
+                Button(onClick = viewModel::confirmImport, enabled = state.selected.isNotEmpty()) {
+                    Text(pluralStringResource(R.plurals.birthday_import_confirm, state.selected.size, state.selected.size))
+                }
+                TextButton(onClick = viewModel::cancelImport) { Text(stringResource(R.string.action_cancel)) }
             }
             if (state.source == BirthdaySource.FILE) FileReadInfo(state, onSwap = viewModel::swapDateOrder)
             LazyColumn(Modifier.heightIn(max = LIST_MAX_HEIGHT)) {
@@ -70,12 +80,6 @@ fun ImportSheet(state: ImportState, viewModel: BirthdaysViewModel) {
                         }
                     }
                 }
-            }
-            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.s)) {
-                Button(onClick = viewModel::confirmImport, enabled = state.selected.isNotEmpty()) {
-                    Text(pluralStringResource(R.plurals.birthday_import_confirm, state.selected.size, state.selected.size))
-                }
-                TextButton(onClick = viewModel::cancelImport) { Text(stringResource(R.string.action_cancel)) }
             }
         }
     }

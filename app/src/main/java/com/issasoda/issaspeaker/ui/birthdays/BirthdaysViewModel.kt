@@ -12,6 +12,7 @@ import com.issasoda.issaspeaker.data.birthdays.BirthdaySource
 import com.issasoda.issaspeaker.data.birthdays.ContactBirthdays
 import com.issasoda.issaspeaker.data.birthdays.ImportCandidate
 import com.issasoda.issaspeaker.data.birthdays.SheetFiles
+import com.issasoda.issaspeaker.data.birthdays.SheetRead
 import com.issasoda.issaspeaker.data.birthdays.upcoming
 import com.issasoda.issaspeaker.speaker.AnnounceResult
 import com.issasoda.issaspeaker.speaker.VoiceChoice
@@ -33,6 +34,8 @@ data class ImportState(
     val dayFirst: Boolean,
     val skippedRows: Int,
     val fileRows: List<List<String>> = emptyList(),
+    /** Why nothing could be read (a string resource), shown instead of the list. */
+    val problem: Int? = null,
 )
 
 /**
@@ -74,9 +77,13 @@ class BirthdaysViewModel(app: Application) : AndroidViewModel(app) {
     /** Reads the spreadsheet the owner picked: a Google Sheet in Drive, an Excel workbook or a CSV. */
     fun importFile(uri: Uri) {
         viewModelScope.launch {
-            val parsed = SheetFiles.read(getApplication(), uri)
-            _import.value = parsed?.let { review(BirthdaySource.FILE, it.candidates, it.dayFirst, it.skippedRows).copy(fileRows = it.rows) }
-                ?: ImportState(BirthdaySource.FILE, emptyList(), emptySet(), dayFirst = true, skippedRows = 0)
+            val empty = ImportState(BirthdaySource.FILE, emptyList(), emptySet(), dayFirst = true, skippedRows = 0)
+            _import.value = when (val read = SheetFiles.read(getApplication(), uri)) {
+                is SheetRead.Read -> review(BirthdaySource.FILE, read.result.candidates, read.result.dayFirst, read.result.skippedRows)
+                    .copy(fileRows = read.result.rows, problem = R.string.birthday_import_none_file.takeIf { read.result.candidates.isEmpty() })
+                SheetRead.GoogleSheet -> empty.copy(problem = R.string.birthday_google_sheet_help)
+                SheetRead.Unreadable -> empty.copy(problem = R.string.birthday_import_unreadable)
+            }
         }
     }
 

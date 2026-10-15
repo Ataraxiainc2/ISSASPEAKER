@@ -296,4 +296,7 @@
         <item quantity="many">Hoje é aniversário de %1$s, que faz %2$d anos. Feliz aniversário!</item>
         <item quantity="other">Hoje é aniversário de %1$s, que faz %2$d anos. Feliz aniversário!</item>
     </plurals>
+    <string name="birthday_google_sheet_help">O Google Drive só deixa outros apps abrirem uma planilha do Google Sheets como PDF. No app Google Sheets, abra a planilha e toque em Mais, Compartilhar e exportar, Salvar como Excel. Depois escolha aqui esse arquivo do Excel.</string>
+    <string name="birthday_import_unreadable">Não foi possível abrir esse arquivo. Escolha um arquivo do Excel (.xlsx) ou CSV.</string>
+    <string name="birthday_format_help">Formato esperado: uma primeira linha com títulos, uma coluna Nome e uma coluna Data (dia/mês/ano; o ano é opcional). Uma coluna Nota opcional também é lida. Linhas sem data são ignoradas.</string>
 </resources>

@@ -97,7 +97,7 @@ fun BirthdayForm(existing: Birthday?, onSave: (Birthday) -> Unit, onDelete: (Str
     // Typed text survives rotation: the fields are saved as a list and put back into a new FormState.
     val form = rememberSaveable(existing?.id, saver = FormState.saver(existing)) { FormState(existing) }
     var confirmDelete by rememberSaveable { mutableStateOf(false) }
-    ModalBottomSheet(onDismissRequest = onDismiss) {
+    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = fullSheet()) {
         Column(
             Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = Spacing.xl).padding(bottom = Spacing.xl),
             verticalArrangement = Arrangement.spacedBy(Spacing.m),
